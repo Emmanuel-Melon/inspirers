@@ -18,13 +18,14 @@ export default function Layout({ children }: LayoutProps) {
         width="100%"
         height="100%"
         minHeight="100vh"
-        alignItems="center"
         direction="column"
         margin={0}
         gap={6}
+        padding={6}
+        bg="#EEEDE7"
       >
         <Navbar />
-        <Flex width="100%" height="100%" direction="column" alignItems="center">
+        <Flex width="100%" height="100%" direction="column">
           {children}
         </Flex>
       </Flex>

@@ -42,20 +42,22 @@ export const Button: FC<ButtonProps> = ({
         variant={variant}
         outline="none"
         disabled={disabled}
-        bg={bg || "brand.white"}
-        color={color || "brand.secondary"}
+        bg={bg || "#F99B45"}
+        color={color || "#fff"}
+        padding="0.5rem"
+        borderRadius="0.5rem"
         size={size}
         leftIcon={icon}
         _hover={{
           background: "brand.accent",
           color: "brand.white",
         }}
-        border="border.primary"
+        border="solid 0.15rem #F99B45"
         _focus={{
           outline: "none",
           boxShadow: "none",
         }}
-        justifyContent="flex-start"
+        justifyContent="center"
       >
         {children}
       </ChakraButton>

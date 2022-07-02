@@ -6,9 +6,9 @@ import * as helmet from "helmet";
 import * as morganLogger from "morgan";
 
 export function init(app) {
+  app.use(cors);
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ extended: true }));
-  app.use(cors);
   app.set("trust proxy", "loopback");
   app.use(compression());
   app.use(express.json({ limit: "50mb" }));

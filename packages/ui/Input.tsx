@@ -16,15 +16,14 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
     return <Input
         autoComplete="off"
         placeholder={props.placeholder}
-        borderStyle="dashed"
-        borderColor="#216583"
-        borderRadius="0"
+        border="solid 0.15rem #868B8E"
+        width={"100%"}
         cursor="pointer"
-        borderWidth="0px 0px 1px 0px"
+        padding="0.5rem"
+        borderRadius="0.5rem"
         value={props.value}
         name={props.type}
         id={props.type}
-        width="100%"
         onChange={props.handleInputchange}
         _hover={{
             background: "brand.grey",
