@@ -1,6 +1,7 @@
 import prisma from "../lib/prisma";
+import { UserObject } from "types/src/User";
 
-export const addUser = async (user) => {
+export const addUser = async (user: UserObject) => {
     const newEntry = await prisma.user.create({
         data: user
     });

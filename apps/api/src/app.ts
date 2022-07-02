@@ -1,20 +1,14 @@
 require("dotenv").config();
 const express = require("express");
-import * as bodyParser from "body-parser";
-import { Prisma, PrismaClient } from "@prisma/client";
 const app = express();
-const port = 5000;
-import routers from "./routers";
+import { databaseURL, port } from "./config";
+import { init } from "./init";
 
 const mysql = require("mysql2");
-const connection = mysql.createConnection(process.env.DATABASE_URL);
-console.log("Connected to PlanetScale!");
+const connection = mysql.createConnection(databaseURL);
 
-/** middleware */
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true }));
-app.use(routers);
-
+/** initialize middleware */
+init(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
