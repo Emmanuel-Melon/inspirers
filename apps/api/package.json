@@ -4,7 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon app.ts"
+    "dev": "nodemon src/app.ts",
+    "prisma-migrate": "npx prisma migrate dev --name --preview-feature",
+    "studio": "npx prisma studio",
+    "prisma-reset": "npx prisma migrate reset",
+    "prisma-status": "npx prisma migrate status",
+    "prisma-sync": "npx prisma db push"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

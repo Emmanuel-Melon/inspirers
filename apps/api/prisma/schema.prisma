@@ -11,3 +11,19 @@ datasource db {
   url      = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email String
+}
+
+model Task {
+  id       Int    @id @default(autoincrement())
+  title     String
+}
+
+model Activity {
+  id       Int    @id @default(autoincrement())
+  title     String
+}
