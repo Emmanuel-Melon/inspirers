@@ -1,12 +1,9 @@
-import { Button } from "ui";
+import Layout from "../layout/layout";
 
 export default function Auth() {
-
-    function handleClick() {}
-    return (
-        <div>
-            <h1>Kuwinda</h1>
-            <Button onClick={handleClick}>Login</Button>
-        </div>
-    );
+  return (
+    <Layout>
+      <h1>Auth</h1>
+    </Layout>
+  );
 }

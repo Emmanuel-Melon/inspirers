@@ -1,9 +1,9 @@
 import Layout from "../layout/layout";
 
-export default function Index() {
+export default function Profile() {
   return (
     <Layout>
-      <h1>Index</h1>
+      <h1>Profile</h1>
     </Layout>
   );
 }
