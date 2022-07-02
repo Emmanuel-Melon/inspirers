@@ -13,7 +13,7 @@ export function init(app) {
   app.use(compression());
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ extended: true }));
-  app.use(helmet);
+  // app.use(helmet());
   app.use(morganLogger("dev"));
   app.use(routers);
 }

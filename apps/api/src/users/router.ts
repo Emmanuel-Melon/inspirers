@@ -1,28 +1,22 @@
-import { NextFunction, Response, Router } from "express";
-import { addUser, getUserById } from "./controller";
+import { NextFunction, Response, Router, Request } from "express";
+import { addUser, getUserById, modifyUser } from "./controller";
 
 const userRouter = Router();
 
-userRouter.get("/", (req, res, next) => {
-  return Promise.resolve(() => {})
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-userRouter.get("/:userId", (req, res, next) => {
+userRouter.get("/:userId", (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(getUserById(parseInt(req.params.userId)))
     .then(data => res.json({ data }))
     .catch(next);
 });
 
-userRouter.post("/", (req, res, next) => {
+userRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
   return Promise.resolve(addUser(req.body))
   .then(data => res.json({ data }))
   .catch(next);
 });
 
-userRouter.put("/", (req, res, next) => {
-  return Promise.resolve(addUser(req.body))
+userRouter.put("/:userId", (req: Request, res: Response, next: NextFunction) => {
+  return Promise.resolve(modifyUser(parseInt(req.params.userId), req.body))
   .then(data => res.json({ data }))
   .catch(next);
 });
