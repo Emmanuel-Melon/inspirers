@@ -13,12 +13,17 @@ model User {
   id    Int    @id @default(autoincrement())
   name  String
   email String
+  createdAt DateTime  @default(now())
+  bio String
 }
 
 model Task {
   id     Int    @id @default(autoincrement())
   title  String
   userId Int
+  description String
+  completed Boolean @default(false)
+  createdAt DateTime  @default(now())
 }
 
 model Activity {
@@ -26,4 +31,5 @@ model Activity {
   title  String
   userId Int
   taskId Int
+  createdAt DateTime  @default(now())
 }

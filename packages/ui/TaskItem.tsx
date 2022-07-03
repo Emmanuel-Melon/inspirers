@@ -24,7 +24,7 @@ export const TaskItem = ({ task }) => {
                 <Avatar size='sm'  name='Dan Abrahmov' src='https://i1.sndcdn.com/avatars-000423224016-58aefd-t500x500.jpg' />
                 <Stack>
                     <Heading as="h3" size="md" color="#4E4F50" m="0">{task.title}</Heading>
-                    <Text color="#696969">It is timeless and versatile, making it a great partner to a wide variety of colors.</Text>
+                    <Text color="#696969">{task.description}</Text>
                 </Stack>
             </Flex>
         </Flex>

@@ -1,7 +1,6 @@
 import Layout from "../layout/layout";
 import { AddTaskItem, TaskItem } from "ui";
 import { client } from "../utils/client";
-import { useEffect, useState } from "react";
 import {
   Flex,
   Text, Heading,
@@ -9,29 +8,25 @@ import {
 } from "@chakra-ui/react";
 
 export default function Tasks(props) {
-  const [success, setSuccess] = useState(false);
 
-  function addTaskItem(title: string) {
+  function addTaskItem(data) {
     client.post("/api/tasks", {
-      title,
-      userId: 1
+      ...data,
+      userId: 1,
+
     })
       .then(response => {
-        setSuccess(true);
+
       });
   }
-
-  useEffect(() => {
-
-  }, [success]);
 
   return (
     <Layout>
       <Flex justifyContent="space-between" alignItems="center">
-      <Heading as="h1" size="sm" color="#4E4F50" m="0">Welcome back, Eman</Heading>
-      
+        <Heading as="h1" size="sm" color="#4E4F50" m="0">Welcome back, Eman</Heading>
+
       </Flex>
-      <Text color="#696969" >You've got 7 active tasks</Text>
+      <Text color="#696969" >You've got {props?.tasks?.data?.length} active tasks</Text>
       <AddTaskItem addTaskItem={addTaskItem} />
       <VStack
         alignItems="flex-start"

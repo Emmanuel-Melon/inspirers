@@ -9,7 +9,9 @@
     "studio": "npx prisma studio",
     "prisma-reset": "npx prisma migrate reset",
     "prisma-status": "npx prisma migrate status",
-    "prisma-sync": "npx prisma db push"
+    "prisma-sync": "npx prisma db push",
+    "pscale-connect": "pscale connect biti dev --port 3309",
+    "dev-all": ""
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

@@ -11,9 +11,14 @@ import Link from "next/link";
 
 export const AddTaskItem = ({ addTaskItem }) => {
     const [title, setTitle] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
 
-    function handleInputchange(e) {
+    function handleTitleChange(e) {
         setTitle(e.target.value);
+    }
+
+   function handleDescChange(e) {
+    setDescription(e.target.value);
     }
 
     return (
@@ -23,13 +28,22 @@ export const AddTaskItem = ({ addTaskItem }) => {
             gap={2}
         >
             <TextInput
-                handleInputchange={handleInputchange}
+                handleInputchange={handleTitleChange}
                 placeholder="Add new task"
                 type="text"
                 value={title}
             />
+            <TextInput
+                handleInputchange={handleDescChange}
+                placeholder="Description"
+                type="text"
+                value={description}
+            />
             <Button
-                onClick={() => addTaskItem(title)}
+                onClick={() => addTaskItem({
+                    description,
+                    title
+                })}
                 width="80px"
             >
                 Add
