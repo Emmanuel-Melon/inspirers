@@ -16,7 +16,7 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
     return <Input
         autoComplete="off"
         placeholder={props.placeholder}
-        border="solid 0.15rem #868B8E"
+        border={props.border || "solid 0.15rem #868B8E"}
         width={"100%"}
         cursor="pointer"
         padding="0.5rem"

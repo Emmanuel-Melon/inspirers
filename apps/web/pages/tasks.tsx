@@ -6,17 +6,21 @@ import {
   Text, Heading,
   VStack
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function Tasks(props) {
 
+  const [isLoading, setIsLoading] = useState(false);
+
   function addTaskItem(data) {
+    setIsLoading(true);
     client.post("/api/tasks", {
       ...data,
       userId: 1,
 
     })
       .then(response => {
-
+        setIsLoading(false);
       });
   }
 
@@ -24,15 +28,24 @@ export default function Tasks(props) {
     <Layout>
       <Flex justifyContent="space-between" alignItems="center">
         <Heading as="h1" size="sm" color="#4E4F50" m="0">Welcome back, Eman</Heading>
-
       </Flex>
-      <Text color="#696969" >You've got {props?.tasks?.data?.length} active tasks</Text>
-      <AddTaskItem addTaskItem={addTaskItem} />
+      {
+        props?.tasks?.data?.length > 0 ? <Text color="#696969" >You've got {props?.tasks?.data?.length} active tasks</Text> : null
+      }
+
+      <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
       <VStack
         alignItems="flex-start"
         width={"600px"}>
         {
-          props?.tasks?.data?.map(task => <TaskItem task={task} key={task.id} />)
+          props?.tasks?.data?.length > 0 ?
+            props?.tasks?.data?.map(task => <TaskItem task={task} key={task.id} />) : (
+              <>
+                <Flex alignItems="center" gap={8} marginTop="8" p="4" justifyContent={"center"}>
+                  <img size='sm' alt="empty" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8Y6jlyyGKX4Xok7Q6ro0TwI-hCCHLP1zovBevgm_JsTiTnbQXbT9UMCt2YOhDBOjHwo&usqp=CAU' height="300px" />
+                </Flex>
+              </>
+            )
         }
       </VStack>
     </Layout>

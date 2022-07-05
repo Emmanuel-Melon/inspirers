@@ -27,6 +27,7 @@ export const Button: FC<ButtonProps> = ({
   size = "lg",
   width = "100%",
   variant,
+  border
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>
@@ -35,7 +36,7 @@ export const Button: FC<ButtonProps> = ({
         colorScheme="brand"
         isLoading={isLoading}
         loadingText={loadingText || "loading"}
-        boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px"
+        boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
         px={5}
         width={width}
         py={3}
@@ -53,7 +54,7 @@ export const Button: FC<ButtonProps> = ({
           background: "brand.accent",
           color: "brand.white",
         }}
-        border="solid 0.15rem #664900"
+        border={"none"}
         _focus={{
           outline: "none",
           boxShadow: "none",
