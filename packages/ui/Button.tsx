@@ -42,17 +42,18 @@ export const Button: FC<ButtonProps> = ({
         variant={variant}
         outline="none"
         disabled={disabled}
-        bg={bg || "#F99B45"}
+        bg={bg || "#664900"}
         color={color || "#fff"}
         padding="0.5rem"
         borderRadius="0.5rem"
         size={size}
+        cursor="pointer"
         leftIcon={icon}
         _hover={{
           background: "brand.accent",
           color: "brand.white",
         }}
-        border="solid 0.15rem #F99B45"
+        border="solid 0.15rem #664900"
         _focus={{
           outline: "none",
           boxShadow: "none",
