@@ -10,7 +10,9 @@
     "prisma-reset": "npx prisma migrate reset",
     "prisma-status": "npx prisma migrate status",
     "prisma-sync": "npx prisma db push",
-    "pscale-connect": "pscale connect biti dev --port 3309"
+    "pscale-connect": "pscale connect biti dev --port 3309",
+    "prisma-init": "npx prisma init",
+    "prisma-generate": "npx prisma generate"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
@@ -36,7 +38,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "prisma": "^4.0.0",
-    "ts-node": "^10.8.1",
+    "ts-node": "^10.8.2",
     "uuid": "^8.3.2"
   }
 }
