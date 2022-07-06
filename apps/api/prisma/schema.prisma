@@ -9,27 +9,27 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String
-  createdAt DateTime  @default(now())
-  bio String
+model Activity {
+  id        Int      @id @default(autoincrement())
+  title     String
+  userId    Int
+  taskId    Int
+  createdAt DateTime @default(now())
 }
 
 model Task {
-  id     Int    @id @default(autoincrement())
-  title  String
-  userId Int
+  id          Int      @id @default(autoincrement())
+  title       String
+  userId      Int
   description String
-  completed Boolean @default(false)
-  createdAt DateTime  @default(now())
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }
 
-model Activity {
-  id     Int    @id @default(autoincrement())
-  title  String
-  userId Int
-  taskId Int
-  createdAt DateTime  @default(now())
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+  bio       String
 }
