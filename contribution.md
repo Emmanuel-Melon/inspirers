@@ -1,4 +1,4 @@
-Project;
+# Project;
  Current name: KUWINDA(Trademark Pending)
  Kind: FullStack Application(built using next.js)
  Creator: E-man
@@ -7,21 +7,21 @@ Project;
  Main gitHub branch: https://github.com/Emmanuel-Melon/kuwinda.git 
  Database: SQL database provided by planetscale
  
-Frameworks used in project;
+## Frameworks used in project;
  next.js(Entire App)
  react.js(Front-End)
 
-Languages used; 
+## Languages used; 
  Typescript (97%)
  Javascript (3%)
 
-Coding Format used;
+## Coding Format used;
 
 
-Database(SQL database);
+## Database(SQL database);
  Database located on planet scale at https://planetscale.com/
 
-Cloning the project;
+## Cloning the project;
  Using Terminal
   Go to terminal and insert command into your desired destination.;
    gh repo clone Emmanuel-Melon/kuwinda
@@ -29,11 +29,11 @@ Cloning the project;
  Using Code Editor
   Clone from : https://github.com/Emmanuel-Melon/kuwinda.git
 
-Setting up the project;
+## Setting up the project;
  Make sure you have a code editor installed.(I recommend VS code)
  Make sure you have node.js installed
 
-Creating a pull request;
+## Creating a pull request;
  Follow the following steps to create a pull request;
   (i) Create a new branch with name of your choosing other than main.
   (ii) Pull code from main branch to the new branch.
@@ -43,9 +43,9 @@ Creating a pull request;
   git push origin then followed by the name of the new branch.
   (vi) This will then create a new pull request that can be reviewed by the owner and collaborators of the project.
 
-Creating an Issue;
+## Creating an Issue;
 
-Issue Picking;
+## Issue Picking;
  To make a contribution involving fixing issues with the project then one has to simply follow the following steps;
   (i) Visit the project main branch at https://github.com/Emmanuel-Melon/kuwinda
   (ii) Select Issues header,
