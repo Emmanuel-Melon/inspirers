@@ -35,8 +35,10 @@ export default function Tasks(props) {
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
       <VStack
+        h="420px"
+        overflowY="scroll"
         alignItems="flex-start"
-        width={"600px"}>
+        width={"610px"}>
         {
           props?.tasks?.data?.length > 0 ?
             props?.tasks?.data?.map(task => <TaskItem task={task} key={task.id} />) : (
