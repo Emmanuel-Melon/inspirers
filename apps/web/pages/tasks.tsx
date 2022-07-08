@@ -34,7 +34,12 @@ export default function Tasks(props) {
       }
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
-      <Flex overflowY="scroll">
+      <Flex
+      overflowY="scroll"
+      sx = {{
+      '::-webkit-scrollbar' :{display: 'none'}
+      }}
+      >
       <VStack
         h="420px"
         alignItems="flex-start"
