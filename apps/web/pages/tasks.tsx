@@ -2,9 +2,16 @@ import Layout from "../layout/layout";
 import { AddTaskItem, TaskItem } from "ui";
 import { client } from "../utils/client";
 import {
+  Container, 
+  Box,
   Flex,
   Text, Heading,
-  VStack
+  VStack,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -35,15 +42,17 @@ export default function Tasks(props) {
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
       <Flex
+      h="420px"
+      w={"640px"}
       overflowY="scroll"
-      sx = {{
-      '::-webkit-scrollbar' :{display: 'none'}
+      css={{
+        '::-webkit-scrollbar':{display:'none'}
       }}
       >
       <VStack
-        h="420px"
         alignItems="flex-start"
-        width={"600px"}>
+        width={"600px"}
+        >
         {
           props?.tasks?.data?.length > 0 ?
             props?.tasks?.data?.map(task => <TaskItem  task={task} key={task.id} />) : (
