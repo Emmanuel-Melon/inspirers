@@ -2,9 +2,16 @@ import Layout from "../layout/layout";
 import { AddTaskItem, TaskItem } from "ui";
 import { client } from "../utils/client";
 import {
+  Container, 
+  Box,
   Flex,
   Text, Heading,
-  VStack
+  VStack,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -34,12 +41,21 @@ export default function Tasks(props) {
       }
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
+      <Flex
+      h={"420px"}
+      w={"640px"}
+      overflowY="scroll"
+      css={{
+        "::-webkit-scrollbar": {display:"none"}
+      }}
+      >
       <VStack
         alignItems="flex-start"
-        width={"600px"}>
+        width={"600px"}
+        >
         {
           props?.tasks?.data?.length > 0 ?
-            props?.tasks?.data?.map(task => <TaskItem task={task} key={task.id} />) : (
+            props?.tasks?.data?.map(task => <TaskItem  task={task} key={task.id} />) : (
               <>
                 <Flex alignItems="center" gap={8} marginTop="8" p="4" justifyContent={"center"}>
                   <img size='sm' alt="empty" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8Y6jlyyGKX4Xok7Q6ro0TwI-hCCHLP1zovBevgm_JsTiTnbQXbT9UMCt2YOhDBOjHwo&usqp=CAU' height="300px" />
@@ -48,6 +64,7 @@ export default function Tasks(props) {
             )
         }
       </VStack>
+      </Flex>
     </Layout>
   );
 }
