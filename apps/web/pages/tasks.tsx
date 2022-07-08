@@ -34,14 +34,14 @@ export default function Tasks(props) {
       }
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
+      <Flex overflowY="scroll">
       <VStack
         h="420px"
-        overflowY="scroll"
         alignItems="flex-start"
-        width={"610px"}>
+        width={"600px"}>
         {
           props?.tasks?.data?.length > 0 ?
-            props?.tasks?.data?.map(task => <TaskItem task={task} key={task.id} />) : (
+            props?.tasks?.data?.map(task => <TaskItem  task={task} key={task.id} />) : (
               <>
                 <Flex alignItems="center" gap={8} marginTop="8" p="4" justifyContent={"center"}>
                   <img size='sm' alt="empty" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8Y6jlyyGKX4Xok7Q6ro0TwI-hCCHLP1zovBevgm_JsTiTnbQXbT9UMCt2YOhDBOjHwo&usqp=CAU' height="300px" />
@@ -50,6 +50,7 @@ export default function Tasks(props) {
             )
         }
       </VStack>
+      </Flex>
     </Layout>
   );
 }
