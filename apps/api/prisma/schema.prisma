@@ -32,4 +32,5 @@ model User {
   email     String
   createdAt DateTime @default(now())
   bio       String
+  password String
 }

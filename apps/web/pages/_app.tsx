@@ -5,15 +5,18 @@ import {
 } from "@chakra-ui/react";
 import theme from "../theme";
 import "../styles/global.css";
+import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
     const getLayout = Component.getLayout || ((page) => page);
 
     return getLayout(
-        <ChakraProvider theme={theme} resetCSS>
-            <Component {...pageProps} />
-        </ChakraProvider>
+        <SessionProvider session={session}>
+            <ChakraProvider theme={theme} resetCSS>
+                <Component {...pageProps} />
+            </ChakraProvider>
+        </SessionProvider>
     )
 }
 

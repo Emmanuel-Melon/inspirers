@@ -1,9 +1,16 @@
 import Layout from "../layout/layout";
+import { AuthForm } from "../Auth/AuthForm";
+import type { NextPage } from "next";
+import { getProviders, signIn, useSession } from "next-auth/react";
 
-export default function Auth() {
+const Auth: NextPage = ({ providers }: any) => {
+  console.log(providers);
   return (
     <Layout>
-      <h1>Auth</h1>
+      <AuthForm />
     </Layout>
   );
 }
+
+
+export default Auth;

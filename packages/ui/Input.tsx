@@ -16,15 +16,9 @@ type InputProps = {
 export const TextInput: FunctionComponent<InputProps> = (props) => {
     return (
         <InputGroup gap={16}>
-            <InputLeftElement
-                pointerEvents='none'
-            >
-                <FiSearch color='gray.300' />
-                </InputLeftElement>
             <Input
                 autoComplete="off"
                 placeholder={props.placeholder}
-                
                 cursor="pointer"
                 padding="1rem"
                 borderRadius="0.8rem"
