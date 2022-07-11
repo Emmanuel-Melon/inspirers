@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
         direction="column"
         margin={0}
         gap={6}
-        bg="#FFFFF0"
+        bg="#f9f9f6"
       >
         <Navbar />
         <Flex width="100%" height="100%" direction="column" padding={6}>
