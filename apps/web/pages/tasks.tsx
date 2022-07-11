@@ -1,19 +1,12 @@
 import Layout from "../layout/layout";
-import { AddTaskItem, TaskItem } from "ui";
+import NestedLayout from "../layout/Nested";
 import { client } from "../utils/client";
 import {
-  Container, 
-  Box,
   Flex,
   Text, Heading,
-  VStack,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { TaskList } from "../tasks/TaskList";
 
 export default function Tasks(props) {
 
@@ -32,48 +25,87 @@ export default function Tasks(props) {
   }
 
   return (
-    <Layout>
-      <Flex justifyContent="space-between" alignItems="center">
-        <Heading as="h1" size="sm" color="#4E4F50" m="0">Welcome back, Eman</Heading>
-      </Flex>
-      {
-        props?.tasks?.data?.length > 0 ? <Text color="#696969" >You've got {props?.tasks?.data?.length} active tasks</Text> : null
-      }
-
-      <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
-      <Flex
-
-      w={"640px"}
-      overflowY="scroll"
-      css={{
-        "::-webkit-scrollbar": {display:"none"}
-      }}
-      >
-      <VStack
-        alignItems="flex-start"
-        width={"600px"}
-        >
-        {
-          props?.tasks?.data?.length > 0 ?
-            props?.tasks?.data?.map(task => <TaskItem  task={task} key={task.id} />) : (
-              <>
-                <Flex alignItems="center" gap={8} marginTop="8" p="4" justifyContent={"center"}>
-                  <img size='sm' alt="empty" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8Y6jlyyGKX4Xok7Q6ro0TwI-hCCHLP1zovBevgm_JsTiTnbQXbT9UMCt2YOhDBOjHwo&usqp=CAU' height="300px" />
-                </Flex>
-              </>
-            )
-        }
-      </VStack>
-      </Flex>
-    </Layout>
+    <>
+      <h3>got tasks</h3>
+    </>
   );
 }
 
+const data = [
+  {
+    "id": 14,
+    "title": "Throw Some D's",
+    "userId": 1,
+    "description": "Rich boy selling crack",
+    "completed": false,
+    "createdAt": "2022-07-05T09:40:16.053Z"
+  },
+  {
+    "id": 15,
+    "title": "Out Here Grinding",
+    "userId": 1,
+    "description": "Making things look great",
+    "completed": false,
+    "createdAt": "2022-07-05T09:42:40.739Z"
+  },
+  {
+    "id": 16,
+    "title": "Hustler's Ambition",
+    "userId": 1,
+    "description": "Out here on a mission",
+    "completed": false,
+    "createdAt": "2022-07-05T09:43:32.044Z"
+  },
+  {
+    "id": 17,
+    "title": "Pimpin",
+    "userId": 1,
+    "description": "Chilling and smoking here",
+    "completed": false,
+    "createdAt": "2022-07-05T09:44:21.664Z"
+  }
+];
+
+Tasks.getLayout = function getLayout(page) {
+  return (
+    <NestedLayout>
+      <Flex justifyContent="space-between" width="100%" p="8" gap={8}>
+        <Flex
+          p="8"
+          flexGrow={1}
+          borderRadius="0.5rem"
+          direction="column"
+        >
+          <Flex
+            w={"640px"}
+            h="500px"
+            overflowY="scroll"
+            css={{
+              "::-webkit-scrollbar": { display: "none" }
+            }}
+          >
+            <TaskList tasks={data} />
+          </Flex>
+        </Flex>
+        <Flex
+          bg="rgba(102, 73, 0, 0.01)"
+          boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px"
+          height="650px"
+          borderRadius="1rem"
+          p="8"
+          flexGrow={1}
+          direction="column"
+        >
+          <Heading>This is a heading</Heading>
+          <Text>Simple text</Text>
+        </Flex>
+      </Flex>
+    </NestedLayout>
+  )
+}
+
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await fetch(`http://localhost:5000/api/tasks/user/1`)
   const data = await res.json();
-
-  // Pass data to the page via props
   return { props: { tasks: data } }
 }

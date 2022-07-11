@@ -6,7 +6,6 @@ import {
 import theme from "../theme";
 import "../styles/global.css";
 
-
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
     const getLayout = Component.getLayout || ((page) => page);

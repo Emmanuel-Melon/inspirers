@@ -3,19 +3,15 @@ import { extendTheme, theme as chakraTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   colors: {
     brand: {
-      primary: "#664900",
+      primary: "#493323",
       white: "#fff",
-      secondary: "#333",
-      accent: "#723d46",
+      secondary: "#DD4A48",
+      accent: "#C0D8C0",
       highlight: "rgba(208, 98, 36, 0.1)",
       highlight1: "rgba(208, 98, 36, 0.2)",
       grey: "#f0f0f0",
       danger: "#df4759",
     },
-  },
-  fonts: {
-    heading: `Pangolin, ${chakraTheme?.fonts?.heading}`,
-    body: `Montserrat, ${chakraTheme?.fonts?.body}`,
   },
   borders: {
     border: {
