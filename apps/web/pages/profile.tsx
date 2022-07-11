@@ -39,6 +39,10 @@ const data = [
 
 
 export default function Profile() {
+
+  const { data, isLoading, isError } = useFetch("/users/1");
+  if (isLoading) return <h3>Loading</h3>
+  if (isError) return <h3>Error</h3>
   return (
     <Layout>
       <Flex justifyContent="space-between" width="100%"  gap={8}>
