@@ -18,6 +18,7 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
         login: "",
         password: ""
     });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleInputchange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +33,17 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
         []
     );
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
         if (mode === "login") {
-            client.post("/users/login", {
+            setIsLoading(true);
+            const account = await client.post("/users/login", {
                 email: user.login || null,
                 password: user.password
             });
+            setIsLoading(false);
+
+            router.push("/");
         } else {
             client.post("users", {
                 ...user,
@@ -49,20 +54,28 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
     }
 
     return (
-        <Flex p="8" direction="column" gap={4} justifyContent="center" alignItems="center">
-            <Heading as="h3" size="md" color="brand.primary">Inspirers</Heading>
-            <Text>Inspire others</Text>
+        <Flex 
+            direction="column" 
+            gap={4} 
+            justifyContent="center" 
+            alignItems="center"
+            p="8"
+            bg="#fff"
+            boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+            borderRadius="1rem"
+        >
+            <Box as="form">
+            <Heading as="h3" size="md" 
+            color="brand.primary">Inspirers</Heading>
+            <Text>Achieve your goals and inspire others, join now!</Text>
             <VStack
-                bg="#fff"
-                width="400px"
+                width="100%"
                 gap={2}
-                p="8"
-                boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
-                borderRadius="1rem"
+
             >
                 <TextInput
                     handleInputchange={handleInputchange}
-                    placeholder="Username or Email Address"
+                    placeholder="Username/ Email Address"
                     type="text"
                     value={user.login}
                     name="login"
@@ -75,23 +88,21 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
                     name="password"
                 />
 
-                <Button onClick={handleClick}>{mode}</Button>
+                <Text>Trouble signing in?</Text>
+
+                <Button 
+                    onClick={handleClick} 
+                    width="350px"
+                    isLoading={isLoading}
+                >
+                    {mode}
+                </Button>
+
+                <Text>Have an account? <Box as="span" fontWeight="700">Register Now</Box></Text>
             </VStack>
-
-
-            {
-                mode === "login" ? (
-                    <Box>
-                        <Heading as="h3" size="sm" color="brand.primary">Don't have an account?</Heading>
-                        <Button onClick={toggleMode} bg="brand.secondary">Become an Inspirer</Button>
-                    </Box>
-                ) : (
-                    <Box>
-                        <Heading as="h3" size="sm" color="brand.primary">Have an account?</Heading>
-                        <Button onClick={toggleMode} bg="brand.secondary">Login</Button>
-                    </Box>
-                )
-            }
+            </Box>
         </Flex>
     )
 }
+
+// box-shadow: ;

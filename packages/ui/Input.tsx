@@ -22,7 +22,7 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 placeholder={props.placeholder}
                 cursor="pointer"
                 padding="1rem"
-                border="none"
+                variant='outline'
                 value={props.value}
                 name={props.name}
                 type={props.type}
@@ -31,11 +31,13 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 borderRadius="1rem"
                 id={props.type}
                 onChange={props.handleInputchange}
+                focusBorderColor='brand.accent'
                 _hover={{
-                    background: "brand.grey",
+                    background: "brand.white",
                 }}
                 _focus={{
                     outline: "none",
+                    background: "brand.accent"
                 }}
                 {...props} />
         </InputGroup>

@@ -27,7 +27,7 @@ export const Button: FC<ButtonProps> = ({
   size = "md",
   width = "100%",
   variant,
-  border
+  fullWidth
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>
@@ -39,15 +39,14 @@ export const Button: FC<ButtonProps> = ({
         boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
         px={4}
         width={width}
-        py={4}
+        py={1}
         variant={variant}
         outline="none"
         disabled={disabled}
         bg={bg || "brand.primary"}
         color={color || "brand.white"}
-        padding="1rem"
         borderRadius="1rem"
-        size={size}
+  
         cursor="pointer"
         leftIcon={icon}
         _hover={{
@@ -59,7 +58,7 @@ export const Button: FC<ButtonProps> = ({
           outline: "none",
           boxShadow: "none",
         }}
-        justifyContent="center"
+        
       >
         {children}
       </ChakraButton>
