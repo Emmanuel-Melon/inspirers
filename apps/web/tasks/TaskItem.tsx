@@ -3,31 +3,36 @@ import {
     Text, Heading,
     Stack
 } from "@chakra-ui/react";
-import { Avatar } from "ui";
+import { TaskObject } from "types/Task";
 
-export const TaskItem = ({ task }) => {
+type TaskItemProps = {
+    task: TaskObject;
+}
+
+export const TaskItem = ({ task }: TaskItemProps) => {
     return (
         <Flex
-            boxShadow="rgba(0, 0, 0, 0.08) 0px 4px 12px"
-            p="8"
+            boxShadow="rgba(120, 130, 164, 0.2) 0px 3px 5px"
+            p="4"
             width={"100%"}
-            borderRadius="0.2rem"
+            borderRadius="16px"
             borderLeft="solid 0.25rem #fff"
             bg="#fff"
             cursor="pointer"
             _hover={{
-                borderLeft: "solid 0.25rem #3e2145",
+                borderLeft: "solid 0.25rem",
+                borderColor: "brand.accent",
                 color: "brand.white",
-                background: "#FFFFF0"
+                background: "rgba(55, 102, 0, 0.01)"
             }}
         >
             <Flex alignItems="center" gap={8}>
-                <Avatar size='sm'  name={task.title} src='https://i1.sndcdn.com/avatars-000423224016-58aefd-t500x500.jpg' />
                 <Stack>
-                    <Heading as="h3" size="md" color="#003c66" m="0">{task.title}</Heading>
+                    <Heading as="h3" size="sm" color="brand.primary" m="0">{task.title}</Heading>
                     <Text color="#696969">{task.description}</Text>
                 </Stack>
             </Flex>
         </Flex>
     );
 }
+

@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Enriqueta&family=Quicksand&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: #fafaf5 !important;
+  height: 100%;
+  font-family: "Quicksand" !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+  color: #fff;
+}
+
+li:hover {
+  color: #ECB390;
+}
+
+/* typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Enriqueta" !important;
+}
+
+a,
+p,
+li,
+label,
+button {
+  margin: 0;
+}
