@@ -1,20 +1,16 @@
 import Layout from "../layout/layout";
+import { useFetch } from "../hooks/useSwr";
+import { Heading, Text } from "@chakra-ui/react";
 
-export default function Profile(props) {
+export default function Profile() {
+
+  const { data, isLoading, isError } = useFetch("/users/1");
+  if (isLoading) return <h3>Loading</h3>
+  if (isError) return <h3>Error</h3>
   return (
     <Layout>
-      <h1>Profile</h1>
+      <Heading color="brand.primary">Hi, {data.data.name}</Heading>
+      <Text color="brand.accent">{data.data.bio}.</Text>
     </Layout>
   );
-}
-
-export async function getStaticProps(context) {
-    // Fetch data from external API
-    const res = await fetch(`http://localhost:5000/api/users/1`)
-    const data = await res.json();
-
-    return {
-      props: {}, // will be passed to the page component as props
-    }
-
 }

@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from "react";
+import useSWR, { Key, Fetcher } from "swr";
 import { client } from "../utils/client";
 
-export const useFetch = (url) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean>(false);
-    const data = client.get(url)
-        .then(response => {
-          setIsLoading(false);
-        }).catch(err => {
-            setIsLoading(false);
-            setError(true);
-        })
+const fetcher: Fetcher<any, any> = (url: string) => client.get(url).then((res: { data: any; }) => res.data);
 
+export const useFetch = (url: string) => {
+    const { data, error } = useSWR(url, fetcher);
     return {
         data,
-        error,
-        isLoading
+        isLoading: !error && !data,
+        isError: error
     }
 }
