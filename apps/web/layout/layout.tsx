@@ -20,9 +20,8 @@ export default function Layout({ children }: LayoutProps) {
         minHeight="100vh"
         direction="column"
         margin={0}
- 
       >
-        
+
         <Flex width="100%" height="100%">
           <Box bg="#333333" p="8" height="100vh" color="#fff">
             <ul>
