@@ -1,5 +1,5 @@
 import React, { ReactChild } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 import { Navbar } from "ui";
 import Head from "next/head";
 
@@ -20,12 +20,25 @@ export default function Layout({ children }: LayoutProps) {
         minHeight="100vh"
         direction="column"
         margin={0}
-        gap={6}
-        bg="#FFFFF0"
+ 
       >
-        <Navbar />
-        <Flex width="100%" height="100%" direction="column" padding={6}>
+        
+        <Flex width="100%" height="100%">
+          <Box bg="#333333" p="8" height="100vh" color="#fff">
+            <ul>
+              <li>Journeys</li>
+              <li>Notifications</li>
+              <li>Tasks</li>
+              <li>Communitis</li>
+              <li>Analytics</li>
+              <li>Discover</li>
+              <li>Settings</li>
+            </ul>
+          </Box>
+          <Box p="8">
+          <Navbar />
           {children}
+          </Box>
         </Flex>
       </Flex>
     </>

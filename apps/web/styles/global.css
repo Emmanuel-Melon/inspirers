@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Rightous&family=Nunito&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background:     #F8F8F7;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rightous" !important;
+  color: #333 !important;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+a,
+p,
+li,
+label,
+button {
+  font-family: "Nunito" !important;
+  margin: 0;
+}

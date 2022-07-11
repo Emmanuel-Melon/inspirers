@@ -42,7 +42,7 @@ export default function Tasks(props) {
 
       <AddTaskItem addTaskItem={addTaskItem} isLoading={isLoading} />
       <Flex
-      h={"420px"}
+
       w={"640px"}
       overflowY="scroll"
       css={{
