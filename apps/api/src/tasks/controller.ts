@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma";
-import { TaskObject } from "types/src/Task";
+import { TaskObject } from "types/Task";
 
 export const addTask = async (task) => {
   const newEntry = await prisma.task.create({

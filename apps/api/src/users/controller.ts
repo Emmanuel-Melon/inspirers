@@ -1,11 +1,61 @@
 import prisma from "../lib/prisma";
-import { UserObject } from "types/src/User";
+import { UserObject } from "types/User";
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import cookie from 'cookie'
+import { secret } from "../config";
+import { AuthenticationError } from "../utils/errors";
 
-export const addUser = async (user: UserObject) => {
-  const newEntry = await prisma.user.create({
-    data: user,
+export interface Credentials {
+  email: string;
+  password: string;
+}
+
+export const loginUser = async (credentials: Credentials) => {
+  return prisma.user.findFirst({
+    where: { email: credentials.email }
+  })
+  .then(user => {
+    return bcrypt
+      .compare(credentials.password, user.password)
+      .then(isValidPassword => {
+        if (!isValidPassword) {
+          return Promise.reject(
+            new AuthenticationError("Invalid username or password")
+          );
+        }
+
+        return Promise.resolve(
+          jwt.sign(user, secret)
+        );
+      });
   });
-  return newEntry;
+}
+
+export const addUser = async (user) => {
+  const salt = bcrypt.genSaltSync();
+
+  const newEntry = await prisma.user.create({
+    data: {
+      ...user,
+      password: bcrypt.hashSync(user.password, salt)
+    },
+  });
+
+  const token = jwt.sign(
+    {
+      email: user.email,
+      id: user.id,
+      time: Date.now(),
+    },
+    'hello',
+    { expiresIn: '8h' }
+  );
+
+  return {
+    ...newEntry,
+    token
+  };
 };
 
 export const getUserById = async (userId: number) => {

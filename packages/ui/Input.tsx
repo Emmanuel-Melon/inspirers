@@ -7,6 +7,7 @@ type InputProps = {
     inputField?: string;
     id?: string;
     type?: string;
+    name?: string;
     icon?: string;
     label?: string;
     value?: string;
@@ -21,12 +22,13 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 placeholder={props.placeholder}
                 cursor="pointer"
                 padding="1rem"
-                borderRadius="0.8rem"
                 border="none"
                 value={props.value}
-                name={props.type}
-                bg="rgba(192, 216, 192, 0.3)"
-                boxShadow="rgba(120, 130, 164, 0.2) 0px 3px 5px"
+                name={props.name}
+                type={props.type}
+                bg="rgba(192, 216, 192, 0.1)"
+                boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+                borderRadius="1rem"
                 id={props.type}
                 onChange={props.handleInputchange}
                 _hover={{

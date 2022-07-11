@@ -6,6 +6,7 @@ import {
 import theme from "../theme";
 import "../styles/global.css";
 import { SessionProvider } from "next-auth/react";
+import Layout from "../layout/layout";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
@@ -14,7 +15,14 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return getLayout(
         <SessionProvider session={session}>
             <ChakraProvider theme={theme} resetCSS>
-                <Component {...pageProps} />
+                {
+                    Component.authPage ? <Component /> : (
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    )
+                }
+
             </ChakraProvider>
         </SessionProvider>
     )
