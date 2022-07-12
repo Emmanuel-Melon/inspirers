@@ -11,9 +11,10 @@ import Layout from "../layout/layout";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
     const getLayout = Component.getLayout || ((page) => page);
+   
 
     return getLayout(
-        <SessionProvider session={session}>
+        <SessionProvider session={pageProps.session}>
             <ChakraProvider theme={theme} resetCSS>
                 {
                     Component.authPage ? <Component /> : (

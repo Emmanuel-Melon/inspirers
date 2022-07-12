@@ -6,6 +6,7 @@ import { UserObject } from "types/User";
 import { client } from "../utils/client";
 import { useSWRConfig } from 'swr';
 import { useRouter } from "next/router";
+import { getProviders, signIn, useSession } from "next-auth/react";
 
 type AuthFormProps = {
     mode: 'login' | 'signup';
@@ -37,19 +38,26 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
         e.preventDefault();
         if (mode === "login") {
             setIsLoading(true);
-            const account = await client.post("/users/login", {
+
+            signIn("email", { email: user.login })
+            /**
+             * const account = await client.post("/users/login", {
                 email: user.login || null,
                 password: user.password
             });
+             */
             setIsLoading(false);
 
             router.push("/");
         } else {
-            client.post("users", {
+            signIn("email", { email: user.login, redirect: false, password: user.password })
+            /**
+             * client.post("users", {
                 ...user,
                 email: user.login || null,
                 password: user.password
             });
+             */
         }
     }
 
@@ -63,8 +71,9 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
             bg="#fff"
             boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
             borderRadius="1rem"
+            height="450px"
         >
-            <Box as="form">
+            <Flex as="form" direction="column" gap={4}>
             <Heading as="h3" size="md" 
             color="brand.primary">Inspirers</Heading>
             <Text>Achieve your goals and inspire others, join now!</Text>
@@ -100,7 +109,7 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
 
                 <Text>Have an account? <Box as="span" fontWeight="700">Register Now</Box></Text>
             </VStack>
-            </Box>
+            </Flex>
         </Flex>
     )
 }

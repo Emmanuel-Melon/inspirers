@@ -2,7 +2,6 @@ import prisma from "../lib/prisma";
 import { UserObject } from "types/User";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import cookie from 'cookie'
 import { secret } from "../config";
 import { AuthenticationError } from "../utils/errors";
 
