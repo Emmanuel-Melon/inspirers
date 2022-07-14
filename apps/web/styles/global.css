@@ -4,7 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: #fafaf5 !important;
+  background: #fefef1 !important;
   height: 100%;
   font-family: "Quicksand" !important;
 }
@@ -44,7 +44,6 @@ h6 {
 a,
 p,
 li,
-label,
-button {
+label {
   margin: 0;
 }

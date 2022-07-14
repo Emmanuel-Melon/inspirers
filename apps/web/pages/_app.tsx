@@ -5,16 +5,34 @@ import {
 } from "@chakra-ui/react";
 import theme from "../theme";
 import "../styles/global.css";
+import { SessionProvider } from "next-auth/react";
+import { getProviders, signIn, signOut, useSession } from "next-auth/react";
+import Layout from "../layout/layout";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
-    const getLayout = Component.getLayout || ((page) => page);
+    const getLayout = Component?.getLayout || ((page) => page);
+
 
     return getLayout(
-        <ChakraProvider theme={theme} resetCSS>
-            <Component {...pageProps} />
-        </ChakraProvider>
+        <SessionProvider 
+            session={pageProps.session}
+            refetchOnWindowFocus={true}
+            refetchInterval={5 * 60}
+        >
+            <ChakraProvider theme={theme} resetCSS>
+                {
+                    Component.authPage ? <Component {...pageProps} /> : (
+                        <Layout>
+                             <Component {...pageProps} />
+                        </Layout>
+                    )
+                }
+            </ChakraProvider>
+        </SessionProvider>
     )
 }
+
 
 export default MyApp;

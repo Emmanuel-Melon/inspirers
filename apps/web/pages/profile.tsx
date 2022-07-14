@@ -1,6 +1,7 @@
 import Layout from "../layout/layout";
 import { Flex, Text, Heading } from "@chakra-ui/react";
 import { TaskList } from "../tasks/TaskList";
+import { useFetch } from "../hooks/useSwr";
 
 const data = [
   {
@@ -40,12 +41,11 @@ const data = [
 
 export default function Profile() {
 
-  const { data, isLoading, isError } = useFetch("/users/1");
+  const { data, isLoading, isError } = useFetch("/users/5");
   if (isLoading) return <h3>Loading</h3>
   if (isError) return <h3>Error</h3>
   return (
-    <Layout>
-      <Flex justifyContent="space-between" width="100%"  gap={8}>
+    <Flex justifyContent="space-between" width="100%"  gap={8}>
         <Flex
           p="4"
           flexGrow={1}
@@ -68,6 +68,5 @@ export default function Profile() {
           <Text>Simple text</Text>
         </Flex>
       </Flex>
-    </Layout>
   );
 }

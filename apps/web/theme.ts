@@ -5,7 +5,7 @@ const theme = extendTheme({
     brand: {
       primary: "#493323",
       white: "#fff",
-      secondary: "#DD4A48",
+      secondary: "#85586F",
       accent: "#C0D8C0",
       highlight: "rgba(208, 98, 36, 0.1)",
       highlight1: "rgba(208, 98, 36, 0.2)",

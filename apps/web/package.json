@@ -12,9 +12,15 @@
     "@chakra-ui/react": "^2.2.3",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@next-auth/prisma-adapter": "^1.0.3",
+    "@prisma/client": "^4.0.0",
     "axios": "^0.27.2",
+    "cookie": "^0.5.0",
     "framer-motion": "^6.4.3",
+    "jsonwebtoken": "^8.5.1",
     "next": "^12.2.2",
+    "next-auth": "^4.9.0",
+    "prisma": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
@@ -23,11 +29,14 @@
     "ui": "*"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.12",
     "@types/react": "17.0.37",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "next-transpile-modules": "9.0.0",
+    "prisma": "^4.0.0",
     "tsconfig": "*",
     "typescript": "^4.5.3"
   }

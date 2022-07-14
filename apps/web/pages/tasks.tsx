@@ -68,8 +68,7 @@ const data = [
 
 Tasks.getLayout = function getLayout(page) {
   return (
-    <NestedLayout>
-      <Flex justifyContent="space-between" width="100%" p="8" gap={8}>
+<Flex justifyContent="space-between" width="100%" p="8" gap={8}>
         <Flex
           p="8"
           flexGrow={1}
@@ -100,7 +99,6 @@ Tasks.getLayout = function getLayout(page) {
           <Text>Simple text</Text>
         </Flex>
       </Flex>
-    </NestedLayout>
   )
 }
 
