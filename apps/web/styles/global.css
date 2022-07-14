@@ -4,8 +4,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: #fefef1 !important;
-  height: 100%;
+  background: #F8F8F7 !important;
+  background-image: linear-gradient( 174.2deg,  #F8F8F7 7.1%, rgba(240,246,238,1) 67.4% ) !important;
   font-family: "Quicksand" !important;
 }
 
