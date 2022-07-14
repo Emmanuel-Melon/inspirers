@@ -31,13 +31,13 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 borderRadius="1rem"
                 id={props.type}
                 onChange={props.handleInputchange}
-                focusBorderColor='brand.accent'
+                focusBorderColor='brand.secondary'
                 _hover={{
                     background: "brand.white",
                 }}
                 _focus={{
                     outline: "none",
-                    background: "rgba(50, 50, 93, 0.25)"
+                    background: "brand.highlight"
                 }}
                 {...props} 
                 _placeholder={{ opacity: 1, color: 'brand.primary' }}

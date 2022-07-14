@@ -15,21 +15,7 @@ const theme = extendTheme({
       primaryText: "#696969",
       hovered: "#F3EDED"
     },
-  },
-  borders: {
-    border: {
-      primary: "3px solid #333",
-      accent: "3px solid #723d46",
-      secondary: "1px solid #333",
-      grey: "3px solid #F1EDE9",
-      white: "3px solid #fff",
-      top: "solid 50px #333",
-      radius: {
-        primary: "2% 6% 5% 4% / 1% 1% 2% 4%",
-        secondary: "2% 6% 5% 4% / 1% 1% 2% 4%",
-      },
-    },
-  },
+  }
 });
 
 export default theme;

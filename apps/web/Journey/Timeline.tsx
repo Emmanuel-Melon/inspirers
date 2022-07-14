@@ -1,39 +1,25 @@
+import { FC } from "react";
 import { Flex, Heading, Text, Avatar } from "@chakra-ui/react";
 import { Button } from "ui";
 
-const events = [
-    {
-        id: 1,
-        type: "task",
-        user: "Ladu Lumori",
-        avatar: "https://img.mensxp.com/media/content/2022/Jun/Thor-Might-Make-A-Cameo-In-Deadpool-31200_629de830d26ae.jpeg",
-        body: "Ladu has mentioned you in an issue"
-    },
-    {
-        id: 2,
-        type: "mention",
-        user: "Ladu Lumori",
-        avatar: "https://img.mensxp.com/media/content/2022/Jun/Thor-Might-Make-A-Cameo-In-Deadpool-31200_629de830d26ae.jpeg",
-        body: "Ladu has mentioned you in an issue"
-    },
-    {
-        id: 3,
-        type: "task",
-        user: "Ladu Lumori",
-        avatar: "https://img.mensxp.com/media/content/2022/Jun/Thor-Might-Make-A-Cameo-In-Deadpool-31200_629de830d26ae.jpeg",
-        body: "Ladu has mentioned you in an issue"
-    }
-]
+type Event = {
+    avatar: string;
+    body: string;
+    user: string;
+    type: string;
+}
 
-const FeedItem = ({ event }) => {
+type FeedItemProps = {
+    event: Event;
+}
 
+const FeedItem: FC<FeedItemProps> = ({ event }) => {
     if (event.type === "task") {
         return (
             <Flex
                 borderRadius="1rem"
                 direction="column"
                 color="brand.primaryText"
-
                 bg="#fff"
                 p="4"
                 gap={4}
@@ -52,7 +38,7 @@ const FeedItem = ({ event }) => {
                 </Flex>
                 <Text>{event.body}</Text>
                 <Flex>
-                    <Button>Reply</Button>
+                    <Button onClick={() => { }}>Reply</Button>
                 </Flex>
             </Flex>
         )
@@ -63,7 +49,6 @@ const FeedItem = ({ event }) => {
 }
 
 
-
 export const Timeline = () => {
     return (
         <Flex direction="column" gap={4}>
@@ -72,7 +57,7 @@ export const Timeline = () => {
             </Flex>
             <Text>Connect with friends to view their activity.</Text>
             {
-                events.map(event => {
+                [].map(event => {
                     return <FeedItem event={event} />
                 })
             }

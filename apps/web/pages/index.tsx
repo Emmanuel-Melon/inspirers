@@ -9,7 +9,7 @@ import { Milestones } from "../Journey/Milestones";
 import { Activities } from "../Journey/Acitivites";
 
 
-export default function Index(props) {
+export default function Index() {
   const session = useSession();
   // When rendering client side don't display anything until loading is complete
   // if (typeof window !== "undefined" && loading) return null
@@ -18,7 +18,7 @@ export default function Index(props) {
       <JourneyOverviewCard user={session.data?.user} />
       <Flex >
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
-          <Insights />
+          <Insights insights={[]} />
           <Timeline />
         </Flex>
         <Flex width="40%" direction="column" gap={4}>

@@ -47,8 +47,8 @@ export const Activities: FC<ActivityListProps> = ({ activities }) => {
             <Flex justifyContent="space-between" alignItems="center">
                 <Heading color="brand.primary" size="md">Activities</Heading>
                 <Text
-                    color="brand.secondary"
-                    bg="brand.highlight"
+                    color="brand.primaryText"
+                    bg="brand.highlight2"
                     fontWeight="700"
                     borderRadius="1rem"
                     boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
