@@ -96,22 +96,13 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
                     </Flex>
                 </Flex>
             </Flex>
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader color="primaryText">Emmanuel's New Journey</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <NewJourney />
                     </ModalBody>
-                    <ModalFooter gap={4} bg="brand.highlight1">
-                        <Button bg="brand.white" color="brand.primaryText" colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant='ghost' onClick={() => {
-                            router.push("/journeys/12")
-                        }}>Save</Button>
-                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
