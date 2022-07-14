@@ -21,19 +21,16 @@ export default function Layout({ children }: LayoutProps) {
       </Head>
       <Flex height="100%">
         <Flex
-          bg="linear-gradient(to right, #343434, #211717)"
+          bg="brand.highlight1"
           px={labels ? "2" : "4"}
           py="8"
           height="650px"
-          color="#D9D9D9"
-          boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-          m="2"
-          borderRadius="2.5rem 2.5rem 2.5rem 2.5rem"
+          color="brand.primaryText"
+          m="4"
+          borderRadius="1.5rem 1.5rem 1.5rem 1.5rem"
           alignItems="center"
           justifyContent="center"
           overflowY="scroll"
-          borderRight="solid 0.5rem"
-          borderColor="#343434"
         >
           <VStack gap={6}>
             <Flex

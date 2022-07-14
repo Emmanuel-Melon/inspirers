@@ -24,7 +24,7 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "sm",
+  size = "md",
   width = "100%",
   variant,
   fullWidth
@@ -41,12 +41,12 @@ export const Button: FC<ButtonProps> = ({
         width={width}
         size={size}
         variant={variant}
-        border="solid 0.1rem"
+        border="solid 1px"
         borderColor="#343434"
         disabled={disabled}
         bg={bg || "brand.primary"}
         color={color || "brand.white"}
-        borderRadius="1rem"
+        borderRadius="0.6rem"
         cursor="pointer"
         leftIcon={icon}
         _hover={{
