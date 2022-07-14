@@ -20,6 +20,7 @@ import { UserObject } from "types/User";
 import { FC } from "react";
 import { TextInput } from "ui/Input";
 import  { useRouter } from "next/router";
+import { NewJourney } from "./NewJourney";
 
 type JourneyOverviewCard = UserObject & {
     // rest of the props
@@ -31,36 +32,7 @@ const Companion = ({ companion }) => {
     )
 }
 
-const Journey = () => {
-    return (
-        <>
-            <Flex direction="column" gap={4} py="4">
-                <Text fontWeight="700">Let's give this journey a name</Text>
-                <TextInput
-                    placeholder="What would you like to do/ become?"
-                    type="text"
-                    handleInputchange={() => { }}
-                />
-                <Text fontWeight="700">Your career/ passion?</Text>
-                <TextInput
-                    placeholder="E.g acting, fitness"
-                    type="text"
-                    handleInputchange={() => { }}
-                />
-                <Text fontWeight="700">How would you describe yourself?</Text>
-                <Select placeholder='Select option' borderRadius="1rem">
-                    <option value='option1'>Student</option>
-                    <option value='option2'>Profesional</option>
-                    <option value='option3'>Guru</option>
-                </Select>
-                <TextInput placeholder="Other"
-                    type="text"
-                    handleInputchange={() => { }}
-                />
-            </Flex>
-        </>
-    )
-}
+
 
 export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
     const router = useRouter();
@@ -130,7 +102,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
                     <ModalHeader color="primaryText">Emmanuel's New Journey</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Journey />
+                        <NewJourney />
                     </ModalBody>
                     <ModalFooter gap={4} bg="brand.highlight1">
                         <Button bg="brand.white" color="brand.primaryText" colorScheme='blue' mr={3} onClick={onClose}>
