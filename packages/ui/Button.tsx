@@ -24,7 +24,7 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "md",
+  size = "sm",
   width = "100%",
   variant,
   fullWidth
@@ -36,24 +36,22 @@ export const Button: FC<ButtonProps> = ({
         colorScheme="brand"
         isLoading={isLoading}
         loadingText={loadingText || "loading"}
-        boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
         px={4}
         width={width}
-        py={1}
+        size={size}
         variant={variant}
-        outline="none"
+        border="solid 0.1rem"
+        borderColor="#343434"
         disabled={disabled}
         bg={bg || "brand.primary"}
         color={color || "brand.white"}
         borderRadius="1rem"
-  
         cursor="pointer"
         leftIcon={icon}
         _hover={{
-          background: "brand.secondary",
-          color: "brand.white",
+          background: "brand.secondary"
         }}
-        border={"none"}
         _focus={{
           outline: "none",
           boxShadow: "none",

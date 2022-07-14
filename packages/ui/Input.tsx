@@ -27,7 +27,7 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 name={props.name}
                 type={props.type}
                 bg="rgba(192, 216, 192, 0.1)"
-                boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                 borderRadius="1rem"
                 id={props.type}
                 onChange={props.handleInputchange}
@@ -37,9 +37,11 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 }}
                 _focus={{
                     outline: "none",
-                    background: "brand.accent"
+                    background: "rgba(50, 50, 93, 0.25)"
                 }}
-                {...props} />
+                {...props} 
+                _placeholder={{ opacity: 1, color: 'brand.primary' }}
+                />
         </InputGroup>
     );
 };
