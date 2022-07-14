@@ -1,8 +1,47 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { FC } from "react";
+import { Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
 
+type Activity = {
+    id: string;
+    title: string;
+    description: string;
+}
 
-export const Activities = () => {
+type ActivityListProps = {
+    activities: Activity[];
+};
+
+type ActivityProps = {
+    activity: Activity;
+};
+
+const AcitivityCard: FC<ActivityProps> = ({ activity }) => {
+    return (
+        <Flex
+            borderRadius="1rem"
+            direction="column"
+            color="brand.primaryText"
+            boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
+            bg="#fff"
+            p="4"
+            width="100%"
+        >
+            <Flex gap={4} direction="column">
+                <Flex justifyContent="space-between" alignItems="center">
+                    <Heading size="sm" color="brand.primaryeText" fontWeight="700">{activity.title}</Heading>
+                    <FiMoreVertical />
+                </Flex>
+                <Text>
+                    {activity.description}
+                </Text>
+            </Flex>
+        </Flex>
+    )
+}
+
+
+export const Activities: FC<ActivityListProps> = ({ activities }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">
@@ -20,50 +59,11 @@ export const Activities = () => {
                     View More
                 </Text>
             </Flex>
-            <Flex
-                borderRadius="1rem"
-                direction="column"
-                color="brand.primaryText"
-                boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
-                bg="#fff"
-                p="4"
-                borderLeft="solid 0.2rem"
-                borderColor="brand.white"
-                _hover={{
-                    background: "brand.hovered",
-                    borderLeft: "solid 0.2rem",
-                    borderColor: "brand.secondary"
-                }}
-                cursor="pointer"
-            >
-                <Flex gap={4} direction="column">
-                    <Flex justifyContent="space-between" alignItems="center">
-                        <Heading size="sm" color="brand.primaryText">Finish the app</Heading>
-                        <FiMoreVertical />
-                    </Flex>
-                    <Text>
-                        Connect with friends to view their activity.
-                    </Text>
-                </Flex>
-            </Flex>
-            <Flex
-                borderRadius="1rem"
-                direction="column"
-                color="brand.primaryText"
-                boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
-                bg="#fff"
-                p="4"
-            >
-                <Flex gap={4} direction="column">
-                    <Flex justifyContent="space-between" alignItems="center">
-                        <Heading size="sm" color="brand.primaryeText" fontWeight="700">Write the article</Heading>
-                        <FiMoreVertical />
-                    </Flex>
-                    <Text>
-                        Connect with friends to view their activity.
-                    </Text>
-                </Flex>
-            </Flex>
+            <VStack color="brand.primaryText">
+            {
+                activities?.length === 0 || !activities ? <Text>Empty State</Text> : activities?.map(activity => <AcitivityCard activity={activity} key={activity.id} />)
+            }
+            </VStack>
         </Flex>
     )
 }

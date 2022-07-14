@@ -9,8 +9,6 @@ import { Milestones } from "../Journey/Milestones";
 import { Activities } from "../Journey/Acitivites";
 
 
-
-
 export default function Index(props) {
   const session = useSession();
   // When rendering client side don't display anything until loading is complete
@@ -24,8 +22,8 @@ export default function Index(props) {
           <Timeline />
         </Flex>
         <Flex width="40%" direction="column" gap={4}>
-          <Milestones />
-          <Activities />
+          <Milestones milestones={[]}/>
+          <Activities activities={[]} />
         </Flex>
       </Flex>
     </Flex>

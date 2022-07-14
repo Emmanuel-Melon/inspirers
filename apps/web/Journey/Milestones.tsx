@@ -1,7 +1,17 @@
+import { FC } from "react";
 import { Flex, Heading, Text } from "@chakra-ui/react";
 
+type Milestone = {
+    id: string;
+    title: string;
+    description: string;
+}
 
-export const Milestones = () => {
+type MileStonesProps = {
+    milestones: Milestone[];
+};
+
+export const Milestones: FC<MileStonesProps> = ({ milestones }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">
@@ -24,30 +34,9 @@ export const Milestones = () => {
                 color="brand.primaryText"
                 gap={4}
             >
-                <Flex
-                    borderRadius="1rem"
-                    direction="column"
-                    color="brand.accent"
-                    bg="brand.highlight1"
-                    p="4"
-                    flexGrow={1}
-                >
-                    <Flex gap={4} direction="column">
-                        <Text fontWeight="700">Write 3 articles.</Text>
-                    </Flex>
-                </Flex>
-                <Flex
-                    borderRadius="1rem"
-                    direction="column"
-                    color="brand.accent"
-                    bg="brand.highlight1"
-                    p="4"
-                    flexGrow={1}
-                >
-                    <Flex gap={4} direction="column">
-                        <Text fontWeight="700">Write 3 articles.</Text>
-                    </Flex>
-                </Flex>
+                {
+                    milestones.map(( milestone) => <Text key={milestone.id}>Empty State</Text>)
+                }
             </Flex>
         </Flex>
     )
