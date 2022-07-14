@@ -1,45 +1,42 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../../../lib/prisma";
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 
-export default NextAuth({
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
+    /**
+     * CredentialsProvider({
       name: 'Credentials',
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: {  label: "Password", type: "password" }
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
         const res = await fetch("/your/endpoint", {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
         })
         const user = await res.json()
-  
-        // If no error and we have user data, return it
         if (res.ok && user) {
           return user
         }
-        // Return null if user data could not be retrieved
         return null
       }
+    })
+     */
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID || "",
+      clientSecret: process.env.GOOGLE_SECRET || "",
     })
   ],
   database: process.env.DATABASE_URL,
@@ -56,10 +53,6 @@ export default NextAuth({
   },
   jwt: {
     secret: process.env.SECRET,
-    // Set to true to use encryption (default: false)
-    // encryption: true,
-    // You can define your own encode/decode functions for signing and encryption
-    // if you want to override the default behaviour.
     /**
      * encode: async ({ secret, token, maxAge }) => {
       const jwtClaims = {
@@ -79,21 +72,14 @@ export default NextAuth({
      */
   },
 
-  // You can define custom pages to override the built-in pages.
-  // The routes shown here are the default URLs that will be used when a custom
-  // pages is not specified for that route.
-  // https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: "/auth/signin", // Displays signin buttons
+    signIn: "/auth", // Displays signin buttons
     // signOut: "/auth/signout", // Displays form with sign out button
     // error: "/auth/error", // Error code passed in query string as ?error=
     // verifyRequest: "/auth/verify-request", // Used for check email page
     // newUser: "/auth/new", // If set, new users will be directed here on first sign in
   },
 
-  // Callbacks are asynchronous functions you can use to control what happens
-  // when an action is performed.
-  // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       return {
@@ -103,21 +89,23 @@ export default NextAuth({
         email,
       };
     },
-    async session(session, user) {
+    /**
+     * async session(session, user) {
+      console.log(session);
       session.user.id = user.id
       return session
-    },
+    } */
     async jwt(tokenPayload, user, account, profile, isNewUser) {
       console.log(user);
-  
+
       if (isNewUser) {
         console.log(isNewUser);
       }
-  
+
       if (tokenPayload && user) {
         return { ...tokenPayload, id: `${user.id}` }
       }
-  
+
       return tokenPayload
     },
     // async redirect(url: string, baseUrl: string) { },
@@ -140,11 +128,8 @@ export default NextAuth({
     }
      */
   },
-
-  // Events are useful for logging
-  // https://next-auth.js.org/configuration/events
   events: {},
-
-  // Enable debug messages in the console if you are having problems
   debug: true,
-});
+}
+
+export default NextAuth(authOptions);

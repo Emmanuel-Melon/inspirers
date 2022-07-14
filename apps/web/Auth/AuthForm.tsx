@@ -11,9 +11,10 @@ import { getProviders, signIn, useSession } from "next-auth/react";
 type AuthFormProps = {
     mode: 'login' | 'signup';
     toggleMode: any;
+    providers: any;
 }
 
-export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
+export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
     const router = useRouter();
     const [user, setUser] = useState<UserObject>({
         login: "",
@@ -40,6 +41,12 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
             setIsLoading(true);
 
             signIn("email", { email: user.login })
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
             /**
              * const account = await client.post("/users/login", {
                 email: user.login || null,
@@ -50,7 +57,8 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
 
             router.push("/");
         } else {
-            signIn("email", { email: user.login, redirect: false, password: user.password })
+            console.log(user);
+            signIn("email", { email: user.login, redirect: false, password: user.password });
             /**
              * client.post("users", {
                 ...user,
@@ -61,57 +69,93 @@ export const AuthForm = ({ mode, toggleMode }: AuthFormProps) => {
         }
     }
 
+    
+
     return (
-        <Flex 
-            direction="column" 
-            gap={4} 
-            justifyContent="center" 
+        <Flex
+            direction="column"
+            justifyContent="center"
             alignItems="center"
-            p="8"
             bg="#fff"
-            boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+            boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
             borderRadius="1rem"
-            height="450px"
         >
-            <Flex as="form" direction="column" gap={4}>
-            <Heading as="h3" size="md" 
-            color="brand.primary">Inspirers</Heading>
-            <Text>Achieve your goals and inspire others, join now!</Text>
-            <VStack
-                width="100%"
-                gap={2}
-
+            <Flex 
+                as="form" 
+                direction="column" 
+                gap={4}
+                p="8"
             >
-                <TextInput
-                    handleInputchange={handleInputchange}
-                    placeholder="Username/ Email Address"
-                    type="text"
-                    value={user.login}
-                    name="login"
-                />
-                <TextInput
-                    handleInputchange={handleInputchange}
-                    placeholder="Password"
-                    type="password"
-                    value={user.password}
-                    name="password"
-                />
-
-                <Text>Trouble signing in?</Text>
-
-                <Button 
-                    onClick={handleClick} 
-                    width="350px"
-                    isLoading={isLoading}
+                <Heading as="h1" size="lg" color="brand.primary" textAlign="center">Inspirers</Heading>
+                <Text>Achieve your goals and inspire others, join now!</Text>
+                <VStack
+                    width="100%"
+                    gap={2}
+                    alignItems="flex-start"
+                    color="brand.primaryText"
                 >
-                    {mode}
-                </Button>
+                    <TextInput
+                        handleInputchange={handleInputchange}
+                        placeholder="Username/ Email Address"
+                        type="text"
+                        value={user.login}
+                        name="login"
+                    />
+                    <TextInput
+                        handleInputchange={handleInputchange}
+                        placeholder="Password"
+                        type="password"
+                        value={user.password}
+                        name="password"
+                    />
 
-                <Text>Have an account? <Box as="span" fontWeight="700">Register Now</Box></Text>
-            </VStack>
+                    <Text>Trouble signing in?</Text>
+
+                    <Button
+                        onClick={handleClick}
+                        width="350px"
+                        isLoading={isLoading}
+                    >
+                        {mode}
+                    </Button>
+                </VStack>
+            </Flex>
+            <Flex 
+                direction="column" 
+                gap={4} 
+                bg="brand.highlight" 
+                width="100%"
+                borderRadius="0rem 0rem 1rem 1rem"
+                p="8"
+                borderTop="solid 0.10rem"
+                borderColor="brand.secondary"
+            >
+                <Heading as="h3" size="sm" color="brand.primaryText">Or sign in with</Heading>
+                <Flex gap={4} direction="column" >
+                    {
+                        providers && Object.values(providers).map((provider) => {
+                            return <div>
+                                <Button
+                                    bg="brand.secondary"
+                                    color="brand.white"
+                                    onClick={() => signIn(provider?.id)
+                                        .then(res => {
+                                            console.log(res);
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        })
+                                }
+                                >
+                                    {provider.name}
+                                </Button>
+                            </div>
+
+                        })
+                    }
+                </Flex>
+                <Text>Have an account? <Box as="span" fontWeight="700" color="brand.primaryText">Register Now</Box></Text>
             </Flex>
         </Flex>
     )
 }
-
-// box-shadow: ;

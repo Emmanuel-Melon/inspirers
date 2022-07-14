@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Activity {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   title     String
   userId    Int
   taskId    Int
@@ -18,7 +18,7 @@ model Activity {
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(cuid())
   title       String
   userId      Int
   description String
@@ -27,20 +27,22 @@ model Task {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String?
-  email     String?
-  createdAt DateTime? @default(now())
-  bio       String?
-  password  String
-  login     String?
-  Account   Account[]
-  Session   Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  image         String?
+  email         String    @unique
+  createdAt     DateTime? @default(now())
+  bio           String?
+  password      String?
+  emailVerified Boolean?  @default(false)
+  login         String?
+  Account       Account[]
+  Session       Session[]
 }
 
 model Account {
   id                String  @id @default(cuid())
-  userId            Int
+  userId            String
   type              String
   provider          String
   providerAccountId String
@@ -60,7 +62,7 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       Int
+  userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
