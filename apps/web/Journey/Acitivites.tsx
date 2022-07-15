@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { Flex, Heading, Text, VStack, Badge } from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
 
 type Activity = {
@@ -60,8 +60,9 @@ export const Activities: FC<ActivityListProps> = ({ activities }) => {
                 </Text>
             </Flex>
             <VStack color="brand.primaryText">
+                <br/>
             {
-                activities?.length === 0 || !activities ? <Text>Empty State</Text> : activities?.map(activity => <AcitivityCard activity={activity} key={activity.id} />)
+                activities?.length === 0 || !activities ? <Badge colorScheme={'purple'}>Click get started to create your first task now ; )</Badge> : activities?.map(activity => <AcitivityCard activity={activity} key={activity.id} />)
             }
             </VStack>
         </Flex>
