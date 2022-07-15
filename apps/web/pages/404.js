@@ -1,9 +1,10 @@
-import { Image, Img, Stack, Text, Button } from '@chakra-ui/react'
+import { Image, Img, Stack, Text, Button} from '@chakra-ui/react'
+//import { FaArrowForwardIcon } from 'react-icons/fa'
 
 export default function ErrorPage404() {
     return(
     <Stack align="center">
-    <Text>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
+    <Text color='gray.500'>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
     <Image
   borderRadius={'full'}
   boxSize='500px'
@@ -12,8 +13,11 @@ export default function ErrorPage404() {
   alt='Sorry Mate!, Try some else : )'
 />
 <Button
-bg="gold"
+bg="#002366"
 color='white'
->Home</Button>
+size='lg'
+//isLoading
+>Home
+</Button>
 </Stack>);
 }
