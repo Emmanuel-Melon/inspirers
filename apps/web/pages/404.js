@@ -1,6 +1,6 @@
 import { Image, Img, Stack, Text, Button } from '@chakra-ui/react'
 
-export default function Home() {
+export default function ErrorPage() {
     return(
     <Stack align="center">
     <Text>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
