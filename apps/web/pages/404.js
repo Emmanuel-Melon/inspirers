@@ -1,9 +1,9 @@
-import { Image, Img } from '@chakra-ui/react'
+import { Image, Img, Stack, Text, Button } from '@chakra-ui/react'
 
 export default function Home() {
     return(
-    <div align="center">
-    {/* <p>"Sorry Mate!, Try some else : ) Like going back Home"</p> */}
+    <Stack align="center">
+    <Text>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
     <Image
   borderRadius={'full'}
   boxSize='500px'
@@ -11,5 +11,6 @@ export default function Home() {
   src='https://webdeasy.de/wp-content/uploads/2020/06/404-pages.jpg'
   alt='Sorry Mate!, Try some else : )'
 />
-</div>);
+<Button>Home</Button>
+</Stack>);
 }
