@@ -11,6 +11,9 @@ export default function ErrorPage404() {
   src='https://webdeasy.de/wp-content/uploads/2020/06/404-pages.jpg'
   alt='Sorry Mate!, Try some else : )'
 />
-<Button>Home</Button>
+<Button
+bg="gold"
+color='white'
+>Home</Button>
 </Stack>);
 }
