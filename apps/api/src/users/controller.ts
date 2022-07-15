@@ -60,7 +60,7 @@ export const addUser = async (user) => {
 export const getUserById = async (userId: number) => {
   const newEntry = await prisma.user.findUnique({
     where: {
-      id: userId,
+      id: userId.toString(),
     },
   });
   return newEntry;
@@ -69,7 +69,7 @@ export const getUserById = async (userId: number) => {
 export const modifyUser = async (userId: number, data) => {
   const newEntry = await prisma.user.update({
     where: {
-        id: userId,
+        id: userId.toString(),
     },
     data,
   });
