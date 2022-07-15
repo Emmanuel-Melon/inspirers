@@ -1,6 +1,6 @@
 import { Image, Img, Stack, Text, Button } from '@chakra-ui/react'
 
-export default function 404ErrorPage() {
+export default function ErrorPage404() {
     return(
     <Stack align="center">
     <Text>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
