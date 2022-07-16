@@ -20,15 +20,14 @@ export const TaskItem = ({ task }: TaskItemProps) => {
             bg="#fff"
             cursor="pointer"
             _hover={{
-                borderLeft: "solid 0.25rem",
-                borderColor: "brand.accent",
-                color: "brand.white",
-                background: "rgba(55, 102, 0, 0.01)"
+                borderLeft: "dashed 0.25rem",
+                borderColor: "brand.highlight",
+                color: "brand.white"
             }}
         >
             <Flex alignItems="center" gap={8}>
                 <Stack>
-                    <Heading as="h3" size="sm" color="brand.primary" m="0">{task.title}</Heading>
+                    <Heading as="h3" size="sm" color="brand.primaryText">{task.title}</Heading>
                     <Text color="#696969">{task.description}</Text>
                 </Stack>
             </Flex>

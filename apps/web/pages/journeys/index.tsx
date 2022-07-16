@@ -15,7 +15,7 @@ export default function Index() {
                 flexGrow={1}
                 direction="column"
             >
-                <Text>Index</Text>
+                <Text>Summarize journeys</Text>
             </Flex>
         </Flex>
     );

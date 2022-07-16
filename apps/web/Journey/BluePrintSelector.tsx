@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { RadioCard } from "ui/RadioCard";
 import { useState } from "react";
-import { FiCopy, FiEdit3 } from "react-icons/fi";
+import { FiCopy, FiPlus } from "react-icons/fi";
 
 type BluePrintSelectorProps = {
 
@@ -34,8 +34,8 @@ const SelectorCard = ({ description, value }: SelectorCardProps) => {
             <Flex gap={4} direction="column" p="4" alignItems="center">
                 <Flex gap={4} direction="column" alignItems="flex-start">
                     {
-                        value !== "scratch" ? <FiCopy size="2.5rem" /> :
-                            <FiEdit3 size="2.5rem" />
+                        value !== "blank" ? <FiCopy size="2.5rem" /> :
+                            <FiPlus size="2.5rem" />
                     }
                     <Text fontWeight="700" color="brand.secondary">{value}</Text>
                 </Flex>
@@ -60,7 +60,7 @@ export const BluePrintSelector = ({ updateBluePrint, currentStep }: BluePrintSel
 
     const options = [{
         id: 1,
-        value: 'scratch',
+        value: 'blank',
         description: "Customize your entire experience"
     },
     {
