@@ -54,8 +54,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -77,9 +76,49 @@ model VerificationToken {
 }
 
 model Journey {
-  id     String @id @default(cuid())
+  id             String           @id @default(cuid())
+  title          String
+  description    String
+  userId         String
+  bluePrint    String?
+  Goal           Goal[]
+  Interest       Interest[]
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // bluePrint      JourneyBluePrint @relation(fields: [bluePrintId], references: [id], onDelete: Cascade)
+}
+
+model Goal {
+  id        String   @id @default(cuid())
+  title     String
+  achieved  Boolean
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  journeyId String?
+}
+
+model JourneyPrivacy {
+  id        String    @id @default(cuid())
+  userId    String
+  journeyId String
+}
+
+model JourneyBluePrint {
+  id        String    @id @default(cuid())
+  userId    String?
+  type String?
+  templateId String?
   title String
-  description String
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  description String?
+  field String?
+  expertise String?
+  price String?
+  creator String?
+  createdAt String?
+  updateAt String?
+  image String?
+}
+
+model Interest {
+  id        String   @id @default(cuid())
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  journeyId String?
 }

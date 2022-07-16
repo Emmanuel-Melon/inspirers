@@ -7,18 +7,14 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    Select
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import { FiEye, FiShare, FiPackage, FiCreditCard, FiSettings, FiTruck } from "react-icons/fi";
 import { UserObject } from "types/User";
 import { FC } from "react";
-import { TextInput } from "ui/Input";
 import  { useRouter } from "next/router";
 import { NewJourney } from "./NewJourney";
 
@@ -36,11 +32,10 @@ const Companion = ({ companion }) => {
 
 export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
     const router = useRouter();
-    const { isOpen, onOpen, onClose } = useDisclosure();
 
     function inviteFriends() { }
     function getStarted() {
-        onOpen();
+        router.push("/journeys/new");
     }
     return (
         <>
@@ -53,7 +48,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
                         <Heading color="brand.primary" size="lg" as="h1">Hi, {user?.name}  </Heading>
                         <Text my="4">You haven't started any journey.</Text>
                     </Box>
-                    <Button onClick={onOpen} icon={<FiTruck />}>Get Started</Button>
+                    <Button onClick={getStarted} icon={<FiTruck />}>Get Started</Button>
 
                 </Flex>
                 <Flex
@@ -96,15 +91,6 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
                     </Flex>
                 </Flex>
             </Flex>
-            <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <NewJourney />
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
         </>
     )
 }

@@ -1,9 +1,29 @@
 import { NextFunction, Response, Router } from "express";
 import { Request } from "../express";
-import { IdInObject } from "../id";
-import { addJourney, getUserJourneys, getJourneyById, updateJourney } from "./controller";
+import { IdInObject } from "./id";
+import { 
+  addJourney, 
+  getUserJourneys, 
+  getJourneyById, 
+  updateJourney ,
+  addBlueprint,
+  getBlueprints,
+  updateBlueprint,
+  deleteBlueprint
+} from "./controller";
 
 const journeyRouter = Router();
+
+journeyRouter.get("/blueprints",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(getBlueprints())
+    .then(data => res.json({ data }))
+    .catch(next);
+});
 
 journeyRouter.get("/:userId/list",
   (
@@ -38,6 +58,17 @@ journeyRouter.put("/:journeyId",
     .catch(next);
 });
 
+journeyRouter.put("/blueprints/:blueprintId",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(updateBlueprint(req.params.blueprintId, req.body))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
 journeyRouter.post("/",
   (
     req: Request<any, any, IdInObject>,
@@ -45,6 +76,28 @@ journeyRouter.post("/",
     next: NextFunction
   ) => {
   return Promise.resolve(addJourney(req.body))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
+journeyRouter.post("/blueprint",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(addBlueprint(req.body))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
+journeyRouter.delete("/blueprints/:blueprintId",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(deleteBlueprint(req.params.blueprintId))
     .then(data => res.json({ data }))
     .catch(next);
 });
