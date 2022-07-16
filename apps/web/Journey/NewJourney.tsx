@@ -84,8 +84,7 @@ export const NewJourney = () => {
         switch (action.type) {
             case "MOVE_FORWARD":
                 const nextStep = state.steps.find(step => {
-                    console.log(state.currentStep.id + step.id);
-                    return step.id === 2;
+                    return step.id === state.currentStep.id + 1;
                 });
                 const newState = {
                     ...state,
@@ -97,8 +96,7 @@ export const NewJourney = () => {
                 return newState;
             case "MOVE_BACKWARDS":
                 const prevStep = state.steps.find(step => {
-                    console.log(state.currentStep.id + step.id);
-                    return step.id === 1;
+                    return step.id === state.currentStep.id - 1;
                 });
                 const prevState = {
                     ...state,

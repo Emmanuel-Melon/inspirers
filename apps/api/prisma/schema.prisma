@@ -38,6 +38,7 @@ model User {
   login         String?
   Account       Account[]
   Session       Session[]
+  Journey       Journey[]
 }
 
 model Account {
@@ -73,4 +74,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Journey {
+  id     String @id @default(cuid())
+  title String
+  description String
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

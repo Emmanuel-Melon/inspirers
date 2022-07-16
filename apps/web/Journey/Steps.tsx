@@ -39,7 +39,6 @@ const Step = ({ step }) => {
 }
 
 export const JourneySteps = ({ steps }) => {
-    console.log(steps);
     return (
         <Flex 
             gap={8} 

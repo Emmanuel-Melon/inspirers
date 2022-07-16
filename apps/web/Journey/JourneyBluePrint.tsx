@@ -71,7 +71,7 @@ export const JourneyBluePrint = (props) => {
                     </Stack>
                 </RadioGroup>
             </Flex>
-            <Button width={400} onClick={props.navigateToNextStep}>Continue</Button>
+            <Button width={400}>Continue</Button>
         </Flex>
     )
 }
