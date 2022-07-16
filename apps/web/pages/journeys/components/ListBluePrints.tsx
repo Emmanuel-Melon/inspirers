@@ -1,4 +1,4 @@
-import { useFetch } from "../hooks/useSwr";
+import { useFetch } from "../../../hooks/useSwr";
 import {
     Flex,
     Text

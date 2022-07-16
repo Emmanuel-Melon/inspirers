@@ -8,7 +8,7 @@ import {
 import { TextInput } from "ui/Input";
 import Image from "next/image";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { FiX, FiArrowRight } from "react-icons/fi";
 
 export const FifthStep = () => {

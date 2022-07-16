@@ -2,11 +2,11 @@ import { Flex } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
-import { Insights } from "../Journey/Insights";
-import { Timeline } from "../Journey/Timeline";
-import { JourneyOverviewCard } from "../Journey/JourneyOverviewCard";
-import { Milestones } from "../Journey/Milestones";
-import { Activities } from "../Journey/Acitivites";
+import { Insights } from "./journeys/components/Insights";
+import { Timeline } from "./journeys/components/Timeline";
+import { JourneyOverviewCard } from "./journeys/components/JourneyOverviewCard";
+import { Milestones } from "./journeys/components/Milestones";
+import { Activities } from "./journeys/components/Acitivites";
 
 
 export default function Index() {

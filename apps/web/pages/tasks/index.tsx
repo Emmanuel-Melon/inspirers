@@ -1,12 +1,12 @@
-import Layout from "../layout/layout";
-import NestedLayout from "../layout/Nested";
-import { client } from "../utils/client";
+import Layout from "../../layout/layout";
+import NestedLayout from "../../layout/Nested";
+import { client } from "../../utils/client";
 import {
   Flex,
   Text, Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { TaskList } from "../tasks/TaskList";
+import { TaskList } from "./components/TaskList";
 
 export default function Tasks(props) {
 

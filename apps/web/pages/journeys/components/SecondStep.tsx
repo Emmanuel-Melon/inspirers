@@ -8,7 +8,7 @@ import {
 import { TextInput } from "ui/Input";
 import Image from "next/image";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { FiInfo } from "react-icons/fi";
 import { ListBluePrints } from "./ListBluePrints";
 

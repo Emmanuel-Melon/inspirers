@@ -8,7 +8,7 @@ import {
     Flex,
     Text
 } from "@chakra-ui/react";
-import { JourneyOnboardingConsumer, JourneyOnboardingProvider } from "../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingConsumer, JourneyOnboardingProvider } from "../../../providers/JourneyOnboardingProvider";
 
 export const NewJourney = () => {
     return (
