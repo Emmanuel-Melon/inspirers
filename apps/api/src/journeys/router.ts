@@ -1,78 +1,54 @@
 import { NextFunction, Response, Router } from "express";
 import { Request } from "../express";
+import { IdInObject } from "../id";
+import { addJourney, getUserJourneys, getJourneyById, updateJourney } from "./controller";
 
-const router = Router();
+const journeyRouter = Router();
 
-router.get("/:userId",
-  (
-    req: Request<void, void, IdInObject>,
-    res: Response,
-    next: NextFunction
-  ) => {
-  return Promise.resolve(listJourneys(req.params.userId))
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-router.get("/:id/list",
-  (
-    req: Request<void, void, IdInObject>,
-    res: Response,
-    next: NextFunction
-  ) => {
-  return Promise.resolve(findById(req.params.id))
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-router.get("/:id/timeline",
-  (
-    req: Request<void, void, IdInObject>,
-    res: Response,
-    next: NextFunction
-  ) => {
-    return Promise.resolve(populateTimeline(req.params.id))
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-router.get("/:id/events",
-  (
-    req: Request<void, void, IdInObject>,
-    res: Response,
-    next: NextFunction
-  ) => {
-    return Promise.resolve(listEvents(req.params.id))
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-router.get("/:id/activities",
-  (
-    req: Request<void, void, IdInObject>,
-    res: Response,
-    next: NextFunction
-  ) => {
-    return Promise.resolve(listActivities(req.params.id))
-    .then(data => res.json({ data }))
-    .catch(next);
-});
-
-router.post("/",
+journeyRouter.get("/:userId/list",
   (
     req: Request<any, any, IdInObject>,
     res: Response,
     next: NextFunction
   ) => {
-  return Promise.resolve(createJourney(req.body, req.user))
+  return Promise.resolve(getUserJourneys(req.params.userId))
     .then(data => res.json({ data }))
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {
-  return Promise.resolve(editJourney(req.body, req.params.id))
+journeyRouter.get("/:journeyId",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(getJourneyById(req.params.journeyId))
     .then(data => res.json({ data }))
     .catch(next);
 });
 
-export default router;
+journeyRouter.put("/:journeyId",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(updateJourney(req.params.journeyId, req.body))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
+journeyRouter.post("/",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(addJourney(req.body))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
+
+
+export default journeyRouter;
