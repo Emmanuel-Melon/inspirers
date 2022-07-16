@@ -72,7 +72,7 @@ export const BluePrintSelector = ({ updateBluePrint, currentStep }: BluePrintSel
 
     return (
         <Flex gap={4} direction="column" >
-            <Heading size="md" color="brand.primaryText">How would you like to start?</Heading>
+            <Heading size="md" color="brand.primaryText">Start a new journey</Heading>
             <Text color="brand.primaryText">We'll streamline your setup experience accordingly.</Text>
             <Flex 
                 gap={4} 
