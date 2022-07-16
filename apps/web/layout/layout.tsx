@@ -12,7 +12,7 @@ type LayoutProps = {
 };
 
 export default function Layout({ children }: LayoutProps) {
-  const [labels, _setLabels] = useState<boolean>(false);
+  const [labels, _setLabels] = useState<boolean>(true);
   return (
     <>
       <Head>
