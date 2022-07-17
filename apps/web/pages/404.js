@@ -1,10 +1,11 @@
-import { Image, Img, Stack, Text, Button, Link} from '@chakra-ui/react'
+import { Image, Img, Stack, Text, Link} from '@chakra-ui/react'
 //import { FaArrowForwardIcon } from 'react-icons/fa'
+import {  Button } from 'ui'
 
 export default function ErrorPage404() {
     return(
     <Stack align="center">
-    <Text color='gray.500'>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
+    <Text color='brand.primaryText'>"Sorry Mate!, Try some else : ) Like going back Home"</Text>
     <Image
   borderRadius={'full'}
   boxSize='500px'
@@ -12,9 +13,11 @@ export default function ErrorPage404() {
   src='https://webdeasy.de/wp-content/uploads/2020/06/404-pages.jpg'
   alt='Sorry Mate!, Try some else : )'
 />
-<Link href='/'>
+<Link
+style= {{textDecoration: 'none'}}
+href='/'>
 <Button
-bg="#002366"
+bg= 'brand.primary'
 color='white'
 size='lg'
 >Home
