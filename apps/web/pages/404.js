@@ -1,4 +1,4 @@
-import { Image, Img, Stack, Text, Button} from '@chakra-ui/react'
+import { Image, Img, Stack, Text, Button, Link} from '@chakra-ui/react'
 //import { FaArrowForwardIcon } from 'react-icons/fa'
 
 export default function ErrorPage404() {
@@ -12,12 +12,13 @@ export default function ErrorPage404() {
   src='https://webdeasy.de/wp-content/uploads/2020/06/404-pages.jpg'
   alt='Sorry Mate!, Try some else : )'
 />
+<Link href='/'>
 <Button
 bg="#002366"
 color='white'
 size='lg'
-//isLoading
 >Home
 </Button>
+</Link>
 </Stack>);
 }
