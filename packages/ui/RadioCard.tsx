@@ -16,7 +16,12 @@ export const RadioCard = (props: any) => {
         _hover={props.hover}
         _focus={props.focus}
         border={props.border || "none"}
-        borderRadius="1rem"
+        borderColor={props.borderColor || "brand.accent"}
+        borderRadius="2.5rem"
+        bg="brand.white"
+        px="2"
+        py="1"
+        boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
       >
         {props.children}
       </Box>

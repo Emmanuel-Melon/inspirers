@@ -4,12 +4,6 @@ import {
     Text,
     Box,
     Avatar,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure,
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import { FiEye, FiShare, FiPackage, FiCreditCard, FiSettings, FiTruck } from "react-icons/fi";

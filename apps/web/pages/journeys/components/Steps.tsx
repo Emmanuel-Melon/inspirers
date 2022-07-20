@@ -46,21 +46,6 @@ export const JourneySteps = ({ steps }) => {
                 }
             </Flex>
             <Flex gap={8} justifyContent="center">
-            <Button
-                onClick={context.moveBackwards}
-                bg="brand.white"
-                color="brand.primaryText"
-                icon={<FiX />}
-                disabled={context.currentStep.id === 1 || context.currentStep.id === 5}
-            >
-                Back
-            </Button>
-            <Button
-                onClick={() => context.moveForward(context.currentStep.id + 1)}
-                icon={<FiArrowRight />}
-            >
-                Next
-            </Button>
             </Flex>
         </>
     )

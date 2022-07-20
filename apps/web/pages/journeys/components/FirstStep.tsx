@@ -9,7 +9,8 @@ import Image from "next/image";
 import { BluePrintSelector } from "./BluePrintSelector";
 import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { Button } from "ui";
-import { FiInfo } from "react-icons/fi";
+import { FiInfo, FiX, FiArrowRight } from "react-icons/fi";
+// import { FiX, FiArrowRight } from "react-icons/fi";
 
 export const FirstStep = ({ blueprint }) => {
     const context = useContext(JourneyOnboardingContext);
@@ -23,11 +24,29 @@ export const FirstStep = ({ blueprint }) => {
                 <Flex
                     direction="column"
                     borderRadius="1rem"
+                    gap={4}
                 >
                     <BluePrintSelector
                         currentStep={context.currentStep}
                         updateBluePrint={context.updateBluePrint}
                     />
+                                            <Flex gap={4}>
+                            <Button
+                                onClick={context.moveBackwards}
+                                bg="brand.white"
+                                color="brand.primaryText"
+                                icon={<FiX />}
+                                disabled={context.currentStep.id === 1 || context.currentStep.id === 5}
+                            >
+                                Back
+                            </Button>
+                            <Button
+                                onClick={() => context.moveForward(context.currentStep.id + 1)}
+                                icon={<FiArrowRight />}
+                            >
+                                Next
+                            </Button>
+                        </Flex>
                 </Flex>
             </VStack>
         </Flex>
@@ -40,6 +59,7 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         <Flex
             direction="column"
             width="100%"
+            height="100%"
         >
             <Flex direction="column" gap={4} >
                 <Heading color="brand.primary">{context.currentStep.id} - {context.currentStep.title}</Heading>

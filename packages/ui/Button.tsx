@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick: (e: React.MouseEvent) => void;
   fullWidth?: boolean;
   icon?: any;
-  color?: string;
+  color?: string; 
   bg?: string;
   loadingText?: string;
   isLoading?: boolean;
@@ -49,7 +49,7 @@ export const Button: FC<ButtonProps> = ({
         cursor="pointer"
         leftIcon={icon}
         _hover={{
-          background: "brand.secondary"
+          background: "brand.primaryHover"
         }}
         _focus={{
           outline: "none",

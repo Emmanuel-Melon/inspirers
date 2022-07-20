@@ -19,7 +19,15 @@ export const FifthStep = () => {
             gap={4}
             borderRadius="1rem"
         >
-            <Text fontWeight="700">Let's review it all</Text>
+            <Heading>Overview</Heading>
+            <Text>Journey</Text>
+            <Text>Activities</Text>
+            <Text>Tasks</Text>
+            <Text>Integrations</Text>
+            <Text>Backpack (Resources)</Text>
+            <Text>Companions</Text>
+            <Text>Inspirers</Text>
+            <Text>Communities</Text>
             <Flex gap={4}>
                 <Button
                     onClick={context.moveForward}

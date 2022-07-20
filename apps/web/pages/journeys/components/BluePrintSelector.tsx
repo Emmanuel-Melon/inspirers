@@ -28,18 +28,18 @@ const SelectorCard = ({ description, value }: SelectorCardProps) => {
             justifyContent="center"
             alignItems="center"
             width="150px"
-            border="dashed 0.25rem #fff"
             height="200px"
         >
             <Flex gap={4} direction="column" p="4" alignItems="center">
-                <Flex gap={4} direction="column" alignItems="flex-start">
+                <Flex gap={4} direction="column" alignItems="center">
                     {
                         value !== "blank" ? <FiCopy size="2.5rem" /> :
                             <FiPlus size="2.5rem" />
                     }
                     <Text fontWeight="700" color="brand.secondary">{value}</Text>
+                    <Text textAlign="center">{description}</Text>
                 </Flex>
-                <Text textAlign="center">{description}</Text>
+                
             </Flex>
         </Flex>
     )

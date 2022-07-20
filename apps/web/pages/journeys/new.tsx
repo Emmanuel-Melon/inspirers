@@ -1,4 +1,3 @@
-import { Flex, Text, Heading } from "@chakra-ui/react";
 import { NewJourney } from "./components/NewJourney";
 
 

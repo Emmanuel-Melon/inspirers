@@ -20,10 +20,10 @@ export const FourthStep = () => {
                     borderRadius="1rem"
                 >
                     <Text fontWeight="700">What are your goals?</Text>
-                    <Text>Land a job</Text>
-                    <Text>Join college, win a scholarship</Text>
+                    <Text>Find mentor</Text>
+                    <Text>Secure funding</Text>
                     <Text>Get a promotion</Text>
-                    <Text>Internship</Text>
+                    <Text>Launch product</Text>
                     <Flex gap={4}>
                         <Button
                             onClick={context.moveBackwards}

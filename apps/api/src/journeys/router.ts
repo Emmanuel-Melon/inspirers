@@ -9,7 +9,8 @@ import {
   addBlueprint,
   getBlueprints,
   updateBlueprint,
-  deleteBlueprint
+  deleteBlueprint,
+  deleteJourney
 } from "./controller";
 
 const journeyRouter = Router();
@@ -98,6 +99,17 @@ journeyRouter.delete("/blueprints/:blueprintId",
     next: NextFunction
   ) => {
   return Promise.resolve(deleteBlueprint(req.params.blueprintId))
+    .then(data => res.json({ data }))
+    .catch(next);
+});
+
+journeyRouter.delete("/:journeyId",
+  (
+    req: Request<any, any, IdInObject>,
+    res: Response,
+    next: NextFunction
+  ) => {
+  return Promise.resolve(deleteJourney(req.params.journeyId))
     .then(data => res.json({ data }))
     .catch(next);
 });

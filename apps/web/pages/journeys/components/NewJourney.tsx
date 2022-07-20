@@ -16,19 +16,21 @@ export const NewJourney = () => {
             <JourneyOnboardingConsumer>
                 {
                     value => (
-                        <Flex width="100%" gap={4}>
-                            <Flex width="35%" direction="column">
+                        <Flex width="100%" gap={4} height="100%">
+                            <Flex width="35%" direction="column"  height="100%">
                                 {value.currentStep.id === 1 ? <FirstStepGuide guide={value.currentStep} /> : null}
                                 {value.currentStep.id === 2 ? <SecondStepGuide guide={value.currentStep} /> : null}
                                 {value.currentStep.id === 3 ? <SecondStepGuide guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 4 ? <SecondStepGuide guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 5 ? <SecondStepGuide guide={value.currentStep} /> : null}
                                 <JourneySteps steps={value.steps} />
                             </Flex>
                             <Flex
                                 direction="column"
                                 width="65%" 
+                                height="100%"
                             >
-                                
-                                <Flex>
+                                <Flex height="100%">
                                     {value.currentStep.id === 1 ? <FirstStep /> : null}
                                     {value.currentStep.id === 2 ? <SecondStep /> : null}
                                     {value.currentStep.id === 3 ? <ThirdStep /> : null}

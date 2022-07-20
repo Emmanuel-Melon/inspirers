@@ -29,14 +29,14 @@ const initialState = {
   steps: [
     {
       id: 1,
-      title: "Journey",
+      title: "New Beginning",
       active: true,
       skippable: false,
       completed: false
     },
     {
       id: 2,
-      title: "About you",
+      title: "About your journey",
       active: false,
       skippable: false,
       completed: false
@@ -69,45 +69,33 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "MOVE_FORWARD":
-      const nextStep = state.steps.find(step => {
-        return step.id === action.payload.targetStepId;
-      });
-
-
-      const newState = {
+      const nextStep = state.steps.find(step => step.id === action.payload.targetStepId);
+      return {
         ...state,
         currentStep: {
           ...nextStep,
           active: true
         }
-      }
-
-      return newState;
+      };
 
     case "MOVE_BACKWARDS":
-      const prevStep = state.steps.find(step => {
-        return step.id === state.currentStep.id - 1;
-      });
-      const prevState = {
+      const prevStep = state.steps.find(step => step.id === state.currentStep.id - 1);
+      return {
         ...state,
         currentStep: {
           ...prevStep,
           active: true
         }
-      }
-      return prevState;
+      };
     default:
-      console.log(action);
       return state;
   }
 }
 
 export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) => {
-
   const [state, dispatch] = useReducer(reducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
   const updateBluePrint = (value: string) => setBluePrint(value);
-
   const moveForward = async (targetStepId) => {
     dispatch({
       type: "MOVE_FORWARD",
@@ -116,7 +104,6 @@ export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) 
       }
     });
   }
-
   const moveBackwards = (targetStepId) => {
     dispatch({
       type: "MOVE_BACKWARDS",
