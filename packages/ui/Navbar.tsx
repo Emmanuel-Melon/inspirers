@@ -42,22 +42,6 @@ export const Navbar = () => {
                 >
                     <FiMoon size="1.5rem" />
                 </Flex>
-                <Flex
-                    bg="#EC994B"
-                    color="brand.white"
-                    borderRadius="1rem"
-                    alignItems="center"
-                    px="2"
-                    justifyContent="center"
-                    boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
-                    cursor="pointer"
-                    _hover={{
-                        background: "brand.secondary",
-                        color: "brand.white",
-                    }}
-                >
-                    <FiBell size="1.5rem" />
-                </Flex>
 
                 <IconButton 
                     onClick={() => {

@@ -12,7 +12,7 @@ const Auth: NextPage = (props) => {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      router.push('/');
+      // router.push('/');
     }
   }, [session, router]);
 

@@ -1,12 +1,12 @@
-import Layout from "../layout/layout";
-import NestedLayout from "../layout/Nested";
-import { client } from "../utils/client";
+import Layout from "../../layout/layout";
+import NestedLayout from "../../layout/Nested";
+import { client } from "../../utils/client";
 import {
   Flex,
   Text, Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { TaskList } from "../tasks/TaskList";
+import { TaskList } from "./components/TaskList";
 
 export default function Tasks(props) {
 
@@ -25,10 +25,37 @@ export default function Tasks(props) {
   }
 
   return (
-    <>
-      <h3>got tasks</h3>
-    </>
-  );
+    <Flex justifyContent="space-between" width="100%"  gap={8}>
+      <Flex
+        flexGrow={1}
+        borderRadius="0.5rem"
+        direction="column"
+      >
+        <Flex
+          w={"640px"}
+          h="500px"
+          overflowY="scroll"
+          css={{
+            "::-webkit-scrollbar": { display: "none" }
+          }}
+        >
+          <TaskList tasks={data} />
+        </Flex>
+      </Flex>
+      <Flex
+        bg="rgba(102, 73, 0, 0.01)"
+        boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px"
+        height="650px"
+        borderRadius="1rem"
+
+        flexGrow={1}
+        direction="column"
+      >
+        <Heading>This is a heading</Heading>
+        <Text>Simple text</Text>
+      </Flex>
+    </Flex>
+  )
 }
 
 const data = [
@@ -66,44 +93,8 @@ const data = [
   }
 ];
 
-Tasks.getLayout = function getLayout(page) {
-  return (
-<Flex justifyContent="space-between" width="100%" p="8" gap={8}>
-        <Flex
-          p="8"
-          flexGrow={1}
-          borderRadius="0.5rem"
-          direction="column"
-        >
-          <Flex
-            w={"640px"}
-            h="500px"
-            overflowY="scroll"
-            css={{
-              "::-webkit-scrollbar": { display: "none" }
-            }}
-          >
-            <TaskList tasks={data} />
-          </Flex>
-        </Flex>
-        <Flex
-          bg="rgba(102, 73, 0, 0.01)"
-          boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px"
-          height="650px"
-          borderRadius="1rem"
-          p="8"
-          flexGrow={1}
-          direction="column"
-        >
-          <Heading>This is a heading</Heading>
-          <Text>Simple text</Text>
-        </Flex>
-      </Flex>
-  )
-}
-
 export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:5000/api/tasks/user/1`)
+  const res = await fetch(`http://localhost:5000/api/tasks/user/cl5imusb0005800bt26o62b2m`)
   const data = await res.json();
   return { props: { tasks: data } }
 }

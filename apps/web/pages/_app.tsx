@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         >
             <ChakraProvider theme={theme} resetCSS>
                 {
-                    Component.authPage ? <Component {...pageProps} /> : (
+                    Component.authPage || Component.publicPage ? <Component {...pageProps} /> : (
                         <Layout>
                              <Component {...pageProps} />
                         </Layout>
