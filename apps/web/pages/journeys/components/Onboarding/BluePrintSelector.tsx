@@ -22,13 +22,9 @@ type SelectorCardProps = {
 const SelectorCard = ({ description, value }: SelectorCardProps) => {
     return (
         <Flex
-            bg="brand.white"
             borderRadius="1rem"
-            boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
             justifyContent="center"
             alignItems="center"
-            width="150px"
-            height="200px"
         >
             <Flex gap={4} direction="column" p="4" alignItems="center">
                 <Flex gap={4} direction="column" alignItems="center">
@@ -87,15 +83,13 @@ export const BluePrintSelector = ({ updateBluePrint, currentStep }: BluePrintSel
                                     key={value.value}
                                     {...radio}
                                     checked={{
-                                        borderColor: "brand.highlight2",
+                                        borderColor: "brand.highlight1",
                                         borderRadius: "1rem"
                                     }}
-
                                     hover={{
                                         borderColor: "brand.highlight",
                                         borderRadius: "1rem"
                                     }}
-                                    border="dashed 0.25rem #F8F8F7"
                                 >
                                     <SelectorCard {...radio} />
                                 </RadioCard>

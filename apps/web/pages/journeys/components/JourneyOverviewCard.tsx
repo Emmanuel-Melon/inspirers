@@ -10,7 +10,7 @@ import { FiEye, FiShare, FiPackage, FiCreditCard, FiSettings, FiTruck } from "re
 import { UserObject } from "types/User";
 import { FC } from "react";
 import  { useRouter } from "next/router";
-import { NewJourney } from "./NewJourney";
+import { NewJourney } from "./Onboarding/NewJourney";
 
 type JourneyOverviewCard = UserObject & {
     // rest of the props

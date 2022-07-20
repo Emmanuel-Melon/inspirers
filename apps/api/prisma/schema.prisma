@@ -85,6 +85,8 @@ model Journey {
   Interest         Interest[]
   user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   JourneyBluePrint JourneyBluePrint? @relation(fields: [bluePrintId], references: [id], onDelete: Cascade)
+  journeyType String?
+  field String?
 }
 
 model Goal {

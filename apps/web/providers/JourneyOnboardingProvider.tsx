@@ -1,3 +1,4 @@
+import next from "next";
 import React, { createContext, useReducer, useState } from "react";
 
 export const JourneyOnboardingContext = createContext<any>(null);
@@ -43,7 +44,7 @@ const initialState = {
     },
     {
       id: 3,
-      title: "Your dream",
+      title: "Journey Goals",
       active: false,
       skippable: false,
       completed: false
@@ -51,13 +52,6 @@ const initialState = {
     {
       id: 4,
       title: "Goals",
-      active: false,
-      skippable: false,
-      completed: false
-    },
-    {
-      id: 5,
-      title: "Finalizing",
       active: false,
       skippable: false,
       completed: false
@@ -96,11 +90,12 @@ export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
   const updateBluePrint = (value: string) => setBluePrint(value);
-  const moveForward = async (targetStepId) => {
+  const moveForward = async (targetStepId, data) => {
     dispatch({
       type: "MOVE_FORWARD",
       payload: {
-        targetStepId
+        targetStepId,
+        ...data || {}
       }
     });
   }

@@ -17,7 +17,7 @@ export const RadioCard = (props: any) => {
         _focus={props.focus}
         border={props.border || "none"}
         borderColor={props.borderColor || "brand.accent"}
-        borderRadius="2.5rem"
+        borderRadius="0.5rem"
         bg="brand.white"
         px="2"
         py="1"

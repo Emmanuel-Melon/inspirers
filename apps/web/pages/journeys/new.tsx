@@ -1,4 +1,4 @@
-import { NewJourney } from "./components/NewJourney";
+import { NewJourney } from "./components/Onboarding/NewJourney";
 
 
 export default function NewJourneyPage() {

@@ -7,12 +7,11 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { BluePrintSelector } from "./BluePrintSelector";
-import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../../../providers/JourneyOnboardingProvider";
 import { Button } from "ui";
 import { FiInfo, FiX, FiArrowRight } from "react-icons/fi";
-// import { FiX, FiArrowRight } from "react-icons/fi";
 
-export const FirstStep = ({ blueprint }) => {
+export const FirstStep = () => {
     const context = useContext(JourneyOnboardingContext);
     return (
         <Flex
@@ -30,23 +29,23 @@ export const FirstStep = ({ blueprint }) => {
                         currentStep={context.currentStep}
                         updateBluePrint={context.updateBluePrint}
                     />
-                                            <Flex gap={4}>
-                            <Button
-                                onClick={context.moveBackwards}
-                                bg="brand.white"
-                                color="brand.primaryText"
-                                icon={<FiX />}
-                                disabled={context.currentStep.id === 1 || context.currentStep.id === 5}
-                            >
-                                Back
-                            </Button>
-                            <Button
-                                onClick={() => context.moveForward(context.currentStep.id + 1)}
-                                icon={<FiArrowRight />}
-                            >
-                                Next
-                            </Button>
-                        </Flex>
+                    <Flex gap={4}>
+                        <Button
+                            onClick={context.moveBackwards}
+                            bg="brand.white"
+                            color="brand.primaryText"
+                            icon={<FiX />}
+                            disabled={context.currentStep.id === 1 || context.currentStep.id === 5}
+                        >
+                            Go Back
+                        </Button>
+                        <Button
+                            onClick={() => context.moveForward(context.currentStep.id + 1)}
+                            icon={<FiArrowRight />}
+                        >
+                            Continue
+                        </Button>
+                    </Flex>
                 </Flex>
             </VStack>
         </Flex>
@@ -77,6 +76,10 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
                 </Flex>
                 <Heading size="md" color="brand.primary">What is a journey?</Heading>
                 <Text>{context.currentStep.description}</Text>
+                <Heading size="sm" color="brand.primary">Blank journey</Heading>
+                <Text>Use this if you're experienced and have a pretty good understanding of what you'd like to accomplish.</Text>
+                <Heading size="sm" color="brand.primary">Using a template</Heading>
+                <Text>If you're just starting out.</Text>
                 <Button
                     onClick={() => { }}
                     icon={<FiInfo />}
