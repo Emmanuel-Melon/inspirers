@@ -57,19 +57,19 @@ export const addUser = async (user) => {
   };
 };
 
-export const getUserById = async (userId: number) => {
+export const getUserById = async (userId: string) => {
   const newEntry = await prisma.user.findUnique({
     where: {
-      id: userId.toString(),
+      id: userId,
     },
   });
   return newEntry;
 };
 
-export const modifyUser = async (userId: number, data) => {
+export const modifyUser = async (userId: string, data) => {
   const newEntry = await prisma.user.update({
     where: {
-        id: userId.toString(),
+        id: userId,
     },
     data,
   });

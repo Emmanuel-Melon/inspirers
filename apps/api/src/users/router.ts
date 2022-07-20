@@ -5,7 +5,7 @@ import * as cookie from 'cookie';
 const userRouter = Router();
 
 userRouter.get("/:userId", (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(getUserById(parseInt(req.params.userId)))
+    return Promise.resolve(getUserById(req.params.userId))
     .then(data => res.json({ data }))
     .catch(next);
 });
@@ -29,7 +29,7 @@ userRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 userRouter.put("/:userId", (req: Request, res: Response, next: NextFunction) => {
-  return Promise.resolve(modifyUser(parseInt(req.params.userId), req.body))
+  return Promise.resolve(modifyUser(req.params.userId, req.body))
   .then(data => res.json({ data }))
   .catch(next);
 });
