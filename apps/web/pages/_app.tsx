@@ -9,6 +9,9 @@ import { SessionProvider } from "next-auth/react";
 import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import Layout from "../layout/layout";
 import { useEffect } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast('Here is your toast.');
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
