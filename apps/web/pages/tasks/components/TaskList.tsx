@@ -31,7 +31,7 @@ export const TaskList = ({ tasks }: TaskListProps) => {
     return (
         <VStack
             alignItems="flex-start"
-            width={"600px"}
+            marginTop="4"
         >
             {
                 tasks.map(task => <TaskItem task={task} key={task.id} />)
