@@ -17,6 +17,7 @@ import { client } from "../../../../utils/client";
 import { ListBluePrints } from "../ListBluePrints";
 import { FiX, FiArrowRight, FiBookOpen, FiBriefcase, FiClipboard, FiHeart } from "react-icons/fi";
 import { RadioCard } from "ui";
+import { useSession } from "next-auth/react";
 
 export const SecondStepGuide = ({ guide }) => {
     const context = useContext(JourneyOnboardingContext);
@@ -123,6 +124,7 @@ type JourneyQuestionsProps = {
 
 const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps) => {
     const [value, setValue] = React.useState(defaultValue);
+    
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name,
@@ -157,10 +159,12 @@ const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps
     )
 }
 
-export const SecondStep = () => {
+export const SecondStep = ({ user }) => {
     const context = useContext(JourneyOnboardingContext);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
+
+
     const [journey, setJourneyInfo] = useState({
         title: "",
         career: "",
@@ -179,7 +183,7 @@ export const SecondStep = () => {
             blueprint: context.blueprint,
             title: journey.title,
             description: journey.description,
-            userId: "cl5imusb0005800bt26o62b2m"
+            userId: user.id
         }).then(res => {
             setLoading(false);
             context.moveForward(context.currentStep.id + 1, res.data);

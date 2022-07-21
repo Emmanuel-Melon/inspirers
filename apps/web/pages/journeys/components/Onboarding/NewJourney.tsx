@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { JourneyOnboardingConsumer, JourneyOnboardingProvider } from "../../../../providers/JourneyOnboardingProvider";
 
-export const NewJourney = () => {
+export const NewJourney = ({ user }) => {
     return (
         <JourneyOnboardingProvider>
             <JourneyOnboardingConsumer>
@@ -20,20 +20,20 @@ export const NewJourney = () => {
                                 <JourneySteps steps={value.steps} />
                             </Flex>
                             <Flex gap={4} width="35%">
-                                {value.currentStep.id === 1 ? <FirstStepGuide guide={value.currentStep} /> : null}
-                                {value.currentStep.id === 2 ? <SecondStepGuide guide={value.currentStep} /> : null}
-                                {value.currentStep.id === 3 ? <ThirdStepGuide guide={value.currentStep} /> : null}
-                                {value.currentStep.id === 4 ? <FourthStepGuide guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 1 ? <FirstStepGuide user={user} guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 2 ? <SecondStepGuide user={user} guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 3 ? <ThirdStepGuide user={user} guide={value.currentStep} /> : null}
+                                {value.currentStep.id === 4 ? <FourthStepGuide user={user} guide={value.currentStep} /> : null}
                             </Flex>
                             <Flex
                                 direction="column"
                                 width="45%"
                             >
                                 <Flex>
-                                    {value.currentStep.id === 1 ? <FirstStep /> : null}
-                                    {value.currentStep.id === 2 ? <SecondStep /> : null}
-                                    {value.currentStep.id === 3 ? <ThirdStep /> : null}
-                                    {value.currentStep.id === 4 ? <FourthStep /> : null}
+                                    {value.currentStep.id === 1 ? <FirstStep user={user} /> : null}
+                                    {value.currentStep.id === 2 ? <SecondStep user={user} /> : null}
+                                    {value.currentStep.id === 3 ? <ThirdStep user={user} /> : null}
+                                    {value.currentStep.id === 4 ? <FourthStep user={user} /> : null}
                                 </Flex>
 
                             </Flex>
