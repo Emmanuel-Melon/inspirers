@@ -12,25 +12,22 @@ import { useRouter } from "next/router";
 
 export default function Index(props) {
   // When rendering client side don't display anything until loading is complete
-  if (typeof window !== "undefined") return null;
 
-  if(props.user) {
-    return (
-      <Flex direction="column" gap={4} my="8">
-        <JourneyOverviewCard user={props.user} />
-        <Flex >
-          <Flex width="60%" direction="column" gap={4} marginRight={8}>
-            <Insights insights={[]} />
-            <Timeline />
-          </Flex>
-          <Flex width="40%" direction="column" gap={4}>
-            <Milestones milestones={[]} />
-            <Activities activities={[]} />
-          </Flex>
+  return (
+    <Flex direction="column" gap={4} my="8">
+      <JourneyOverviewCard user={props.user} />
+      <Flex >
+        <Flex width="60%" direction="column" gap={4} marginRight={8}>
+          <Insights insights={[]} />
+          <Timeline />
+        </Flex>
+        <Flex width="40%" direction="column" gap={4}>
+          <Milestones milestones={[]} />
+          <Activities activities={[]} />
         </Flex>
       </Flex>
-    );
-  }
+    </Flex>
+  );
 }
 
 export async function getServerSideProps(context) {

@@ -10,18 +10,18 @@ export default function NewJourneyPage(props) {
 }
 
 export async function getServerSideProps(context) {
-    const session = await unstable_getServerSession(context.req, context.res, authOptions)
-    const { id, email, name, bio, image } = session?.user;
-  
-    return {
-      props: {
-        user: {
-          id,
-          email,
-          name,
-          bio,
-          image
-        }
-      },
-    }
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const { id, email, name, image, bio } = session?.user || {};
+
+  return {
+    props: {
+      user: {
+        id: id || null,
+        email: email || null,
+        name: name || null,
+        bio: bio || null,
+        image: image || null
+      }
+    },
   }
+}
