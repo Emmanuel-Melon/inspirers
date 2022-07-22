@@ -4,6 +4,8 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyBluePrint } from "./components/JourneyBluePrint";
+import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
+import { InstructorCard } from "./components/InstructorCard";
 
 
 
@@ -11,7 +13,13 @@ export default function Index(props) {
     const { data, isLoading, isError } = useFetch("/journeys/blueprints");
 
     return (
-        <Flex justifyContent="space-between" width="100%" gap={8}>
+        <Flex 
+            justifyContent="space-between" 
+            width="100%" 
+            gap={8}
+            color="brand.primaryText"
+            py="4"
+        >
             <VStack width="30%" alignItems="flex-start">
                 <>
                     <Heading size="md" color="brand.primary">Browse templates</Heading>
@@ -66,26 +74,16 @@ export default function Index(props) {
                     </VStack>
                 </>
             </VStack>
-            <VStack width="70%" gap={8}>
-
-                <JourneyCard user={props.user} />
+            <VStack width="70%" gap={4}>
                 <VStack alignItems="flex-start" width="100%">
                     <Flex justifyContent="space-between" width="100%" alignItems="center">
-                        <Heading size="md">Career</Heading>
-                        <Text
-                            color="brand.primaryText"
-                            bg="brand.highlight2"
-                            fontWeight="700"
-                            borderRadius="1rem"
-                            boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                            fontSize="12px"
-                            px="2"
-                            py="1px"
-                        >
-                            View More
-                        </Text>
+                        <Heading size="md" color="brand.primary">Recommended Journeys</Heading>
+                        <Flex gap={2} color="brand.primary">
+                            <FiArrowLeftCircle size="1.5rem" />
+                            <FiArrowRightCircle size="1.5rem" />
+                        </Flex>
                     </Flex>
-                    <Flex gap={4} flexWrap="wrap">
+                    <Flex gap={8} flexWrap="wrap">
                         {
                             data?.data?.map(bluePrint => <JourneyBluePrint bluePrint={bluePrint} key={bluePrint.id} />)
                         }
@@ -93,23 +91,16 @@ export default function Index(props) {
                 </VStack>
                 <VStack alignItems="flex-start" width="100%">
                     <Flex justifyContent="space-between" alignItems="center" width="100%">
-                        <Heading size="md">Career</Heading>
-                        <Text
-                            color="brand.primaryText"
-                            bg="brand.highlight2"
-                            fontWeight="700"
-                            borderRadius="1rem"
-                            boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                            fontSize="12px"
-                            px="2"
-                            py="1px"
-                        >
-                            View More
-                        </Text>
+                        <Heading size="md" color="brand.primary">Featured Mentors</Heading>
+                        <Flex gap={2} color="brand.primary">
+                            <Text>Show All</Text>
+                            <FiArrowLeftCircle size="1.5rem" />
+                            <FiArrowRightCircle size="1.5rem" />
+                        </Flex>
                     </Flex>
-                    <Flex gap={4} flexWrap="wrap">
+                    <Flex gap={8} overflowX="scroll">
                         {
-                            data?.data?.map(bluePrint => <JourneyBluePrint bluePrint={bluePrint} key={bluePrint.id} />)
+                            data?.data?.map(instructor => <InstructorCard instructor={instructor} key={instructor.id} />)
                         }
                     </Flex>
                 </VStack>

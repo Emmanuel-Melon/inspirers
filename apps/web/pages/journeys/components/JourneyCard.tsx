@@ -7,9 +7,6 @@ export const JourneyCard = ({ user }) => {
 
     return (
         <Flex
-            bg="brand.highlight2"
-            borderRadius="1rem"
-            p="8"
             direction="column"
             color="brand.primaryText"
             width="100%"
