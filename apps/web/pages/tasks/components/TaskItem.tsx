@@ -16,12 +16,10 @@ export const TaskItem = ({ task }: TaskItemProps) => {
             p="4"
             width={"100%"}
             borderRadius="1rem"
-            borderLeft="solid 0.25rem #fff"
             bg="#fff"
             cursor="pointer"
             _hover={{
-                borderLeft: "dashed 0.25rem",
-                borderColor: "brand.highlight",
+
                 color: "brand.white"
             }}
         >

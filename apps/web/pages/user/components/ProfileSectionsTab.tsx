@@ -108,20 +108,21 @@ export const ProfileSectionsTab = () => {
         <Flex
             direction="column"
             color="brand.primaryText"
-            gap={8}
+  
             alignItems="center"
+            width="65%"
         >
             <Tabs
                 width="100%"
                 defaultIndex={1}
                 isLazy
+                variant='unstyled'
             >
                 <TabList
                     gap={4}
-                    bg="brand.highlight1"
+                    bg="brand.highlight2"
                     p="4"
                     borderRadius="1rem"
-                    boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
                     marginBottom={4}
                 >
                     <CustomTab icon={<FiCompass />}>Journeys</CustomTab>
@@ -142,7 +143,10 @@ export const ProfileSectionsTab = () => {
                         <ListUsers users={users} />
                     </TabPanel>
                     <TabPanel p="none">
-                        <Text>three!</Text>
+                        <TaskList tasks={tasks} />
+                    </TabPanel>
+                    <TabPanel p="none">
+                        <TaskList tasks={tasks} />
                     </TabPanel>
                 </TabPanels>
             </Tabs>

@@ -1,5 +1,5 @@
 import React, { ReactChild, useState } from "react";
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { Navbar } from "ui";
 import Head from "next/head";
 import Link from "next/link";

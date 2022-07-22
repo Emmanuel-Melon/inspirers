@@ -30,9 +30,10 @@ export const ListUsers = ({ users }: ListUsersProps) => {
                         alignItems="center"
                         cursor="pointer"
                         borderRadius="1rem"
-                        p="2"
+                        py="4"
+                        px="2"
                         _hover={{
-                            bg: "brand.highlight1"
+                            bg: "brand.highlight2"
                         }}
                     >
                         <Flex alignItems="center" gap={2}>

@@ -1,6 +1,6 @@
-import { Avatar, Flex, Text, Heading, VStack } from "@chakra-ui/react";
+import { Avatar, Flex, Text, Heading, VStack, Box, Tag } from "@chakra-ui/react";
 import { Button } from "ui";
-import { FiMoreVertical, FiPlus, FiMessageCircle } from "react-icons/fi";
+import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
 
 
 export const UserProfileCard = ({ user }) => {
@@ -13,35 +13,48 @@ export const UserProfileCard = ({ user }) => {
             p="8"
             direction="column"
             color="brand.primaryText"
-            gap={8}
-            alignItems="center"
             width="100%"
-
         >
             <Flex
                 gap={4}
-                alignItems="center"
+                justifyContent="space-between"
+                direction="column"
             >
-                <Avatar src={user.image} />
-                <VStack alignItems="flex-start">
-                    <Heading size="md">{user.name}</Heading>
-                    <Text>Software Developer</Text>
-                </VStack>
-                <FiMoreVertical />
-            </Flex>
-            <Flex gap={4}>
-                <Button 
-                    bg="brand.white" 
-                    color="brand.primaryText"
-                    onClick={() => {}}
-                    icon={<FiMessageCircle />}
+                <Flex gap={2} justifyContent="space-between">
+                    <Flex gap={2}>
+
+                    <Avatar src={user.image} />
+                    <VStack alignItems="flex-start">
+                        <Heading color="brand.primary" size="sm">{user.name}</Heading>
+                        <Text>@junubiman</Text>
+                    </VStack>
+                    </Flex>
+                    <Button
+                        bg="brand.white"
+                        color="brand.primaryText"
+                        onClick={() => { }}
+                        icon={<FiEdit3 />}
+                        size="sm"
                     >
-                        Message
+                        Edit Profile
                     </Button>
-                <Button 
-                    onClick={() => {}}
-                    icon={<FiPlus />}
-                >Follow</Button>
+                </Flex>
+                <VStack alignItems="flex-start" width="100%">
+                    <Flex gap={4}>
+                        <Text><Box as="span" color="brand.secondary" fontWeight="700">500</Box> following</Text>
+                        <Text><Box as="span" color="brand.secondary" fontWeight="700">500</Box>  followers</Text>
+                    </Flex>
+                    <Flex gap={2} flexWrap="wrap">
+                        <Tag bg="brand.highlight">Tech</Tag>
+                        <Tag bg="brand.highlight1">Software</Tag>
+                        <Tag bg="brand.highlight">Mentorship</Tag>
+                    </Flex>
+                    <Flex gap={4} flexWrap="wrap" py="2">
+                        <FiFacebook size="1.5rem" />
+                        <FiTwitter size="1.5rem" />
+                        <FiLinkedin size="1.5rem" />
+                    </Flex>
+                </VStack>
             </Flex>
         </Flex>
     );
