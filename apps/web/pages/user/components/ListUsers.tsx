@@ -19,7 +19,7 @@ export const ListUsers = ({ users }: ListUsersProps) => {
         <VStack
             alignItems="flex-start"
             color="brand.primaryText"
-            gap={4}
+            gap={2}
             marginTop="4"
         >
             {
@@ -30,7 +30,7 @@ export const ListUsers = ({ users }: ListUsersProps) => {
                         alignItems="center"
                         cursor="pointer"
                         borderRadius="1rem"
-                        py="4"
+                        py="2"
                         px="2"
                         _hover={{
                             bg: "brand.highlight2"
