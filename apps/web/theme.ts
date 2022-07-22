@@ -13,6 +13,7 @@ const theme = extendTheme({
       highlight2: "rgba(71, 13, 33, 0.02)",
       grey: "#f0f0f0",
       danger: "#df4759",
+      success: "green",
       primaryText: "#696969",
       hovered: "#F3EDED"
     }

@@ -1,16 +1,19 @@
-import Layout from "../../layout/layout";
-import NestedLayout from "../../layout/Nested";
 import { client } from "../../utils/client";
+import { useState } from "react";
 import {
   Flex,
   Text, Heading,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { TaskList } from "./components/TaskList";
+import { TaskViewMenu } from "./components/TaskViewMenu";
+import { TaskBoard } from "./components/TaskBoard";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function Tasks(props) {
 
   const [isLoading, setIsLoading] = useState(false);
+  const [view, setView] = useState("kanban");
 
   function addTaskItem(data) {
     setIsLoading(true);
@@ -24,35 +27,38 @@ export default function Tasks(props) {
       });
   }
 
+  const changeView = (view) => {
+    setView(view);
+  }
+
   return (
-    <Flex justifyContent="space-between" width="100%"  gap={8}>
+    <Flex justifyContent="space-between" width="100%" gap={8}>
       <Flex
         flexGrow={1}
         borderRadius="0.5rem"
         direction="column"
+        gap={8}
       >
-        <Flex
-          w={"640px"}
-          h="500px"
-          overflowY="scroll"
-          css={{
-            "::-webkit-scrollbar": { display: "none" }
-          }}
-        >
-          <TaskList tasks={data} />
+        <TaskViewMenu changeView={changeView} view={view} />
+        <Flex>
+          {
+            view === "list" ? (
+              <Flex
+                h="500px"
+                overflowY="scroll"
+                css={{
+                  "::-webkit-scrollbar": { display: "none" }
+                }}
+              >
+                <TaskList tasks={data} />
+              </Flex>
+            ) : (
+              <DndProvider backend={HTML5Backend}>
+                <TaskBoard />
+              </DndProvider>
+            )
+          }
         </Flex>
-      </Flex>
-      <Flex
-        bg="rgba(102, 73, 0, 0.01)"
-        boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px"
-        height="650px"
-        borderRadius="1rem"
-
-        flexGrow={1}
-        direction="column"
-      >
-        <Heading>This is a heading</Heading>
-        <Text>Simple text</Text>
       </Flex>
     </Flex>
   )
@@ -82,14 +88,6 @@ const data = [
     "description": "Out here on a mission",
     "completed": false,
     "createdAt": "2022-07-05T09:43:32.044Z"
-  },
-  {
-    "id": 17,
-    "title": "Pimpin",
-    "userId": 1,
-    "description": "Chilling and smoking here",
-    "completed": false,
-    "createdAt": "2022-07-05T09:44:21.664Z"
   }
 ];
 
