@@ -17,7 +17,6 @@ export const JourneyBluePrint = (props) => {
             direction="column" 
             gap={4}
             color="brand.primaryText"
-
             borderRadius="0rem 0rem 1rem 1rem"
             cursor="pointer"
         >
