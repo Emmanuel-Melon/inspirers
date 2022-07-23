@@ -10,7 +10,7 @@ const theme = extendTheme({
       accent: "#E79C2A",
       highlight: "rgba(17, 105, 121, 0.1)",
       highlight1: "rgba(208, 98, 36, 0.1)",
-      highlight2: "rgba(71, 13, 33, 0.02)",
+      highlight2: "rgba(71, 13, 33, 0.03)",
       grey: "#f0f0f0",
       danger: "#df4759",
       success: "green",

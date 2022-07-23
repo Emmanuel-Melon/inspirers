@@ -6,7 +6,7 @@ import {
     Text,
     Tag
 } from "@chakra-ui/react";
-import { FiMoreHorizontal, FiMessageSquare, FiList, FiInfo, FiBell, FiCheckSquare, FiLink2 } from "react-icons/fi";
+import { FiEdit3, FiMessageSquare, FiList, FiInfo, FiBell, FiCheckSquare, FiLink2 } from "react-icons/fi";
 
 const colors = {
     Progress: "brand.secondary",
@@ -25,7 +25,7 @@ export const KanbanListItem = ({ item }) => {
             borderRadius="1rem"
             my="2"
             direction="column"
-            gap={4}
+            gap={2}
             cursor="pointer"
             _hover={{
                 bg: "brand.highlight"
@@ -34,13 +34,15 @@ export const KanbanListItem = ({ item }) => {
         >
             <Flex justifyContent="space-between" alignItems="center">
                 <Heading size="sm" color="brand.primary">{item.name}</Heading>
-                <FiMoreHorizontal />
+                <FiEdit3 />
             </Flex>
             <Flex gap={2}>
                 <Tag
                     width="fit-content"
                     bg={colors[item.status]}
                     color="brand.white"
+                    size="sm"
+                    borderRadius="1rem"
                 >
                     {item.status}
                 </Tag>
@@ -54,32 +56,47 @@ export const KanbanListItem = ({ item }) => {
                     color="brand.primary"
                     borderRadius="1rem"
                 >
-                    <Flex gap={1} alignItems="center">
-                        <FiBell />
-                        <Text>35</Text>
-                    </Flex>
-                    <Flex gap={1} alignItems="center">
-                        <FiCheckSquare />
-                        <Text>3/5</Text>
-                    </Flex>
-                    <Flex gap={1} alignItems="center">
-                        <FiMessageSquare />
-                        <Text>17</Text>
-                    </Flex>
-                    <Flex gap={1} alignItems="center">
-                        <FiLink2 />
-                        <Text>3</Text>
-                    </Flex>
+                    {
+                        item.notifications ? (
+                            <Flex gap={1} alignItems="center">
+                                <FiBell />
+                                <Text>{item.notifications}</Text>
+                            </Flex>
+                        ) : null
+                    }
+                    {
+                        item.tasks ? (
+                            <Flex gap={1} alignItems="center">
+                                <FiCheckSquare />
+                                <Text>{item.tasks}/{item.completedTasks}</Text>
+                            </Flex>
+                        ) : null
+                    }
+                    {
+                        item.comments ? (
+                            <Flex gap={1} alignItems="center">
+                                <FiMessageSquare />
+                                <Text>{item.comments}</Text>
+                            </Flex>
+                        ) : null
+                    }
+                    {
+                        item.attachments ? (
+                            <Flex gap={1} alignItems="center">
+                                <FiLink2 />
+                                <Text>{item.attachments}</Text>
+                            </Flex>
+                        ) : null
+                    }
                 </Flex>
                 <Flex gap={2}>
-                    <Avatar
-                        size="xs"
-                        src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg"
-                    />
-                    <Avatar
-                        size="xs"
-                        src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg"
-                    />
+                    {
+                        item?.members?.map(member => <Avatar
+                            size="xs"
+                            src={member.avatar}
+                        />
+                        )
+                    }
                 </Flex>
             </Flex>
             <Progress

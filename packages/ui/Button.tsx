@@ -36,7 +36,7 @@ export const Button: FC<ButtonProps> = ({
         colorScheme="brand"
         isLoading={isLoading}
         loadingText={loadingText || "loading"}
-        boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
+        
         px={4}
         width={width}
         size={size}
