@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../../../lib/prisma";
-import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -9,27 +8,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    /**
-     * CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials, req) {
-        const res = await fetch("/your/endpoint", {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
-        if (res.ok && user) {
-          return user
-        }
-        return null
-      }
-    })
-     */
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
@@ -37,19 +15,18 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID || "",
       clientSecret: process.env.GOOGLE_SECRET || "",
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID || "",
+      clientSecret: process.env.FACEBOOK_SECRET || "",
     })
   ],
   database: process.env.DATABASE_URL,
   secret: process.env.SECRET,
 
   session: {
-    jwt: true
-    // Seconds - How long until an idle session expires and is no longer valid.
-    // maxAge: 30 * 24 * 60 * 60, // 30 days
-    // Seconds - Throttle how frequently to write to database to extend a session.
-    // Use it to limit write operations. Set to 0 to always update the database.
-    // Note: This option is ignored if using JSON Web Tokens
-    // updateAge: 24 * 60 * 60, // 24 hours
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   jwt: {
     secret: process.env.SECRET,
@@ -77,7 +54,7 @@ export const authOptions = {
     // signOut: "/auth/signout", // Displays form with sign out button
     // error: "/auth/error", // Error code passed in query string as ?error=
     // verifyRequest: "/auth/verify-request", // Used for check email page
-    // newUser: "/auth/new", // If set, new users will be directed here on first sign in
+    newUser: "/auth/new", // If set, new users will be directed here on first sign in
   },
 
   callbacks: {
@@ -89,44 +66,16 @@ export const authOptions = {
         email,
       };
     },
-    /**
-     * async session(session, user) {
-      console.log(session);
-      session.user.id = user.id
-      return session
-    } */
-    async jwt(tokenPayload, user, account, profile, isNewUser) {
-      console.log(user);
-
-      if (isNewUser) {
-        console.log(isNewUser);
+    async session({ session, token, user }) {
+      session.user.id = user.id;
+      return {
+        session,
+        user
       }
-
-      if (tokenPayload && user) {
-        return { ...tokenPayload, id: `${user.id}` }
-      }
-
-      return tokenPayload
     },
-    // async redirect(url: string, baseUrl: string) { },
-    // async session(session, token) {
-    // const encodedToken = jwt.sign(token, process.env.SECRET, { algorithm: 'HS256'});
-    // session.id = token.id;
-    //session.token = encodedToken;
-    // return Promise.resolve(session);
-    // }
-    /**
-     * ,
-    async jwt(token, user, account, profile, isNewUser) { 
-      const isUserSignedIn = user ? true : false;
-      // make a http call to our graphql api
-      // store this in postgres
-      if(isUserSignedIn) {
-        token.id = user.id.toString();
-      }
-      return Promise.resolve(token);
+    async jwt({ token, account }) {
+      return token
     }
-     */
   },
   events: {},
   debug: true,

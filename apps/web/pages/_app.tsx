@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
     return getLayout(
         <SessionProvider 
-            session={pageProps.session}
+            session={session}
             refetchOnWindowFocus={true}
             refetchInterval={5 * 60}
         >

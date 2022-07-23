@@ -7,11 +7,24 @@ import { client } from "../utils/client";
 import { useSWRConfig } from 'swr';
 import { useRouter } from "next/router";
 import { getProviders, signIn, useSession } from "next-auth/react";
+import { FiFacebook, FiGithub, FiMail } from "react-icons/fi";
 
 type AuthFormProps = {
     mode: 'login' | 'signup';
     toggleMode: any;
     providers: any;
+}
+
+const GetIcon = (providerName: string) => {
+    if(providerName === "Facebook") {
+        return <FiFacebook />
+    }
+    if(providerName === "GitHub") {
+        return <FiGithub />
+    }
+    if(providerName === "Google") {
+        return <FiMail />
+    }
 }
 
 export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
@@ -123,21 +136,20 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
             <Flex 
                 direction="column" 
                 gap={4} 
-                bg="brand.highlight" 
+                bg="brand.highlight2" 
                 width="100%"
                 borderRadius="0rem 0rem 1rem 1rem"
                 p="8"
-                borderTop="solid 0.10rem"
-                borderColor="brand.secondary"
             >
                 <Heading as="h3" size="sm" color="brand.primaryText">Or sign in with</Heading>
-                <Flex gap={4} direction="column" >
+                <Flex gap={4} >
                     {
                         providers && Object.values(providers).map((provider) => {
                             return <div>
                                 <Button
-                                    bg="brand.secondary"
-                                    color="brand.white"
+                                    bg="brand.white"
+                                    color="brand.primary"
+                                    icon={GetIcon(provider.name)}
                                     onClick={() => signIn(provider?.id)
                                         .then(res => {
                                             console.log(res);

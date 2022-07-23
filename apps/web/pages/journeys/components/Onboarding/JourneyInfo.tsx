@@ -126,6 +126,7 @@ type JourneyQuestionsProps = {
 
 const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps) => {
     const [value, setValue] = React.useState(defaultValue);
+    
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name,
@@ -160,7 +161,7 @@ const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps
     )
 }
 
-export const SecondStep = () => {
+export const SecondStep = ({ user }) => {
     const context = useContext(JourneyOnboardingContext);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
@@ -184,7 +185,7 @@ export const SecondStep = () => {
             blueprint: context.blueprint,
             title: journey.title,
             description: journey.description,
-            userId: "cl5imusb0005800bt26o62b2m"
+            userId: user.id
         }).then(res => {
             setLoading(false);
             successToast("Created journey");

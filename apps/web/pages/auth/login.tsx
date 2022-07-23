@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
-import { AuthForm } from "../Auth/AuthForm";
+import { AuthForm } from "./components/LoginForm";
 import type { NextPage } from "next";
 import { Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getProviders, useSession } from "next-auth/react";
 
-const Auth: NextPage = (props) => {
+const Login: NextPage = (props) => {
   const [mode, setMode] = useState<string>("signup");
   const session = useSession();
   const router = useRouter();
@@ -32,7 +32,7 @@ const Auth: NextPage = (props) => {
   );
 }
 
-Auth.authPage = true;
+Login.authPage = true;
 
 export async function getServerSideProps(_context: any) {
   const providers = await getProviders();
@@ -41,4 +41,4 @@ export async function getServerSideProps(_context: any) {
   };
 }
 
-export default Auth;
+export default Login;
