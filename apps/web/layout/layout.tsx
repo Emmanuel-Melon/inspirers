@@ -3,7 +3,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { Navbar } from "ui";
 import Head from "next/head";
 import Link from "next/link";
-import { FiHome, FiSettings, FiUser, FiBell, FiCheckCircle, FiUsers, FiStar, FiMap } from "react-icons/fi";
+import { FiHome, FiSettings, FiUser, FiBell, FiCheckCircle, FiUsers, FiTrendingUp, FiMap } from "react-icons/fi";
 import { VStack } from "@chakra-ui/react";
 
 
@@ -165,27 +165,7 @@ export default function Layout({ children }: LayoutProps) {
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                 cursor="pointer"
               >
-                <FiUsers size="1.2rem" />
-              </Flex>
-              {labels ? <Link href="/communities">Communities</Link> : null}
-
-            </Flex>
-            <Flex direction="column" alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
-              <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
-                alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
-              >
-                <FiStar size="1.2rem" />
+                <FiTrendingUp size="1.2rem" />
               </Flex>
               {labels ? <Link href="/discover">Discover</Link> : null}
             </Flex>
