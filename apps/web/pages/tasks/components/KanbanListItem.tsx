@@ -33,7 +33,7 @@ export const KanbanListItem = ({ item }) => {
             color="brand.primaryText"
         >
             <Flex justifyContent="space-between" alignItems="center">
-                <Heading size="sm" color="brand.primary">{item.name}</Heading>
+                <Text>{item.name}</Text>
                 <FiEdit3 />
             </Flex>
             <Flex gap={2}>
