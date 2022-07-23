@@ -17,7 +17,9 @@ import { client } from "../../../../utils/client";
 import { ListBluePrints } from "../ListBluePrints";
 import { FiX, FiArrowRight, FiBookOpen, FiBriefcase, FiClipboard, FiHeart } from "react-icons/fi";
 import { RadioCard } from "ui";
-import { useSession } from "next-auth/react";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 export const SecondStepGuide = ({ guide }) => {
     const context = useContext(JourneyOnboardingContext);
@@ -163,8 +165,8 @@ export const SecondStep = ({ user }) => {
     const context = useContext(JourneyOnboardingContext);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
-
-
+    const errorToast = (message: string) => toast.error(message);
+    const successToast= (message: string) => toast.success(message);
     const [journey, setJourneyInfo] = useState({
         title: "",
         career: "",
@@ -186,10 +188,12 @@ export const SecondStep = ({ user }) => {
             userId: user.id
         }).then(res => {
             setLoading(false);
+            successToast("Created journey");
             context.moveForward(context.currentStep.id + 1, res.data);
         }).catch(err => {
             setLoading(false);
             setError(true);
+            errorToast("something went wrong, try again later");
         });
     }
 
@@ -350,9 +354,6 @@ export const SecondStep = ({ user }) => {
                                         <JourneyQuestions options={personalOptions} defaultValue="personal" name="personal" /></>
                                 ) : null
                             }
-                            {
-                                isError ? <Text color="brand.danger">Something went wrong, try again later.</Text> : null
-                            }
                             <Flex gap={4}>
                                 <Button
                                     onClick={context.moveBackwards}
@@ -375,6 +376,9 @@ export const SecondStep = ({ user }) => {
                     )
                 }
             </Flex>
+            <Toaster 
+                position="bottom-center"
+            />
         </VStack>
     )
 }

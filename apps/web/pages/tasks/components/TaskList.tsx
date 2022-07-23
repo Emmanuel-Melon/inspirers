@@ -1,10 +1,12 @@
 import {
     Flex,
-    VStack
+    VStack,
+    Text
 } from "@chakra-ui/react";
 import { TaskItem } from "./TaskItem";
 import { TaskObject } from "types/Task";
 import Image from "next/image";
+import { FiCheck, FiFilter, FiCalendar } from "react-icons/fi";
 
 type TaskListProps = {
     tasks: TaskObject[];
@@ -30,13 +32,13 @@ export const TaskList = ({ tasks }: TaskListProps) => {
 
     return (
         <VStack
-            alignItems="flex-start"
-            width={"600px"}
-        >
-            {
-                tasks.map(task => <TaskItem task={task} key={task.id} />)
-            }
-        </VStack>
+        alignItems="flex-start"
+        width="100%"
+    >
+        {
+            tasks.map(task => <TaskItem task={task} key={task.id} />)
+        }
+    </VStack>
     );
 }
 
