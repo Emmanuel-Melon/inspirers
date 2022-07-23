@@ -1,16 +1,30 @@
-import Layout from "../../layout/layout";
-import NestedLayout from "../../layout/Nested";
 import { client } from "../../utils/client";
+import { useState } from "react";
 import {
   Flex,
-  Text, Heading,
+  Text,
+  Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { TaskList } from "./components/TaskList";
+import { TaskViewMenu } from "./components/TaskViewMenu";
+import { TaskBoard } from "./components/TaskBoard";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Button } from "ui";
 
 export default function Tasks(props) {
 
   const [isLoading, setIsLoading] = useState(false);
+  const [view, setView] = useState("kanban");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function addTaskItem(data) {
     setIsLoading(true);
@@ -24,37 +38,63 @@ export default function Tasks(props) {
       });
   }
 
+  const changeView = (view) => {
+    setView(view);
+  }
+
+
   return (
-    <Flex justifyContent="space-between" width="100%"  gap={8}>
-      <Flex
-        flexGrow={1}
-        borderRadius="0.5rem"
-        direction="column"
-      >
+    <>
+      <Flex justifyContent="space-between" width="100%" gap={8}>
         <Flex
-          w={"640px"}
-          h="500px"
-          overflowY="scroll"
-          css={{
-            "::-webkit-scrollbar": { display: "none" }
-          }}
+          flexGrow={1}
+          borderRadius="0.5rem"
+          direction="column"
+          gap={8}
         >
-          <TaskList tasks={data} />
+          <TaskViewMenu
+            changeView={changeView}
+            view={view}
+            addNewJourney={onOpen}
+          />
+          <Flex>
+            {
+              view === "list" ? (
+                <Flex gap={8}>
+                  <Flex
+                    h="500px"
+                    overflowY="scroll"
+                    css={{
+                      "::-webkit-scrollbar": { display: "none" }
+                    }}
+
+                  >
+                    <TaskList tasks={data} />
+                  </Flex>
+                  <Flex direction="column" width={"35%"} gap={4}>
+                    <Text>White</Text>
+                    <Flex
+                      boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                      p="4"
+                      gap={4}
+                      borderRadius="1rem"
+                      bg="brand.white"
+
+                    >
+                      <Text>White</Text>
+                    </Flex>
+                  </Flex>
+                </Flex>
+              ) : (
+                <DndProvider backend={HTML5Backend}>
+                  <TaskBoard />
+                </DndProvider>
+              )
+            }
+          </Flex>
         </Flex>
       </Flex>
-      <Flex
-        bg="rgba(102, 73, 0, 0.01)"
-        boxShadow="rgba(0, 0, 0, 0.04) 0px 3px 5px"
-        height="650px"
-        borderRadius="1rem"
-
-        flexGrow={1}
-        direction="column"
-      >
-        <Heading>This is a heading</Heading>
-        <Text>Simple text</Text>
-      </Flex>
-    </Flex>
+    </>
   )
 }
 
@@ -63,7 +103,7 @@ const data = [
     "id": 14,
     "title": "Throw Some D's",
     "userId": 1,
-    "description": "Rich boy selling crack",
+    "description": "As a privat user, I want to keep the inspirational resources on my own board and use a personal planner..etc?",
     "completed": false,
     "createdAt": "2022-07-05T09:40:16.053Z"
   },
@@ -82,14 +122,6 @@ const data = [
     "description": "Out here on a mission",
     "completed": false,
     "createdAt": "2022-07-05T09:43:32.044Z"
-  },
-  {
-    "id": 17,
-    "title": "Pimpin",
-    "userId": 1,
-    "description": "Chilling and smoking here",
-    "completed": false,
-    "createdAt": "2022-07-05T09:44:21.664Z"
   }
 ];
 
