@@ -36,7 +36,7 @@ export const Button: FC<ButtonProps> = ({
         colorScheme="brand"
         isLoading={isLoading}
         loadingText={loadingText || "loading"}
-        
+        boxShadow="none"
         px={4}
         width={width}
         size={size}
