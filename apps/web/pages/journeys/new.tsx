@@ -1,4 +1,4 @@
-import { NewJourney } from "./components/Onboarding/NewJourney";
+import { NewJourney } from "./Onboarding/NewJourney";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 

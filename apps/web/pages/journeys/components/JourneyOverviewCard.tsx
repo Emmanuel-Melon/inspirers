@@ -10,7 +10,7 @@ import { FiEye, FiShare, FiPackage, FiCreditCard, FiSettings, FiTruck } from "re
 import { UserObject } from "types/User";
 import { FC } from "react";
 import  { useRouter } from "next/router";
-import { NewJourney } from "./Onboarding/NewJourney";
+import { NewJourney } from "../Onboarding/NewJourney";
 
 type JourneyOverviewCard = UserObject & {
     // rest of the props
@@ -36,6 +36,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
             <Flex
                 direction="column"
                 borderRadius="0rem 0.1rem 0.1rem 0rem"
+                width="100%"
             >
                 <Flex justifyContent="space-between">
                     <Box>
