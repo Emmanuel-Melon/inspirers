@@ -35,7 +35,7 @@ export const Milestones: FC<MileStonesProps> = ({ milestones }) => {
                 gap={4}
             >
                 {
-                    milestones.map(( milestone) => <Text key={milestone.id}>Empty State</Text>)
+                    milestones && milestones.map(( milestone) => <Text key={milestone.id}>Empty State</Text>)
                 }
             </Flex>
         </Flex>

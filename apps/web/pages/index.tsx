@@ -19,7 +19,7 @@ export default function Index(props) {
       <Flex >
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />
-          <Timeline />
+          <Timeline events={[]}/>
         </Flex>
         <Flex width="40%" direction="column" gap={4}>
           <Milestones milestones={[]} />

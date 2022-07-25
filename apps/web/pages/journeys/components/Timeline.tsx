@@ -49,7 +49,7 @@ const FeedItem: FC<FeedItemProps> = ({ event }) => {
 }
 
 
-export const Timeline = () => {
+export const Timeline = ({ events }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex>
@@ -57,7 +57,7 @@ export const Timeline = () => {
             </Flex>
             <Text>Connect with friends to view their activity.</Text>
             {
-                [].map(event => {
+                events && events.map(event => {
                     return <FeedItem event={event} />
                 })
             }

@@ -50,7 +50,7 @@ export const Insights: FC<InsightsProps> = ({ insights }) => {
             </Flex>
             <Flex justifyContent="space-between">
                 {
-                    insights.map(insight => <InsightCard insight={insight} key={insight.id} />)
+                    insights && insights.map(insight => <InsightCard insight={insight} key={insight.id} />)
                 }
             </Flex>
         </Flex>
