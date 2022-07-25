@@ -7,10 +7,10 @@ import {
 } from "@chakra-ui/react";
 import { TextInput } from "ui/Input";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 import { FiX, FiArrowRight, FiTarget, FiTrendingUp, FiThumbsUp, FiCheckCircle, FiClock } from "react-icons/fi";
 import { JourneyBluePrint } from "../components/JourneyBluePrint";
-import { client } from "../../../utils/client";
+import { client } from "../../utils/client";
 import Image from "next/image";
 
 export const ThirdStepGuide = ({ guide }) => {

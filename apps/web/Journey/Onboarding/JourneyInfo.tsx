@@ -12,8 +12,8 @@ import {
 import { TextInput } from "ui/Input";
 import Image from "next/image";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
-import { client } from "../../../utils/client";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
+import { client } from "../../utils/client";
 import { ListBluePrints } from "../components/ListBluePrints";
 import { FiX, FiArrowRight, FiBookOpen, FiBriefcase, FiClipboard, FiHeart } from "react-icons/fi";
 import { RadioCard } from "ui";

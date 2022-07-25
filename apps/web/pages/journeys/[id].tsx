@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Flex } from "@chakra-ui/react";
-import { JourneyOverviewCard } from "./components/JourneyOverviewCard";
-import { OutlineOverview } from "./Overview/OutlineView";
+import { JourneyOverviewCard } from "../../Journey/components/JourneyOverviewCard";
+import { OutlineOverview } from "../../Journey/Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 

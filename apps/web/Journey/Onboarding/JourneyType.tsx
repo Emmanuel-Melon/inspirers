@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { BluePrintSelector } from "./BluePrintSelector";
-import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 import { Button } from "ui";
 import { FiInfo, FiX, FiArrowRight } from "react-icons/fi";
 

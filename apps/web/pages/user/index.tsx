@@ -1,6 +1,6 @@
 import Layout from "../../layout/layout";
 import { Flex, Text, Heading } from "@chakra-ui/react";
-import { TaskList } from "../tasks/components/TaskList";
+import { TaskList } from "../../Tasks/components/TaskList";
 import { useFetch } from "../../hooks/useSwr";
 
 const data = [
