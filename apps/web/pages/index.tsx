@@ -15,7 +15,7 @@ export default function Index(props) {
 
   return (
     <Flex direction="column" gap={4} my="8">
-      <JourneyOverviewCard user={props.user} />
+      <JourneyOverviewCard />
       <Flex >
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />
@@ -30,7 +30,8 @@ export default function Index(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+/**
+ * export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const { id, email, name, image, bio } = session?.user || {};
 
@@ -46,3 +47,4 @@ export async function getServerSideProps(context) {
     },
   }
 }
+ */
