@@ -37,6 +37,7 @@ export const ResourcesOverview = () => {
                             bg="brand.white"
                             borderRadius="1rem"
                             p="4"
+                            key={resource.id}
                         >
                             <Flex alignItems="center" gap={2}>
                                 <FiBook size="2rem" color="#E79C2A" />

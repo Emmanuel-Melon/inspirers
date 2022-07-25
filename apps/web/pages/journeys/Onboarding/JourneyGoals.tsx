@@ -156,13 +156,13 @@ export const ThirdStep = () => {
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                handleInputchange={() => { }}
+                onChange={() => { }}
             />
             <Text fontWeight="700">How would you measure your journey success?</Text>
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                handleInputchange={() => { }}
+                onChange={() => { }}
             />
             <Flex width="200">
                 {

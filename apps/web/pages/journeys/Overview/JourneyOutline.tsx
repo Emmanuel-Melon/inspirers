@@ -67,14 +67,14 @@ export const JourneyOutline = ({ journey }) => {
             >
                 {
                     journey.chapters.map(chapter => (
-                        <ListItem color="brand.primaryText" fontWeight="700">
+                        <ListItem color="brand.primaryText" fontWeight="700" key={chapter.id}>
                             <ListIcon as={FiMapPin} color='brand.accent' />
                             {chapter.title}
                             {
                                 chapter.subChapters.length > 0 ? <List paddingLeft="8" spacing={2}>
                                     {
                                         chapter.subChapters.map(subChapter => (
-                                            <ListItem color="brand.primaryText">
+                                            <ListItem color="brand.primaryText" key={subChapter.id}>
 
                                                 <ListIcon as={FiMapPin} color='brand.secondary' />
                                                 {subChapter.title}

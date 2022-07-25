@@ -33,15 +33,15 @@ const journey = {
       title: "SAT Preparation",
       subChapters: [
         {
-          id: "cl5o8pq8t0070fgbt5eqar9bb",
+          id: "cl5o8pq8t0070fgbt5eqar9bk",
           title: "Algebra 1"
         },
         {
-          id: "cl5o8pq8t0070fgbt5eqar9bc",
+          id: "cl5o8pq8t0070fgbt5eqar9bl",
           title: "English"
         },
         {
-          id: "cl5o8pq8t0070fgbt5eqar9bd",
+          id: "cl5o8pq8t0070fgbt5eqar9bm",
           title: "AP Physics"
         }
       ]

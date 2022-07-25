@@ -20,7 +20,7 @@ export const Navbar = () => {
         <Flex as="header" width="100%" px="8" gap={8} my="4" justifyContent="space-between">
             <Flex width="30%">
                 <TextInput
-                    handleInputchange={handleTitleChange}
+                    onChange={handleTitleChange}
                     placeholder="Search inspirers..."
                     type="text"
                     value={""}

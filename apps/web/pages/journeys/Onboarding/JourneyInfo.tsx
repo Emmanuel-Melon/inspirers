@@ -198,7 +198,7 @@ export const SecondStep = ({ user }) => {
     }
 
 
-    const handleInputchange = useCallback(
+    const onChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
             setJourneyInfo((currentState) => {
@@ -251,7 +251,7 @@ export const SecondStep = ({ user }) => {
                             <TextInput
                                 placeholder="e.g Getting into Harvard"
                                 type="text"
-                                handleInputchange={handleInputchange}
+                                onChange={onChange}
                                 value={journey.title}
                                 name="title"
                             />
@@ -286,7 +286,7 @@ export const SecondStep = ({ user }) => {
                                         <TextInput
                                             placeholder="E.g Engineering, Medicine etc."
                                             type="text"
-                                            handleInputchange={handleInputchange}
+                                            onChange={onChange}
                                             value={journey.interest}
                                             name="interest"
                                         />
@@ -312,7 +312,7 @@ export const SecondStep = ({ user }) => {
                                         <TextInput
                                             placeholder="E.g Engineering, Medicine etc."
                                             type="text"
-                                            handleInputchange={handleInputchange}
+                                            onChange={onChange}
                                             value={journey.interest}
                                             name="interest"
                                         />
@@ -328,7 +328,7 @@ export const SecondStep = ({ user }) => {
                                         <TextInput
                                             placeholder="E.g Engineering, Medicine etc."
                                             type="text"
-                                            handleInputchange={handleInputchange}
+                                            onChange={onChange}
                                             value={journey.interest}
                                             name="interest"
                                         />
