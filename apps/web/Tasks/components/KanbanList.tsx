@@ -26,7 +26,7 @@ import {
     EditablePreview,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { DropWrapper } from "../../../dnd";
+import { DropWrapper } from "../../dnd";
 import { Types } from "./types";
 import { KanbanListItem } from "./KanbanListItem";
 import {

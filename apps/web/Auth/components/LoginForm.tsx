@@ -3,10 +3,8 @@ import { useCallback, useState } from "react";
 import { TextInput } from "ui/Input";
 import { Button } from "ui";
 import { UserObject } from "types/User";
-import { client } from "../utils/client";
-import { useSWRConfig } from 'swr';
 import { useRouter } from "next/router";
-import { getProviders, signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { FiFacebook, FiGithub, FiMail } from "react-icons/fi";
 
 type AuthFormProps = {
@@ -35,7 +33,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
     });
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const handleInputchange = useCallback(
+    const onChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
             setUser((currentState) => {
@@ -108,14 +106,14 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
                     color="brand.primaryText"
                 >
                     <TextInput
-                        handleInputchange={handleInputchange}
+                        onChange={onChange}
                         placeholder="Username/ Email Address"
                         type="text"
                         value={user.login}
                         name="login"
                     />
                     <TextInput
-                        handleInputchange={handleInputchange}
+                        onChange={onChange}
                         placeholder="Password"
                         type="password"
                         value={user.password}

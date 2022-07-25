@@ -8,7 +8,7 @@ import {
     Tabs, TabList, TabPanels, Tab, TabPanel, Box, useMultiStyleConfig, useTab,
     Button
 } from "@chakra-ui/react";
-import { TaskList } from "../../tasks/components/TaskList";
+import { TaskList } from "../../Tasks/components/TaskList";
 import { ListUsers } from "./ListUsers";
 
 import {

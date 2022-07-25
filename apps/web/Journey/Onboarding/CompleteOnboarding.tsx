@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 import { FiX, FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 

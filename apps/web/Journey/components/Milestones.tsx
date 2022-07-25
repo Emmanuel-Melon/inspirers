@@ -11,7 +11,7 @@ type MileStonesProps = {
     milestones: Milestone[];
 };
 
-export const Milestones: FC<MileStonesProps> = ({ milestones }) => {
+export const Milestones: FC<MileStonesProps> = ({ milestones = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">
@@ -35,7 +35,7 @@ export const Milestones: FC<MileStonesProps> = ({ milestones }) => {
                 gap={4}
             >
                 {
-                    milestones.map(( milestone) => <Text key={milestone.id}>Empty State</Text>)
+                    milestones && milestones.map(( milestone) => <Text key={milestone.id}>Empty State</Text>)
                 }
             </Flex>
         </Flex>

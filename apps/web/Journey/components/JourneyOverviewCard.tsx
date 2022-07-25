@@ -9,8 +9,8 @@ import { Button } from "ui";
 import { FiEye, FiShare, FiPackage, FiCreditCard, FiSettings, FiTruck } from "react-icons/fi";
 import { UserObject } from "types/User";
 import { FC } from "react";
-import  { useRouter } from "next/router";
-import { NewJourney } from "./Onboarding/NewJourney";
+import { useRouter } from "next/router";
+import { NewJourney } from "../Onboarding/NewJourney";
 
 type JourneyOverviewCard = UserObject & {
     // rest of the props
@@ -31,15 +31,27 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
     function getStarted() {
         router.push("/journeys/new");
     }
+
+    /**
+     * {
+                                false ? <Flex gap={1}>
+                                {
+                                    [].map(companion => <Companion key={companion.id} companion={companion} />)
+                                }
+                            </Flex> : null
+                            }
+     */
+
     return (
         <>
             <Flex
                 direction="column"
                 borderRadius="0rem 0.1rem 0.1rem 0rem"
+                width="100%"
             >
                 <Flex justifyContent="space-between">
                     <Box>
-                        <Heading color="brand.primary" size="lg" as="h1">Hi, {user?.name}  </Heading>
+                        <Heading color="brand.primary" size="lg" as="h1">Hi, {user?.name || "Guest"}  </Heading>
                         <Text my="4">You haven't started any journey.</Text>
                     </Box>
                     <Button onClick={getStarted} icon={<FiTruck />}>Get Started</Button>
@@ -57,11 +69,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
 
                         <Flex alignItems="center" gap={4}>
                             <Text fontWeight={"700"}>Companions</Text>
-                            <Flex gap={1}>
-                                {
-                                    [].map(companion => <Companion key={companion.id} companion={companion} />)
-                                }
-                            </Flex>
+
                         </Flex>
                         <Button onClick={inviteFriends} variant="outline" bg="#fff" color="brand.primary" icon={<FiShare />}>Invite Friends</Button>
                     </Flex>

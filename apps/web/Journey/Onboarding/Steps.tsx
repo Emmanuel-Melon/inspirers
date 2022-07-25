@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import { FiX, FiArrowRight, FiBookOpen, FiBriefcase, FiClipboard, FiHeart } from "react-icons/fi";
-import { JourneyOnboardingContext } from "../../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 
 const Step = ({ step }) => {
     return (

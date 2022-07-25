@@ -7,10 +7,10 @@ import {
 } from "@chakra-ui/react";
 import { TextInput } from "ui/Input";
 import { Button } from "ui";
-import { JourneyOnboardingContext } from "../../../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 import { FiX, FiArrowRight, FiTarget, FiTrendingUp, FiThumbsUp, FiCheckCircle, FiClock } from "react-icons/fi";
-import { JourneyBluePrint } from "../JourneyBluePrint";
-import { client } from "../../../../utils/client";
+import { JourneyBluePrint } from "../components/JourneyBluePrint";
+import { client } from "../../utils/client";
 import Image from "next/image";
 
 export const ThirdStepGuide = ({ guide }) => {
@@ -156,13 +156,13 @@ export const ThirdStep = () => {
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                handleInputchange={() => { }}
+                onChange={() => { }}
             />
             <Text fontWeight="700">How would you measure your journey success?</Text>
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                handleInputchange={() => { }}
+                onChange={() => { }}
             />
             <Flex width="200">
                 {

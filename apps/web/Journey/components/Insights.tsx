@@ -41,7 +41,7 @@ const InsightCard: FC<InsightCardProps> = ({ insight }) => {
 }
 
 
-export const Insights: FC<InsightsProps> = ({ insights }) => {
+export const Insights: FC<InsightsProps> = ({ insights = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">
@@ -50,7 +50,7 @@ export const Insights: FC<InsightsProps> = ({ insights }) => {
             </Flex>
             <Flex justifyContent="space-between">
                 {
-                    insights.map(insight => <InsightCard insight={insight} key={insight.id} />)
+                    insights && insights.map(insight => <InsightCard insight={insight} key={insight.id} />)
                 }
             </Flex>
         </Flex>
