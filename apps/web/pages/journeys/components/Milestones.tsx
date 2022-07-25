@@ -11,7 +11,7 @@ type MileStonesProps = {
     milestones: Milestone[];
 };
 
-export const Milestones: FC<MileStonesProps> = ({ milestones }) => {
+export const Milestones: FC<MileStonesProps> = ({ milestones = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">

@@ -49,7 +49,7 @@ const FeedItem: FC<FeedItemProps> = ({ event }) => {
 }
 
 
-export const Timeline = ({ events }) => {
+export const Timeline = ({ events = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex>

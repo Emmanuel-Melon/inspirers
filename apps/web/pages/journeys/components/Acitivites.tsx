@@ -41,7 +41,7 @@ const AcitivityCard: FC<ActivityProps> = ({ activity }) => {
 }
 
 
-export const Activities: FC<ActivityListProps> = ({ activities }) => {
+export const Activities: FC<ActivityListProps> = ({ activities = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">

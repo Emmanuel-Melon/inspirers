@@ -41,7 +41,7 @@ const InsightCard: FC<InsightCardProps> = ({ insight }) => {
 }
 
 
-export const Insights: FC<InsightsProps> = ({ insights }) => {
+export const Insights: FC<InsightsProps> = ({ insights = [] }) => {
     return (
         <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between" alignItems="center">
