@@ -10,8 +10,23 @@ const connection = mysql.createConnection(databaseURL);
 /** initialize middleware */
 init(app);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+const listen = () => {
+  return new Promise<void>((resolve, reject) =>
+    app.listen(port, error => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve();
+    })
+  );
+};
+
+listen().then(() =>
+  // tslint:disable-next-line:no-console
+  console.info(
+    `Listening on http://localhost:${port}.`,
+    `Press CTRL-C to stop\n`
+  )
+);
 
 connection.end();

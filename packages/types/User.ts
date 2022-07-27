@@ -1,5 +1,5 @@
 export interface UserObject {
-    id?: number;
+    id?: string;
     name?: string;
     bio?: string;
     email?: string;

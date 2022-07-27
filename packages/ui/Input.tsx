@@ -11,13 +11,12 @@ type InputProps = {
     icon?: string;
     label?: string;
     value?: string;
-    handleInputchange: React.ChangeEventHandler<HTMLInputElement>;
+    onChange: any;
 };
 
 export const TextInput: FunctionComponent<InputProps> = (props) => {
     return (
-        <InputGroup gap={16}>
-            <Input
+        <Input
                 autoComplete="off"
                 placeholder={props.placeholder}
                 cursor="pointer"
@@ -26,22 +25,20 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 value={props.value}
                 name={props.name}
                 type={props.type}
-                bg="rgba(192, 216, 192, 0.1)"
+                bg="brand.white"
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                 borderRadius="1rem"
                 id={props.type}
-                onChange={props.handleInputchange}
+                onChange={() => {}}
                 focusBorderColor='brand.secondary'
                 _hover={{
-                    background: "brand.white",
+                    background: "brand.grey",
                 }}
                 _focus={{
                     outline: "none",
                     background: "brand.highlight"
                 }}
-                {...props} 
                 _placeholder={{ opacity: 1, color: 'brand.primary' }}
                 />
-        </InputGroup>
     );
 };
