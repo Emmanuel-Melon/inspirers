@@ -16,9 +16,6 @@ export const NewJourney = ({ user }) => {
                 {
                     value => (
                         <Flex width="100%" gap={4} height="100%">
-                            <Flex width="10%">
-                                <JourneySteps steps={value.steps} />
-                            </Flex>
                             <Flex gap={4} width="35%">
                                 {value.currentStep.id === 1 ? <FirstStepGuide user={user} guide={value.currentStep} /> : null}
                                 {value.currentStep.id === 2 ? <SecondStepGuide user={user} guide={value.currentStep} /> : null}

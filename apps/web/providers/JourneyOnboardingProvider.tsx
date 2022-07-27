@@ -1,5 +1,7 @@
 import next from "next";
 import React, { createContext, useReducer, useState } from "react";
+import { stepsReducer } from "./reducer";
+import { MOVE_BACKWARDS, MOVE_FORWARD, UPDATE_JOURNEY } from "./actions";
 
 export const JourneyOnboardingContext = createContext<any>(null);
 export const JourneyOnboardingConsumer = JourneyOnboardingContext.Consumer;
@@ -9,11 +11,17 @@ type JourneyOnboardingProps = {
 };
 
 const initialState = {
+  journey: {
+    id: "",
+    title: "",
+    description: ""
+  },
   currentStep: {
     id: 1,
     title: "Journey",
     active: true,
     skippable: false,
+    journeyId: "",
     description: "Privacy Policies are agreements that specify what type of data a website collects from users and how that data will be used. Known as personal information.",
     mimi: {
       header: "",
@@ -60,52 +68,35 @@ const initialState = {
 
 };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "MOVE_FORWARD":
-      const nextStep = state.steps.find(step => step.id === action.payload.targetStepId);
-      return {
-        ...state,
-        currentStep: {
-          ...nextStep,
-          active: true
-        }
-      };
-
-    case "MOVE_BACKWARDS":
-      const prevStep = state.steps.find(step => step.id === state.currentStep.id - 1);
-      return {
-        ...state,
-        currentStep: {
-          ...prevStep,
-          active: true
-        }
-      };
-    default:
-      return state;
-  }
-}
-
 export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(stepsReducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
   const updateBluePrint = (value: string) => setBluePrint(value);
-  const moveForward = async (targetStepId, data) => {
+
+  const moveForward = (targetStepId) => {
     dispatch({
-      type: "MOVE_FORWARD",
+      type: MOVE_FORWARD,
       payload: {
-        targetStepId,
-        ...data || {}
+        targetStepId
       }
     });
   }
   const moveBackwards = (targetStepId) => {
     dispatch({
-      type: "MOVE_BACKWARDS",
+      type: MOVE_BACKWARDS,
       payload: {
         targetStepId
       }
     });
+  }
+
+  const updateJourney = async (data, options) => {
+    dispatch({
+      type: UPDATE_JOURNEY,
+      payload:  {
+        ...data
+      }
+    }) 
   }
 
   return (
@@ -115,7 +106,8 @@ export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) 
         moveBackwards,
         moveForward,
         updateBluePrint,
-        blueprint
+        blueprint,
+        updateJourney
       }}
     >
       {children}

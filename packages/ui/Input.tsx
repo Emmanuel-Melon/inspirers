@@ -29,7 +29,7 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                 borderRadius="1rem"
                 id={props.type}
-                onChange={() => {}}
+                onChange={props.onChange}
                 focusBorderColor='brand.secondary'
                 _hover={{
                     background: "brand.grey",

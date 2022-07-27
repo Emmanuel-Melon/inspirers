@@ -54,7 +54,7 @@ export default function Journey(props) {
   const [started, setStarted] = useState<boolean>(false);
 
   return (
-    <Flex width="100%" gap={8} direction="column">
+    <Flex width="100%" gap={8} direction="column" height="100%">
       {
         started ? <JourneyOverviewCard /> : null
       }

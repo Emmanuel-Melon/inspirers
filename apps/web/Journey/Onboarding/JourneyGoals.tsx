@@ -120,7 +120,7 @@ export const ThirdStepGuide = ({ guide }) => {
     )
 }
 
-export const ThirdStep = () => {
+export const ThirdStep = ({ onChange }) => {
     const context = useContext(JourneyOnboardingContext);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
@@ -134,12 +134,14 @@ export const ThirdStep = () => {
     });
 
     const handleNext = () => {
+        console.log(context);
         setLoading(true);
-        client.put("/journeys/cl5r5qfwj0254a0btyahkbv69", {
+        client.put(`/journeys/${context.journey.id}`, {
             title: journey.title,
         }).then(res => {
             setLoading(false);
-            context.moveForward(context.currentStep.id + 1);
+            console.log(res);
+            // context.moveForward(context.currentStep.id + 1);
         }).catch(err => {
             setLoading(false);
             setError(true);
@@ -156,13 +158,13 @@ export const ThirdStep = () => {
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                onChange={() => { }}
+                onChange={onChange}
             />
             <Text fontWeight="700">How would you measure your journey success?</Text>
             <TextInput
                 placeholder="e.g Becoming an Oscar Nominee"
                 type="text"
-                onChange={() => { }}
+                onChange={onChange}
             />
             <Flex width="200">
                 {

@@ -77,8 +77,8 @@ model VerificationToken {
 
 model Journey {
   id               String            @id @default(cuid())
-  title            String
-  description      String
+  title            String?
+  description      String?
   userId           String
   bluePrintId      String?
   Goal             Goal[]

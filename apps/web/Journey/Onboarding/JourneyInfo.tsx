@@ -8,6 +8,7 @@ import {
     VStack,
     useRadioGroup,
     HStack,
+    Checkbox, CheckboxGroup
 } from "@chakra-ui/react";
 import { TextInput } from "ui/Input";
 import Image from "next/image";
@@ -125,38 +126,28 @@ type JourneyQuestionsProps = {
 }
 
 const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps) => {
-    const [value, setValue] = React.useState(defaultValue);
-    
+    const [value, setValue] = React.useState([]);
 
-    const { getRootProps, getRadioProps } = useRadioGroup({
-        name,
-        defaultValue,
-        onChange: (nextValue) => setValue(nextValue),
-    })
-
-    const group = getRootProps();
 
     return (
-        <VStack {...group} alignItems="flex-start">
+        <VStack alignItems="flex-start">
             {options.map((value) => {
-                const radio = getRadioProps({ value })
                 return (
-                    <RadioCard
+                    <Checkbox
                         key={value}
-                        {...radio}
-                        bg="brand.white"
-                        checked={{
+                        _checked={{
                             bg: "brand.primary",
                             color: "brand.white"
                         }}
-                        hover={{
+                        _hover={{
                             bg: "brand.highlight"
                         }}
                     >
                         {value}
-                    </RadioCard>
+                    </Checkbox>
                 )
             })}
+
         </VStack>
     )
 }
@@ -185,10 +176,11 @@ export const SecondStep = ({ user }) => {
             blueprint: context.blueprint,
             title: journey.title,
             description: journey.description,
-            userId: user.id
+            userId: "cl5ubrlsj0911srbtwhibuim9"
         }).then(res => {
             setLoading(false);
             successToast("Created journey");
+            context.updateJourney(res.data.data);
             context.moveForward(context.currentStep.id + 1, res.data);
         }).catch(err => {
             setLoading(false);
@@ -292,13 +284,14 @@ export const SecondStep = ({ user }) => {
                                         />
                                         <Text color="brand.primary">Academic level</Text>
                                         <Select
-                                            placeholder='e.g undergrad or postgrade'
+                                            placeholder='e.g undergraduate or postgrade'
                                             borderRadius="1rem"
                                             name="background"
                                         >
                                             <option value={journey.background}>High School</option>
-                                            <option value={journey.background}>Undergrate</option>
+                                            <option value={journey.background}>Undergraduate</option>
                                             <option value={journey.background}>Postgraduate</option>
+                                            <option value={journey.background}>Other</option>
                                         </Select>
                                         <Text color="brand.primary">What's your goal?</Text>
                                         <JourneyQuestions options={academicOptions} defaultValue="academic" name="academic" />
