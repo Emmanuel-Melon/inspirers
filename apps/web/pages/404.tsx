@@ -19,7 +19,7 @@ export default function ErrorPage404() {
         </Heading>
         <Text
           color='brand.primaryText'
-        > Try something else : ) Like going back Home</Text>
+        > Try something else, Like going back Home : ) </Text>
         <Link
           style={{ textDecoration: 'none' }}
           href='/'>
@@ -36,7 +36,7 @@ export default function ErrorPage404() {
       <Image
         width='400px'
         src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658932426/inspirers/images/483e08cb-79ba-41a7-ac5b-247e13bec399.png'
-        alt=' Try something else : ) Like going back Home'
+        alt=' Try something else, Like going back Home : ) '
       />
     </Flex>);
 }
