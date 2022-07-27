@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Flex, Heading, Text, VStack, Badge } from "@chakra-ui/react";
+import { Flex, Heading, Text, VStack, Badge, Image } from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
 
 type Activity = {
@@ -62,7 +62,7 @@ export const Activities: FC<ActivityListProps> = ({ activities = [] }) => {
             <VStack color="brand.primaryText">
                 <br/>
             {
-                activities && activities?.length === 0 || !activities ? <Badge colorScheme={'purple'}>Click get started to create your first task now ; )</Badge> : activities?.map(activity => <AcitivityCard activity={activity} key={activity.id} />)
+                activities && activities?.length === 0 || !activities ? <VStack gap='4'><Image width='200px' src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948708/inspirers/images/eecd383e-9fbd-4587-ba71-710a6d48734c.png' alt='None to see here'/><Heading>Oops! No activities yet.</Heading><Badge colorScheme={'purple'}>Click get started to create your first task now ; )</Badge></VStack> : activities?.map(activity => <AcitivityCard activity={activity} key={activity.id} />)
             }
             </VStack>
         </Flex>
