@@ -17,7 +17,7 @@ export const UserBioCard = ({ user }) => {
             alignItems="center"
 
         >
-            <Text>The UI design for this component is still a work in progress so we only need to get rid of the underline rules on those links.</Text>
+            <Text></Text>
         </Flex>
     );
 }

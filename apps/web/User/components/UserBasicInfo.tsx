@@ -21,17 +21,17 @@ export const UserBasicInfo = ({ user }) => {
                     <FiBriefcase />
                     <Text color="brand.primary" fontWeight="700">Work</Text>
                 </Flex>
-                <Text>Software Developer</Text>
+                <Text></Text>
                 <Flex alignItems="center" gap={2}>
                     <FiCalendar />
                     <Text color="brand.primary" fontWeight="700">Joined</Text>
                 </Flex>
-                <Text>July 2022</Text>
+                <Text></Text>
                 <Flex alignItems="center" gap={2}>
                     <FiMapPin />
                     <Text color="brand.primary" fontWeight="700">Location</Text>
                 </Flex>
-                <Text>South Sudan</Text>
+                <Text></Text>
             </VStack>
         </Flex>
     );

@@ -26,7 +26,7 @@ export const UserProfileCard = ({ user }) => {
                     <Avatar src={user.image} />
                     <VStack alignItems="flex-start">
                         <Heading color="brand.primary" size="sm">{user.name}</Heading>
-                        <Text>@junubiman</Text>
+                        <Text></Text>
                     </VStack>
                     </Flex>
                     <Button
@@ -41,13 +41,13 @@ export const UserProfileCard = ({ user }) => {
                 </Flex>
                 <VStack alignItems="flex-start" width="100%">
                     <Flex gap={4}>
-                        <Text><Box as="span" color="brand.secondary" fontWeight="700">500</Box> following</Text>
-                        <Text><Box as="span" color="brand.secondary" fontWeight="700">500</Box>  followers</Text>
+                        <Text><Box as="span" color="brand.secondary" fontWeight="700">0</Box> following</Text>
+                        <Text><Box as="span" color="brand.secondary" fontWeight="700">0</Box>  followers</Text>
                     </Flex>
                     <Flex gap={2} flexWrap="wrap">
-                        <Tag bg="brand.highlight">Tech</Tag>
+                        {/* <Tag bg="brand.highlight">Tech</Tag>
                         <Tag bg="brand.highlight1">Software</Tag>
-                        <Tag bg="brand.highlight">Mentorship</Tag>
+                        <Tag bg="brand.highlight">Mentorship</Tag> */}
                     </Flex>
                     <Flex gap={4} flexWrap="wrap" py="2">
                         <FiFacebook size="1.5rem" />
