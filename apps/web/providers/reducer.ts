@@ -1,17 +1,15 @@
 import { ActionType, JourneyType } from "./actions";
 
 export function stepsReducer(state: JourneyType, action: ActionType) {
-    console.log(action.payload);
+  console.log(action.payload);
   switch (action.type) {
     case "MOVE_FORWARD":
       const nextStep = state.steps.find(
         (step) => step.id === action.payload.targetStepId
       );
 
-
-      if(action.payload.targetStepId === 4) {
-        console.log('finished');
-
+      if (action.payload.targetStepId === 4) {
+        console.log("finished");
       } else {
         return {
           ...state,
@@ -33,19 +31,17 @@ export function stepsReducer(state: JourneyType, action: ActionType) {
           active: true,
         },
       };
-    
+
     case "UPDATE_JOURNEY":
-        return {
-            ...state,
-            journey: {
-                ...action.payload
-            }
-        };
+      return {
+        ...state,
+        journey: {
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }
 }
 
-export const journeyReducer = (state: JourneyType, action: ActionType) => {
-
-}
+export const journeyReducer = (state: JourneyType, action: ActionType) => {};

@@ -5,18 +5,18 @@ export const MOVE_BACKWARDS = "MOVE_BACKWARDS";
 export const UPDATE_JOURNEY = "UPDATE_JOURNEY";
 
 export type ActionType = {
-    type: string;
-    payload: any;
-}
+  type: string;
+  payload: any;
+};
 
 export type JourneyOnboardingStep = {
-    id: string | number;
-    title: string;
-    active: boolean;
-    skippable: boolean;
-    completed: boolean;
-}
+  id: string | number;
+  title: string;
+  active: boolean;
+  skippable: boolean;
+  completed: boolean;
+};
 
 export type JourneyType = {
-    steps: JourneyOnboardingStep[];
+  steps: JourneyOnboardingStep[];
 };

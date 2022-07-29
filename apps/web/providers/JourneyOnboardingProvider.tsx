@@ -14,7 +14,7 @@ const initialState = {
   journey: {
     id: "",
     title: "",
-    description: ""
+    description: "",
   },
   currentStep: {
     id: 1,
@@ -22,12 +22,13 @@ const initialState = {
     active: true,
     skippable: false,
     journeyId: "",
-    description: "Inspirers works in a way that lets you create your goal, add tasks and their reminders, connect with people with similar journeys, add the resources (books, videos, or courses) in your backpack that you carry on your journey, and lastly, you can track and analyze your performance periodically.",
+    description:
+      "Inspirers works in a way that lets you create your goal, add tasks and their reminders, connect with people with similar journeys, add the resources (books, videos, or courses) in your backpack that you carry on your journey, and lastly, you can track and analyze your performance periodically.",
     mimi: {
       header: "",
       greeting: "Hi, my name is Mimi and I'll be your guide in this journey",
     },
-    completed: false
+    completed: false,
   },
   steps: [
     {
@@ -35,27 +36,28 @@ const initialState = {
       title: "New Beginning",
       active: true,
       skippable: false,
-      completed: false
+      completed: false,
     },
     {
       id: 2,
       title: "About your journey",
       active: false,
       skippable: false,
-      completed: false
+      completed: false,
     },
     {
       id: 3,
       title: "Getting ready",
       active: false,
       skippable: false,
-      completed: false
-    }
-  ]
-
+      completed: false,
+    },
+  ],
 };
 
-export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) => {
+export const JourneyOnboardingProvider = ({
+  children,
+}: JourneyOnboardingProps) => {
   const [state, dispatch] = useReducer(stepsReducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
   const updateBluePrint = (value: string) => setBluePrint(value);
@@ -64,27 +66,27 @@ export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) 
     dispatch({
       type: MOVE_FORWARD,
       payload: {
-        targetStepId
-      }
+        targetStepId,
+      },
     });
-  }
+  };
   const moveBackwards = (targetStepId) => {
     dispatch({
       type: MOVE_BACKWARDS,
       payload: {
-        targetStepId
-      }
+        targetStepId,
+      },
     });
-  }
+  };
 
   const updateJourney = async (data, options) => {
     dispatch({
       type: UPDATE_JOURNEY,
-      payload:  {
-        ...data
-      }
-    }) 
-  }
+      payload: {
+        ...data,
+      },
+    });
+  };
 
   return (
     <JourneyOnboardingContext.Provider
@@ -94,7 +96,7 @@ export const JourneyOnboardingProvider = ({ children }: JourneyOnboardingProps) 
         moveForward,
         updateBluePrint,
         blueprint,
-        updateJourney
+        updateJourney,
       }}
     >
       {children}

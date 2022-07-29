@@ -41,7 +41,7 @@ export const addJourney = async (journey: JourneyAttrs) => {
     data: {
       title: journey.title,
       description: journey.description,
-      userId: journey.userId
+      userId: journey.userId,
     },
   });
 };

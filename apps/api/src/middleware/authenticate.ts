@@ -17,21 +17,19 @@ export default function authenticate(
   const token = tokenInQuery || tokenInHeader.replace(/Bearer\s+/, "");
 
   if (!token) {
-    console.log('hey');
-    res.status(401).json({ message: "unauthorized"});
+    console.log("hey");
+    res.status(401).json({ message: "unauthorized" });
   }
 
-  if(token) {
+  if (token) {
     return Promise.resolve()
-    .then(() => jwt.verify(token, secret) as { id: string })
-    .then(({ id }) => {
-      return getUserById(id).then(user => {
-        req.user = user;
-        return next();
-      });
-    })
-    .catch(
-      handleError(res, 401, "Your session has expired")
-    );
+      .then(() => jwt.verify(token, secret) as { id: string })
+      .then(({ id }) => {
+        return getUserById(id).then((user) => {
+          req.user = user;
+          return next();
+        });
+      })
+      .catch(handleError(res, 401, "Your session has expired"));
   }
 }
