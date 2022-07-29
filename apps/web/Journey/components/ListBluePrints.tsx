@@ -15,7 +15,7 @@ export const ListBluePrints = () => {
 
     return (
         <Flex direction="column" gap={4} color="brand.primary" width="100%">
-            <Flex direction="column" gap={4}>
+            <Flex direction="column" gap={4} >
                 <Flex justifyContent="space-between" alignItems="center">
                     <Heading size="md">Career</Heading>
                     <Text

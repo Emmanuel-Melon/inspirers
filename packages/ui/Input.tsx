@@ -30,9 +30,9 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
                 borderRadius="1rem"
                 id={props.type}
                 onChange={props.onChange}
-                focusBorderColor='brand.secondary'
+                focusBorderColor='brand.accent'
                 _hover={{
-                    background: "brand.grey",
+                    background: "brand.highlight1",
                 }}
                 _focus={{
                     outline: "none",

@@ -7,13 +7,20 @@ export function stepsReducer(state: JourneyType, action: ActionType) {
       const nextStep = state.steps.find(
         (step) => step.id === action.payload.targetStepId
       );
-      return {
-        ...state,
-        currentStep: {
-          ...nextStep,
-          active: true,
-        },
-      };
+
+
+      if(action.payload.targetStepId === 4) {
+        console.log('finished');
+
+      } else {
+        return {
+          ...state,
+          currentStep: {
+            ...nextStep,
+            active: true,
+          },
+        };
+      }
 
     case "MOVE_BACKWARDS":
       const prevStep = state.steps.find(

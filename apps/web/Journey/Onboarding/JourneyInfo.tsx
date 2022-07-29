@@ -8,7 +8,7 @@ import {
     VStack,
     useRadioGroup,
     HStack,
-    Checkbox, CheckboxGroup
+    useCheckboxGroup,
 } from "@chakra-ui/react";
 import { TextInput } from "ui/Input";
 import Image from "next/image";
@@ -19,6 +19,7 @@ import { ListBluePrints } from "../components/ListBluePrints";
 import { FiX, FiArrowRight, FiBookOpen, FiBriefcase, FiClipboard, FiHeart } from "react-icons/fi";
 import { RadioCard } from "ui";
 import toast, { Toaster } from 'react-hot-toast';
+import { CustomCheckbox } from "ui";
 
 
 
@@ -27,7 +28,7 @@ export const SecondStepGuide = ({ guide }) => {
     return (
         <Flex gap={8} height="100%">
             <Flex direction="column" gap={4}>
-                <Heading color="brand.primary">{context.currentStep.id} - {context.currentStep.title}</Heading>
+                <Heading color="brand.primary">{context.currentStep.id}/{context.steps.length} - {context.currentStep.title}</Heading>
                 <Flex
                     alignItems="center"
                     bg="brand.white"
@@ -78,39 +79,39 @@ export const SecondStepGuide = ({ guide }) => {
                             <Flex
                                 alignItems="center"
                                 gap={2}
-                                color="brand.primary"
+                                color="brand.secondary"
                             >
                                 <FiBookOpen />
                                 <Heading size="sm" >Academic</Heading>
                             </Flex>
-                            <Text>Explore the different journey types</Text>
+                            <Text>Study, prepar for exams and organize your academic life.</Text>
                             <Flex
                                 alignItems="center"
                                 gap={2}
-                                color="brand.primary"
+                                color="brand.secondary"
                             >
                                 <FiBriefcase />
                                 <Heading size="sm" >Business</Heading>
                             </Flex>
-                            <Text>Explore the different journey types</Text>
+                            <Text>Plan your business and manage your work.</Text>
                             <Flex
                                 alignItems="center"
                                 gap={2}
-                                color="brand.primary"
+                                color="brand.secondary"
                             >
                                 <FiClipboard />
                                 <Heading size="sm" >Career</Heading>
                             </Flex>
-                            <Text>Explore the different journey types</Text>
+                            <Text>Career guidance and development.</Text>
                             <Flex
                                 alignItems="center"
                                 gap={2}
-                                color="brand.primary"
+                                color="brand.secondary"
                             >
                                 <FiHeart />
                                 <Heading size="sm" >Personal</Heading>
                             </Flex>
-                            <Text>Explore the different journey types</Text>
+                            <Text>Improve your personal life.</Text>
                         </Flex>
                     )}
             </Flex>
@@ -126,29 +127,75 @@ type JourneyQuestionsProps = {
 }
 
 const JourneyQuestions = ({ options, defaultValue, name }: JourneyQuestionsProps) => {
-    const [value, setValue] = React.useState([]);
+    // const [value, setValue] = React.useState([]);
 
+    const { value, getCheckboxProps } = useCheckboxGroup({
+        defaultValue: ['2'],
+      });
+
+    console.log(name);
+    console.log(value);
 
     return (
         <VStack alignItems="flex-start">
             {options.map((value) => {
+
+                console.log(value);
                 return (
-                    <Checkbox
+                    <CustomCheckbox
                         key={value}
-                        _checked={{
-                            bg: "brand.primary",
-                            color: "brand.white"
-                        }}
+                        size="lg"
+                        colorScheme='orange'
                         _hover={{
-                            bg: "brand.highlight"
+                            color: "brand.secondary"
                         }}
-                    >
-                        {value}
-                    </Checkbox>
+                        text={value}
+                        value={value}
+                    />
                 )
             })}
 
         </VStack>
+    )
+}
+
+const JourneyTypeSelector = ({ defaultValue, options, updateJourneyType }) => {
+
+    const { getRootProps, getRadioProps } = useRadioGroup({
+        name: 'journey',
+        defaultValue,
+        onChange: (nextValue) => updateJourneyType(nextValue),
+    })
+
+    const group = getRootProps();
+    return (
+        <>
+        <Text color="brand.primary">Type of journey</Text>
+            <HStack {...group}>
+                {options.map((value) => {
+                    const radio = getRadioProps({ value })
+                    return (
+                        <RadioCard
+                            key={value}
+                            {...radio}
+                            bg="brand.white"
+                            checked={{
+                                bg: "brand.primary",
+                                color: "brand.white"
+                            }}
+                            hover={{
+                                borderColor: "brand.highlight2"
+                            }}
+                            border="groove 0.10rem"
+                            borderColor="brand.primary"
+                            name="journeyType"
+                        >
+                            {value}
+                        </RadioCard>
+                    )
+                })}
+            </HStack>
+        </>
     )
 }
 
@@ -157,36 +204,38 @@ export const SecondStep = ({ user }) => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
     const errorToast = (message: string) => toast.error(message);
-    const successToast= (message: string) => toast.success(message);
+    const successToast = (message: string) => toast.success(message);
+
+
     const [journey, setJourneyInfo] = useState({
         title: "",
-        career: "",
-        interest: "",
-        blueprint: "",
-        description: "",
-        background: "",
+        blueprint: context.blueprint,
         field: "",
-        academicLevel: "",
-        journeyType: ""
+        journeyType: "academic"
     });
 
     const handleNext = () => {
-        setLoading(true);
-        client.post("/journeys", {
-            blueprint: context.blueprint,
-            title: journey.title,
-            description: journey.description,
-            userId: "cl5ubrlsj0911srbtwhibuim9"
-        }).then(res => {
-            setLoading(false);
-            successToast("Created journey");
-            context.updateJourney(res.data.data);
-            context.moveForward(context.currentStep.id + 1, res.data);
-        }).catch(err => {
-            setLoading(false);
-            setError(true);
-            errorToast("something went wrong, try again later");
-        });
+    
+        if(context.journey.title === "") {
+            setLoading(true);
+            client.post("/journeys", {
+                blueprint: context.blueprint,
+                title: journey.title,
+                userId: "cl5ubrlsj0911srbtwhibuim9",
+                journeyType: journey.journeyType
+            }).then(res => {
+                setLoading(false);
+                successToast("Created journey");
+                context.updateJourney(res.data.data);
+                context.moveForward(context.currentStep.id + 1, res.data);
+            }).catch(err => {
+                setLoading(false);
+                setError(true);
+                errorToast("something went wrong, try again later");
+            });
+        } else {
+            context.moveForward(context.currentStep.id + 1, {});
+        }
     }
 
 
@@ -203,7 +252,6 @@ export const SecondStep = ({ user }) => {
         []
     );
 
-    const [value, setValue] = React.useState('academic');
     const options = ['academic', 'business', 'career', 'personal'];
 
     const academicOptions = ['Earn a scholarship', 'Exam Preparation', 'Research', 'Write thesis/ Paper', 'publish'];
@@ -211,13 +259,14 @@ export const SecondStep = ({ user }) => {
     const careerOptions = ['Get a Promotion', 'Learn new skills', 'land a new job', 'netowrk', 'other'];
     const personalOptions = ['Lifestyle Change', 'Diet', 'other'];
 
-    const { getRootProps, getRadioProps } = useRadioGroup({
-        name: 'journey',
-        defaultValue: 'academic',
-        onChange: (nextValue) => setValue(nextValue),
-    })
-
-    const group = getRootProps();
+    const updateJourneyType = (value) => {
+        setJourneyInfo(currentState => {
+            return {
+                ...currentState,
+                journeyType: value
+            }
+        })
+    }
 
     return (
         <VStack width="100%" alignItems="flex-start">
@@ -247,40 +296,23 @@ export const SecondStep = ({ user }) => {
                                 value={journey.title}
                                 name="title"
                             />
-                            <Text color="brand.primary">Type of journey</Text>
-                            <HStack {...group}>
-                                {options.map((value) => {
-                                    const radio = getRadioProps({ value })
-                                    return (
-                                        <RadioCard
-                                            key={value}
-                                            {...radio}
-                                            bg="brand.white"
-                                            checked={{
-                                                bg: "brand.primary",
-                                                color: "brand.white"
-                                            }}
-                                            hover={{
-                                                borderColor: "brand.highlight2"
-                                            }}
-                                            border="groove 0.10rem"
-                                            borderColor="brand.primary"
-                                        >
-                                            {value}
-                                        </RadioCard>
-                                    )
-                                })}
-                            </HStack>
+                            <JourneyTypeSelector 
+                                defaultValue={journey.journeyType} 
+                                options={options}
+                                updateJourneyType={updateJourneyType}
+                            />
+                            
+
                             {
-                                value === "academic" ? (
+                                journey.journeyType === "academic" ? (
                                     <>
                                         <Text color="brand.primary">Your field</Text>
                                         <TextInput
                                             placeholder="E.g Engineering, Medicine etc."
                                             type="text"
                                             onChange={onChange}
-                                            value={journey.interest}
-                                            name="interest"
+                                            value={journey.field}
+                                            name="field"
                                         />
                                         <Text color="brand.primary">Academic level</Text>
                                         <Select
@@ -299,15 +331,15 @@ export const SecondStep = ({ user }) => {
                                 ) : null
                             }
                             {
-                                value === "business" ? (
+                                journey.journeyType === "business" ? (
                                     <>
                                         <Text color="brand.primary">Business type</Text>
                                         <TextInput
-                                            placeholder="E.g Engineering, Medicine etc."
+                                            placeholder="E.g Tech, Education"
                                             type="text"
                                             onChange={onChange}
-                                            value={journey.interest}
-                                            name="interest"
+                                            value={journey.field}
+                                            name="field"
                                         />
                                         <Text color="brand.primary">What's your goal?</Text>
                                         <JourneyQuestions options={businessOptions} defaultValue="business" name="business" />
@@ -315,7 +347,7 @@ export const SecondStep = ({ user }) => {
                                 ) : null
                             }
                             {
-                                value === "career" ? (
+                                journey.journeyType === "career" ? (
                                     <>
                                         <Text color="brand.primary">Field</Text>
                                         <TextInput
@@ -342,7 +374,7 @@ export const SecondStep = ({ user }) => {
                                 ) : null
                             }
                             {
-                                value === "personal" ? (
+                                journey.journeyType === "personal" ? (
                                     <>
                                         <JourneyQuestions options={personalOptions} defaultValue="personal" name="personal" /></>
                                 ) : null
@@ -369,7 +401,7 @@ export const SecondStep = ({ user }) => {
                     )
                 }
             </Flex>
-            <Toaster 
+            <Toaster
                 position="bottom-center"
             />
         </VStack>

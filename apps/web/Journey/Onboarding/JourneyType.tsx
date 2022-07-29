@@ -62,7 +62,7 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         >
             <Flex direction="column" gap={4} >
                 <Heading color="brand.primary">{context.currentStep.id} - {context.currentStep.title}</Heading>
-                <Text>Every castle started at the basement.</Text>
+                <Text>Start your journey!</Text>
                 <Flex
                     alignItems="center"
                     bg="brand.white"
@@ -76,10 +76,11 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
                 </Flex>
                 <Heading size="md" color="brand.primary">What is a journey?</Heading>
                 <Text>{context.currentStep.description}</Text>
+                <Heading size="sm" color="brand.primary">Using a template</Heading>
+                <Text>Browse community created journeys.</Text>
                 <Heading size="sm" color="brand.primary">Blank journey</Heading>
                 <Text>Use this if you're experienced and have a pretty good understanding of what you'd like to accomplish.</Text>
-                <Heading size="sm" color="brand.primary">Using a template</Heading>
-                <Text>If you're just starting out.</Text>
+
                 <Button
                     onClick={() => { }}
                     icon={<FiInfo />}

@@ -22,18 +22,12 @@ const initialState = {
     active: true,
     skippable: false,
     journeyId: "",
-    description: "Privacy Policies are agreements that specify what type of data a website collects from users and how that data will be used. Known as personal information.",
+    description: "Inspirers works in a way that lets you create your goal, add tasks and their reminders, connect with people with similar journeys, add the resources (books, videos, or courses) in your backpack that you carry on your journey, and lastly, you can track and analyze your performance periodically.",
     mimi: {
       header: "",
       greeting: "Hi, my name is Mimi and I'll be your guide in this journey",
     },
-    completed: false,
-    subSteps: [
-      {
-        id: 1,
-        completed: false
-      }
-    ]
+    completed: false
   },
   steps: [
     {
@@ -52,14 +46,7 @@ const initialState = {
     },
     {
       id: 3,
-      title: "Journey Goals",
-      active: false,
-      skippable: false,
-      completed: false
-    },
-    {
-      id: 4,
-      title: "Goals",
+      title: "Getting ready",
       active: false,
       skippable: false,
       completed: false
