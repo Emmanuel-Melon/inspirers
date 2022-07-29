@@ -66,7 +66,7 @@ export const JourneyOutline = ({ journey }) => {
                 borderRadius="1rem"
             >
                 {
-                    journey.chapters.map(chapter => (
+                    journey.chapters && journey.chapters.map(chapter => (
                         <ListItem color="brand.primaryText" fontWeight="700" key={chapter.id}>
                             <ListIcon as={FiMapPin} color='brand.accent' />
                             {chapter.title}

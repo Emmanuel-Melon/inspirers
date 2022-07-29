@@ -10,7 +10,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 
 
-export default function Index() {
+export default function Index(props) {
   // When rendering client side don't display anything until loading is complete
 
   return (
@@ -30,8 +30,7 @@ export default function Index() {
   );
 }
 
-/**
- * export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const { id, email, name, image, bio } = session?.user || {};
 
@@ -47,4 +46,3 @@ export default function Index() {
     },
   }
 }
- */

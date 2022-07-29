@@ -30,7 +30,7 @@ import { JourneyOutline } from "./JourneyOutline";
 
 export const OutlineOverview = ({ journey, user }) => {
     return (
-        <Flex gap={8}>
+        <Flex gap={8} height="100%">
             <Flex flex={2}>
                 <Flex direction="column" color="brand.primaryText" gap={4}>
                     <Flex direction="column" width="100%" gap={8}>

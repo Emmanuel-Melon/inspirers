@@ -1,16 +1,16 @@
 import { Flex, Text, Heading, VStack } from "@chakra-ui/react";
-import { UserProfileCard } from "../User/components/UserProfileCard";
-import { UserBasicInfo } from "../User/components/UserBasicInfo";
-import { UserBioCard } from "../User/components/UserBioCard";
+import { UserProfileCard } from "../../User/components/UserProfileCard";
+import { UserBasicInfo } from "../../User/components/UserBasicInfo";
+import { UserBioCard } from "../../User/components/UserBioCard";
 import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]";
-import { ProfileSectionsTab } from "../User/components/ProfileSectionsTab";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { ProfileSectionsTab } from "../../User/components/ProfileSectionsTab";
 
 
 
 export default function UserProfile(props) {
     return (
-        <Flex width="100%" gap={8}>
+        <Flex width="100%" gap={8} height="100%">
             <VStack alignItems="flex-start" width="35%">
                 <UserProfileCard user={props.user} />
                 <UserBasicInfo user={props.user} />
