@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Flex, Heading, Text, VStack, Badge } from "@chakra-ui/react";
+import { Flex, Heading, Text, VStack, Badge, Image } from "@chakra-ui/react";
 import { FiMoreVertical } from "react-icons/fi";
 
 type Activity = {

@@ -98,6 +98,54 @@ export const ProfileSectionsTab = () => {
     const styles = useMultiStyleConfig("Tabs", tabProps);
 
     return (
+<<<<<<< HEAD
+        <Flex
+            direction="column"
+            color="brand.primaryText"
+
+            alignItems="center"
+            width="65%"
+        >
+            <Tabs
+                width="100%"
+                defaultIndex={1}
+                isLazy
+                variant='unstyled'
+            >
+                <TabList
+                    gap={4}
+                    bg="brand.highlight2"
+                    p="4"
+                    borderRadius="1rem"
+                    marginBottom={4}
+                >
+                    <CustomTab icon={<FiCompass />}>Journeys</CustomTab>
+                    <CustomTab icon={<FiActivity />}>Activity</CustomTab>
+                    <CustomTab icon={<FiUsers />}>Mentees</CustomTab>
+                    <CustomTab icon={<FiClipboard />}>Tasks</CustomTab>
+                    <CustomTab icon={<FiShoppingBag />}>Backpacks</CustomTab>
+                </TabList>
+
+                <TabPanels>
+                    <TabPanel p="none">
+                        <VStack gap='8' justifyContent='center' alignItems='center'><Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658951639/inspirers/images/9094bc98-b99d-4474-9803-13eaaaccc383.png' /><Text>Oops! no journeys yet.</Text><Button bg='brand.primary' color='brand.white' size='md' width='fit-content'>Click Me!</Button></VStack>
+                    </TabPanel>
+                    <TabPanel p="none">
+                        <VStack gap='8' justifyContent='center' alignItems='center'><Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658951299/inspirers/images/729a0ff0-9727-4b73-b2b5-26d23f5e442d.png' /><Text>Oops! no activity yet.</Text><Button bg='brand.primary' color='brand.white' size='md' width='fit-content'>Click Me!</Button></VStack>
+                    </TabPanel>
+                    <TabPanel p="none">
+                        <VStack gap='8' justifyContent='center' alignItems='center'><Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658951330/inspirers/images/8a6a6be1-df6c-482e-8f05-2e089ab083f5.png' /><Text>Oops! no mentees yet.</Text><Button bg='brand.primary' color='brand.white' size='md' width='fit-content'>Click Me!</Button></VStack>
+                    </TabPanel>
+                    <TabPanel p="none">
+                        <VStack gap='8' justifyContent='center' alignItems='center'><Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658951972/inspirers/images/3ef610d9-84ff-4ab3-b809-4fda743dceee.png' /><Text>Oops! no tasks yet.</Text><Button bg='brand.primary' color='brand.white' size='md' width='fit-content'>Click Me!</Button></VStack>
+                    </TabPanel>
+                    <TabPanel p="none">
+                        <VStack gap='8' justifyContent='center' alignItems='center'><Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658952252/inspirers/images/3072ccca-26d9-4b94-9b1b-979661a6da7f.png' /><Text>Oops! no backpacks yet.</Text><Button bg='brand.primary' color='brand.white' size='md' width='fit-content'>Click Me!</Button></VStack>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+        </Flex>
+=======
       <Button
         {...tabProps}
         size="sm"
@@ -112,6 +160,7 @@ export const ProfileSectionsTab = () => {
       >
         {tabProps.children}
       </Button>
+>>>>>>> 48ab069691d58ae1160cbd1aff06d8968576e14f
     );
   });
   return (
