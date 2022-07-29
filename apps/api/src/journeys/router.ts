@@ -1,5 +1,5 @@
-import { NextFunction, Response, Router } from "express";
-import { Request } from "../express";
+import { NextFunction, Response, Router , Request} from "express";
+// import { Request } from "../express";
 import { IdInObject } from "./id";
 import { 
   addJourney, 
@@ -33,7 +33,10 @@ journeyRouter.get("/:userId/list",
     next: NextFunction
   ) => {
   return Promise.resolve(getUserJourneys(req.params.userId))
-    .then(data => res.json({ data }))
+    .then(data => {
+      console.log(data);
+      return res.json({ data });
+    })
     .catch(next);
 });
 
@@ -72,7 +75,7 @@ journeyRouter.put("/blueprints/:blueprintId",
 
 journeyRouter.post("/",
   (
-    req: Request<any, any, IdInObject>,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {

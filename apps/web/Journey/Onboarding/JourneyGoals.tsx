@@ -1,9 +1,12 @@
 import React, { useContext, useState } from "react";
 import {
+    Avatar,
     Flex,
     Heading,
     Text,
-    VStack
+    VStack,
+    Checkbox,
+    Tag
 } from "@chakra-ui/react";
 import { TextInput } from "ui/Input";
 import { Button } from "ui";
@@ -12,8 +15,9 @@ import { FiX, FiArrowRight, FiTarget, FiTrendingUp, FiThumbsUp, FiCheckCircle, F
 import { JourneyBluePrint } from "../components/JourneyBluePrint";
 import { client } from "../../utils/client";
 import Image from "next/image";
+import Router, { useRouter } from "next/router";
 
-export const ThirdStepGuide = ({ guide }) => {
+export const ThirdStepGuide = ({  guide }) => {
     const context = useContext(JourneyOnboardingContext);
     return (
         <Flex height="100%">
@@ -120,10 +124,58 @@ export const ThirdStepGuide = ({ guide }) => {
     )
 }
 
-export const ThirdStep = () => {
+const accounts = [
+    {
+        id: 1,
+        name: "Emmanuel Daniel",
+        avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
+        tags: [
+            "fintech",
+            "business",
+            "design"
+        ],
+        bio: "You are all set now, let us begin navigating the journey."
+    },
+    {
+        id: 2,
+        name: "Ladu Lumori",
+        avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
+        tags: [
+            "documentation",
+            "ui"
+        ],
+        bio: "You are all set now, let us begin navigating the journey."
+    },
+    {
+        id: 3,
+        name: "Sandra Nadege",
+        avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
+        tags: [
+            "business",
+            "communication",
+            "poetry"
+        ],
+        bio: "You are all set now, let us begin navigating the journey."
+    },
+    {
+        id: 4,
+        name: "Bernadetta",
+        avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
+        tags: [
+            "fintech",
+            "communication",
+            "design"
+        ],
+        bio: "You are all set now, let us begin navigating the journey."
+    }
+]
+
+export const ThirdStep = ({ onChange }) => {
     const context = useContext(JourneyOnboardingContext);
     const [isLoading, setLoading] = useState<boolean>(false);
     const [isError, setError] = useState<boolean>(false);
+    const router = useRouter();
+
     const [journey, setJourneyInfo] = useState({
         title: "",
         career: "",
@@ -134,16 +186,7 @@ export const ThirdStep = () => {
     });
 
     const handleNext = () => {
-        setLoading(true);
-        client.put("/journeys/cl5r5qfwj0254a0btyahkbv69", {
-            title: journey.title,
-        }).then(res => {
-            setLoading(false);
-            context.moveForward(context.currentStep.id + 1);
-        }).catch(err => {
-            setLoading(false);
-            setError(true);
-        });
+        router.push(`/journeys/${context.journey.id}`);
     }
     return (
         <Flex
@@ -151,19 +194,48 @@ export const ThirdStep = () => {
             borderRadius="1rem"
             direction="column"
             width="100%"
+            color="brand.primaryText"
         >
-            <Text fontWeight="700">What's the main goal of this journey?</Text>
-            <TextInput
-                placeholder="e.g Becoming an Oscar Nominee"
-                type="text"
-                onChange={() => { }}
-            />
-            <Text fontWeight="700">How would you measure your journey success?</Text>
-            <TextInput
-                placeholder="e.g Becoming an Oscar Nominee"
-                type="text"
-                onChange={() => { }}
-            />
+            
+            <Flex
+            direction="column"
+            gap={4}
+            borderRadius="1rem"
+            
+        >
+            <Heading size="md" color="brand.secondary">People you may know</Heading>
+            <Flex direction="column" gap={8} height="400px" overflowY="scroll">
+                {
+                    accounts.map(account => {
+                        return (
+                            <Flex
+                                gap={4}
+                                borderRadius="1rem"
+                                justifyContent="space-between"
+                                width="100%"
+                            >
+                                <Flex
+                                    alignItems="flex-start"
+                                    gap={4}
+                                    direction="column"
+
+                                >
+                                    <Flex gap={2} alignItems="center">
+                                        <Avatar src={account.avatar} />
+                                        <VStack alignItems="flex-start">
+                                            <Heading size="sm">{account.name}</Heading>
+                                            <Text>{account.bio}</Text>
+                                        </VStack>
+                                    </Flex>
+                                </Flex>
+                                <Button onClick={() => { }} width="fit-content">Follow</Button>
+                            </Flex>
+                        )
+                    })
+                }
+            </Flex>
+        </Flex>
+
             <Flex width="200">
                 {
                     context.blueprint === "template" ? (
@@ -194,20 +266,20 @@ export const ThirdStep = () => {
             </Flex>
             <Flex gap={4}>
                 <Button
-                    onClick={context.moveBackwards}
+                    onClick={handleNext}
                     bg="brand.white"
                     color="brand.primaryText"
                     icon={<FiX />}
                     disabled={context.currentStep.id === 1 || context.currentStep.id === 5}
                 >
-                    Back
+                    Skip
                 </Button>
                 <Button
                     onClick={handleNext}
                     icon={<FiArrowRight />}
                     isLoading={isLoading}
                 >
-                    Next
+                    Finished
                 </Button>
             </Flex>
         </Flex>

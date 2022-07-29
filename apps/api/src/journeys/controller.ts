@@ -27,26 +27,23 @@ export const deleteBlueprint = async (blueprintId: string) => {
   });
 };
 
-export const addJourney = async (journey) => {
-  if (journey.blueprint === "blank") {
-    const blueprint = await prisma.journeyBluePrint.create({
-      data: {
-        title: journey.title
-      },
-    });
-    return prisma.journey.create({
-      data: {
-        bluePrintId: blueprint.id,
-        title: journey.title,
-        description: journey.description,
-        userId: journey.userId
-      },
-    });
-  } else {
-    return prisma.journey.create({
-      data: journey,
-    });
-  }
+interface JourneyAttrs {
+  bluePrintId: string;
+  title: string;
+  description: string;
+  userId: string;
+  blueprint: string;
+  [key: string]: string;
+}
+
+export const addJourney = async (journey: JourneyAttrs) => {
+  return prisma.journey.create({
+    data: {
+      title: journey.title,
+      description: journey.description,
+      userId: journey.userId
+    },
+  });
 };
 
 export const getUserJourneys = async (userId) => {
@@ -64,6 +61,8 @@ export const getJourneyById = async (journeyId) => {
     },
     include: {
       user: true,
+      goals: true,
+      interests: true,
     },
   });
 };

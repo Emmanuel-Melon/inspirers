@@ -15,6 +15,8 @@ model Activity {
   userId    Int
   taskId    Int
   createdAt DateTime @default(now())
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  journeyId String?
 }
 
 model Task {
@@ -24,6 +26,8 @@ model Task {
   description String
   completed   Boolean  @default(false)
   createdAt   DateTime @default(now())
+  Journey     Journey? @relation(fields: [journeyId], references: [id])
+  journeyId   String?
 }
 
 model User {
@@ -71,22 +75,25 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
   @@unique([identifier, token])
 }
 
 model Journey {
   id               String            @id @default(cuid())
-  title            String
-  description      String
+  title            String?
+  description      String?
   userId           String
   bluePrintId      String?
-  Goal             Goal[]
-  Interest         Interest[]
+  goals            Goal[]
+  interests        Interest[]
   user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   JourneyBluePrint JourneyBluePrint? @relation(fields: [bluePrintId], references: [id], onDelete: Cascade)
-  journeyType String?
-  field String?
+  journeyType      String?
+  field            Field             @relation(fields: [fieldId], references: [id])
+  fieldId          String
+  milestones       MileStone[]
+  activities       Activity[]
+  tasks            Task[]
 }
 
 model Goal {
@@ -98,13 +105,14 @@ model Goal {
 }
 
 model Field {
-  id        String   @id @default(cuid())
-  title     String
+  id      String    @id @default(cuid())
+  title   String
+  Journey Journey[]
 }
 
 model Experience {
-  id        String   @id @default(cuid())
-  title     String
+  id    String @id @default(cuid())
+  title String
 }
 
 model JourneyPrivacy {
@@ -114,23 +122,23 @@ model JourneyPrivacy {
 }
 
 model AcademicJourney {
-  id        String   @id @default(cuid())
-  title     String
+  id    String @id @default(cuid())
+  title String
 }
 
 model BusinessJourney {
-  id        String   @id @default(cuid())
-  title     String
+  id    String @id @default(cuid())
+  title String
 }
 
 model CareerJourney {
-  id        String   @id @default(cuid())
-  title     String
+  id    String @id @default(cuid())
+  title String
 }
 
 model PersonalJourney {
-  id        String   @id @default(cuid())
-  title     String
+  id    String @id @default(cuid())
+  title String
 }
 
 model JourneyBluePrint {
@@ -152,6 +160,13 @@ model JourneyBluePrint {
 
 model Interest {
   id        String   @id @default(cuid())
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  journeyId String?
+}
+
+model MileStone {
+  id String @id @default(cuid())
+
   Journey   Journey? @relation(fields: [journeyId], references: [id])
   journeyId String?
 }
