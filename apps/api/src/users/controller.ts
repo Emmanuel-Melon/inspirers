@@ -12,7 +12,7 @@ export const getUserById = async (userId: string) => {
 export const modifyUser = async (userId: string, data) => {
   const newEntry = await prisma.user.update({
     where: {
-        id: userId,
+      id: userId,
     },
     data,
   });

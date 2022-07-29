@@ -1,6 +1,5 @@
 export interface IdInObject {
-    id?: string;
-    journeyId?: string;
-    userId?: string;
-  }
-  
+  id?: string;
+  journeyId?: string;
+  userId?: string;
+}

@@ -18,9 +18,9 @@ const theme = extendTheme({
       danger: "#df4759",
       success: "#5cb85c",
       primaryText: "#696969",
-      hovered: "#F3EDED"
-    }
-  }
+      hovered: "#F3EDED",
+    },
+  },
 });
 
 export default theme;
