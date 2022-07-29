@@ -19,7 +19,7 @@ export const authOptions = {
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID || "",
       clientSecret: process.env.FACEBOOK_SECRET || "",
-    })
+    }),
   ],
   database: process.env.DATABASE_URL,
   secret: process.env.SECRET,
@@ -70,15 +70,15 @@ export const authOptions = {
       session.user.id = user.id;
       return {
         session,
-        user
-      }
+        user,
+      };
     },
     async jwt({ token, account }) {
-      return token
-    }
+      return token;
+    },
   },
   events: {},
   debug: true,
-}
+};
 
 export default NextAuth(authOptions);
