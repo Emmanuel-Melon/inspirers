@@ -139,7 +139,7 @@ export default function Landing() {
                 </Flex>
             </Flex>
             <Flex p="8" gap={8} direction="column" alignItems="center" justifyContent="center">
-                <Heading textAlign="center">Who's this app for?</Heading>
+                <Heading textAlign="center">Who is this app for?</Heading>
                 <Flex gap={4} flexWrap="wrap" alignItems="center" justifyContent="center">
                     {
                         process.map(benefit => {
