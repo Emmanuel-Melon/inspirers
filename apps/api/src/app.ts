@@ -12,7 +12,7 @@ init(app);
 
 const listen = () => {
   return new Promise<void>((resolve, reject) =>
-    app.listen(port, error => {
+    app.listen(port, (error) => {
       if (error) {
         return reject(error);
       }

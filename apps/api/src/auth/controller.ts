@@ -36,7 +36,7 @@ export const createUser = async (user) => {
     };
   }
 
-  if(userExists && (await userExists).password === null) {
+  if (userExists && (await userExists).password === null) {
     // create password
   }
 

@@ -1,7 +1,4 @@
 import { DragWrapper } from "./draggable";
 import { DropWrapper } from "./droppable";
 
-export {
-  DragWrapper,
-  DropWrapper
-}
+export { DragWrapper, DropWrapper };

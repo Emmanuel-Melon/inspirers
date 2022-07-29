@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick: (e: React.MouseEvent) => void;
   fullWidth?: boolean;
   icon?: any;
-  color?: string; 
+  color?: string;
   bg?: string;
   loadingText?: string;
   isLoading?: boolean;
@@ -27,7 +27,7 @@ export const Button: FC<ButtonProps> = ({
   size = "md",
   width = "100%",
   variant,
-  fullWidth
+  fullWidth,
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>
@@ -49,13 +49,12 @@ export const Button: FC<ButtonProps> = ({
         cursor="pointer"
         leftIcon={icon}
         _hover={{
-          background: "brand.primaryHover"
+          background: "brand.primaryHover",
         }}
         _focus={{
           outline: "none",
           boxShadow: "none",
         }}
-        
       >
         {children}
       </ChakraButton>

@@ -28,5 +28,4 @@ export function catchErrors(
   return res.status(500).json({ message: "Something went wrong" });
 }
 
-
 export class AuthenticationError extends BaseError {}

@@ -3,9 +3,17 @@ import { Flex, Text } from "@chakra-ui/react";
 import { Navbar } from "ui";
 import Head from "next/head";
 import Link from "next/link";
-import { FiHome, FiSettings, FiUser, FiBell, FiCheckCircle, FiUsers, FiTrendingUp, FiMap } from "react-icons/fi";
+import {
+  FiHome,
+  FiSettings,
+  FiUser,
+  FiBell,
+  FiCheckCircle,
+  FiUsers,
+  FiTrendingUp,
+  FiMap,
+} from "react-icons/fi";
 import { VStack } from "@chakra-ui/react";
-
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -17,7 +25,10 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Head>
         <title>Inspirers</title>
-        <meta name="description" content="Inspirers is an app for changemakers both individually and collectively. It allows you to start and track your journey to achieve your long-term goals. " />
+        <meta
+          name="description"
+          content="Inspirers is an app for changemakers both individually and collectively. It allows you to start and track your journey to achieve your long-term goals. "
+        />
         <link rel="icon" href="favicon.png" />
       </Head>
       <Flex height="100%" py="4">
@@ -43,7 +54,6 @@ export default function Layout({ children }: LayoutProps) {
                   color: "brand.accent",
                 }}
               >
-
                 <Flex
                   bg="brand.white"
                   color="brand.primary"
@@ -58,7 +68,6 @@ export default function Layout({ children }: LayoutProps) {
                 </Flex>
 
                 {labels ? <Text>Home</Text> : null}
-
               </Flex>
             </Link>
 
@@ -70,7 +79,6 @@ export default function Layout({ children }: LayoutProps) {
                   color: "brand.accent",
                 }}
               >
-
                 <Flex
                   bg="brand.primary"
                   color="brand.white"
@@ -85,11 +93,12 @@ export default function Layout({ children }: LayoutProps) {
                 </Flex>
 
                 {labels ? <Text>Profile</Text> : null}
-
               </Flex>
             </Link>
 
-            <Flex direction="column" alignItems="center"
+            <Flex
+              direction="column"
+              alignItems="center"
               _hover={{
                 color: "brand.accent",
               }}
@@ -112,7 +121,9 @@ export default function Layout({ children }: LayoutProps) {
 
               {labels ? <Link href="/journeys">Journeys</Link> : null}
             </Flex>
-            <Flex direction="column" alignItems="center"
+            <Flex
+              direction="column"
+              alignItems="center"
               _hover={{
                 color: "brand.accent",
               }}
@@ -131,7 +142,9 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/notifications">Notifications</Link> : null}
             </Flex>
-            <Flex direction="column" alignItems="center"
+            <Flex
+              direction="column"
+              alignItems="center"
               _hover={{
                 color: "brand.accent",
               }}
@@ -149,9 +162,10 @@ export default function Layout({ children }: LayoutProps) {
                 <FiCheckCircle size="1.2rem" />
               </Flex>
               {labels ? <Link href="/tasks">Tasks</Link> : null}
-
             </Flex>
-            <Flex direction="column" alignItems="center"
+            <Flex
+              direction="column"
+              alignItems="center"
               _hover={{
                 color: "brand.accent",
               }}
@@ -170,7 +184,9 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/discover">Discover</Link> : null}
             </Flex>
-            <Flex direction="column" alignItems="center"
+            <Flex
+              direction="column"
+              alignItems="center"
               _hover={{
                 color: "brand.accent",
               }}
@@ -193,7 +209,13 @@ export default function Layout({ children }: LayoutProps) {
         </Flex>
         <Flex width="90%" direction="column" alignItems="stretch" height="100%">
           <Navbar />
-          <Flex as="section" px="8"  direction="column" height="100%" alignItems="stretch" >
+          <Flex
+            as="section"
+            px="8"
+            direction="column"
+            height="100%"
+            alignItems="stretch"
+          >
             {children}
           </Flex>
         </Flex>

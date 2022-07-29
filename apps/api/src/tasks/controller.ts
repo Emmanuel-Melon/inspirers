@@ -25,16 +25,16 @@ export const getUserTasks = async (userId: number) => {
 export const removeTask = async (taskId: number) => {
   const newEntry = await prisma.task.delete({
     where: {
-      id: taskId.toString()
-    }
-  })
+      id: taskId.toString(),
+    },
+  });
   return newEntry;
 };
 
 export const modifyTask = async (taskId: number | string, data) => {
   const newEntry = await prisma.task.update({
     where: {
-        id: taskId.toString(),
+      id: taskId.toString(),
     },
     data,
   });

@@ -4,28 +4,24 @@ export const DragContext = createContext();
 
 export const DragProvider = ({ children }) => {
   const Drag = useProvideDrag();
-  return (
-    <DragContext.Provider value={Drag}>
-      {children}
-    </DragContext.Provider>
-  )
-}
+  return <DragContext.Provider value={Drag}>{children}</DragContext.Provider>;
+};
 
 export const useDrag = () => {
   return useContext(DragContext);
 };
 
-function dragItem () {
+function dragItem() {
   console.log("moving this list!");
 }
 
-function dropItem () {
+function dropItem() {
   console.log("moving this list!");
 }
 
-function useProvideDrag () {
+function useProvideDrag() {
   return {
     dragItem,
-    dropItem
-  }
+    dropItem,
+  };
 }

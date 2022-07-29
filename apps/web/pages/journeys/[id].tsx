@@ -18,18 +18,18 @@ const journey = {
       subChapters: [
         {
           id: "cl5o8pq8t0070fgbt5eqar9bb",
-          title: "Goals"
+          title: "Goals",
         },
         {
           id: "cl5o8pq8t0070fgbt5eqar9bc",
-          title: "Resources and Companions"
-        }
-      ]
+          title: "Resources and Companions",
+        },
+      ],
     },
     {
       id: "cl5o8pq8t0070fgbt5eqar9bb",
       title: "Writing an Essay",
-      subChapters: []
+      subChapters: [],
     },
     {
       id: "cl5o8pq8t0070fgbt5eqar9bc",
@@ -37,23 +37,20 @@ const journey = {
       subChapters: [
         {
           id: "cl5o8pq8t0070fgbt5eqar9bk",
-          title: "Algebra 1"
+          title: "Algebra 1",
         },
         {
           id: "cl5o8pq8t0070fgbt5eqar9bl",
-          title: "English"
+          title: "English",
         },
         {
           id: "cl5o8pq8t0070fgbt5eqar9bm",
-          title: "AP Physics"
-        }
-      ]
-    }
-  ]
-}
-
-
-
+          title: "AP Physics",
+        },
+      ],
+    },
+  ],
+};
 
 export default function Journey(props) {
   const router = useRouter();
@@ -62,53 +59,40 @@ export default function Journey(props) {
   const { data, isLoading, isError } = useFetch(`${router.asPath}`);
 
   if (router.isFallback) {
-    return (
-      <Text color="brand.primary">Processing Request</Text>
-    )
+    return <Text color="brand.primary">Processing Request</Text>;
   }
 
-
-  if(isError) {
-    return (
-      <p>Done</p>
-    )
+  if (isError) {
+    return <p>Done</p>;
   }
 
-  if(data?.data?.user?.id === "cl5ubrlsj0911srbtwhibuim9") {
-    return (
-      <PersonalJourney journey={data?.data}/>
-    )
+  if (data?.data?.user?.id === "cl5ubrlsj0911srbtwhibuim9") {
+    return <PersonalJourney journey={data?.data} />;
   }
 
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
-      <Flex>
+      <Flex>{started ? <JourneyOverviewCard /> : null}</Flex>
 
-              {
-        started ? <JourneyOverviewCard /> : null
-      }
-      </Flex>
-
-      {
-        !isLoading ? (
-          <OutlineOverview journey={data?.data} user={data?.data?.user} />
-        ) : <p>Loading</p>
-      }
+      {!isLoading ? (
+        <OutlineOverview journey={data?.data} user={data?.data?.user} />
+      ) : (
+        <p>Loading</p>
+      )}
     </Flex>
   );
 }
 
 export async function getStaticPaths({ params }) {
   console.log(params);
-  return { paths: [], fallback: true }
+  return { paths: [], fallback: true };
 }
 
 export async function getStaticProps(context) {
   console.log(context);
   // read the posts dir from the fs
-  return { props: { journey: {} } }
+  return { props: { journey: {} } };
 }
-
 
 /**
  * 
@@ -129,4 +113,3 @@ export async function getServerSideProps(context) {
   }
 }
  */
-

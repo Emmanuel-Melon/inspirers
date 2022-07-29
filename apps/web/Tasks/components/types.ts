@@ -1,4 +1,4 @@
 export const Types = {
-    CARD: "CARD",
-    LIST: "LIST",
-  }
+  CARD: "CARD",
+  LIST: "LIST",
+};
