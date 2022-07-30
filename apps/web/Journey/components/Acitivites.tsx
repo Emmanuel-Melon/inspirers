@@ -63,16 +63,16 @@ export const Activities: FC<ActivityListProps> = ({ activities = [] }) => {
       <VStack color="brand.primaryText">
         <br />
         {(activities && activities?.length === 0) || !activities ? (
-          <VStack>
-          <Image
-          display = 'block'
-          alt = "Bussy"
-          src = "https://res.cloudinary.com/dwacr3zpp/image/upload/v1659214988/inspirers/images/dbef0821-2fe8-4aaf-a95a-32db3141a17e.png"
-          />
-          <Heading gap = "4" >Oops! no activities yet.</Heading>
-          <Badge colorScheme={"purple"}>
-            Click get started to create your first task now ; )
-          </Badge>
+          <VStack gap="4">
+            <Image
+              display="block"
+              alt="Bussy"
+              src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1659214988/inspirers/images/dbef0821-2fe8-4aaf-a95a-32db3141a17e.png"
+            />
+            <Heading>Oops! no activities yet.</Heading>
+            <Badge colorScheme={"purple"}>
+              Click get started to create your first task now ; )
+            </Badge>
           </VStack>
         ) : (
           activities?.map((activity) => (
