@@ -1,17 +1,15 @@
 import {
-    Avatar,
-    Image,
-    Img,
-    Stack,
-    Text,
-    Link,
-    Flex,
-    Heading,
-    Box,
-  } from "@chakra-ui/react";
+  Avatar,
+  Image,
+  Img,
+  Stack,
+  Text,
+  Link,
+  Flex,
+  Heading,
+  Box,
+} from "@chakra-ui/react";
 
-  export default function Settings(){
-    return(
-        <Heading>Settings.</Heading>
-    );
-  }
+export default function Settings() {
+  return <Heading>Settings.</Heading>;
+}
