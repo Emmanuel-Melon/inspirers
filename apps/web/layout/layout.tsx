@@ -97,127 +97,129 @@ export default function Layout({ children }: LayoutProps) {
             </Link>
 
             <Link href="/journeys">
-            <Flex
-              direction="column"
-              alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
               <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
+                direction="column"
                 alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
                 _hover={{
                   color: "brand.accent",
                 }}
               >
-                <FiMap size="1.2rem" />
+                <Flex
+                  bg="brand.primary"
+                  color="brand.white"
+                  borderRadius="1rem"
+                  alignItems="center"
+                  p="2"
+                  justifyContent="center"
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                  cursor="pointer"
+                  _hover={{
+                    color: "brand.accent",
+                  }}
+                >
+                  <FiMap size="1.2rem" />
+                </Flex>
+
+                {labels ? <Link href="/journeys">Journeys</Link> : null}
               </Flex>
+            </Link>
 
-              {labels ? <Link href="/journeys">Journeys</Link> : null}
-            </Flex>
-             </Link>
-
-             <Link href="/notifications">
-            <Flex
-              direction="column"
-              alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
+            <Link href="/notifications">
               <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
+                direction="column"
                 alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
+                _hover={{
+                  color: "brand.accent",
+                }}
               >
-                <FiBell size="1.2rem" />
+                <Flex
+                  bg="brand.primary"
+                  color="brand.white"
+                  borderRadius="1rem"
+                  alignItems="center"
+                  p="2"
+                  justifyContent="center"
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                  cursor="pointer"
+                >
+                  <FiBell size="1.2rem" />
+                </Flex>
+                {labels ? (
+                  <Link href="/notifications">Notifications</Link>
+                ) : null}
               </Flex>
-              {labels ? <Link href="/notifications">Notifications</Link> : null}
-            </Flex>
             </Link>
 
             <Link href="/tasks">
-            <Flex
-              direction="column"
-              alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
               <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
+                direction="column"
                 alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
+                _hover={{
+                  color: "brand.accent",
+                }}
               >
-                <FiCheckCircle size="1.2rem" />
+                <Flex
+                  bg="brand.primary"
+                  color="brand.white"
+                  borderRadius="1rem"
+                  alignItems="center"
+                  p="2"
+                  justifyContent="center"
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                  cursor="pointer"
+                >
+                  <FiCheckCircle size="1.2rem" />
+                </Flex>
+                {labels ? <Link href="/tasks">Tasks</Link> : null}
               </Flex>
-              {labels ? <Link href="/tasks">Tasks</Link> : null}
-            </Flex>
             </Link>
 
             <Link href="/discover">
-            <Flex
-              direction="column"
-              alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
               <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
+                direction="column"
                 alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
+                _hover={{
+                  color: "brand.accent",
+                }}
               >
-                <FiTrendingUp size="1.2rem" />
+                <Flex
+                  bg="brand.primary"
+                  color="brand.white"
+                  borderRadius="1rem"
+                  alignItems="center"
+                  p="2"
+                  justifyContent="center"
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                  cursor="pointer"
+                >
+                  <FiTrendingUp size="1.2rem" />
+                </Flex>
+                {labels ? <Link href="/discover">Discover</Link> : null}
               </Flex>
-              {labels ? <Link href="/discover">Discover</Link> : null}
-            </Flex>
             </Link>
 
             <Link href="/settings">
-            <Flex
-              direction="column"
-              alignItems="center"
-              _hover={{
-                color: "brand.accent",
-              }}
-            >
               <Flex
-                bg="brand.primary"
-                color="brand.white"
-                borderRadius="1rem"
+                direction="column"
                 alignItems="center"
-                p="2"
-                justifyContent="center"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                cursor="pointer"
+                _hover={{
+                  color: "brand.accent",
+                }}
               >
-                <FiSettings size="1.2rem" />
+                <Flex
+                  bg="brand.primary"
+                  color="brand.white"
+                  borderRadius="1rem"
+                  alignItems="center"
+                  p="2"
+                  justifyContent="center"
+                  boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                  cursor="pointer"
+                >
+                  <FiSettings size="1.2rem" />
+                </Flex>
+                {labels ? <Link href="/settings">Settings</Link> : null}
               </Flex>
-              {labels ? <Link href="/settings">Settings</Link> : null}
-            </Flex>
             </Link>
           </VStack>
         </Flex>
