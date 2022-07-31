@@ -186,5 +186,3 @@ export const ProfileSectionsTab = () => {
     </Flex>
   );
 };
-
-

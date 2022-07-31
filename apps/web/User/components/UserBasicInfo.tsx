@@ -4,9 +4,8 @@ import { FiBriefcase, FiCalendar, FiMapPin } from "react-icons/fi";
 
 export const UserBasicInfo = ({ user }) => {
   let flip: boolean = true;
-  // set flip to true to observe empty state and to false to observe the default data. 
-  return(flip)?
-  (
+  // set flip to true to observe empty state and to false to observe the default data.
+  return flip ? (
     <Flex
       bg="brand.white"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
@@ -20,29 +19,22 @@ export const UserBasicInfo = ({ user }) => {
       <VStack alignItems="flex-start">
         <Flex alignItems="center" gap={2}>
           <FiBriefcase />
-          <Text color="brand.primary" fontWeight="700">
-            
-          </Text>
+          <Text color="brand.primary" fontWeight="700"></Text>
         </Flex>
         <Text></Text>
         <Flex alignItems="center" gap={2}>
           <FiCalendar />
-          <Text color="brand.primary" fontWeight="700">
-            
-          </Text>
+          <Text color="brand.primary" fontWeight="700"></Text>
         </Flex>
         <Text></Text>
         <Flex alignItems="center" gap={2}>
           <FiMapPin />
-          <Text color="brand.primary" fontWeight="700">
-            
-          </Text>
+          <Text color="brand.primary" fontWeight="700"></Text>
         </Flex>
         <Text></Text>
       </VStack>
     </Flex>
-  ) 
-  :(
+  ) : (
     <Flex
       bg="brand.white"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"

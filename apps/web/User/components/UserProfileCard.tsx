@@ -12,9 +12,9 @@ import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
 
 export const UserProfileCard = ({ user }) => {
   let flip: boolean = true;
-  // set flip to true to observe empty state and to false to observe the default data. 
-  return (flip) ?
-  (<Flex
+  // set flip to true to observe empty state and to false to observe the default data.
+  return flip ? (
+    <Flex
       bg="brand.white"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
       borderRadius="1rem"
@@ -71,8 +71,8 @@ export const UserProfileCard = ({ user }) => {
           </Flex>
         </VStack>
       </Flex>
-    </Flex>)
-   :(
+    </Flex>
+  ) : (
     <Flex
       bg="brand.white"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
