@@ -20,7 +20,8 @@
     "jsonwebtoken": "^8.5.1",
     "next": "^12.2.2",
     "next-auth": "^4.9.0",
-    "prisma": "^4.0.0",
+    "next-seo": "^5.5.0",
+    "prisma": "*",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
@@ -39,7 +40,6 @@
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "next-transpile-modules": "9.0.0",
-    "prisma": "^4.0.0",
     "tsconfig": "*",
     "typescript": "^4.5.3"
   }
