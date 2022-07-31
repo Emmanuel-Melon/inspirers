@@ -141,19 +141,44 @@ export const ProfileSectionsTab = () => {
         <TabPanels>
           <TabPanel p="none">
             {/* Below here status "on" will show what will render the data present if the data exists while "off" will render the empty state */}
-            <WhatToDisplay status="off" panelTitle="Journeys" url={EmptyStateImages.JourneyEmptyStateImage} input= {<Text>Success</Text>}/>
+            <WhatToDisplay
+              status="off"
+              panelTitle="Journeys"
+              url={EmptyStateImages.JourneyEmptyStateImage}
+              input={<Text>Success</Text>}
+            />
           </TabPanel>
           <TabPanel p="none">
-            <WhatToDisplay status="off" panelTitle="Activity" url={EmptyStateImages.ActivityEmptyStateImage} input= {<ListUsers users={users} />}/>
+            <WhatToDisplay
+              status="off"
+              panelTitle="Activity"
+              url={EmptyStateImages.ActivityEmptyStateImage}
+              input={<ListUsers users={users} />}
+            />
           </TabPanel>
           <TabPanel p="none">
-            <WhatToDisplay status="off" panelTitle="Mentees" url={EmptyStateImages.MenteesEmptyStateImage} input= {<ListUsers users={users} />}/>
+            <WhatToDisplay
+              status="off"
+              panelTitle="Mentees"
+              url={EmptyStateImages.MenteesEmptyStateImage}
+              input={<ListUsers users={users} />}
+            />
           </TabPanel>
           <TabPanel p="none">
-            <WhatToDisplay status="off" panelTitle="Tasks" url={EmptyStateImages.TasksEmptyStateImage} input= {<TaskList tasks={tasks} />}/>
+            <WhatToDisplay
+              status="off"
+              panelTitle="Tasks"
+              url={EmptyStateImages.TasksEmptyStateImage}
+              input={<TaskList tasks={tasks} />}
+            />
           </TabPanel>
           <TabPanel p="none">
-            <WhatToDisplay status="off" panelTitle="Backpacks" url={EmptyStateImages.BackpacksEmptyStateImage} input= {<TaskList tasks={tasks} />}/>
+            <WhatToDisplay
+              status="off"
+              panelTitle="Backpacks"
+              url={EmptyStateImages.BackpacksEmptyStateImage}
+              input={<TaskList tasks={tasks} />}
+            />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -161,15 +186,13 @@ export const ProfileSectionsTab = () => {
   );
 };
 
-const WhatToDisplay = (props): any =>{
+const WhatToDisplay = (props): any => {
   let display: boolean = true;
   const panelTitle: string = props.panelTitle;
   const url: any = props.url;
   const input = props.input;
   const status: string = props.status;
 
-  input && status=="on" ? display : display = false;
-  return(
-    display ? input : <EmptyState panelTitle= {panelTitle} url={url}/>
-  )
-}
+  input && status == "on" ? display : (display = false);
+  return display ? input : <EmptyState panelTitle={panelTitle} url={url} />;
+};
