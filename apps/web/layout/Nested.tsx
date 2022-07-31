@@ -42,7 +42,7 @@ export default function NestedLayout({ children }: LayoutProps) {
                 <Link href="/tasks">Tasks</Link>
               </li>
               <li>
-                <Link href="/communitis">Communitis</Link>
+                <Link href="/communities">Communities</Link>
               </li>
               <li>
                 <Link href="/discover">Discover</Link>
