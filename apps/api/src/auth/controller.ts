@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma";
+import prisma from "prisma";
 import { UserObject } from "types/User";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";

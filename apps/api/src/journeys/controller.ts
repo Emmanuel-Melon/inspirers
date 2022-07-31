@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma";
+import prisma from "prisma";
 
 export const addBlueprint = async (blueprint) => {
   return prisma.journeyBluePrint.create({
@@ -38,6 +38,7 @@ interface JourneyAttrs {
 
 export const addJourney = async (journey: JourneyAttrs) => {
   return prisma.journey.create({
+    // @ts-ignore
     data: {
       title: journey.title,
       description: journey.description,

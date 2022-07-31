@@ -9,6 +9,7 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
+
 model Activity {
   id        String   @id @default(cuid())
   title     String
@@ -75,6 +76,7 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+
   @@unique([identifier, token])
 }
 
@@ -165,8 +167,7 @@ model Interest {
 }
 
 model MileStone {
-  id String @id @default(cuid())
-
+  id        String   @id @default(cuid())
   Journey   Journey? @relation(fields: [journeyId], references: [id])
   journeyId String?
 }
