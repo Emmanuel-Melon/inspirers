@@ -96,6 +96,7 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
             </Link>
 
+            <Link href="/journeys">
             <Flex
               direction="column"
               alignItems="center"
@@ -121,6 +122,9 @@ export default function Layout({ children }: LayoutProps) {
 
               {labels ? <Link href="/journeys">Journeys</Link> : null}
             </Flex>
+             </Link>
+
+             <Link href="/notifications">
             <Flex
               direction="column"
               alignItems="center"
@@ -142,6 +146,9 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/notifications">Notifications</Link> : null}
             </Flex>
+            </Link>
+
+            <Link href="/tasks">
             <Flex
               direction="column"
               alignItems="center"
@@ -163,6 +170,9 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/tasks">Tasks</Link> : null}
             </Flex>
+            </Link>
+
+            <Link href="/discover">
             <Flex
               direction="column"
               alignItems="center"
@@ -184,6 +194,9 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/discover">Discover</Link> : null}
             </Flex>
+            </Link>
+
+            <Link href="/settings">
             <Flex
               direction="column"
               alignItems="center"
@@ -205,6 +218,7 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
               {labels ? <Link href="/settings">Settings</Link> : null}
             </Flex>
+            </Link>
           </VStack>
         </Flex>
         <Flex width="90%" direction="column" alignItems="stretch" height="100%">
