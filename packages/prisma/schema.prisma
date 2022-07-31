@@ -88,11 +88,11 @@ model Journey {
   bluePrintId      String?
   goals            Goal[]
   interests        Interest[]
-  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
   JourneyBluePrint JourneyBluePrint? @relation(fields: [bluePrintId], references: [id], onDelete: Cascade)
   journeyType      String?
-  field            Field             @relation(fields: [fieldId], references: [id])
-  fieldId          String
+  field            Field?             @relation(fields: [fieldId], references: [id])
+  fieldId          String?
   milestones       MileStone[]
   activities       Activity[]
   tasks            Task[]
