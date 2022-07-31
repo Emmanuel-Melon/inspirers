@@ -71,7 +71,7 @@ export default function Layout({ children }: LayoutProps) {
               </Flex>
             </Link>
 
-            <Link href="/username">
+            <Link href="/user/username">
               <Flex
                 direction="column"
                 alignItems="center"
