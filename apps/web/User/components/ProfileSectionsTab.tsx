@@ -19,6 +19,7 @@ import { TaskList } from "../../Tasks/components/TaskList";
 import { ListUsers } from "./ListUsers";
 import { EmptyState } from "./EmptyState";
 import { EmptyStateImages } from "./EmptyState";
+import { WhatToDisplay } from "./EmptyState";
 
 import {
   FiActivity,
@@ -186,13 +187,4 @@ export const ProfileSectionsTab = () => {
   );
 };
 
-const WhatToDisplay = (props): any => {
-  let display: boolean = true;
-  const panelTitle: string = props.panelTitle;
-  const url: any = props.url;
-  const input = props.input;
-  const status: string = props.status;
 
-  input && status == "on" ? display : (display = false);
-  return display ? input : <EmptyState panelTitle={panelTitle} url={url} />;
-};
