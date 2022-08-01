@@ -26,10 +26,10 @@ export const UserProfileCard = ({ user }) => {
       <Flex gap={4} justifyContent="space-between" direction="column">
         <Flex gap={2} justifyContent="space-between">
           <Flex gap={2}>
-            <Avatar src={user.image} />
+            <Avatar src={user?.image || "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg"} />
             <VStack alignItems="flex-start">
               <Heading color="brand.primary" size="sm">
-                {user.name}
+                {user?.name}
               </Heading>
               <Text>@guest</Text>
             </VStack>

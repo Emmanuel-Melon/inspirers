@@ -9,7 +9,7 @@ import {
   FiClipboard,
   FiHeart,
 } from "react-icons/fi";
-import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
+import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 
 const Step = ({ step }) => {
   return (

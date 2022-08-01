@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Flex, Text } from "@chakra-ui/react";
-import { JourneyOverviewCard } from "../../Journey/components/JourneyOverviewCard";
-import { OutlineOverview } from "../../Journey/Overview/OutlineView";
+import { JourneyOverviewCard } from "./components/JourneyOverviewCard";
+import { OutlineOverview } from "./Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
 import { PersonalJourney } from "./components/personal";
+import { JourneyEditor } from "./components/editor";
 
 const journey = {
   id: "cl5o8pq8t0070fgbt5eqar9ba",
@@ -75,7 +76,7 @@ export default function Journey(props) {
       <Flex>{started ? <JourneyOverviewCard /> : null}</Flex>
 
       {!isLoading ? (
-        <OutlineOverview journey={data?.data} user={data?.data?.user} />
+        <JourneyEditor journey={data?.data} />
       ) : (
         <p>Loading</p>
       )}
