@@ -2,7 +2,6 @@ require("dotenv").config({ path: "../../.env" });
 
 const withTM = require("next-transpile-modules")([
   "ui",
-  "prisma",
   "@inspirers/prisma"
 ]);
 
@@ -28,16 +27,5 @@ module.exports = withTM({
   },
   images: {
     domains: ["cloudinary.com/", "res.cloudinary.com"],
-  },
-  async redirects () {
-    const redirects = [
-      {
-        source: "/settings",
-        destination: "/settings/profile",
-        permanent: true,
-      }
-    ];
-
-    return redirects;
   }
 });

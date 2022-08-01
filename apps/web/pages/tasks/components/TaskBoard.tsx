@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { DragWrapper, DropWrapper } from "../../dnd";
+import { DragWrapper, DropWrapper } from "../../../dnd";
 import { Types } from "./types";
 import { KanbanList } from "./KanbanList";
 

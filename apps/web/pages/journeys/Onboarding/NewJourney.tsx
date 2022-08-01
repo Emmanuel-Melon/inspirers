@@ -5,7 +5,7 @@ import { Flex } from "@chakra-ui/react";
 import {
   JourneyOnboardingConsumer,
   JourneyOnboardingProvider,
-} from "../../providers/JourneyOnboardingProvider";
+} from "../../../providers/JourneyOnboardingProvider";
 
 export const NewJourney = ({ user }) => {
   return (

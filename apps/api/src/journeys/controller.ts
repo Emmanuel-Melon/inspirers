@@ -36,9 +36,8 @@ interface JourneyAttrs {
   [key: string]: string;
 }
 
-export const addJourney = async (journey: JourneyAttrs) => {
+export const addJourney = async (journey) => {
   return prisma.journey.create({
-    // @ts-ignore
     data: {
       title: journey.title,
       description: journey.description,

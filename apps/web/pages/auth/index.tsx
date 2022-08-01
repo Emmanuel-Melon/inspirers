@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { AuthForm } from "../../Auth/components/LoginForm";
+import { AuthForm } from "./components/LoginForm";
 import type { NextPage } from "next";
 import { Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ const Login: NextPage = (props) => {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      // router.push('/');
+      router.push('/');
     }
   }, [session, router]);
 

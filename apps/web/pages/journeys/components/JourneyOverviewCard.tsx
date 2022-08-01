@@ -22,6 +22,7 @@ const Companion = ({ companion }) => {
 };
 
 export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
+  console.log(user);
   const router = useRouter();
 
   function inviteFriends() {}
@@ -48,9 +49,12 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
       >
         <Flex justifyContent="space-between">
           <Box>
+            <Flex gap={2} alignItems="center">
+              <Avatar src={user?.image} />
             <Heading color="brand.primary" size="lg" as="h1">
               Hi, {user?.name || "Guest"}{" "}
             </Heading>
+            </Flex>
             <Text my="4">You haven't started any journey.</Text>
           </Box>
           <Button onClick={getStarted} icon={<FiTruck />}>

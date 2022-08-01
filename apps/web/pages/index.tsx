@@ -1,20 +1,20 @@
 import { Flex } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { Insights } from "../Journey/components/Insights";
-import { Timeline } from "../Journey/components/Timeline";
-import { JourneyOverviewCard } from "../Journey/components/JourneyOverviewCard";
-import { Milestones } from "../Journey/components/Milestones";
-import { Activities } from "../Journey/components/Acitivites";
+import { Insights } from "./journeys/components/Insights";
+import { Timeline } from "./journeys/components/Timeline";
+import { JourneyOverviewCard } from "./journeys/components/JourneyOverviewCard";
+import { Milestones } from "./journeys/components/Milestones";
+import { Activities } from "./journeys/components/Acitivites";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Index(props) {
   // When rendering client side don't display anything until loading is complete
-
   return (
     <Flex direction="column" gap={4} my="8">
-      <JourneyOverviewCard />
+      <JourneyOverviewCard user={props.user}/>
       <Flex>
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />

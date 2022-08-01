@@ -1,10 +1,10 @@
 import { Flex, Text, Heading, VStack } from "@chakra-ui/react";
-import { UserProfileCard } from "../../User/components/UserProfileCard";
-import { UserBasicInfo } from "../../User/components/UserBasicInfo";
-import { UserBioCard } from "../../User/components/UserBioCard";
+import { UserProfileCard } from "./components/UserProfileCard";
+import { UserBasicInfo } from "./components/UserBasicInfo";
+import { UserBioCard } from "./components/UserBioCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { ProfileSectionsTab } from "../../User/components/ProfileSectionsTab";
+import { ProfileSectionsTab } from "./components/ProfileSectionsTab";
 
 export default function UserProfile(props) {
   return (

@@ -125,6 +125,8 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
+
+  console.log(session);
   const { id, email, name, image, bio } = session?.user || {};
 
   return {
