@@ -28,6 +28,8 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
 
@@ -119,6 +121,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  User         User     @relation(fields: [userId], references: [id])
 }
 
 model Task {
@@ -141,6 +144,8 @@ model User {
   password      String?
   emailVerified Boolean?  @default(false)
   login         String?
+  Account      Account[]
+  Session      Session[]
 }
 
 model VerificationToken {

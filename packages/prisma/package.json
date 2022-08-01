@@ -1,7 +1,8 @@
 {
   "name": "prisma",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
+  "private": true,
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^4.1.1",
