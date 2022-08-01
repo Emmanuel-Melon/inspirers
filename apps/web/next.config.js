@@ -1,14 +1,10 @@
-require("dotenv").config({ path: "../../.env" });
+// require("dotenv").config({ path: "../../.env" });
 
 const withTM = require("next-transpile-modules")([
   "ui",
   "prisma"
 ]);
 
-
-if (!process.env.NEXTAUTH_SECRET) throw new Error("Please set NEXTAUTH_SECRET");
-
-if (!process.env.NEXTAUTH_URL) throw new Error("Please set NEXTAUTH_URL");
 
 module.exports = withTM({
   reactStrictMode: false,
