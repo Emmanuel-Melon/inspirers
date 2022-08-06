@@ -1,8 +1,8 @@
-// require("dotenv").config({ path: "../../.env" });
+require("dotenv").config({ path: "../../.env" });
 
 const withTM = require("next-transpile-modules")([
   "ui",
-  "prisma"
+  "@inspirers/prisma"
 ]);
 
 

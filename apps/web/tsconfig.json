@@ -5,7 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@prisma/client/*": ["@inspirers/prisma/client/*"]
+      "@prisma/client/*": ["inspirers/prisma/client/*"]
     }
   }
 }

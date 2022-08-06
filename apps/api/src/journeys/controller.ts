@@ -1,4 +1,4 @@
-import prisma from "prisma";
+import prisma from "@inspirers/prisma";
 
 export const addBlueprint = async (blueprint) => {
   return prisma.journeyBluePrint.create({
@@ -58,12 +58,7 @@ export const getJourneyById = async (journeyId) => {
   return prisma.journey.findUnique({
     where: {
       id: journeyId,
-    },
-    include: {
-      user: true,
-      goals: true,
-      interests: true,
-    },
+    }
   });
 };
 

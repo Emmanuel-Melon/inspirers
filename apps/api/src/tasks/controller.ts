@@ -1,4 +1,4 @@
-import prisma from "prisma";
+import prisma from "@inspirers/prisma";
 import { TaskObject } from "types/Task";
 
 export const addTask = async (task) => {

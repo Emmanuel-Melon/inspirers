@@ -14,7 +14,7 @@ export default function Index(props) {
   // When rendering client side don't display anything until loading is complete
   return (
     <Flex direction="column" gap={4} my="8">
-      <JourneyOverviewCard user={props.user}/>
+      <JourneyOverviewCard user={{}}/>
       <Flex>
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />
@@ -29,7 +29,8 @@ export default function Index(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+/**
+ * export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(
     context.req,
     context.res,
@@ -49,3 +50,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
+ */
