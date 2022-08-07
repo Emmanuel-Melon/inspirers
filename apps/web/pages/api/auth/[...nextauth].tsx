@@ -11,9 +11,13 @@ const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
   adapter: inspirersAdapter,
   providers: [
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID || "",
+      clientSecret: process.env.FACEBOOK_SECRET || "",
+    }),
     GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID || "",
@@ -27,7 +31,7 @@ export const authOptions = {
     // signOut: "/auth/signout", // Displays form with sign out button
     // error: "/auth/error", // Error code passed in query string as ?error=
     // verifyRequest: "/auth/verify-request", // Used for check email page
-    // newUser: "/auth/new", // If set, new users will be directed here on first sign in
+    newUser: "/auth/new", // If set, new users will be directed here on first sign in
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {

@@ -18,9 +18,6 @@ export default function InspirersCustomAdapter(prismaClient: PrismaClient) {
       providerAccountId: Account["providerAccountId"];
       provider: User["identityProvider"];
     }) {
-      /// console.log('hello!');
-      // console.log(providerAccountId);
-      // console.log(provider);
       let _account;
       const account = await prismaClient.account.findUnique({
         where: {
@@ -30,19 +27,8 @@ export default function InspirersCustomAdapter(prismaClient: PrismaClient) {
           user: true,
         },
       });
-
-      console.log('lawd');
       const provider = provider_providerAccountId?.provider.toUpperCase() as IdentityProvider;
       const obtainProvider = identityProviderNameMap[provider].toUpperCase() as IdentityProvider;
-      /**
-       * 
-       * 
-
-      // @ts-ignore
-      
-
-      
-       */
       const user = await prismaClient.user.findFirst({
         where: {
           identityProviderId: provider_providerAccountId?.providerAccountId,
@@ -64,20 +50,6 @@ export default function InspirersCustomAdapter(prismaClient: PrismaClient) {
       return;
     },
     async createSession(data: Prisma.SessionCreateInput) {
-      /**
-         * const res = await prismaClient.session.create({ sessionToken, userId, expires });
-
-        console.log(sessionToken);
-        console.log(userId);
-        console.log(expires);
-
-        console.log('got response');
-        console.log(res);
-         */
-
-      // console.log(prismaClient);
-
-      console.log(data);
       return prismaClient.session.create({ data });
     },
     async getSessionAndUser(sessionToken: string) {

@@ -49,11 +49,10 @@ export const Insights: FC<InsightsProps> = ({ insights = [] }) => {
         </Heading>
         <FiMoreVertical />
       </Flex>
-      <Flex justifyContent="space-between">
-        {insights &&
-          insights.map((insight) => (
-            <InsightCard insight={insight} key={insight.id} />
-          ))}
+      <Flex justifyContent="space-between" gap={4}>
+        <InsightCard insight={{}} />
+        <InsightCard insight={{}} />
+        <InsightCard insight={{}} />
       </Flex>
     </Flex>
   );

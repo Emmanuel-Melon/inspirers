@@ -12,25 +12,29 @@ import { useEffect } from "react";
 
 export default function Index(props) {
   // When rendering client side don't display anything until loading is complete
+  const router = useRouter();
+
+  function getStarted() {
+    router.push("/journeys/new");
+  }
   return (
     <Flex direction="column" gap={4} my="8">
-      <JourneyOverviewCard user={{}}/>
+      <JourneyOverviewCard user={props.user} getStarted={getStarted}/>
       <Flex>
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />
           <Timeline events={[]} />
         </Flex>
         <Flex width="40%" direction="column" gap={4}>
-          <Milestones milestones={[]} />
-          <Activities activities={[]} />
+          <Milestones milestones={[]} getStarted={getStarted} />
+          <Activities activities={[]} getStarted={getStarted} />
         </Flex>
       </Flex>
     </Flex>
   );
 }
 
-/**
- * export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(
     context.req,
     context.res,
@@ -50,4 +54,3 @@ export default function Index(props) {
     },
   };
 }
- */
