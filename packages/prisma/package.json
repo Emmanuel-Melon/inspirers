@@ -5,6 +5,9 @@
   "types": "index.d.ts",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "postinstall": "prisma generate"
+  },
   "dependencies": {
     "@prisma/client": "^4.1.1",
     "dotenv-cli": "^6.0.0"
