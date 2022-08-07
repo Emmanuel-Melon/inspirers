@@ -22,7 +22,7 @@ import {
   FiMessageSquare,
 } from "react-icons/fi";
 import { Button } from "ui";
-import { UserProfileCard } from "../../user/components/UserProfileCard";
+import { UserProfileCard } from "../../pages/user/components/UserProfileCard";
 import { ResourcesOverview } from "./ResourcesOverview";
 import { JourneyOutline } from "./JourneyOutline";
 

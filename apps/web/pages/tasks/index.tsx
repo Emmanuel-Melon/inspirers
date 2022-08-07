@@ -13,9 +13,9 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { TaskList } from "./components/TaskList";
-import { TaskViewMenu } from "./components/TaskViewMenu";
-import { TaskBoard } from "./components/TaskBoard";
+import { TaskList } from "../../Tasks/components/TaskList";
+import { TaskViewMenu } from "../../Tasks/components/TaskViewMenu";
+import { TaskBoard } from "../../Tasks/components/TaskBoard";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Button } from "ui";

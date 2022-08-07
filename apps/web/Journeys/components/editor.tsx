@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Text, Stack, Input } from "@chakra-ui/react"
 import { v4 as uuidv4 } from 'uuid';
 import { Button, EditableComponent } from "ui";
 import { FiPlus } from "react-icons/fi";
-import { AddTask } from "../../tasks/components/AddTask";
+import { AddTask } from "../../Tasks/components/AddTask";
 import { CustomModal } from "ui";
 
 const initialBlock = { id: uuidv4(), html: "", tag: "p" };

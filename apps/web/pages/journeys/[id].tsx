@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Flex, Stack, Text } from "@chakra-ui/react";
-import { JourneyOverviewCard } from "./components/JourneyOverviewCard";
-import { OutlineOverview } from "./Overview/OutlineView";
+import { JourneyOverviewCard } from "../../Journeys/components/JourneyOverviewCard";
+import { OutlineOverview } from "../../Journeys/Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
-import { PersonalJourney } from "./components/personal";
-import { JourneyEditor } from "./components/editor";
+import { PersonalJourney } from "../../Journeys/components/personal";
+import { JourneyEditor } from "../../Journeys/components/editor";
 
 
 

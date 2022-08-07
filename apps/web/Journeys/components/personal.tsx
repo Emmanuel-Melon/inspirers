@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
-import { TaskList } from "pages/tasks/components/TaskList";
-import { AddTask } from "pages/tasks/components/AddTask";
+import { TaskList } from "Tasks/components/TaskList";
+import { AddTask } from "Tasks/components/AddTask";
 import { Button } from "ui";
 import { client } from "utils/client";
 import { CustomModal } from "ui";

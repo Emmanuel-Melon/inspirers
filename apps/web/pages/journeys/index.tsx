@@ -1,12 +1,12 @@
 import { Flex, Text, Heading, VStack } from "@chakra-ui/react";
-import { JourneyCard } from "./components/JourneyCard";
+import { JourneyCard } from "../../Journeys/components/JourneyCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
-import { JourneyBluePrint } from "./components/JourneyBluePrint";
+import { JourneyBluePrint } from "../../Journeys/components/JourneyBluePrint";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { InstructorCard } from "./components/InstructorCard";
-import { MyJourneys } from "./components/MyJourneys";
+import { InstructorCard } from "../../Journeys/components/InstructorCard";
+import { MyJourneys } from "../../Journeys/components/MyJourneys";
 
 export default function Index(props) {
 
