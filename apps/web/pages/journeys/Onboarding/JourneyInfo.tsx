@@ -226,8 +226,9 @@ export const SecondStep = ({ user }) => {
         .post("/journeys", {
           blueprint: context.blueprint,
           title: journey.title,
-          userId: "cl5ubrlsj0911srbtwhibuim9",
+          userId: user.id,
           journeyType: journey.journeyType,
+          active: true
         })
         .then((res) => {
           setLoading(false);

@@ -41,13 +41,7 @@ import {
   FiClock,
 } from "react-icons/fi";
 
-const colors = {
-  Progress: "brand.secondary",
-  Blocked: "brand.danger",
-  Review: "blue",
-  Pending: "brand.accent",
-  Approved: "brand.success",
-};
+import { buttonColors } from "utils/ui";
 
 export const TaskDetailView = ({ item }) => {
   const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
@@ -105,7 +99,7 @@ export const TaskDetailView = ({ item }) => {
           </Flex>
           <Tag
             width="fit-content"
-            bg={colors[item.status]}
+            bg={buttonColors[item.status]}
             color="brand.white"
             size="sm"
             borderRadius="1rem"

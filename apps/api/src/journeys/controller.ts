@@ -54,10 +54,16 @@ export const getUserJourneys = async (userId) => {
   });
 };
 
-export const getJourneyById = async (journeyId) => {
+export const getJourneyById = async (journeyId: string) => {
   return prisma.journey.findUnique({
     where: {
       id: journeyId,
+    },
+    include: {
+      tasks: true,
+      user: true,
+      goals: true,
+      interests: true
     }
   });
 };

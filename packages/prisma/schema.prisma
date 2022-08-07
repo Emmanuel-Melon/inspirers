@@ -62,25 +62,34 @@ model Field {
 }
 
 model Goal {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
   achieved  Boolean
   journeyId String?
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
 }
 
 model Interest {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   journeyId String?
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
 }
 
 model Journey {
-  id          String  @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String?
   description String?
   userId      String
   bluePrintId String?
   journeyType String?
   fieldId     String?
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interests   Interest[]
+  goals       Goal[]
+  tasks       Task[]
+  createdAt   DateTime?  @default(now())
+  active      Boolean    @default(false)
+  completed   Boolean    @default(false)
 }
 
 model JourneyBluePrint {
@@ -123,14 +132,25 @@ model Session {
   user         User     @relation(fields: [userId], references: [id])
 }
 
+model TaskLabel {
+  id     String  @id @default(cuid())
+  title  String
+  color  String
+  Task   Task?   @relation(fields: [taskId], references: [id])
+  taskId String?
+}
+
 model Task {
-  id          String   @id @default(cuid())
+  id          String      @id @default(cuid())
   title       String
-  userId      Int
+  userId      String
   description String
-  completed   Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  completed   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
   journeyId   String?
+  Journey     Journey?    @relation(fields: [journeyId], references: [id])
+  progress    Int
+  labels      TaskLabel[]
 }
 
 enum IdentityProvider {
@@ -157,6 +177,7 @@ model User {
   Session            Session[]
   identityProvider   IdentityProvider @default(GITHUB)
   identityProviderId String?
+  Journey            Journey[]
 }
 
 model VerificationToken {

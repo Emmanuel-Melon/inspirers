@@ -16,7 +16,8 @@ import {
   FiLock
 } from "react-icons/fi";
 import { VStack } from "@chakra-ui/react";
-import { Button } from "ui";
+import { Button, UnAuthorized } from "ui";
+
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -252,15 +253,6 @@ export default function Layout({ children }: LayoutProps) {
   }
   
   return (
-    <Box p="8">
-      <Stack gap={2} width="400px" p="8" bg="brand.white" borderRadius="1rem">
-      <Heading size="md">Not signed in</Heading>
-      <Button 
-        onClick={() => signIn()}
-        size="sm"
-        icon={<FiLock /> }
-      >Sign in</Button>
-      </Stack>
-    </Box>
+    <UnAuthorized onClick={signIn}/>
   )
 }

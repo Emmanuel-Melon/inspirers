@@ -6,9 +6,9 @@ import { useFetch } from "../../hooks/useSwr";
 import { JourneyBluePrint } from "./components/JourneyBluePrint";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { InstructorCard } from "./components/InstructorCard";
+import { MyJourneys } from "./components/MyJourneys";
 
 export default function Index(props) {
-  const { data, isLoading, isError } = useFetch("/journeys/blueprints");
 
   return (
     <Flex
@@ -81,6 +81,18 @@ export default function Index(props) {
         </>
       </VStack>
       <VStack width="70%" gap={4}>
+      <VStack alignItems="flex-start" width="100%">
+          <Flex justifyContent="space-between" width="100%" alignItems="center">
+            <Heading size="md" color="brand.primary">
+              My Journeys
+            </Heading>
+            <Flex gap={2} color="brand.primary">
+              <FiArrowLeftCircle size="1.5rem" />
+              <FiArrowRightCircle size="1.5rem" />
+            </Flex>
+          </Flex>
+          <MyJourneys />
+        </VStack>
         <VStack alignItems="flex-start" width="100%">
           <Flex justifyContent="space-between" width="100%" alignItems="center">
             <Heading size="md" color="brand.primary">
@@ -90,11 +102,6 @@ export default function Index(props) {
               <FiArrowLeftCircle size="1.5rem" />
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
-          </Flex>
-          <Flex gap={8} flexWrap="wrap">
-            {data?.data?.map((bluePrint) => (
-              <JourneyBluePrint bluePrint={bluePrint} key={bluePrint.id} />
-            ))}
           </Flex>
         </VStack>
         <VStack alignItems="flex-start" width="100%">
@@ -107,11 +114,6 @@ export default function Index(props) {
               <FiArrowLeftCircle size="1.5rem" />
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
-          </Flex>
-          <Flex gap={8} overflowX="scroll">
-            {data?.data?.map((instructor) => (
-              <InstructorCard instructor={instructor} key={instructor.id} />
-            ))}
           </Flex>
         </VStack>
       </VStack>

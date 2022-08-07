@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Stack, Text } from "@chakra-ui/react";
 import { JourneyOverviewCard } from "./components/JourneyOverviewCard";
 import { OutlineOverview } from "./Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
@@ -9,49 +9,7 @@ import { useFetch } from "../../hooks/useSwr";
 import { PersonalJourney } from "./components/personal";
 import { JourneyEditor } from "./components/editor";
 
-const journey = {
-  id: "cl5o8pq8t0070fgbt5eqar9ba",
-  title: "Getting Into Harvard",
-  chapters: [
-    {
-      id: "cl5o8pq8t0070fgbt5eqar9ba",
-      title: "Introduction",
-      subChapters: [
-        {
-          id: "cl5o8pq8t0070fgbt5eqar9bb",
-          title: "Goals",
-        },
-        {
-          id: "cl5o8pq8t0070fgbt5eqar9bc",
-          title: "Resources and Companions",
-        },
-      ],
-    },
-    {
-      id: "cl5o8pq8t0070fgbt5eqar9bb",
-      title: "Writing an Essay",
-      subChapters: [],
-    },
-    {
-      id: "cl5o8pq8t0070fgbt5eqar9bc",
-      title: "SAT Preparation",
-      subChapters: [
-        {
-          id: "cl5o8pq8t0070fgbt5eqar9bk",
-          title: "Algebra 1",
-        },
-        {
-          id: "cl5o8pq8t0070fgbt5eqar9bl",
-          title: "English",
-        },
-        {
-          id: "cl5o8pq8t0070fgbt5eqar9bm",
-          title: "AP Physics",
-        },
-      ],
-    },
-  ],
-};
+
 
 export default function Journey(props) {
   const router = useRouter();
@@ -64,16 +22,21 @@ export default function Journey(props) {
   }
 
   if (isError) {
-    return <p>Done</p>;
+    return <Text>An error has occured</Text>;
   }
 
-  if (data?.data?.user?.id === "cl5ubrlsj0911srbtwhibuim9") {
-    return <PersonalJourney journey={data?.data} />;
+  if (data?.data?.userId === props.user?.id) {
+    return (
+      <Stack gap={4} width="100%">
+        <JourneyOverviewCard user={props.user} journey={data?.data} />
+        <PersonalJourney journey={data?.data} />
+      </Stack>
+    )
   }
 
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
-      <Flex>{started ? <JourneyOverviewCard /> : null}</Flex>
+      <JourneyOverviewCard user={props.user} journey={data?.data} />
 
       {!isLoading ? (
         <JourneyEditor journey={data?.data} />
@@ -84,33 +47,20 @@ export default function Journey(props) {
   );
 }
 
-export async function getStaticPaths({ params }) {
-  console.log(params);
-  return { paths: [], fallback: true };
-}
 
-export async function getStaticProps(context) {
-  console.log(context);
-  // read the posts dir from the fs
-  return { props: { journey: {} } };
-}
-
-/**
- * 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
-  const { id, email, name, image, bio } = session?.user || {};
-
+  const { session, user } = await unstable_getServerSession(context.req, context.res, authOptions)
+  const { email, name, image, bio } = session?.user || {};
+  const { id } = user || {};
   return {
-      props: {
-          user: {
-              id: id || null,
-              email: email || null,
-              name: name || null,
-              bio: bio || null,
-              image: image || null
-          }
-      },
+    props: {
+      user: {
+        id: id || null,
+        email: email || null,
+        name: name || null,
+        bio: bio || null,
+        image: image || null
+      }
+    },
   }
 }
- */

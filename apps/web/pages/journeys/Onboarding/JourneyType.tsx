@@ -49,7 +49,7 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         <Heading color="brand.primary">
           {context.currentStep.id} - {context.currentStep.title}
         </Heading>
-        <Text>Start your journey!</Text>
+        <Text>Plan your own personal and professional development. Easily track your progress towards long-term goals.</Text>
         <Flex
           alignItems="center"
           bg="brand.white"
@@ -75,16 +75,15 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         <Heading size="sm" color="brand.primary">
           Using a template
         </Heading>
-        <Text>Browse community created journeys.</Text>
+        <Text>Immerse yourself in the world of resources and transformation built by the community.</Text>
         <Heading size="sm" color="brand.primary">
           Blank journey
         </Heading>
         <Text>
-          Use this if you're experienced and have a pretty good understanding of
-          what you'd like to accomplish.
+          Create your own systems to continue to build momentum and stay focused on the things that matter most.
         </Text>
 
-        <Button onClick={() => {}} icon={<FiInfo />}>
+        <Button onClick={() => { }} icon={<FiInfo />}>
           Learn More
         </Button>
       </Flex>

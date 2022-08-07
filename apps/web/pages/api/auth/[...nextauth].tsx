@@ -42,6 +42,14 @@ export const authOptions = {
         email,
       };
     },
+    async session ({ session, user, token}) {
+
+      // console.log(user);
+      return {
+        session,
+        user
+      }
+    }
     // async redirect(url: string, baseUrl: string) { },
     // async session(session, token) {
     // const encodedToken = jwt.sign(token, process.env.SECRET, { algorithm: 'HS256'});
