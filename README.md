@@ -1,5 +1,6 @@
 # Inspirers
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2590dcd2-77a9-4b8a-ab9c-c59fa49f9a8a/deploy-status)](https://app.netlify.com/sites/inspirers/deploys)
 Achieve your dreams and inspire others
 
 ## Built with
