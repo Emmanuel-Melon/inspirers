@@ -15,7 +15,7 @@ import {
   useTab,
   Button,
 } from "@chakra-ui/react";
-import { TaskList } from "../../../Tasks/components/TaskList";
+import { TaskList } from "../../Tasks/components/TaskList";
 import { ListUsers } from "./ListUsers";
 import { EmptyState } from "./EmptyState";
 import { EmptyStateImages } from "./EmptyState";
