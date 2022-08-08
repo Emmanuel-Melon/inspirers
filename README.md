@@ -143,3 +143,5 @@ Inside the package.json file we have;
 ## App capabilities
 
 A user will be able to create journeys made up of specific achievable tasks and set up a routine they can follow, this will enable the user to reach their goals, change their habits and master the art of success. And thus ultimately create a better version of themselves.
+
+Are you ready to find out what you're truly capable of? The journey begins here , at Inspirers.
