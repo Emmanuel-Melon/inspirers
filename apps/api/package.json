@@ -4,11 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/app.ts",
+    "api": "nodemon src/app.ts",
+    "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
     "pscale-connect": "pscale connect biti dev --port 3309"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
+    "concurrently": "^7.3.0",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "nodemon": "^2.0.18",

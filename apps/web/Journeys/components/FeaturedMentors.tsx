@@ -3,7 +3,7 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import { JourneyBluePrint } from "./JourneyBluePrint";
 
 
-export const MyJourneys = () => {
+export const FeaturedMentors = () => {
     const { data, isLoading, isError } = useFetch("/journeys/cl6ifq3t90010llbt92ibevlf/list");
 
     if (isError) {

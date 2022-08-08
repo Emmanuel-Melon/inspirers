@@ -7,6 +7,8 @@ import { JourneyBluePrint } from "../../Journeys/components/JourneyBluePrint";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { InstructorCard } from "../../Journeys/components/InstructorCard";
 import { MyJourneys } from "../../Journeys/components/MyJourneys";
+import { FeaturedMentors } from "Journeys/components/FeaturedMentors";
+import { RecommendJourneys } from "Journeys/components/RecommendedJourneys";
 
 export default function Index(props) {
 
@@ -103,6 +105,7 @@ export default function Index(props) {
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
           </Flex>
+          <RecommendJourneys />
         </VStack>
         <VStack alignItems="flex-start" width="100%">
           <Flex justifyContent="space-between" alignItems="center" width="100%">
@@ -115,6 +118,7 @@ export default function Index(props) {
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
           </Flex>
+          <FeaturedMentors />
         </VStack>
       </VStack>
     </Flex>
@@ -127,8 +131,6 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
-
-  console.log(session);
   const { id, email, name, image, bio } = session?.user || {};
 
   return {

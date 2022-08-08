@@ -29,68 +29,6 @@ import {
   FiCompass,
 } from "react-icons/fi";
 
-const tasks = [
-  {
-    id: 14,
-    title: "Throw Some D's",
-    userId: 1,
-    description: "Rich boy selling crack",
-    completed: false,
-    createdAt: "2022-07-05T09:40:16.053Z",
-  },
-  {
-    id: 15,
-    title: "Out Here Grinding",
-    userId: 1,
-    description: "Making things look great",
-    completed: false,
-    createdAt: "2022-07-05T09:42:40.739Z",
-  },
-  {
-    id: 16,
-    title: "Hustler's Ambition",
-    userId: 1,
-    description: "Out here on a mission",
-    completed: false,
-    createdAt: "2022-07-05T09:43:32.044Z",
-  },
-  {
-    id: 17,
-    title: "Pimpin",
-    userId: 1,
-    description: "Chilling and smoking here",
-    completed: false,
-    createdAt: "2022-07-05T09:44:21.664Z",
-  },
-];
-
-const users = [
-  {
-    id: 14,
-    name: "Throw Some D's",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-  },
-  {
-    id: 15,
-    name: "Out Here Grinding",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-  },
-  {
-    id: 16,
-    name: "Hustler's Ambition",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-  },
-  {
-    id: 17,
-    name: "Pimpin",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-  },
-];
-
 export const ProfileSectionsTab = () => {
   const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
     // 1. Reuse the `useTab` hook
@@ -117,6 +55,10 @@ export const ProfileSectionsTab = () => {
       </Button>
     );
   });
+
+  const getStarted = () => {
+
+  }
   return (
     <Flex
       direction="column"
@@ -147,6 +89,7 @@ export const ProfileSectionsTab = () => {
               panelTitle="Journeys"
               url={EmptyStateImages.JourneyEmptyStateImage}
               input={<Text>Success</Text>}
+              getStarted={getStarted}
             />
           </TabPanel>
           <TabPanel p="none">
@@ -154,7 +97,7 @@ export const ProfileSectionsTab = () => {
               status="off"
               panelTitle="Activity"
               url={EmptyStateImages.ActivityEmptyStateImage}
-              input={<ListUsers users={users} />}
+              input={<ListUsers users={[]} />}
             />
           </TabPanel>
           <TabPanel p="none">
@@ -162,7 +105,7 @@ export const ProfileSectionsTab = () => {
               status="off"
               panelTitle="Mentees"
               url={EmptyStateImages.MenteesEmptyStateImage}
-              input={<ListUsers users={users} />}
+              input={<ListUsers users={[]} />}
             />
           </TabPanel>
           <TabPanel p="none">
@@ -170,7 +113,7 @@ export const ProfileSectionsTab = () => {
               status="off"
               panelTitle="Tasks"
               url={EmptyStateImages.TasksEmptyStateImage}
-              input={<TaskList tasks={tasks} />}
+              input={<TaskList tasks={[]} />}
             />
           </TabPanel>
           <TabPanel p="none">
@@ -178,7 +121,7 @@ export const ProfileSectionsTab = () => {
               status="off"
               panelTitle="Backpacks"
               url={EmptyStateImages.BackpacksEmptyStateImage}
-              input={<TaskList tasks={tasks} />}
+              input={<TaskList tasks={[]} />}
             />
           </TabPanel>
         </TabPanels>

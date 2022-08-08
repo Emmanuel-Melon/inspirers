@@ -69,9 +69,11 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ journey, user }) 
             <Text my="4">It's time for you to take the leap. What is your ultimate goal?</Text>
           </Box>
           <Flex gap={4}>
-            <Button onClick={deleteJourney} icon={<FiTrash />} bg="brand.danger">
+            {
+              journey?.active && journey.usrId === user.id ? <Button onClick={deleteJourney} icon={<FiTrash />} bg="brand.danger">
               Delete Journey
-            </Button>
+            </Button> : null
+            }
             <Button onClick={getStarted} icon={<FiTruck />}>
               Get Started
             </Button>

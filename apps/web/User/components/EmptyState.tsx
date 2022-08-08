@@ -38,12 +38,22 @@ export const EmptyState = (props) => {
     <VStack gap="8">
       <Heading>No {props.panelTitle} yet.</Heading>
       <Image alt="Image not loaded." src={props.url} />
+      <Flex gap={4} alignItems="center">
       <Link>
-        <Button color={"brand.white"} bg={"brand.primary"}>
-          {" "}
-          Click Me!{" "}
+        <Button 
+          color={"brand.white"} 
+          bg={"brand.primary"}
+          onClick={props.getStarted}
+        >
+          Get Started
         </Button>
       </Link>
+      <Text>Or</Text>
+      <Link>
+        <Button color={"brand.primary"} bg={"brand.white"}>
+          Explpore
+        </Button></Link>
+      </Flex>
     </VStack>
   );
 };
