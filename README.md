@@ -16,19 +16,19 @@ Achieve your dreams and inspire others
   - [Frontend Technologies](#frontend-technologies)
   - [Backend Technologies](#backend-technologies)
   - [Installation](#installation)
-    - [Setup](#setup)
-    - [Root](#root)
-      - [Apps](#apps)
+      - [Setup](#setup)
+  - [Root](#root)
+    - [Apps](#apps)
         - [Api](#api)
         - [Docs](#docs)
         - [Web](#web)
-      - [Packages](#packages)
+    - [Packages](#packages)
         - [prisma](#prisma)
         - [tsconfig](#tsconfig)
         - [Types](#types)
         - [UI](#ui)
-      - [Contribution.md](#contributionmd)
-      - [Package.json](#packagejson)
+    - [Contribution.md](#contributionmd)
+    - [Package.json](#packagejson)
   - [App capabilities](#app-capabilities)
 
 ### Things to learn
@@ -84,14 +84,14 @@ Before we install the project, Here is what you need to be able to run Inspirers
     nvm use && yarn
 ```
 
-### Root
+## Root
 
 On the root of the project there are two main folders namely;
 
 - Apps
 - Packages
 
-#### Apps
+### Apps
 
 Inside the app folder there are mainly three folders namely;
 
@@ -111,7 +111,7 @@ This contains the documentation of the project.
 
 This contains the main project.
 
-#### Packages
+### Packages
 
 Contains common packages used throughout the project and much more. Some of the folders inside packages include;
 
@@ -131,11 +131,11 @@ Common types used throughout the project
 
 Common UI components
 
-#### Contribution.md
+### Contribution.md
 
 Checkout this document to see the various ways how you can contribute to the project.
 
-#### Package.json
+### Package.json
 
 Inside the package.json file we have;
 
