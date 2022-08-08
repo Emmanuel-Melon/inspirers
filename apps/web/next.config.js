@@ -2,14 +2,9 @@ require("dotenv").config({ path: "../../.env" });
 
 const withTM = require("next-transpile-modules")([
   "ui",
-  "prisma",
   "@inspirers/prisma"
 ]);
 
-
-if (!process.env.NEXTAUTH_SECRET) throw new Error("Please set NEXTAUTH_SECRET");
-
-if (!process.env.NEXTAUTH_URL) throw new Error("Please set NEXTAUTH_URL");
 
 module.exports = withTM({
   reactStrictMode: false,
@@ -28,16 +23,5 @@ module.exports = withTM({
   },
   images: {
     domains: ["cloudinary.com/", "res.cloudinary.com"],
-  },
-  async redirects () {
-    const redirects = [
-      {
-        source: "/settings",
-        destination: "/settings/profile",
-        permanent: true,
-      }
-    ];
-
-    return redirects;
   }
 });

@@ -12,7 +12,7 @@ const tasksRouter = Router();
 tasksRouter.get(
   "/:taskId",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(getTaskById(parseInt(req.params.taskId)))
+    return Promise.resolve(getTaskById(req.params.taskId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
@@ -21,7 +21,7 @@ tasksRouter.get(
 tasksRouter.get(
   "/user/:userId",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(getUserTasks(parseInt(req.params.taskId)))
+    return Promise.resolve(getUserTasks(req.params.taskId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
@@ -30,7 +30,7 @@ tasksRouter.get(
 tasksRouter.delete(
   "/:taskId",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(removeTask(parseInt(req.params.taskId)))
+    return Promise.resolve(removeTask(req.params.taskId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
@@ -45,7 +45,7 @@ tasksRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
 tasksRouter.put(
   "/:taskId",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(modifyTask(parseInt(req.params.taskId), req.body))
+    return Promise.resolve(modifyTask(req.params.taskId, req.body))
       .then((data) => res.json({ data }))
       .catch(next);
   }

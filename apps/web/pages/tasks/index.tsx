@@ -19,6 +19,8 @@ import { TaskBoard } from "../../Tasks/components/TaskBoard";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Button } from "ui";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function Tasks(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -115,10 +117,20 @@ const data = [
   },
 ];
 
-export async function getServerSideProps() {
-  const res = await fetch(
-    `http://localhost:5000/api/tasks/user/cl5imusb0005800bt26o62b2m`
-  );
-  const data = await res.json();
-  return { props: { tasks: data } };
+export async function getServerSideProps(context) {
+  const { session, user } = await unstable_getServerSession(context.req, context.res, authOptions)
+  const { email, name, image, bio } = session?.user || {};
+  const { id } = user || {};
+
+  return {
+    props: {
+      user: {
+        id: id || null,
+        email: email || null,
+        name: name || null,
+        bio: bio || null,
+        image: image || null,
+      },
+    },
+  };
 }

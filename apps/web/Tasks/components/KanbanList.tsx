@@ -25,7 +25,7 @@ import {
   EditableTextarea,
   EditablePreview,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { DropWrapper } from "../../dnd";
 import { Types } from "./types";
 import { KanbanListItem } from "./KanbanListItem";
@@ -42,9 +42,13 @@ import {
 } from "react-icons/fi";
 import { Button } from "ui";
 import { CustomModal } from "ui";
+import { client } from "utils/client";
+import { JourneyOnboardingContext } from "providers/JourneyOnboardingProvider";
 
 export const KanbanList = ({ list }) => {
+  const context = useContext(JourneyOnboardingContext);
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // state should live on board, shared by all lists
   function openModal() {
     setShow(true);
@@ -72,6 +76,20 @@ export const KanbanList = ({ list }) => {
       return [...newItems];
     });
   };
+
+  const addTask = (task) => {
+    setIsLoading(true);
+    client.post("/tasks", {
+      ...task
+    })
+      .then(res => {
+        setIsLoading(true);
+        closeModal()
+      }).catch(err => {
+        setIsLoading(true);
+        closeModal();
+      })
+  }
 
   return (
     <>

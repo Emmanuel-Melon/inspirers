@@ -1,16 +1,25 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from '@prisma/client'
 
 declare global {
+  // allow global `var` declarations
   // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
+  var prisma: PrismaClient | undefined
 }
 
 const prismaOptions: Prisma.PrismaClientOptions = {};
 
-if (!!process.env.NEXT_PUBLIC_DEBUG)
-  prismaOptions.log = ["query", "error", "warn"];
-
 export const prisma = globalThis.prisma || new PrismaClient(prismaOptions);
+
+/**
+ * const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ['query'],
+  })
+
+if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+
+ */
 
 export const customPrisma = (options: Prisma.PrismaClientOptions) =>
   new PrismaClient({ ...prismaOptions, ...options });
@@ -18,5 +27,7 @@ export const customPrisma = (options: Prisma.PrismaClientOptions) =>
 if (process.env.NODE_ENV !== "production") {
   globalThis.prisma = prisma;
 }
-
 export default prisma;
+
+// I like this keyboard! It's amazing.
+

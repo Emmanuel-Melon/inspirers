@@ -9,41 +9,9 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-
-model Activity {
-  id        String   @id @default(cuid())
-  title     String
-  userId    Int
-  taskId    Int
-  createdAt DateTime @default(now())
-  Journey   Journey? @relation(fields: [journeyId], references: [id])
-  journeyId String?
-}
-
-model Task {
-  id          String   @id @default(cuid())
-  title       String
-  userId      Int
-  description String
-  completed   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  Journey     Journey? @relation(fields: [journeyId], references: [id])
-  journeyId   String?
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  image         String?
-  email         String    @unique
-  createdAt     DateTime? @default(now())
-  bio           String?
-  password      String?
-  emailVerified Boolean?  @default(false)
-  login         String?
-  Account       Account[]
-  Session       Session[]
-  Journey       Journey[]
+model AcademicJourney {
+  id    String @id @default(cuid())
+  title String
 }
 
 model Account {
@@ -64,68 +32,13 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
-model Journey {
-  id               String            @id @default(cuid())
-  title            String?
-  description      String?
-  userId           String
-  bluePrintId      String?
-  goals            Goal[]
-  interests        Interest[]
-  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  JourneyBluePrint JourneyBluePrint? @relation(fields: [bluePrintId], references: [id], onDelete: Cascade)
-  journeyType      String?
-  field            Field             @relation(fields: [fieldId], references: [id])
-  fieldId          String
-  milestones       MileStone[]
-  activities       Activity[]
-  tasks            Task[]
-}
-
-model Goal {
+model Activity {
   id        String   @id @default(cuid())
   title     String
-  achieved  Boolean
-  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  userId    Int
+  taskId    Int
+  createdAt DateTime @default(now())
   journeyId String?
-}
-
-model Field {
-  id      String    @id @default(cuid())
-  title   String
-  Journey Journey[]
-}
-
-model Experience {
-  id    String @id @default(cuid())
-  title String
-}
-
-model JourneyPrivacy {
-  id        String @id @default(cuid())
-  userId    String
-  journeyId String
-}
-
-model AcademicJourney {
-  id    String @id @default(cuid())
-  title String
 }
 
 model BusinessJourney {
@@ -138,13 +51,49 @@ model CareerJourney {
   title String
 }
 
-model PersonalJourney {
+model Experience {
+  id    String @id
+  title String
+}
+
+model Field {
   id    String @id @default(cuid())
   title String
 }
 
+model Goal {
+  id        String   @id @default(cuid())
+  title     String
+  achieved  Boolean
+  journeyId String?
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+}
+
+model Interest {
+  id        String   @id @default(cuid())
+  journeyId String?
+  Journey   Journey? @relation(fields: [journeyId], references: [id])
+}
+
+model Journey {
+  id          String     @id @default(cuid())
+  title       String?
+  description String?
+  userId      String
+  bluePrintId String?
+  journeyType String?
+  fieldId     String?
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interests   Interest[]
+  goals       Goal[]
+  tasks       Task[]
+  createdAt   DateTime?  @default(now())
+  active      Boolean    @default(false)
+  completed   Boolean    @default(false)
+}
+
 model JourneyBluePrint {
-  id          String    @id @default(cuid())
+  id          String  @id @default(cuid())
   userId      String?
   type        String?
   templateId  String?
@@ -157,17 +106,84 @@ model JourneyBluePrint {
   createdAt   String?
   updateAt    String?
   image       String?
-  Journey     Journey[]
 }
 
-model Interest {
-  id        String   @id @default(cuid())
-  Journey   Journey? @relation(fields: [journeyId], references: [id])
-  journeyId String?
+model JourneyPrivacy {
+  id        String @id @default(cuid())
+  userId    String
+  journeyId String
 }
 
 model MileStone {
-  id        String   @id @default(cuid())
-  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  id        String  @id @default(cuid())
   journeyId String?
+}
+
+model PersonalJourney {
+  id    String @id @default(cuid())
+  title String
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model TaskLabel {
+  id     String  @id @default(cuid())
+  title  String
+  color  String
+  Task   Task?   @relation(fields: [taskId], references: [id])
+  taskId String?
+}
+
+model Task {
+  id          String      @id @default(cuid())
+  title       String
+  userId      String
+  description String
+  completed   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  journeyId   String?
+  Journey     Journey?    @relation(fields: [journeyId], references: [id])
+  progress    Int
+  labels      TaskLabel[]
+}
+
+enum IdentityProvider {
+  GOOGLE
+  GITHUB
+}
+
+enum UserPermissionRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id                 String           @id @default(cuid())
+  name               String?
+  image              String?
+  email              String           @unique
+  createdAt          DateTime?        @default(now())
+  bio                String?
+  password           String?
+  emailVerified      Boolean?         @default(false)
+  login              String?
+  Account            Account[]
+  Session            Session[]
+  identityProvider   IdentityProvider @default(GITHUB)
+  identityProviderId String?
+  Journey            Journey[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

@@ -24,10 +24,11 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "md",
+  size = "lg",
   width = "100%",
   variant,
   fullWidth,
+  border
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>
@@ -41,16 +42,12 @@ export const Button: FC<ButtonProps> = ({
         width={width}
         size={size}
         variant={variant}
-        border="none"
+        border={border || "none"}
         disabled={disabled}
         bg={bg || "brand.primary"}
         color={color || "brand.white"}
-        borderRadius="1rem"
         cursor="pointer"
         leftIcon={icon}
-        _hover={{
-          background: "brand.primaryHover",
-        }}
         _focus={{
           outline: "none",
           boxShadow: "none",

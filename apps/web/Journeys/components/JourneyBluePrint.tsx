@@ -2,8 +2,16 @@ import { Flex, Text, Box, Avatar, Tag, Heading } from "@chakra-ui/react";
 import Image from "next/image";
 import { Button } from "ui";
 import { FiStar, FiUsers, FiMessageSquare, FiCompass } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 export const JourneyBluePrint = (props) => {
+  const router = useRouter();
+
+  console.log(props);
+
+  const handleClick = () => {
+    router.push(`/journeys/${props.bluePrint.id}`);
+  }
   return (
     <Flex
       alignItems="flex-start"
@@ -12,6 +20,7 @@ export const JourneyBluePrint = (props) => {
       color="brand.primaryText"
       borderRadius="0rem 0rem 1rem 1rem"
       cursor="pointer"
+      onClick={handleClick}
     >
       <Image
         height="150"

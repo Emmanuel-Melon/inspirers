@@ -7,11 +7,13 @@ import {
   FiCreditCard,
   FiSettings,
   FiTruck,
+  FiTrash
 } from "react-icons/fi";
 import { UserObject } from "types/User";
 import { FC } from "react";
 import { useRouter } from "next/router";
 import { NewJourney } from "../Onboarding/NewJourney";
+import { client } from "utils/client";
 
 type JourneyOverviewCard = UserObject & {
   // rest of the props
@@ -21,10 +23,10 @@ const Companion = ({ companion }) => {
   return <Avatar src={companion.avatar} />;
 };
 
-export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
+export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ journey, user }) => {
   const router = useRouter();
 
-  function inviteFriends() {}
+  function inviteFriends() { }
   function getStarted() {
     router.push("/journeys/new");
   }
@@ -39,6 +41,16 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
                             }
      */
 
+
+  const deleteJourney = () => {
+    client.delete(`/journeys/${journey.id}`)
+    .then(res => {
+      router.push("/");
+    }).
+    catch(err => {
+      alert('failed to delete');
+    })
+  }
   return (
     <>
       <Flex
@@ -48,14 +60,22 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ user }) => {
       >
         <Flex justifyContent="space-between">
           <Box>
-            <Heading color="brand.primary" size="lg" as="h1">
-              Hi, {user?.name || "Guest"}{" "}
-            </Heading>
-            <Text my="4">You haven't started any journey.</Text>
+            <Flex gap={2} alignItems="center">
+              <Avatar src={user?.image} />
+              <Heading color="brand.primary" size="lg" as="h1">
+                Hi, {user?.name || "Guest"}{" "}
+              </Heading>
+            </Flex>
+            <Text my="4">It's time for you to take the leap. What is your ultimate goal?</Text>
           </Box>
-          <Button onClick={getStarted} icon={<FiTruck />}>
-            Get Started
-          </Button>
+          <Flex gap={4}>
+            <Button onClick={deleteJourney} icon={<FiTrash />} bg="brand.danger">
+              Delete Journey
+            </Button>
+            <Button onClick={getStarted} icon={<FiTruck />}>
+              Get Started
+            </Button>
+          </Flex>
         </Flex>
         <Flex
           justifyContent="space-between"

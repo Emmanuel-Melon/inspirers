@@ -129,40 +129,6 @@ export const ThirdStepGuide = ({ guide }) => {
   );
 };
 
-const accounts = [
-  {
-    id: 1,
-    name: "Emmanuel Daniel",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["fintech", "business", "design"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 2,
-    name: "Ladu Lumori",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["documentation", "ui"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 3,
-    name: "Sandra Nadege",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["business", "communication", "poetry"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 4,
-    name: "Bernadetta",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["fintech", "communication", "design"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-];
 
 export const ThirdStep = ({ onChange }) => {
   const context = useContext(JourneyOnboardingContext);
@@ -195,7 +161,7 @@ export const ThirdStep = ({ onChange }) => {
           People you may know
         </Heading>
         <Flex direction="column" gap={8} height="400px" overflowY="scroll">
-          {accounts.map((account) => {
+          {[].map((account) => {
             return (
               <Flex
                 gap={4}
@@ -218,6 +184,19 @@ export const ThirdStep = ({ onChange }) => {
               </Flex>
             );
           })}
+
+          <Text>The Inspirers app helps you stay motivated by connecting with groups of people with similar goals.</Text>
+          <Flex>
+          <Image
+            height="200"
+            width="200"
+            alt="start journey"
+            src={
+              "https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948628/inspirers/images/1a595af8-d3e7-4b77-bef6-420b4836a3ad.png"
+            }
+          />
+          </Flex>
+          <Text>There are no accounts to follow at the moment.</Text>
         </Flex>
       </Flex>
 
@@ -267,7 +246,7 @@ export const ThirdStep = ({ onChange }) => {
           icon={<FiArrowRight />}
           isLoading={isLoading}
         >
-          Finished
+          Embark on a journey
         </Button>
       </Flex>
     </Flex>

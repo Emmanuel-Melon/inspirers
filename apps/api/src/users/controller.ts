@@ -1,4 +1,4 @@
-import prisma from "prisma";
+import prisma from "@inspirers/prisma";
 
 export const getUserById = async (userId: string) => {
   const newEntry = await prisma.user.findUnique({

@@ -1,4 +1,4 @@
-import prisma from "prisma";
+import prisma from "@inspirers/prisma";
 
 export const addBlueprint = async (blueprint) => {
   return prisma.journeyBluePrint.create({
@@ -36,9 +36,8 @@ interface JourneyAttrs {
   [key: string]: string;
 }
 
-export const addJourney = async (journey: JourneyAttrs) => {
+export const addJourney = async (journey) => {
   return prisma.journey.create({
-    // @ts-ignore
     data: {
       title: journey.title,
       description: journey.description,
@@ -55,16 +54,17 @@ export const getUserJourneys = async (userId) => {
   });
 };
 
-export const getJourneyById = async (journeyId) => {
+export const getJourneyById = async (journeyId: string) => {
   return prisma.journey.findUnique({
     where: {
       id: journeyId,
     },
     include: {
+      tasks: true,
       user: true,
       goals: true,
-      interests: true,
-    },
+      interests: true
+    }
   });
 };
 

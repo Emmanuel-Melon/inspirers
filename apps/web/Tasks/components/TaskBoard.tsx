@@ -158,7 +158,7 @@ export const TaskBoard = () => {
   return (
     <>
       <DropWrapper type={Types.LIST} onDrop={onDrop} index={1}>
-        <Flex gap={4} overflowX="scroll" width="1250px">
+        <Flex gap={4} overflowX="scroll">
           {lists &&
             lists.map((list, index) => (
               <DragWrapper type={Types.LIST} moveItem={moveItem} item={list}>
