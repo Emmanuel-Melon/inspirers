@@ -1,0 +1,4 @@
+runtime: nodejs16
+env_variables:
+  MY_VAR: "my value"
+service: "client"

@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 import { databaseURL, port } from "./config";
 import { init } from "./init";
+const serverless = require("serverless-http");
 
-const mysql = require("mysql2");
-const connection = mysql.createConnection(databaseURL);
+import connect from "./db";
+const connection = connect();
 
 /** initialize middleware */
 init(app);
@@ -30,3 +31,6 @@ listen().then(() =>
 );
 
 connection.end();
+
+module.exports = app;
+module.exports.handler = serverless(app);

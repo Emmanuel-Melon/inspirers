@@ -19,4 +19,6 @@ export function init(app) {
   app.use(morganLogger("dev"));
   app.use(catchErrors);
   app.use(routers);
+
+app.use(`/.netlify/functions/api`, routers);
 }
