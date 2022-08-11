@@ -6,7 +6,8 @@
   "scripts": {
     "api": "nodemon src/app.ts",
     "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
-    "pscale-connect": "pscale connect biti dev --port 3309"
+    "pscale-connect": "pscale connect biti dev --port 3309",
+    "start: "node app.ts"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
