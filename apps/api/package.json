@@ -5,11 +5,9 @@
   "license": "MIT",
   "scripts": {
     "api": "nodemon src/app.ts",
-    "dev": "concurrently \"yarn api\" ",
+    "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
     "pscale-connect": "pscale connect biti dev --port 3309",
-    "start": "node src/app.ts",
-    "db": "npm run src/db.ts",
-    "clean": "rm -rf ./dist"
+    "start": "node src/app.ts"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
