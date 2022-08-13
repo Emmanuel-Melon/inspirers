@@ -30,7 +30,9 @@ listen().then(() =>
   )
 );
 
+// source maps
+// add a few custom build steps to compile and run typescript
+
 connection.end();
 
-module.exports = app;
-module.exports.handler = serverless(app);
+
