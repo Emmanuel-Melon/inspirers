@@ -8,7 +8,7 @@
     "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
     "pscale-connect": "pscale connect biti dev --port 3309",
     "start": "node ./dist/index.js",
-    "gcp-build": "tsc -p .",
+    "gcp-build": "tsc --project tsconfig.json",
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json"
   },
