@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var router_1 = require("../journeys/router");
+var router_2 = require("../tasks/router");
+var router_3 = require("../users/router");
+var router = (0, express_1.Router)();
+router.use("/users", router_3.default);
+router.use("/journeys", router_1.default);
+router.use("/tasks", router_2.default);
+exports.default = router;
