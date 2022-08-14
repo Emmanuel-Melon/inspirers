@@ -7,8 +7,7 @@
     "api": "nodemon src/app.ts",
     "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
     "pscale-connect": "pscale connect biti dev --port 3309",
-    "start": "node ./dist/index.js",
-    "gcp-build": "tsc --project tsconfig.json",
+    "start": "node ./dist/app.js",
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json"
   },
@@ -42,8 +41,6 @@
     "netlify-lambda": "^2.0.15",
     "serverless-http": "^3.0.1",
     "ts-node": "^10.8.2",
-    "uuid": "^8.3.2",
-    "types": "*",
-    "@inspirers/prisma": "*"
+    "uuid": "^8.3.2"
   }
 }

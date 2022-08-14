@@ -48,7 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = exports.createUser = void 0;
-var prisma_1 = require("prisma");
+var prisma_1 = require("@inspirers/prisma");
 var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 var config_1 = require("../config");
