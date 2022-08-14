@@ -4,11 +4,10 @@ import * as jwt from "jsonwebtoken";
 import { getUserById } from "../users/controller";
 
 import { secret } from "../config";
-import { Request } from "../express";
 import { handleError } from "../utils/errors";
 
 export default function authenticate(
-  req: Request<any, any, any>,
+  req: any,
   res: Response,
   next: NextFunction
 ): Promise<void | Response> {

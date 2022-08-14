@@ -11,8 +11,7 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "turbo run start --parallel",
-    "gcp-build": "turbo run compile"
+    "start": "turbo run start --parallel"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

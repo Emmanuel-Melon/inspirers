@@ -7,7 +7,7 @@
     "api": "nodemon src/app.ts",
     "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
     "pscale-connect": "pscale connect biti dev --port 3309",
-    "start": "node ./dist/app.js",
+    "start": "ts-node ./src/app.ts",
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json"
   },

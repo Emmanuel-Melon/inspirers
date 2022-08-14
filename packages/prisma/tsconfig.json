@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "target": "es5",
+      "module": "commonjs",
+      "lib": [
+        "DOM"
+      ],
+      "outDir": "./dist",
+      "resolveJsonModule": true,
+      "removeComments": true,
+      "alwaysStrict": true,
+      "sourceMap": false,
+      "skipLibCheck": true,
+      "esModuleInterop": false,
+      "paths": {
+        "*": [
+          "types/*"
+        ]
+      }
+    },
+    "include": ["*"]
+  }

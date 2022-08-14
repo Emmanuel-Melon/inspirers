@@ -15,5 +15,6 @@
       "cache": false
     },
     "start": {}
-  }
+  },
+  "globalDependencies": ["yarn.lock"]
 }

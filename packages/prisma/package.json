@@ -6,7 +6,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc --project tsconfig.json"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
