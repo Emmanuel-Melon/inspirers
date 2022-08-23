@@ -1,3 +1,5 @@
+// it's recommended to use the 
+
 export const Spinner = () => {return (
   <img
     className="image_rotate"
@@ -7,5 +9,4 @@ export const Spinner = () => {return (
 );
 }
  
-
-
+// yeah I am here
