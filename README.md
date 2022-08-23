@@ -81,7 +81,7 @@ Before we install the project, Here is what you need to be able to run Inspirers
 3. Choose Node.js version and install dependencies
 
 ```bash
-    nvm use && yarn
+    nvm
 ```
 
 ## Root
