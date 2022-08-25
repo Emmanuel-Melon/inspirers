@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  api:
+    build:
+      dockerfile: ./apps/api/Dockerfile
+    image: api
+    ports:
+      - 5000:5000
+  db:
+    image: mysql
+  redis:
+    image: redis:6
+  docs:
+    build:
+      dockerfile: ./apps/docs/Dockerfile
+    image: docs
+    ports:
+      - 3001:3001
+  web:
+    build:
+      dockerfile: ./apps/web/Dockerfile
+    image: web
+    ports:
+      - 3000:3000

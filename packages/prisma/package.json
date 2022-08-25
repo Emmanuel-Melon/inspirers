@@ -8,7 +8,9 @@
   "scripts": {
     "postinstall": "prisma generate",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project tsconfig.json"
+    "compile": "tsc --project tsconfig.json",
+    "push": "prisma db push",
+    "studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",

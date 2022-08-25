@@ -158,7 +158,7 @@ model Task {
   createdAt   DateTime?   @default(now())
   updatedAt   DateTime?   @default(now())
   deletedAt   DateTime?   @default(now())
-  due DateTime?
+  due         DateTime?
 }
 
 enum IdentityProvider {
@@ -188,10 +188,51 @@ model User {
   Journey            Journey[]
 }
 
+enum ResourceType {
+  Video
+  Book
+  Article
+  Tutorial
+  Tools
+  Document
+  Course
+}
+
+model Resource {
+  id         String       @id @default(cuid())
+  Backpack   Backpack?    @relation(fields: [backpackId], references: [id])
+  backpackId String?
+  type       ResourceType
+  createdAt  DateTime?    @default(now())
+  updatedAt  DateTime?    @default(now())
+  deletedAt  DateTime?    @default(now())
+}
+
+model Backpack {
+  id          String     @id @default(cuid())
+  description String?
+  userId      String
+  journeyId   String
+  resources   Resource[]
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @default(now())
+  deletedAt   DateTime?  @default(now())
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Feeds {
+  id     String @id @default(cuid())
+  userId String
+}
+
+model FeedsActivities {
+  id     String @id @default(cuid())
+  userId String
 }
