@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         {Component.authPage || Component.publicPage ? (
           <Component {...pageProps} />
         ) : (
-          <Layout>
+          <Layout public>
             <Component {...pageProps} />
           </Layout>
         )}

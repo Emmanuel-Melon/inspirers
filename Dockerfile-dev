@@ -1,0 +1,30 @@
+FROM node:16-alpine
+
+ENV NODE_ENV development
+
+#add turborepo
+RUN yarn global add turbo
+
+
+# Set working directory
+WORKDIR /app
+
+# Install app dependencies
+COPY ./package.json /app/package.json
+COPY ./pnpm-workspace.yaml /app/pnpm-workspace.yaml
+COPY ./turbo.json   /app/turbo.json
+COPY ./apps/api/package.json  /app/apps/api/package.json
+COPY ./apps/api/prisma/schema.prisma /app/apps/api/prisma/schema.prisma
+COPY ./pnpm-lock.yaml /app/pnpm-lock.yaml
+
+# Copying source files
+COPY ./apps ./@engine/app
+COPY ./@engine/common ./@engine/common
+
+
+# Install app dependencies
+RUN yarn install
+
+EXPOSE 3000 1337
+
+#CMD ["yarn", "dev"]

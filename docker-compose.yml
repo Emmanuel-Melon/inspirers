@@ -1,24 +1,34 @@
-version: '3.9'
+version: '3'
 services:
   api:
+    container_name: api
     build:
-      dockerfile: ./apps/api/Dockerfile
-    image: api
+      context: .
+      dockerfile: Dockerfile-api
     ports:
       - 5000:5000
+    env_file:
+      - ./.env
   db:
     image: mysql
   redis:
     image: redis:6
   docs:
     build:
-      dockerfile: ./apps/docs/Dockerfile
+      dockerfile: Dockerfile-docs
+      context: .
     image: docs
     ports:
       - 3001:3001
+    env_file:
+      - ./.env
   web:
     build:
-      dockerfile: ./apps/web/Dockerfile
+      context: .
+      dockerfile: Dockerfile-web
     image: web
     ports:
       - 3000:3000
+    depends_on:
+      - api
+    env_file: .env
