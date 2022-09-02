@@ -6,7 +6,6 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import InspirersCustomAdapter from "lib/custom-prisma-adapter";
 
-
 const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
   adapter: inspirersAdapter,
@@ -42,14 +41,13 @@ export const authOptions = {
         email,
       };
     },
-    async session ({ session, user, token}) {
-
+    async session({ session, user, token }) {
       // console.log(user);
       return {
         session,
-        user
-      }
-    }
+        user,
+      };
+    },
     // async redirect(url: string, baseUrl: string) { },
     // async session(session, token) {
     // const encodedToken = jwt.sign(token, process.env.SECRET, { algorithm: 'HS256'});

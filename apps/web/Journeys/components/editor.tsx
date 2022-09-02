@@ -1,15 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Box, Flex, Heading, Text, Stack, Input } from "@chakra-ui/react"
+import { Box, Flex, Heading, Text, Stack, Input } from "@chakra-ui/react";
 // import { AddTaskItem } from ""
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { Button, EditableComponent } from "ui";
 import { FiPlus } from "react-icons/fi";
 import { AddTask } from "../../Tasks/components/AddTask";
 import { CustomModal } from "ui";
 
 const initialBlock = { id: uuidv4(), html: "", tag: "p" };
-
-
 
 export const JourneyEditor = ({ journey }) => {
   const contentEditable = React.createRef();
@@ -22,10 +20,10 @@ export const JourneyEditor = ({ journey }) => {
     updatedBlocks[index] = {
       ...updatedBlocks[index],
       tag: updatedBlock.tag,
-      html: updatedBlock.html
+      html: updatedBlock.html,
     };
     setBlocks({ localBlocks: updatedBlocks });
-  }
+  };
 
   const addBlockHandler = (currentBlock) => {
     const newBlock = { id: uuidv4(), html: "", tag: "p" };
@@ -36,7 +34,7 @@ export const JourneyEditor = ({ journey }) => {
     setBlocks({ localBlocks: updatedBlocks }, () => {
       currentBlock.ref.nextElementSibling.focus();
     });
-  }
+  };
 
   const deleteBlockHandler = (currentBlock) => {
     const previousBlock = currentBlock.ref.previousElementSibling;
@@ -50,8 +48,7 @@ export const JourneyEditor = ({ journey }) => {
         previousBlock.focus();
       });
     }
-  }
-
+  };
 
   return (
     <Stack gap={4} color="brand.primaryText">
@@ -60,22 +57,26 @@ export const JourneyEditor = ({ journey }) => {
         <Flex gap={4} direction="column">
           <Heading size="md">Add Milestones</Heading>
           <Text>These are major goals in your journy.</Text>
-          <Button size="sm" icon={<FiPlus />} width="fit-content">Add Milestone</Button>
+          <Button size="sm" icon={<FiPlus />} width="fit-content">
+            Add Milestone
+          </Button>
         </Flex>
-        <Flex gap={4} direction="column" >
+        <Flex gap={4} direction="column">
           <Heading size="md">Add Tasks</Heading>
           <Text>These are major goals in your journy.</Text>
-          <Button size="sm" icon={<FiPlus />} width="fit-content">Add Task</Button>
+          <Button size="sm" icon={<FiPlus />} width="fit-content">
+            Add Task
+          </Button>
         </Flex>
       </Flex>
       <Flex gap={4} direction="column">
         <Heading size="md">Pack Resources</Heading>
         <Text>These are major goals in your journy.</Text>
       </Flex>
-      {
-        false ? <Stack>
-          {
-            blocks.map((block, key) => <EditableComponent
+      {false ? (
+        <Stack>
+          {blocks.map((block, key) => (
+            <EditableComponent
               key={key}
               id={block.id}
               tag={block.tag}
@@ -83,10 +84,10 @@ export const JourneyEditor = ({ journey }) => {
               updatePage={updatePageHandler}
               addBlock={addBlockHandler}
               deleteBlock={deleteBlockHandler}
-            />)
-          }
-        </Stack> : null
-      }
+            />
+          ))}
+        </Stack>
+      ) : null}
     </Stack>
-  )
-}
+  );
+};

@@ -49,7 +49,10 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         <Heading color="brand.primary">
           {context.currentStep.id} - {context.currentStep.title}
         </Heading>
-        <Text>Plan your own personal and professional development. Easily track your progress towards long-term goals.</Text>
+        <Text>
+          Plan your own personal and professional development. Easily track your
+          progress towards long-term goals.
+        </Text>
         <Flex
           alignItems="center"
           bg="brand.white"
@@ -75,15 +78,19 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
         <Heading size="sm" color="brand.primary">
           Using a template
         </Heading>
-        <Text>Immerse yourself in the world of resources and transformation built by the community.</Text>
+        <Text>
+          Immerse yourself in the world of resources and transformation built by
+          the community.
+        </Text>
         <Heading size="sm" color="brand.primary">
           Blank journey
         </Heading>
         <Text>
-          Create your own systems to continue to build momentum and stay focused on the things that matter most.
+          Create your own systems to continue to build momentum and stay focused
+          on the things that matter most.
         </Text>
 
-        <Button onClick={() => { }} icon={<FiInfo />}>
+        <Button onClick={() => {}} icon={<FiInfo />}>
           Learn More
         </Button>
       </Flex>

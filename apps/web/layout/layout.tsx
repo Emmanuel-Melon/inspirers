@@ -13,11 +13,10 @@ import {
   FiUsers,
   FiTrendingUp,
   FiMap,
-  FiLock
+  FiLock,
 } from "react-icons/fi";
 import { VStack } from "@chakra-ui/react";
 import { Button, UnAuthorized } from "ui";
-
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -26,9 +25,9 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   const [labels, _setLabels] = useState<boolean>(false);
   const { data: session, status } = useSession();
-  
+
   if (status === "loading") {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (session) {
@@ -77,11 +76,11 @@ export default function Layout({ children }: LayoutProps) {
                   >
                     <FiHome size="1.2rem" />
                   </Flex>
-  
+
                   {labels ? <Text>Home</Text> : null}
                 </Flex>
               </Link>
-  
+
               <Link href={`/user/1`}>
                 <Flex
                   direction="column"
@@ -102,11 +101,11 @@ export default function Layout({ children }: LayoutProps) {
                   >
                     <FiUser size="1.2rem" />
                   </Flex>
-  
+
                   {labels ? <Text>Profile</Text> : null}
                 </Flex>
               </Link>
-  
+
               <Link href="/journeys">
                 <Flex
                   direction="column"
@@ -130,11 +129,11 @@ export default function Layout({ children }: LayoutProps) {
                   >
                     <FiMap size="1.2rem" />
                   </Flex>
-  
+
                   {labels ? <Link href="/journeys">Journeys</Link> : null}
                 </Flex>
               </Link>
-  
+
               <Link href="/notifications">
                 <Flex
                   direction="column"
@@ -160,7 +159,7 @@ export default function Layout({ children }: LayoutProps) {
                   ) : null}
                 </Flex>
               </Link>
-  
+
               <Link href="/tasks">
                 <Flex
                   direction="column"
@@ -184,7 +183,7 @@ export default function Layout({ children }: LayoutProps) {
                   {labels ? <Link href="/tasks">Tasks</Link> : null}
                 </Flex>
               </Link>
-  
+
               <Link href="/discover">
                 <Flex
                   direction="column"
@@ -208,7 +207,7 @@ export default function Layout({ children }: LayoutProps) {
                   {labels ? <Link href="/discover">Discover</Link> : null}
                 </Flex>
               </Link>
-  
+
               <Link href="/settings">
                 <Flex
                   direction="column"
@@ -234,7 +233,12 @@ export default function Layout({ children }: LayoutProps) {
               </Link>
             </VStack>
           </Flex>
-          <Flex width="90%" direction="column" alignItems="stretch" height="100%">
+          <Flex
+            width="90%"
+            direction="column"
+            alignItems="stretch"
+            height="100%"
+          >
             <Navbar />
             <Flex
               as="section"
@@ -249,10 +253,7 @@ export default function Layout({ children }: LayoutProps) {
         </Flex>
       </>
     );
-    
   }
-  
-  return (
-    <UnAuthorized onClick={signIn}/>
-  )
+
+  return <UnAuthorized onClick={signIn} />;
 }
