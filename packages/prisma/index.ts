@@ -1,9 +1,9 @@
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from "@prisma/client";
 
 declare global {
   // allow global `var` declarations
   // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined
+  var prisma: PrismaClient | undefined;
 }
 
 const prismaOptions: Prisma.PrismaClientOptions = {};
@@ -30,4 +30,3 @@ if (process.env.NODE_ENV !== "production") {
 export default prisma;
 
 // I like this keyboard! It's amazing.
-

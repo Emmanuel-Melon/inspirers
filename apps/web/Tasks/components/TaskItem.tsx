@@ -44,14 +44,15 @@ export const TaskItem = ({ task }: TaskItemProps) => {
 
   const deleteTask = () => {
     setIsLoading(true);
-    client.delete(`/tasks/${task.id}`)
-    .then(res => {
-      setIsLoading(false);
-    })
-    .catch(err => {
-      setIsLoading(false);
-    });
-  }
+    client
+      .delete(`/tasks/${task.id}`)
+      .then((res) => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  };
   return (
     <Popover placement="right-start">
       <PopoverContent>
@@ -64,7 +65,11 @@ export const TaskItem = ({ task }: TaskItemProps) => {
               <ListIcon as={FiCopy} />
               Duplicate
             </ListItem>
-            <ListItem cursor="pointer" color="brand.primaryText" onClick={deleteTask}>
+            <ListItem
+              cursor="pointer"
+              color="brand.primaryText"
+              onClick={deleteTask}
+            >
               <ListIcon as={FiTrash} />
               Delete
             </ListItem>
@@ -92,9 +97,12 @@ export const TaskItem = ({ task }: TaskItemProps) => {
               </Flex>
               <Flex gap={2}>
                 <PopoverTrigger>
-                <IconButton aria-label={"task item options"} bg="brand.highlight2">
-                  <FiMoreHorizontal />
-                </IconButton>
+                  <IconButton
+                    aria-label={"task item options"}
+                    bg="brand.highlight2"
+                  >
+                    <FiMoreHorizontal />
+                  </IconButton>
                 </PopoverTrigger>
               </Flex>
             </Flex>

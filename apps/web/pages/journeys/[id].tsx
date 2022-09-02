@@ -9,8 +9,6 @@ import { useFetch } from "../../hooks/useSwr";
 import { PersonalJourney } from "../../Journeys/components/personal";
 import { JourneyEditor } from "../../Journeys/components/editor";
 
-
-
 export default function Journey(props) {
   const router = useRouter();
 
@@ -31,25 +29,24 @@ export default function Journey(props) {
         <JourneyOverviewCard user={props.user} journey={data?.data} />
         <PersonalJourney journey={data?.data} />
       </Stack>
-    )
+    );
   }
 
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
       <JourneyOverviewCard user={props.user} journey={data?.data} />
 
-      {!isLoading ? (
-        <JourneyEditor journey={data?.data} />
-      ) : (
-        <p>Loading</p>
-      )}
+      {!isLoading ? <JourneyEditor journey={data?.data} /> : <p>Loading</p>}
     </Flex>
   );
 }
 
-
 export async function getServerSideProps(context) {
-  const { session, user } = await unstable_getServerSession(context.req, context.res, authOptions)
+  const { session, user } = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
   const { email, name, image, bio } = session?.user || {};
   const { id } = user || {};
   return {
@@ -59,8 +56,8 @@ export async function getServerSideProps(context) {
         email: email || null,
         name: name || null,
         bio: bio || null,
-        image: image || null
-      }
+        image: image || null,
+      },
     },
-  }
+  };
 }

@@ -32,7 +32,6 @@ export async function getServerSideProps(context) {
   );
   const { id, email, name, bio, image } = session?.user;
 
-
   return {
     props: {
       user: {
