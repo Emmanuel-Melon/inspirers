@@ -61,7 +61,8 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
         borderRadius="0rem 0.1rem 0.1rem 0rem"
         width="100%"
       >
-        <Flex justifyContent="space-between">
+        {
+          false ?         <Flex justifyContent="space-between">
           <Box>
             <Flex gap={2} alignItems="center">
               <Avatar src={user?.image} />
@@ -87,7 +88,8 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
               Get Started
             </Button>
           </Flex>
-        </Flex>
+        </Flex> : null
+        }
         <Flex
           justifyContent="space-between"
           p="8"

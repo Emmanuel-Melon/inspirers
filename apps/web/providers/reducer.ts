@@ -1,7 +1,6 @@
 import { ActionType, JourneyType } from "./actions";
 
 export function stepsReducer(state: JourneyType, action: ActionType) {
-  console.log(action.payload);
   switch (action.type) {
     case "MOVE_FORWARD":
       const nextStep = state.steps.find(
@@ -44,4 +43,6 @@ export function stepsReducer(state: JourneyType, action: ActionType) {
   }
 }
 
-export const journeyReducer = (state: JourneyType, action: ActionType) => {};
+export const journeyReducer = (state, action) => {
+  
+};
