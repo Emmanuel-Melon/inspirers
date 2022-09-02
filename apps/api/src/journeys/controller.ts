@@ -63,8 +63,8 @@ export const getJourneyById = async (journeyId: string) => {
       tasks: true,
       user: true,
       goals: true,
-      interests: true
-    }
+      interests: true,
+    },
   });
 };
 

@@ -1,4 +1,10 @@
-import { Account, Prisma, PrismaClient, User , IdentityProvider} from "@prisma/client";
+import {
+  Account,
+  Prisma,
+  PrismaClient,
+  User,
+  IdentityProvider,
+} from "@prisma/client";
 import { identityProviderNameMap } from "utils/auth";
 
 /** @return { import("next-auth/adapters").Adapter } */
@@ -27,8 +33,11 @@ export default function InspirersCustomAdapter(prismaClient: PrismaClient) {
           user: true,
         },
       });
-      const provider = provider_providerAccountId?.provider.toUpperCase() as IdentityProvider;
-      const obtainProvider = identityProviderNameMap[provider].toUpperCase() as IdentityProvider;
+      const provider =
+        provider_providerAccountId?.provider.toUpperCase() as IdentityProvider;
+      const obtainProvider = identityProviderNameMap[
+        provider
+      ].toUpperCase() as IdentityProvider;
       const user = await prismaClient.user.findFirst({
         where: {
           identityProviderId: provider_providerAccountId?.providerAccountId,

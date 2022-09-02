@@ -228,7 +228,7 @@ export const SecondStep = ({ user }) => {
           title: journey.title,
           userId: user.id,
           journeyType: journey.journeyType,
-          active: true
+          active: true,
         })
         .then((res) => {
           setLoading(false);

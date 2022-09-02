@@ -7,7 +7,7 @@ import {
   FiCreditCard,
   FiSettings,
   FiTruck,
-  FiTrash
+  FiTrash,
 } from "react-icons/fi";
 import { UserObject } from "types/User";
 import { FC } from "react";
@@ -23,10 +23,13 @@ const Companion = ({ companion }) => {
   return <Avatar src={companion.avatar} />;
 };
 
-export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ journey, user }) => {
+export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
+  journey,
+  user,
+}) => {
   const router = useRouter();
 
-  function inviteFriends() { }
+  function inviteFriends() {}
   function getStarted() {
     router.push("/journeys/new");
   }
@@ -41,16 +44,16 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ journey, user }) 
                             }
      */
 
-
   const deleteJourney = () => {
-    client.delete(`/journeys/${journey.id}`)
-    .then(res => {
-      router.push("/");
-    }).
-    catch(err => {
-      alert('failed to delete');
-    })
-  }
+    client
+      .delete(`/journeys/${journey.id}`)
+      .then((res) => {
+        router.push("/");
+      })
+      .catch((err) => {
+        alert("failed to delete");
+      });
+  };
   return (
     <>
       <Flex
@@ -66,14 +69,20 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({ journey, user }) 
                 Hi, {user?.name || "Guest"}{" "}
               </Heading>
             </Flex>
-            <Text my="4">It's time for you to take the leap. What is your ultimate goal?</Text>
+            <Text my="4">
+              It's time for you to take the leap. What is your ultimate goal?
+            </Text>
           </Box>
           <Flex gap={4}>
-            {
-              journey?.active && journey.usrId === user.id ? <Button onClick={deleteJourney} icon={<FiTrash />} bg="brand.danger">
-              Delete Journey
-            </Button> : null
-            }
+            {journey?.active && journey.usrId === user.id ? (
+              <Button
+                onClick={deleteJourney}
+                icon={<FiTrash />}
+                bg="brand.danger"
+              >
+                Delete Journey
+              </Button>
+            ) : null}
             <Button onClick={getStarted} icon={<FiTruck />}>
               Get Started
             </Button>

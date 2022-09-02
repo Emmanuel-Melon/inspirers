@@ -34,5 +34,3 @@ listen().then(() =>
 // add a few custom build steps to compile and run typescript
 
 connection.end();
-
-
