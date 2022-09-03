@@ -1,11 +1,12 @@
 import { Router } from "express";
 import authenticate from "../middleware/authenticate";
 
+import connections from  "../connections/router";
+import backpacks from  "../backpacks/router";
 import journeys from "../journeys/router";
+import reflections from "../reflections/router";
 import tasks from "../tasks/router";
 import users from "../users/router";
-import backpacks from  "../backpacks/router";
-import reflections from "../reflections/router";
 
 const router = Router();
 
