@@ -7,6 +7,7 @@ import { getProviders, signIn, signOut, useSession } from "next-auth/react";
 import Layout from "../layout/layout";
 import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { JourneyContext, JourneyConsumer, JourneyProvider } from "providers/JourneyProvider";
 
 const notify = () => toast("Here is your toast.");
 
@@ -23,9 +24,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         {Component.authPage || Component.publicPage ? (
           <Component {...pageProps} />
         ) : (
-          <Layout public>
-            <Component {...pageProps} />
-          </Layout>
+          <JourneyProvider>
+            <JourneyConsumer>
+              {
+                value => (
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                )
+              }
+            </JourneyConsumer>
+          </JourneyProvider>
         )}
       </ChakraProvider>
     </SessionProvider>

@@ -37,6 +37,11 @@ interface JourneyAttrs {
 }
 
 export const addJourney = async (journey) => {
+  const backpack = await prisma.$queryRaw<
+    Array<{ tablename: string }>
+  >`INSERT INTO backpacks`;
+
+
   return prisma.journey.create({
     data: {
       title: journey.title,
@@ -78,9 +83,11 @@ export const updateJourney = async (journeyId, journey) => {
 };
 
 export const deleteJourney = async (journeyId: string) => {
-  return prisma.journey.delete({
+  const record = prisma.journey.delete({
     where: {
       id: journeyId,
     },
   });
+
+  console.log(record);
 };

@@ -6,8 +6,11 @@ import { Button } from "ui";
 import { client } from "utils/client";
 import { CustomModal } from "ui";
 import { FiPlus, FiFilter, FiCalendar } from "react-icons/fi";
+import { AddBackPackItemModal } from "./AddBackPackItemModal";
+import { AddTaskModal } from "Tasks/components/AddTaskModal";
 
 export const PersonalJourney = ({ journey }) => {
+
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   function openModal() {
@@ -16,6 +19,16 @@ export const PersonalJourney = ({ journey }) => {
 
   function closeModal() {
     setShow(false);
+  }
+
+  function handleTaskClick() {
+    setView("task");
+    openModal();
+  }
+
+  function handleBackpackClick() {
+    setView("backpack");
+    openModal();
   }
 
   const addTask = (task) => {
@@ -63,17 +76,12 @@ export const PersonalJourney = ({ journey }) => {
               journey={journey}
               addTask={addTask}
             />
-          </Flex>
+            <Text>Create your own unique action plan for success with Inspirers. We help you organize your goals in a way that works for you.</Text>
+            <Button onClick={handleTaskClick} icon={<FiPlus />} >Add a task</Button>
+            </Flex>
         </VStack>
-      </VStack>
-      <CustomModal show={show} close={closeModal}>
-        <AddTask
-          journey={journey}
-          closeModal={closeModal}
-          addTask={addTask}
-          isLoading
-        />
-      </CustomModal>
+        <TaskList tasks={journey.tasks} journey={journey} addTask={addTask} />
+    </VStack>
     </>
   );
 };

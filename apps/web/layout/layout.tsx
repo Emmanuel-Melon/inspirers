@@ -22,6 +22,10 @@ type LayoutProps = {
   children: ReactChild | ReactChild[];
 };
 
+
+// preserve layout when navigating
+// pre-fetch
+// nesting layout
 export default function Layout({ children }: LayoutProps) {
   const [labels, _setLabels] = useState<boolean>(false);
   const { data: session, status } = useSession();
