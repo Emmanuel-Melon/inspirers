@@ -1,19 +1,12 @@
-import * as yup from "yup";
+import prisma from "@inspirers/prisma";
+import { Reflection } from "@prisma/client";
 
-const reflectionSchema = yup.object().shape({
-  userId: yup.string().required(),
-  description: yup.string().required(),
-  type: yup.string().required(),
-});
-
-export const createReflection = async (reflection) => {
-  const isValid = await reflectionSchema.isValid(reflection);
-  console.log(isValid);
-  if (isValid) {
+export const create = async (reflection: Reflection): Promise<Reflection> => {
+  try {
     return prisma.reflection.create({
       data: reflection,
     });
-  } else {
-    throw new Error("Invalid input");
+  } catch (err) {
+    
   }
 };
