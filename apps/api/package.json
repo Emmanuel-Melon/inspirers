@@ -9,13 +9,16 @@
     "pscale-connect": "pscale connect biti dev --port 3309",
     "start": "ts-node ./src/app.ts",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project tsconfig.json"
+    "compile": "tsc --project tsconfig.json",
+    "socket": "nodemon src/lib/socket.ts",
+    "test": ""
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
     "concurrently": "^7.3.0",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
+    "jest": "^29.0.2",
     "nodemon": "^2.0.18",
     "tsconfig": "*",
     "typescript": "^4.5.3"
@@ -39,8 +42,11 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "netlify-lambda": "^2.0.15",
+    "redis": "^4.2.0",
     "serverless-http": "^3.0.1",
+    "socket.io": "^4.5.1",
     "ts-node": "^10.8.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
   }
 }

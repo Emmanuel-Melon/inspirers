@@ -9,6 +9,10 @@ export class BaseError extends Error {
 
 export class NotFoundError extends BaseError {}
 
+export function PrismaError (err) {
+  
+}
+
 export function handleError(
   res?: Response,
   statusCode?: number,

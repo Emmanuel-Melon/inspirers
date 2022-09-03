@@ -5,7 +5,6 @@
 
     },
     "build": {
-      "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
@@ -14,7 +13,9 @@
     "dev": {
       "cache": false
     },
-    "start": {}
+    "start": {
+      "dependsOn": ["^build"]
+    }
   },
   "globalDependencies": ["yarn.lock"]
 }

@@ -129,7 +129,6 @@ export const ThirdStepGuide = ({ guide }) => {
   );
 };
 
-
 export const ThirdStep = ({ onChange }) => {
   const context = useContext(JourneyOnboardingContext);
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -185,16 +184,19 @@ export const ThirdStep = ({ onChange }) => {
             );
           })}
 
-          <Text>The Inspirers app helps you stay motivated by connecting with groups of people with similar goals.</Text>
+          <Text>
+            The Inspirers app helps you stay motivated by connecting with groups
+            of people with similar goals.
+          </Text>
           <Flex>
-          <Image
-            height="200"
-            width="200"
-            alt="start journey"
-            src={
-              "https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948628/inspirers/images/1a595af8-d3e7-4b77-bef6-420b4836a3ad.png"
-            }
-          />
+            <Image
+              height="200"
+              width="200"
+              alt="start journey"
+              src={
+                "https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948628/inspirers/images/1a595af8-d3e7-4b77-bef6-420b4836a3ad.png"
+              }
+            />
           </Flex>
           <Text>There are no accounts to follow at the moment.</Text>
         </Flex>

@@ -56,9 +56,7 @@ export const ProfileSectionsTab = () => {
     );
   });
 
-  const getStarted = () => {
-
-  }
+  const getStarted = () => {};
   return (
     <Flex
       direction="column"

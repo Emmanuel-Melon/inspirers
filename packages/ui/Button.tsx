@@ -28,7 +28,7 @@ export const Button: FC<ButtonProps> = ({
   width = "100%",
   variant,
   fullWidth,
-  border
+  border,
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>

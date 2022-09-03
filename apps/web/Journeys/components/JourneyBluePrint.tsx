@@ -11,7 +11,7 @@ export const JourneyBluePrint = (props) => {
 
   const handleClick = () => {
     router.push(`/journeys/${props.bluePrint.id}`);
-  }
+  };
   return (
     <Flex
       alignItems="flex-start"

@@ -1,5 +1,10 @@
 import {
-  Flex, Heading, VStack, Text, Box, FormControl,
+  Flex,
+  Heading,
+  VStack,
+  Text,
+  Box,
+  FormControl,
   FormLabel,
   FormErrorMessage,
   FormHelperText,
@@ -35,22 +40,22 @@ const getProviderStyles = (provider: string) => {
   if (provider === "GitHub") {
     return {
       bg: "#000",
-      color: "#fff"
-    }
+      color: "#fff",
+    };
   }
   if (provider === "Google") {
     return {
       bg: "#fff",
-      color: "#333"
-    }
+      color: "#333",
+    };
   }
   if (provider === "Facebook") {
     return {
       bg: "#4267B2",
-      color: "#fff"
-    }
+      color: "#fff",
+    };
   }
-}
+};
 
 export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
   const router = useRouter();
@@ -113,7 +118,10 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
       <Heading as="h1" size="lg" color="brand.primary" textAlign="center">
         Inspirers
       </Heading>
-      <Text textAlign="center">Inspirers is a community of individuals who share a love for inspiring and empowering others.</Text>
+      <Text textAlign="center">
+        Inspirers is a community of individuals who share a love for inspiring
+        and empowering others.
+      </Text>
       <Flex
         direction="column"
         justifyContent="center"
@@ -132,7 +140,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
             color="brand.primaryText"
           >
             <FormControl>
-            <FormLabel>Email address</FormLabel>
+              <FormLabel>Email address</FormLabel>
               <TextInput
                 onChange={onChange}
                 placeholder="e.g name@domain.com"
@@ -154,7 +162,12 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
 
             <Text>Trouble signing in? Try SSO</Text>
 
-            <Button icon={<FiUser />} onClick={handleClick} width="350px" isLoading={isLoading}>
+            <Button
+              icon={<FiUser />}
+              onClick={handleClick}
+              width="350px"
+              isLoading={isLoading}
+            >
               {mode.toLocaleUpperCase()}
             </Button>
           </VStack>
@@ -180,7 +193,11 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
                     bg={style?.bg || "brand.white"}
                     color={style?.color || "brand.white"}
                     icon={GetIcon(provider.name)}
-                    border={provider?.name === "Google" ? "solid 0.10rem #000" : "none"}
+                    border={
+                      provider?.name === "Google"
+                        ? "solid 0.10rem #000"
+                        : "none"
+                    }
                     onClick={() =>
                       signIn(provider?.id)
                         .then((res) => {
@@ -204,7 +221,9 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
           </Text>
         </Flex>
       </Flex>
-      <Text textAlign="center">By clicking Signup, you agree to our terms and conditions.</Text>
+      <Text textAlign="center">
+        By clicking Signup, you agree to our terms and conditions.
+      </Text>
     </VStack>
   );
 };

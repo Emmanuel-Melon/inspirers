@@ -19,7 +19,7 @@ export default function Index(props) {
   }
   return (
     <Flex direction="column" gap={4} my="8">
-      <JourneyOverviewCard user={props.user} getStarted={getStarted}/>
+      <JourneyOverviewCard user={props.user} getStarted={getStarted} />
       <Flex>
         <Flex width="60%" direction="column" gap={4} marginRight={8}>
           <Insights insights={[]} />

@@ -20,5 +20,5 @@ export function init(app) {
   app.use(catchErrors);
   app.use(routers);
 
-app.use(`/.netlify/functions/api`, routers);
+  app.use(`/.netlify/functions/api`, routers);
 }
