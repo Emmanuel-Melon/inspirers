@@ -1,0 +1,64 @@
+ARG NODE_VERSION=16
+ARG ALPINE_VERSION=3.15
+
+# Install dependencies only when needed
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps 
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat rsync
+RUN apk add git
+WORKDIR /app-install
+RUN yarn global add turbo
+
+# Install dependencies based on the preferred package manager
+COPY package.json ./
+COPY .gitignore .gitignore
+COPY turbo.json turbo.json
+COPY yarn.lock ./
+
+
+RUN \
+  if [ -f yarn.lock ]; then yarn; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# turbo prune
+# RUN turbo prune --docker
+
+###################################################################
+# Stage 2: Build the app                                          #
+###################################################################
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+ENV NODE_ENV=production
+ENV NEXTJS_IGNORE_ESLINT=1
+ENV NEXTJS_IGNORE_TYPECHECK=0
+
+WORKDIR /app
+# COPY . .
+COPY --from=deps /app-install ./
+# CMD ["node", "-e", "(function() { setInterval(() => { console.log(\"hello\") }, 5000) })()"]
+
+###################################################################
+# Stage 3: Extract a minimal image from the build                 #
+###################################################################
+
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+RUN apk add git
+
+COPY --from=builder /app ./
+
+# USER nextjs
+
+EXPOSE ${NEXTJS_APP_PORT:-3001}
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# CMD ["npm", "run", "start"]
+RUN yarn start

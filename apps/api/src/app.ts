@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
+export const app = express();
 import { databaseURL, port } from "./config";
 import { init } from "./init";
-const serverless = require("serverless-http");
+
 
 import connect from "./db";
 const connection = connect();
