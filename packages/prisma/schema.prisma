@@ -202,7 +202,7 @@ model Resource {
   id         String       @id @default(cuid())
   Backpack   Backpack?    @relation(fields: [backpackId], references: [id])
   backpackId String?
-  title String
+  title      String
   type       ResourceType
   createdAt  DateTime?    @default(now())
   updatedAt  DateTime?    @default(now())
@@ -236,4 +236,32 @@ model Feeds {
 model FeedsActivities {
   id     String @id @default(cuid())
   userId String
+}
+
+enum ResflectionsType {
+  Success
+  Improvement
+  Issue
+}
+
+model ReflectionActionItem {
+  id           String           @id @default(cuid())
+  type         ResflectionsType
+  createdAt    DateTime?        @default(now())
+  updatedAt    DateTime?        @default(now())
+  deletedAt    DateTime?        @default(now())
+  reflectionId String
+  Reflection   Reflection?      @relation(fields: [reflectionId], references: [id])
+}
+
+model Reflection {
+  id          String                 @id @default(cuid())
+  userId      String
+  type        ResflectionsType
+  createdAt   DateTime?              @default(now())
+  updatedAt   DateTime?              @default(now())
+  deletedAt   DateTime?              @default(now())
+  actionItems ReflectionActionItem[]
+  description String
+  thoughts String
 }
