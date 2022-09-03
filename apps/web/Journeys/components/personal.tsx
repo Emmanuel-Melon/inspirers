@@ -10,10 +10,7 @@ import { AddBackPackItemModal } from "./AddBackPackItemModal";
 import { AddTaskModal } from "Tasks/components/AddTaskModal";
 
 export const PersonalJourney = ({ journey }) => {
-<<<<<<< Updated upstream
-=======
-  const [view, setView] = useState("");
->>>>>>> Stashed changes
+
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   function openModal() {
@@ -24,12 +21,12 @@ export const PersonalJourney = ({ journey }) => {
     setShow(false);
   }
 
-  function handleTaskClick () {
+  function handleTaskClick() {
     setView("task");
     openModal();
   }
 
-  function handleBackpackClick () {
+  function handleBackpackClick() {
     setView("backpack");
     openModal();
   }
@@ -66,7 +63,6 @@ export const PersonalJourney = ({ journey }) => {
           <Flex gap={4}>
             <VStack alignItems="flex-start" width="40%" gap={4}>
               <Heading size="md">Tasks</Heading>
-<<<<<<< Updated upstream
               <Text>
                 Create your own unique action plan for success with Inspirers.
                 We help you organize your goals in a way that works for you.
@@ -80,37 +76,12 @@ export const PersonalJourney = ({ journey }) => {
               journey={journey}
               addTask={addTask}
             />
-=======
-              <Text>Create your own unique action plan for success with Inspirers. We help you organize your goals in a way that works for you.</Text>
-              <Button onClick={handleTaskClick} icon={<FiPlus />} >Add a task</Button>
-            </VStack>
-          </Flex>
-          <Flex gap={4}>
-            <VStack alignItems="flex-start" width="40%" gap={4}>
-              <Heading size="md">Fill Backpack</Heading>
-              <Text>Use this resources organizer to log all the websites, videos, and courses that you want to save. Quickly access frequently used tools and docs, plus stay on top of interesting research and articles.</Text>
-              <Button onClick={handleBackpackClick} icon={<FiPlus />} >Add Resources</Button>
-            </VStack>
->>>>>>> Stashed changes
-          </Flex>
+            <Text>Create your own unique action plan for success with Inspirers. We help you organize your goals in a way that works for you.</Text>
+            <Button onClick={handleTaskClick} icon={<FiPlus />} >Add a task</Button>
+            </Flex>
         </VStack>
-      </VStack>
-      <CustomModal show={show} close={closeModal}>
-<<<<<<< Updated upstream
-        <AddTask
-          journey={journey}
-          closeModal={closeModal}
-          addTask={addTask}
-          isLoading
-        />
-=======
-          {
-            view === "task" ? (
-              <AddTaskModal />
-            ) : <AddBackPackItemModal />
-          }
->>>>>>> Stashed changes
-      </CustomModal>
+        <TaskList tasks={journey.tasks} journey={journey} addTask={addTask} />
+    </VStack>
     </>
   );
 };
