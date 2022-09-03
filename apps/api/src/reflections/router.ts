@@ -1,7 +1,13 @@
 import { NextFunction, Response, Router, Request } from "express";
 import { validation } from "../middleware/validation";
 import { validateReflection } from "./validation";
-import { create, update, getAllReflections, getReflectionById } from "./operations";
+import {
+  create,
+  deleteReflection,
+  update,
+  getAllReflections,
+  getReflectionById,
+} from "./operations";
 
 const reflectionsRouter = Router();
 
@@ -28,6 +34,15 @@ reflectionsRouter.get(
   "/:reflectionId",
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(getReflectionById(req.params.reflectionId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+reflectionsRouter.delete(
+  "/:reflectionId",
+  (req: Request, res: Response, next: NextFunction) => {
+    return Promise.resolve(deleteReflection(req.params.reflectionId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
