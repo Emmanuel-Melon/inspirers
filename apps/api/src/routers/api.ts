@@ -12,6 +12,7 @@ const router = Router();
 
 // router.use(authenticate);
 router.use("/backpacks", backpacks);
+router.use("/connections", connections);
 router.use("/users", users);
 router.use("/journeys", journeys);
 router.use("/reflections", reflections);
