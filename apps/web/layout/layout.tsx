@@ -1,7 +1,7 @@
 import React, { ReactChild, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Box, Flex, Heading, Text, Stack } from "@chakra-ui/react";
-import { Navbar } from "ui";
+import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import Link from "next/link";
 import {
@@ -30,9 +30,14 @@ export default function Layout({ children }: LayoutProps) {
   const [labels, _setLabels] = useState<boolean>(false);
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
+
+  // if (status === "loading") {
+  return (
+    <Flex minHeight="100vh" align="center" justify="center">
+      <Spinner />
+    </Flex>
+  );
+  //}
 
   if (session) {
     return (
