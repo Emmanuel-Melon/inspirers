@@ -118,7 +118,11 @@ const data = [
 ];
 
 export async function getServerSideProps(context) {
-  const { session, user } = await unstable_getServerSession(context.req, context.res, authOptions)
+  const { session, user } = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
   const { email, name, image, bio } = session?.user || {};
   const { id } = user || {};
 

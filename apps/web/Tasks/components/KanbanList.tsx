@@ -79,17 +79,19 @@ export const KanbanList = ({ list }) => {
 
   const addTask = (task) => {
     setIsLoading(true);
-    client.post("/tasks", {
-      ...task
-    })
-      .then(res => {
-        setIsLoading(true);
-        closeModal()
-      }).catch(err => {
+    client
+      .post("/tasks", {
+        ...task,
+      })
+      .then((res) => {
         setIsLoading(true);
         closeModal();
       })
-  }
+      .catch((err) => {
+        setIsLoading(true);
+        closeModal();
+      });
+  };
 
   return (
     <>

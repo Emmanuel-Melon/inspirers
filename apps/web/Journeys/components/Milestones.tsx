@@ -13,7 +13,10 @@ type MileStonesProps = {
   milestones: Milestone[];
 };
 
-export const Milestones: FC<MileStonesProps> = ({ milestones = [], getStarted }) => {
+export const Milestones: FC<MileStonesProps> = ({
+  milestones = [],
+  getStarted,
+}) => {
   return (
     <Flex direction="column" gap={4}>
       <Flex justifyContent="space-between" alignItems="center">
@@ -35,11 +38,13 @@ export const Milestones: FC<MileStonesProps> = ({ milestones = [], getStarted })
       </Flex>
       <Flex borderRadius="1rem" color="brand.primaryText" gap={4}>
         <Stack width="100%">
-        <Heading size="sm">No Milestones</Heading>
-        <Flex alignItems="center" justifyContent="space-between" width="100%">
-        <Text>Embark on a Journey to set Milestones</Text>
-        <Button size="sm" onClick={getStarted} icon={<FiPlus />}>Get Inspired</Button>
-        </Flex>
+          <Heading size="sm">No Milestones</Heading>
+          <Flex alignItems="center" justifyContent="space-between" width="100%">
+            <Text>Embark on a Journey to set Milestones</Text>
+            <Button size="sm" onClick={getStarted} icon={<FiPlus />}>
+              Get Inspired
+            </Button>
+          </Flex>
         </Stack>
         {milestones &&
           milestones.map((milestone) => (

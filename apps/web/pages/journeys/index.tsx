@@ -11,7 +11,6 @@ import { FeaturedMentors } from "Journeys/components/FeaturedMentors";
 import { RecommendJourneys } from "Journeys/components/RecommendedJourneys";
 
 export default function Index(props) {
-
   return (
     <Flex
       justifyContent="space-between"
@@ -83,7 +82,7 @@ export default function Index(props) {
         </>
       </VStack>
       <VStack width="70%" gap={4}>
-      <VStack alignItems="flex-start" width="100%">
+        <VStack alignItems="flex-start" width="100%">
           <Flex justifyContent="space-between" width="100%" alignItems="center">
             <Heading size="md" color="brand.primary">
               My Journeys
