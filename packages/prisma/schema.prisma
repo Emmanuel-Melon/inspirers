@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider             = "mysql"
+  provider             = "postgresql"
   url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
@@ -172,20 +172,22 @@ enum UserPermissionRole {
 }
 
 model User {
-  id                 String           @id @default(cuid())
+  id                 String              @id @default(cuid())
   name               String?
   image              String?
-  email              String           @unique
-  createdAt          DateTime?        @default(now())
+  email              String              @unique
+  createdAt          DateTime?           @default(now())
   bio                String?
   password           String?
-  emailVerified      Boolean?         @default(false)
+  emailVerified      Boolean?            @default(false)
   login              String?
   Account            Account[]
   Session            Session[]
-  identityProvider   IdentityProvider @default(GITHUB)
+  identityProvider   IdentityProvider    @default(GITHUB)
   identityProviderId String?
   Journey            Journey[]
+  ConnectionRequest  ConnectionRequest[]
+  journeyLimit Int @default(1)
 }
 
 enum ResourceType {
@@ -263,5 +265,62 @@ model Reflection {
   deletedAt   DateTime?              @default(now())
   actionItems ReflectionActionItem[]
   description String
-  thoughts String
+  thoughts    String
+}
+
+enum ConnectionStatus {
+  Active
+  Blocked
+  Muted
+}
+
+model ConnectionInteraction {
+  id           String    @id @default(cuid())
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @default(now())
+  deletedAt    DateTime? @default(now())
+  weight       Int
+  connectionId String
+}
+
+model Connection {
+  id            String           @id @default(cuid())
+  createdAt     DateTime?        @default(now())
+  updatedAt     DateTime?        @default(now())
+  deletedAt     DateTime?        @default(now())
+  status        ConnectionStatus
+  affinityScore Int              @default(0)
+  user1         String
+  user2         String
+}
+
+enum ConnectionRequestStatus {
+  Accepted
+  Declined
+  Pending
+}
+
+model ConnectionRequest {
+  id          String                  @id @default(cuid())
+  createdAt   DateTime?               @default(now())
+  updatedAt   DateTime?               @default(now())
+  deletedAt   DateTime?               @default(now())
+  acceptedAt  DateTime?
+  requesterId String                  @unique
+  requesteeId String                  @unique
+  note        String?
+  accepted    Boolean                 @default(false)
+  status      ConnectionRequestStatus @default(Pending)
+  requester   User                    @relation(fields: [requesterId], references: [id])
+}
+
+model UserConnections {
+  id           String @id @default(cuid())
+  userId       String
+  connectionId String
+}
+
+model RecommendedConnections {
+  id String @id @default(cuid())
+  userId String
 }

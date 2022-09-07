@@ -30,14 +30,13 @@ export default function Layout({ children }: LayoutProps) {
   const [labels, _setLabels] = useState<boolean>(false);
   const { data: session, status } = useSession();
 
-
-  // if (status === "loading") {
+   if (status === "loading") {
   return (
     <Flex minHeight="100vh" align="center" justify="center">
       <Spinner />
     </Flex>
   );
-  //}
+  }
 
   if (session) {
     return (

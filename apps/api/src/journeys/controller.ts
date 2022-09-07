@@ -37,11 +37,6 @@ interface JourneyAttrs {
 }
 
 export const addJourney = async (journey) => {
-  const backpack = await prisma.$queryRaw<
-    Array<{ tablename: string }>
-  >`INSERT INTO backpacks`;
-
-
   return prisma.journey.create({
     data: {
       title: journey.title,

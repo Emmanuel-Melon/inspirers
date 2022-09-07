@@ -5,35 +5,32 @@
 - Current name: INSPIRERS(Trademark Pending)
 - Kind: FullStack Application(built using next.js)
 - Creator: E-man
-- Contributors: Ladu-man, Kon-AK,
+- Contributors: La
 - Executive Supervisor: COCO.
-- Main gitHub branch: (https://github.com/Emmanuel-Melon/kuwinda.git)
-- Database: SQL database provided by planetscale
+- Main gitHub branch: (https://github.com/Emmanuel-Melon/inspirers.git)
+- Database: PostgreSQL
 
 ## Frameworks used in project;
 
 - [Next.js(Entire App)](https://next.js.com/)
-- [React.js(Front-End)](https://react.js.com/)
 
 ## Languages used;
 
-- Typescript (97%)
-- Javascript (3%)
-
-## Coding Format used;
+- Typescript 
+- Javascript 
 
 ## Database(SQL database);
 
-Database located on planet scale at [planet scale](https://planetscale.com/)
+PostgreSQL.
 
 ## Cloning the project;
 
 Using Terminal
 Go to terminal and insert command into your desired destination.;
-`gh repo clone Emmanuel-Melon/kuwinda`
+`gh repo clone Emmanuel-Melon/inspirers`
 
 Using Code Editor
-Clone from : `https://github.com/Emmanuel-Melon/kuwinda.git`
+Clone from : `https://github.com/Emmanuel-Melon/inspirers.git`
 
 ## Setting up the project;
 
@@ -58,7 +55,7 @@ Follow the following steps to create a pull request;
 
 To make a contribution involving fixing issues with the project then one has to simply follow the following steps;
 
-1. Visit the project main branch at [main branch](https://github.com/Emmanuel-Melon/kuwinda).
+1. Visit the project main branch at [main branch](https://github.com/Emmanuel-Melon/inspirers).
 2. Select Issues header,
 3. Select an issue that you are capable of doing.
 4. Then submit a pull request addressing the issue in mind

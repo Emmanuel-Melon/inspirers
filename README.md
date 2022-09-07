@@ -5,28 +5,31 @@ Achieve your dreams and inspire others
 
 - Ready to become a legend in your own right? The journey begins here , at Inspirers.
 
-# 🎉🎉 **Welcome to the Inspirers project** 🎉🎉
-
 ## Table of contents
 
 - [Inspirers](#inspirers)
-- [🎉🎉 **Welcome to the Inspirers project** 🎉🎉](#-welcome-to-the-inspirers-project-)
-  - [Table Of Contents](#table-of-contents)
+  - [Table of contents](#table-of-contents)
     - [Things to learn](#things-to-learn)
   - [Frontend Technologies](#frontend-technologies)
   - [Backend Technologies](#backend-technologies)
-  - [Installation](#installation)
-    - [Setup](#setup)
-  - [Root](#root)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+    - [Database](#database)
+      - [MacOS](#macos)
+      - [Via Docker](#via-docker)
+        - [Pull Docker Image](#pull-docker-image)
+        - [Run Container](#run-container)
+        - [Expose Container](#expose-container)
+  - [Directory Structure](#directory-structure)
     - [Apps](#apps)
-      - [Api](#api)
-      - [Docs](#docs)
-      - [Web](#web)
+        - [API](#api)
+        - [DOCS](#docs)
+        - [Web](#web)
     - [Packages](#packages)
-      - [prisma](#prisma)
-      - [tsconfig](#tsconfig)
-      - [Types](#types)
-      - [UI](#ui)
+        - [prisma](#prisma)
+        - [tsconfig](#tsconfig)
+        - [Types](#types)
+        - [UI](#ui)
     - [Contribution.md](#contributionmd)
     - [Package.json](#packagejson)
   - [App capabilities](#app-capabilities)
@@ -48,12 +51,12 @@ We use the following tech stack in the frontend part of the project:
 For the backend stack, we use:
 
 - [REST APIs with Express.js](https://www.expressjs.com/): We use Express.js framework which is a back-end framework that runs on node.js to build fast scalable APi's.
-- [Node.js](https://www.nodejs.org/): We use node js as our runtime.
+- [Node.js](https://www.nodejs.org/): We use Node.js as our runtime.
 - [MySQL](https://www.mysql.com/): We use MySQL as our database and store all the data used in the app in a MySQL database located on planetscale.
 - [PlanetScale](https://www.planetscale.com): **PlanetScale** is now the most scalable MySQL platform. And is what we use as the host of our MySQL database.
 - [Prisma](https://www.prisma.io/): We use prisma as our ORM.
 
-## Installation
+## Requirements
 
 Before we install the project, Here is what you need to be able to run Inspirers:
 
@@ -64,7 +67,7 @@ Before we install the project, Here is what you need to be able to run Inspirers
 - [Yarn (recommended)](https://yarnpkg.com/getting-started/install) - a Node packaging manager 📦
 - Code Editor ([VS Code](https://code.visualstudio.com/download), [Atom](https://flight-manual.atom.io/getting-started/sections/installing-atom/), [Vim](https://www.vim.org/download.php), [Bracket](http://brackets.io/), etc)
 
-#### Setup
+## Setup
 
 1. Clone the project
 
@@ -84,7 +87,35 @@ Before we install the project, Here is what you need to be able to run Inspirers
     nvm
 ```
 
-## Root
+### Database
+
+#### MacOS
+- Download and install the PostgreSQL app from [here](https://postgresapp.com/downloads.html).
+- Run the server.
+
+
+#### Via Docker
+
+##### Pull Docker Image
+
+```bash
+  docker pull postgres:alpine
+```
+
+##### Run Container
+
+```bash
+  docker run --name <name> -e POSTGRES_PASSWORD=<password> -d p
+ostgres-alpine
+```
+
+##### Expose Container
+
+```bash
+  docker exec -it <container_name> bash
+```
+
+## Directory Structure
 
 On the root of the project there are two main folders namely;
 

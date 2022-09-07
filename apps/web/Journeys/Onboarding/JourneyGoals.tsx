@@ -24,6 +24,7 @@ import { JourneyBluePrint } from "../components/JourneyBluePrint";
 import { client } from "../../utils/client";
 import Image from "next/image";
 import Router, { useRouter } from "next/router";
+import { RecommendedAccounts } from "./RecommendedAccounts";
 
 export const ThirdStepGuide = ({ guide }) => {
   const context = useContext(JourneyOnboardingContext);
@@ -157,49 +158,9 @@ export const ThirdStep = ({ onChange }) => {
     >
       <Flex direction="column" gap={4} borderRadius="1rem">
         <Heading size="md" color="brand.secondary">
-          People you may know
+          People you may knows!
         </Heading>
-        <Flex direction="column" gap={8} height="400px" overflowY="scroll">
-          {[].map((account) => {
-            return (
-              <Flex
-                gap={4}
-                borderRadius="1rem"
-                justifyContent="space-between"
-                width="100%"
-              >
-                <Flex alignItems="flex-start" gap={4} direction="column">
-                  <Flex gap={2} alignItems="center">
-                    <Avatar src={account.avatar} />
-                    <VStack alignItems="flex-start">
-                      <Heading size="sm">{account.name}</Heading>
-                      <Text>{account.bio}</Text>
-                    </VStack>
-                  </Flex>
-                </Flex>
-                <Button onClick={() => {}} width="fit-content">
-                  Follow
-                </Button>
-              </Flex>
-            );
-          })}
-
-          <Text>
-            The Inspirers app helps you stay motivated by connecting with groups
-            of people with similar goals.
-          </Text>
-          <Flex>
-            <Image
-              height="200"
-              width="200"
-              alt="start journey"
-              src={
-                "https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948628/inspirers/images/1a595af8-d3e7-4b77-bef6-420b4836a3ad.png"
-              }
-            />
-          </Flex>
-          <Text>There are no accounts to follow at the moment.</Text>
-        </Flex>
+        <RecommendedAccounts />
       </Flex>
 
       <Flex width="200">

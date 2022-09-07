@@ -25,11 +25,11 @@ export function handleError(
 
 export function catchErrors(
   error: Error,
-  _req: Request,
+  req: Request,
   res: Response,
   _next: NextFunction
 ): Response {
-  return res.status(500).json({ message: "Something went wrong" });
+  return res.status(res.statusCode || 500).json({ message: error.message || "Something went wrong" });
 }
 
 export class AuthenticationError extends BaseError {}

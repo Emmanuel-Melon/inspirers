@@ -8,7 +8,7 @@ import InspirersCustomAdapter from "lib/custom-prisma-adapter";
 
 const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
-  adapter: inspirersAdapter,
+  adapter: PrismaAdapter(prisma),
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID || "",

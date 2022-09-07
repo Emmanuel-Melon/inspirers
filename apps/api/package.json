@@ -4,16 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "api": "nodemon src/app.ts",
-    "dev": "concurrently \"yarn pscale-connect\" \"yarn api\"",
-    "pscale-connect": "pscale connect biti dev --port 3309",
-    "start": "ts-node ./src/app.ts",
+    "api": "nodemon src/server.ts",
+    "dev": "concurrently \"yarn api\"",
+    "db-connect": "pscale connect biti dev --port 3309",
+    "start": "ts-node ./src/server.ts",
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json",
     "socket": "nodemon src/lib/socket.ts",
-    "test": ""
+    "test": "jest --testTimeout=10000"
   },
   "devDependencies": {
+    "@types/jest": "^29.0.0",
     "@types/node": "^17.0.12",
     "concurrently": "^7.3.0",
     "eslint": "7.32.0",
@@ -42,6 +43,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "netlify-lambda": "^2.0.15",
+    "pg": "^8.8.0",
     "redis": "^4.2.0",
     "serverless-http": "^3.0.1",
     "socket.io": "^4.5.1",
