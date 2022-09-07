@@ -305,8 +305,8 @@ model ConnectionRequest {
   updatedAt   DateTime?               @default(now())
   deletedAt   DateTime?               @default(now())
   acceptedAt  DateTime?
-  requesterId String
-  requesteeId String
+  requesterId String @unique
+  requesteeId String @unique
   note        String?
   accepted    Boolean                 @default(false)
   status      ConnectionRequestStatus @default(Pending)
@@ -316,4 +316,5 @@ model ConnectionRequest {
 model UserConnections {
   id     String @id @default(cuid())
   userId String
+  connectionId String
 }

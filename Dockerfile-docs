@@ -61,4 +61,4 @@ EXPOSE ${NEXTJS_APP_PORT:-3001}
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # CMD ["npm", "run", "start"]
-RUN yarn start
+# RUN yarn start

@@ -7,11 +7,13 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --scope=docs",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "gcp-build": "tsc -p .",
+    "deploy": "gcloud app deploy"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

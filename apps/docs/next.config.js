@@ -16,7 +16,6 @@ module.exports = withTM({
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["cloudinary.com/", "res.cloudinary.com"],
+    domains: ["cloudinary.com/", "res.cloudinary.com"]
   },
-  output: 'standalone',
 });

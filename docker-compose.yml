@@ -54,12 +54,9 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile-web
-    image: web
+      dockerfile: Dockerfile-app
     ports:
-      - 3000:3000
-    depends_on:
-      - api
+      - 3001:3001
     env_file: .env
 volumes:
   db:
