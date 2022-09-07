@@ -106,7 +106,7 @@ ostgres-alpine
 ##### Expose Container
 
 ```bash
-  docker exec -it postgres-0 bash
+  docker exec -it <container_name> bash
 ```
 
 ## Directory Structure

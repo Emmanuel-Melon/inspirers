@@ -50,3 +50,11 @@ export const listConnections = (userId: string): Promise<Connection[]> => {
     throw new Error("something broke!");
   }
 };
+
+export const listRecommendations = (userId: string): Promise<any[]> => {
+  try {
+    return prisma.user.findMany({});
+  } catch (err) {
+    throw new Error("something broke!");
+  }
+};

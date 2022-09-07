@@ -5,6 +5,7 @@ import {
   listConnections,
   listIncomingRequests,
   listOutgoingRequests,
+  listRecommendations
 } from "./operations/list";
 import { validateRequest } from "./validation";
 import { respondToRequest } from "./operations/update";
@@ -45,6 +46,15 @@ connectionsRouter.get(
   "/:userId/outgoing",
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(listOutgoingRequests(req.params.userId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+connectionsRouter.get(
+  "/:userId/recommendations",
+  (req: Request, res: Response, next: NextFunction) => {
+    return Promise.resolve(listRecommendations(req.params.userId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
