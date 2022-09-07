@@ -15,6 +15,7 @@ Achieve your dreams and inspire others
   - [Requirements](#requirements)
   - [Setup](#setup)
     - [Database](#database)
+      - [MacOS](#macos)
       - [Via Docker](#via-docker)
         - [Pull Docker Image](#pull-docker-image)
         - [Run Container](#run-container)
@@ -87,6 +88,11 @@ Before we install the project, Here is what you need to be able to run Inspirers
 ```
 
 ### Database
+
+#### MacOS
+- Download and install the PostgreSQL app from [here](https://postgresapp.com/downloads.html).
+- Run the server.
+
 
 #### Via Docker
 

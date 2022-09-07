@@ -53,7 +53,7 @@ export const listConnections = (userId: string): Promise<Connection[]> => {
 
 export const listRecommendations = (userId: string): Promise<any[]> => {
   try {
-    return prisma.user.findMany({});
+    return prisma.recommendedConnections.findMany({});
   } catch (err) {
     throw new Error("something broke!");
   }

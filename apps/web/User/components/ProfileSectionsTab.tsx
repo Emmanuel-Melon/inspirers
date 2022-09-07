@@ -74,7 +74,7 @@ export const ProfileSectionsTab = () => {
         >
           <CustomTab icon={<FiCompass />}>Journeys</CustomTab>
           <CustomTab icon={<FiActivity />}>Activity</CustomTab>
-          <CustomTab icon={<FiUsers />}>Mentees</CustomTab>
+          <CustomTab icon={<FiUsers />}>Companions</CustomTab>
           <CustomTab icon={<FiClipboard />}>Tasks</CustomTab>
           <CustomTab icon={<FiShoppingBag />}>Backpacks</CustomTab>
         </TabList>
@@ -101,7 +101,7 @@ export const ProfileSectionsTab = () => {
           <TabPanel p="none">
             <WhatToDisplay
               status="off"
-              panelTitle="Mentees"
+              panelTitle="Companions"
               url={EmptyStateImages.MenteesEmptyStateImage}
               input={<ListUsers users={[]} />}
             />

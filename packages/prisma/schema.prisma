@@ -187,6 +187,7 @@ model User {
   identityProviderId String?
   Journey            Journey[]
   ConnectionRequest  ConnectionRequest[]
+  journeyLimit Int @default(1)
 }
 
 enum ResourceType {
@@ -274,23 +275,23 @@ enum ConnectionStatus {
 }
 
 model ConnectionInteraction {
-  id         String       @id @default(cuid())
-  createdAt  DateTime?    @default(now())
-  updatedAt  DateTime?    @default(now())
-  deletedAt  DateTime?    @default(now())
-  weight     Int
+  id           String    @id @default(cuid())
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @default(now())
+  deletedAt    DateTime? @default(now())
+  weight       Int
   connectionId String
 }
 
 model Connection {
-  id                      String                @id @default(cuid())
-  createdAt               DateTime?             @default(now())
-  updatedAt               DateTime?             @default(now())
-  deletedAt               DateTime?             @default(now())
-  status                  ConnectionStatus
-  affinityScore           Int @default(0)
-  user1 String
-  user2 String
+  id            String           @id @default(cuid())
+  createdAt     DateTime?        @default(now())
+  updatedAt     DateTime?        @default(now())
+  deletedAt     DateTime?        @default(now())
+  status        ConnectionStatus
+  affinityScore Int              @default(0)
+  user1         String
+  user2         String
 }
 
 enum ConnectionRequestStatus {
@@ -305,8 +306,8 @@ model ConnectionRequest {
   updatedAt   DateTime?               @default(now())
   deletedAt   DateTime?               @default(now())
   acceptedAt  DateTime?
-  requesterId String @unique
-  requesteeId String @unique
+  requesterId String                  @unique
+  requesteeId String                  @unique
   note        String?
   accepted    Boolean                 @default(false)
   status      ConnectionRequestStatus @default(Pending)
@@ -314,7 +315,12 @@ model ConnectionRequest {
 }
 
 model UserConnections {
-  id     String @id @default(cuid())
-  userId String
+  id           String @id @default(cuid())
+  userId       String
   connectionId String
+}
+
+model RecommendedConnections {
+  id String @id @default(cuid())
+  userId String
 }

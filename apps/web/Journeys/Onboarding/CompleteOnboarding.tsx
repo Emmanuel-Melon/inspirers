@@ -101,7 +101,7 @@ export const FourthStep = () => {
         <Tag bg="brand.highlight2">Networking</Tag>
         <Tag bg="brand.white">Gaming</Tag>
       </Flex>
-      <Text fontWeight="700">People you may know</Text>
+      <Text fontWeight="700">People you may know!</Text>
       <Flex direction="column" gap={8}>
         {accounts.map((account) => {
           return (

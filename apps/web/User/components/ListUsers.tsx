@@ -1,12 +1,16 @@
 import { Flex, VStack, Avatar, Text, Button, Heading } from "@chakra-ui/react";
 import { TaskObject } from "types/Task";
 import Image from "next/image";
+import { useFetch } from "../../hooks/useSwr";
 
 type ListUsersProps = {
   users: TaskObject[];
 };
 
 export const ListUsers = ({ users }: ListUsersProps) => {
+  const { data, isLoading, isError } = useFetch('/connections/cl7roxqwu000865btoyx4lw1h/');
+  console.log(data);
+  console.log(isLoading);
   return (
     <VStack
       alignItems="flex-start"
