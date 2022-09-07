@@ -136,14 +136,9 @@ const JourneyQuestions = ({
   defaultValue,
   name,
 }: JourneyQuestionsProps) => {
-  // const [value, setValue] = React.useState([]);
-
   const { value, getCheckboxProps } = useCheckboxGroup({
     defaultValue: ["2"],
   });
-
-  console.log(name);
-  console.log(value);
 
   return (
     <VStack alignItems="flex-start">

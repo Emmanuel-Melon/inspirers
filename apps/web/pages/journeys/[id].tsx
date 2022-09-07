@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
 import { PersonalJourney } from "../../Journeys/components/personal";
 import { JourneyEditor } from "../../Journeys/components/editor";
+import { Spinner } from "ui";
 
 export default function Journey(props) {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function Journey(props) {
     <Flex width="100%" gap={8} direction="column" height="100%">
       <JourneyOverviewCard user={props.user} journey={data?.data} />
 
-      {!isLoading ? <JourneyEditor journey={data?.data} /> : <p>Loading</p>}
+      {!isLoading ? <JourneyEditor journey={data?.data} /> : <Spinner /> }
     </Flex>
   );
 }

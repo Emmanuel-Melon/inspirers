@@ -82,10 +82,10 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
 
       signIn("email", { email: user.login })
         .then((res) => {
-          console.log(res);
+
         })
         .catch((err) => {
-          console.log(err);
+  
         });
       /**
              * const account = await client.post("/users/login", {
@@ -97,7 +97,6 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
 
       router.push("/");
     } else {
-      console.log(user);
       signIn("email", {
         email: user.login,
         redirect: false,
@@ -187,7 +186,6 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
             {providers &&
               Object.values(providers).map((provider) => {
                 const style = getProviderStyles(provider?.name);
-                console.log(style);
                 return (
                   <Button
                     bg={style?.bg || "brand.white"}

@@ -1,5 +1,6 @@
 import { NextFunction, Response, Router, Request } from "express";
 import { getUserById, modifyUser } from "./controller";
+import { updateUser } from "./operations/update";
 const userRouter = Router();
 
 userRouter.get(
@@ -14,7 +15,7 @@ userRouter.get(
 userRouter.put(
   "/:userId",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(modifyUser(req.params.userId, req.body))
+    return Promise.resolve(updateUser(req.params.userId, req.body))
       .then((data) => res.json({ data }))
       .catch(next);
   }

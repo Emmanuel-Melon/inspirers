@@ -88,8 +88,7 @@ export default function Layout({ children }: LayoutProps) {
                   {labels ? <Text>Home</Text> : null}
                 </Flex>
               </Link>
-
-              <Link href={`/user/1`}>
+              <Link href={`/user/${session?.user?.id}`}>
                 <Flex
                   direction="column"
                   alignItems="center"

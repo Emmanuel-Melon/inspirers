@@ -24,8 +24,8 @@ export const UserProfileCard = ({ user }) => {
       width="100%"
     >
       <Flex gap={4} justifyContent="space-between" direction="column">
-        <Flex gap={2} justifyContent="space-between">
-          <Flex gap={2}>
+        <Flex gap={2} justifyContent="space-between" alignItems="center">
+          <Flex gap={2} alignItems="center">
             <Avatar
               src={
                 user?.image ||
@@ -36,45 +36,42 @@ export const UserProfileCard = ({ user }) => {
               <Heading color="brand.primary" size="sm">
                 {user?.name}
               </Heading>
-              <Text>@guest</Text>
+              <Text color="brand.accent"  size="sm">@{user?.username}</Text>
             </VStack>
           </Flex>
           <Button
-            bg="brand.white"
-            color="brand.primaryText"
-            onClick={() => {}}
+            onClick={() => { }}
             icon={<FiEdit3 />}
             size="sm"
           >
-            Create Profile
+            Edit Profile
           </Button>
         </Flex>
-        <VStack alignItems="flex-start" width="100%">
+
+        <VStack alignItems="flex-start" width="100%" gap={4}>
           <Flex gap={4}>
             <Text>
               <Box as="span" color="brand.secondary" fontWeight="700">
                 0
               </Box>{" "}
-              following
-            </Text>
-            <Text>
-              <Box as="span" color="brand.secondary" fontWeight="700">
-                0
-              </Box>{" "}
-              followers
+              Connections
             </Text>
           </Flex>
           <Flex gap={2} flexWrap="wrap">
-            <Tag bg="brand.highlight"></Tag>
-            <Tag bg="brand.highlight1"></Tag>
-            <Tag bg="brand.highlight"></Tag>
+            <Tag bg="brand.highlight">Interest</Tag>
+            <Tag bg="brand.highlight1">Interest</Tag>
+            <Tag bg="brand.highlight">Interest</Tag>
           </Flex>
-          <Flex gap={4} flexWrap="wrap" py="2">
-            <FiFacebook size="1.5rem" />
-            <FiTwitter size="1.5rem" />
-            <FiLinkedin size="1.5rem" />
-          </Flex>
+          <VStack alignItems="flex-start">
+            <Heading size="sm">Socials</Heading>
+            <Flex gap={4} flexWrap="wrap" py="2">
+              <FiFacebook size="1.5rem" />
+              <FiTwitter size="1.5rem" />
+              <FiLinkedin size="1.5rem" />
+            </Flex>
+          </VStack>
         </VStack>
+        <Text>{user?.bio}</Text>
       </Flex>
     </Flex>
   ) : (
@@ -95,13 +92,13 @@ export const UserProfileCard = ({ user }) => {
               <Heading color="brand.primary" size="sm">
                 {user.name}
               </Heading>
-              <Text>@junubiman</Text>
+              <Text>@{user.username}</Text>
             </VStack>
           </Flex>
           <Button
             bg="brand.white"
             color="brand.primaryText"
-            onClick={() => {}}
+            onClick={() => { }}
             icon={<FiEdit3 />}
             size="sm"
           >

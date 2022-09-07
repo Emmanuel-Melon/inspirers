@@ -5,16 +5,22 @@ import { UserBioCard } from "../../User/components/UserBioCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { ProfileSectionsTab } from "../../User/components/ProfileSectionsTab";
+import { useRouter } from "next/router";
+import { useFetch } from "../../hooks/useSwr";
 
 export default function UserProfile(props) {
+  const router = useRouter();
+  console.log(router.asPath);
+  const { data, isLoading, isError } = useFetch(`/users/${props.user.id}`) || {};
+  console.log(data);
   return (
     <Flex width="100%" gap={8} height="100%">
       <VStack alignItems="flex-start" width="35%">
-        <UserProfileCard user={props.user} />
-        <UserBasicInfo user={props.user} />
-        <UserBioCard user={props.user} />
+        <UserProfileCard user={data?.data} />
+        <UserBasicInfo user={data?.data} />
+        <UserBioCard user={data?.data} />
       </VStack>
-      <ProfileSectionsTab user={props.user} />
+      <ProfileSectionsTab user={data?.data} />
     </Flex>
   );
 }

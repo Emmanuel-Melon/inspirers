@@ -10,6 +10,7 @@ import { AddBackPackItemModal } from "./AddBackPackItemModal";
 import { AddTaskModal } from "Tasks/components/AddTaskModal";
 
 export const PersonalJourney = ({ journey }) => {
+  console.log(journey);
 
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,12 +23,10 @@ export const PersonalJourney = ({ journey }) => {
   }
 
   function handleTaskClick() {
-    setView("task");
     openModal();
   }
 
   function handleBackpackClick() {
-    setView("backpack");
     openModal();
   }
 
@@ -71,17 +70,32 @@ export const PersonalJourney = ({ journey }) => {
                 Add a task
               </Button>
             </VStack>
-            <TaskList
-              tasks={journey.tasks}
-              journey={journey}
-              addTask={addTask}
-            />
-            <Text>Create your own unique action plan for success with Inspirers. We help you organize your goals in a way that works for you.</Text>
-            <Button onClick={handleTaskClick} icon={<FiPlus />} >Add a task</Button>
-            </Flex>
+          </Flex>
+          <Flex gap={4}>
+            <VStack alignItems="flex-start" width="40%" gap={4}>
+              <Heading size="md">Backpack</Heading>
+              <Text>
+              Immerse yourself in the world of resources and transformation with Inspirers. It's a beautiful, exciting place to be.
+              </Text>
+              <Button onClick={openModal} icon={<FiPlus />}>
+                Pack Resources
+              </Button>
+            </VStack>
+          </Flex>
+          <Flex gap={4}>
+            <VStack alignItems="flex-start" width="40%" gap={4}>
+              <Heading size="md">Reflections</Heading>
+              <Text>
+                Create your own unique action plan for success with Inspirers.
+                We help you organize your goals in a way that works for you.
+              </Text>
+              <Button onClick={openModal} icon={<FiPlus />}>
+                Reflect
+              </Button>
+            </VStack>
+          </Flex>
         </VStack>
-        <TaskList tasks={journey.tasks} journey={journey} addTask={addTask} />
-    </VStack>
+      </VStack>
     </>
   );
 };
