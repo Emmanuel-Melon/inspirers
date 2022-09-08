@@ -328,9 +328,33 @@ model RecommendedConnections {
   userId String
 }
 
+enum NotificationTriggers {
+  Event
+  Warning
+}
+
+enum NotificationChannels {
+  Mail
+  SMS
+  InApp
+  Push
+}
+
+enum NotificationFeedback {
+  ReadOnly
+  Write
+}
+
 model Notification {
   id        String    @id @default(cuid())
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now())
   deletedAt DateTime? @default(now())
+  senderId String
+  receiverId String
+}
+
+model NotificationPreferences {
+  id        String    @id @default(cuid())
+  email Boolean @default(false)
 }

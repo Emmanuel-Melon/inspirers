@@ -12,3 +12,6 @@ export const pushNotificationsQueue = create<any>(Queues.PushNotifications);
 
 export const pushEmail: Enqueue<MailDataRequired> = message =>
   emailsQueue.add(message, { removeOnComplete: true });
+
+  export const pushIntoEvents: Enqueue<any> = message =>
+  eventsQueue.add(message, { removeOnComplete: false });

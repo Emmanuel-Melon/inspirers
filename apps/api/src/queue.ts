@@ -1,4 +1,4 @@
-import * as Bull from "bull";
+import Bull from "bull";
 
 import { redisHost } from "./config";
 
