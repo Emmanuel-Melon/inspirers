@@ -352,6 +352,7 @@ model Notification {
   deletedAt DateTime? @default(now())
   senderId String
   receiverId String
+  read Boolean @default(false)
 }
 
 model NotificationPreferences {

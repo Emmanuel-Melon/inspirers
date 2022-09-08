@@ -6,6 +6,11 @@ export const listNotifications = (userId: string): Promise<Notification[]> => {
       where: {
         receiverId: userId,
       },
+      orderBy: [
+        {
+          createdAt: "desc",
+        }
+      ]
     });
   } catch (error) {
     return Promise.reject(error);
