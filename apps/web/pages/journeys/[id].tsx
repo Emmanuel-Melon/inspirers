@@ -14,7 +14,7 @@ export default function Journey(props) {
   const router = useRouter();
 
   const [started, _setStarted] = useState<boolean>(false);
-  const { data, isLoading, isError } = useFetch(`${router.asPath}`);
+  const { data: journey, isLoading, isError } = useFetch(`${router.asPath}`);
 
   if (router.isFallback) {
     return <Text color="brand.primary">Processing Request</Text>;
@@ -24,41 +24,44 @@ export default function Journey(props) {
     return <Text>An error has occured</Text>;
   }
 
-  if (data?.data?.userId === props.user?.id) {
+  if (journey.userId === props.user?.id) {
     return (
       <Stack gap={4} width="100%">
-        <JourneyOverviewCard user={props.user} journey={data?.data} />
-        <PersonalJourney journey={data?.data} />
+        <JourneyOverviewCard user={props.user} journey={journey} />
+        <PersonalJourney journey={journey} />
       </Stack>
     );
   }
 
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
-      <JourneyOverviewCard user={props.user} journey={data?.data} />
+      <JourneyOverviewCard user={props.user} journey={journey} />
 
-      {!isLoading ? <JourneyEditor journey={data?.data} /> : <Spinner /> }
+      {!isLoading ? <JourneyEditor journey={journey} /> : <Spinner />}
     </Flex>
   );
 }
 
 export async function getServerSideProps(context) {
-  const { session, user } = await unstable_getServerSession(
+  const session = await unstable_getServerSession(
     context.req,
     context.res,
     authOptions
   );
-  const { email, name, image, bio } = session?.user || {};
-  const { id } = user || {};
+  const { createdAt, ...user } = session?.user;
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      user: {
-        id: id || null,
-        email: email || null,
-        name: name || null,
-        bio: bio || null,
-        image: image || null,
-      },
+      user
     },
   };
 }

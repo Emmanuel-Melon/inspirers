@@ -9,8 +9,6 @@ type ListUsersProps = {
 
 export const ListUsers = ({ users }: ListUsersProps) => {
   const { data, isLoading, isError } = useFetch('/connections/cl7roxqwu000865btoyx4lw1h/');
-  console.log(data);
-  console.log(isLoading);
   return (
     <VStack
       alignItems="flex-start"

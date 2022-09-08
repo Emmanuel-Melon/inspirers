@@ -3,16 +3,23 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@inspirers/prisma";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import InspirersCustomAdapter from "lib/custom-prisma-adapter";
+import { 
+  facebokClientId,
+  facebokClientSecret,
+  secret 
+} from "config";
 
 const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
+
     FacebookProvider({
-      clientId: process.env.FACEBOOK_ID || "",
-      clientSecret: process.env.FACEBOOK_SECRET || "",
+      clientId: facebokClientId,
+      clientSecret: facebokClientSecret,
     }),
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -24,7 +31,7 @@ export const authOptions = {
     }),
   ],
   database: process.env.DATABASE_URL,
-  secret: process.env.SECRET,
+  secret,
   pages: {
     signIn: "/auth", // Displays signin buttons
     // signOut: "/auth/signout", // Displays form with sign out button
@@ -57,16 +64,20 @@ export const authOptions = {
     // }
     /**
      * ,
-    async jwt(token, user, account, profile, isNewUser) { 
-      const isUserSignedIn = user ? true : false;
+     */
+     async jwt({ token, user, account, profile, isNewUser }) { 
+      console.log('got data!');
+
+      /**
+       *       const isUserSignedIn = user ? true : false;
       // make a http call to our graphql api
       // store this in postgres
       if(isUserSignedIn) {
         token.id = user.id.toString();
       }
-      return Promise.resolve(token);
+       */
+      return token;
     }
-     */
   },
   debug: true,
 };

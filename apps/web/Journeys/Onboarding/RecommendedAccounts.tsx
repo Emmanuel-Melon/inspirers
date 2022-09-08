@@ -14,7 +14,6 @@ import { useFetch } from "../../hooks/useSwr";
 
 export const RecommendedAccounts = () => {
     const { data, isLoading, isError } = useFetch('/connections/cl7roxqwu000865btoyx4lw1h/recommendations');
-    console.log(data);
     return (
         <>
         <Flex direction="column" gap={8} height="400px" overflowY="scroll">

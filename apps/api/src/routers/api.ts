@@ -10,7 +10,7 @@ import users from "../users/router";
 
 const router = Router();
 
-// router.use(authenticate);
+router.use(authenticate);
 router.use("/backpacks", backpacks);
 router.use("/connections", connections);
 router.use("/users", users);

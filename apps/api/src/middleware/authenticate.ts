@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import * as jwt from "jsonwebtoken";
+import { sign, verify } from 'jsonwebtoken';
 
 import { getUserById } from "../users/controller";
 
@@ -14,21 +14,27 @@ export default function authenticate(
   const tokenInQuery = req.query.access_token;
   const tokenInHeader = req.header("Authorization") || "";
   const token = tokenInQuery || tokenInHeader.replace(/Bearer\s+/, "");
+  // console.log(tokenInHeader);
 
   if (!token) {
-    console.log("hey");
     res.status(401).json({ message: "unauthorized" });
   }
 
   if (token) {
+    // console.log(token);
     return Promise.resolve()
-      .then(() => jwt.verify(token, secret) as { id: string })
-      .then(({ id }) => {
-        return getUserById(id).then((user) => {
-          req.user = user;
-          return next();
+      .then(() => {
+        const res = verify(token, secret, {
+          algorithms: ["RS256"]
         });
+        return res
       })
-      .catch(handleError(res, 401, "Your session has expired"));
+      .then((res) => {
+
+      })
+      .catch(e => {
+        console.log(e);
+        handleError(res, 401, "unauthorized");
+      });
   }
 }

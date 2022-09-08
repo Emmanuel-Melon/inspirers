@@ -49,7 +49,8 @@ export interface Credentials {
 }
 
 export const loginUser = async (credentials: Credentials) => {
-  return prisma.user
+  try {
+    return prisma.user
     .findUnique({
       where: { email: credentials.email },
     })
@@ -71,4 +72,7 @@ export const loginUser = async (credentials: Credentials) => {
           return Promise.resolve(jwt.sign(user, secret));
         });
     });
+  } catch (err) {
+
+  }
 };

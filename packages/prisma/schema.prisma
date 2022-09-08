@@ -174,7 +174,7 @@ enum UserPermissionRole {
 model User {
   id                 String              @id @default(cuid())
   name               String?
-  username String?
+  username           String?             @unique
   image              String?
   email              String              @unique
   createdAt          DateTime?           @default(now())
@@ -188,9 +188,9 @@ model User {
   identityProviderId String?
   Journey            Journey[]
   ConnectionRequest  ConnectionRequest[]
-  journeyLimit Int @default(1)
-  location String?
-  occupation String?
+  journeyLimit       Int                 @default(1)
+  location           String?
+  occupation         String?
 }
 
 enum ResourceType {
@@ -324,6 +324,6 @@ model UserConnections {
 }
 
 model RecommendedConnections {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String
 }
