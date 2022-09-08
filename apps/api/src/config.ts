@@ -6,3 +6,4 @@ export const arenaPort: string = process.env.NODE_ENV || "development";
 export const redisHost: string = process.env.NODE_ENV || "development";
 export const redisPassword: string = process.env.NODE_ENV || "development";
 export const redisPort: string = process.env.NODE_ENV || "development";
+export const sendGridAPIKey: string = process.env.SENDGRID_API_KEY || "sendgrid";
