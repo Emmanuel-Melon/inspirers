@@ -14,7 +14,8 @@
     "test": "jest --testTimeout=10000",
     "start:arena": "ts-node ./src/arena.ts",
     "work": "ts-node ./src/start.ts",
-    "work:events": "ts-node ./src/notifications/worker.ts"
+    "work:events": "ts-node ./src/events/worker.ts",
+    "work:notification": "ts-node ./src/notifications/worker.ts"
   },
   "devDependencies": {
     "@types/bull": "^3.15.9",

@@ -17,7 +17,7 @@ export const establishConnection = async (connection) => {
         const res = await prisma.connection.create({
             data: connection
           });
-          console.log(connection);        
+          return res;       
     } catch (err) {
 
     }

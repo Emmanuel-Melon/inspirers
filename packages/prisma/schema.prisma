@@ -172,26 +172,26 @@ enum UserPermissionRole {
 }
 
 model User {
-  id                 String              @id @default(cuid())
-  name               String?
-  username           String?             @unique
-  image              String?
-  email              String              @unique
-  createdAt          DateTime?           @default(now())
-  bio                String?
-  password           String?
-  emailVerified      Boolean?            @default(false)
-  login              String?
-  Account            Account[]
-  Session            Session[]
-  identityProvider   IdentityProvider    @default(GITHUB)
-  identityProviderId String?
-  Journey            Journey[]
-  ConnectionRequest  ConnectionRequest[]
-  journeyLimit       Int                 @default(1)
-  location           String?
-  occupation         String?
-  UserNotifications  UserNotifications[]
+  id                    String                  @id @default(cuid())
+  name                  String?
+  username              String?                 @unique
+  image                 String?
+  email                 String                  @unique
+  createdAt             DateTime?               @default(now())
+  bio                   String?
+  password              String?
+  emailVerified         Boolean?                @default(false)
+  login                 String?
+  Account               Account[]
+  Session               Session[]
+  identityProvider      IdentityProvider        @default(GITHUB)
+  identityProviderId    String?
+  Journey               Journey[]
+  ConnectionRequest     ConnectionRequest[]
+  journeyLimit          Int                     @default(1)
+  location              String?
+  occupation            String?
+  NotificationRecepient NotificationRecepient[]
 }
 
 enum ResourceType {
@@ -339,6 +339,8 @@ enum NotificationTrigger {
   Comment
   Share
   AcceptedConnection
+  Reminder
+  System
 }
 
 enum NotificationChannel {
@@ -361,27 +363,29 @@ enum NotificationState {
 }
 
 model Notification {
-  id                String              @id @default(cuid())
-  createdAt         DateTime?           @default(now())
-  updatedAt         DateTime?           @default(now())
-  deletedAt         DateTime?           @default(now())
-  senderId          String
-  receiverId        String
-  trigger           NotificationTrigger
-  channel           NotificationChannel
-  message           String
-  interactive       Boolean             @default(true)
-  url               String?
-  state             NotificationState @default(Unread)
-  UserNotifications UserNotifications[]
+  id          String                  @id @default(cuid())
+  createdAt   DateTime?               @default(now())
+  updatedAt   DateTime?               @default(now())
+  deletedAt   DateTime?               @default(now())
+  senderId    String
+  receiverId  String
+  trigger     NotificationTrigger
+  channel     NotificationChannel
+  message     String
+  title       String
+  interactive Boolean                 @default(true)
+  url         String?
+  state       NotificationState       @default(Unread)
+  Recepient   NotificationRecepient[]
 }
 
 model NotificationPreferences {
   id    String  @id @default(cuid())
   email Boolean @default(false)
+  userId String
 }
 
-model UserNotifications {
+model NotificationRecepient {
   id             String       @id @default(cuid())
   userId         String
   notificationId String
