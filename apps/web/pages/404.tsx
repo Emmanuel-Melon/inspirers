@@ -6,7 +6,7 @@ export default function ErrorPage404() {
   return (
     <Flex padding="8" alignItems="center" justifyContent="center">
       <Stack gap="4">
-        <Heading color="brand.primary">404 not found.</Heading>
+        <Heading color="brand.primary">404 Page not found.</Heading>
         <Text color="brand.primaryText">
           {" "}
           Try something else, Like going back Home : ){" "}

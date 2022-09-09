@@ -310,12 +310,14 @@ model ConnectionRequest {
   updatedAt   DateTime?               @default(now())
   deletedAt   DateTime?               @default(now())
   acceptedAt  DateTime?
-  requesterId String                  @unique
-  requesteeId String                  @unique
+  requesterId String
+  recepientId String
   note        String?
   accepted    Boolean                 @default(false)
   status      ConnectionRequestStatus @default(Pending)
   requester   User                    @relation(fields: [requesterId], references: [id])
+
+  @@unique([requesterId, recepientId])
 }
 
 model UserConnections {
@@ -368,7 +370,7 @@ model Notification {
   updatedAt   DateTime?               @default(now())
   deletedAt   DateTime?               @default(now())
   senderId    String
-  receiverId  String
+  recepientId String
   trigger     NotificationTrigger
   channel     NotificationChannel
   message     String
@@ -377,12 +379,16 @@ model Notification {
   url         String?
   state       NotificationState       @default(Unread)
   Recepient   NotificationRecepient[]
+  spam        Boolean                 @default(true)
+  muted       Boolean                 @default(true)
+  entityId    String
 }
 
 model NotificationPreferences {
-  id    String  @id @default(cuid())
-  email Boolean @default(false)
-  userId String
+  id                String                @id @default(cuid())
+  email             Boolean               @default(false)
+  userId            String
+  preferredChannels NotificationChannel[]
 }
 
 model NotificationRecepient {

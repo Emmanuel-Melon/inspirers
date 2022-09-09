@@ -16,6 +16,17 @@ notificationsRouter.get(
   }
 );
 
+notificationsRouter.put(
+  "/:notificationId",
+  (req: Request, res: Response, next: NextFunction) => {
+    return Promise.resolve(listNotifications(req.params.userId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+
+
 
 
 export default notificationsRouter;

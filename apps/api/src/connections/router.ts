@@ -10,7 +10,7 @@ import {
 import { validateRequest } from "./validation";
 import { respondToRequest } from "./operations/update";
 import { getConnectionById, getConnectionRequestById } from "./operations/read";
-import { pushIntoEvents } from "../enqueue";
+import { pushIntoEvents, pushNotificationsQueue } from "../enqueue";
 import { NotificationTrigger, NotificationChannel } from "@prisma/client";
 
 const connectionsRouter = Router();

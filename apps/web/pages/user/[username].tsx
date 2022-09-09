@@ -13,7 +13,7 @@ import { redirectUnauthorized } from 'utils/auth';
 
 export default function UserProfile() {
   const router = useRouter();
-  const { data: user, isLoading, isError } = useFetch(`/users/${router.query.username}`) || {};
+  const { data: user, isLoading, isError } = useFetch(`/users/${router.query.username}`);
 
   const openModal = () => { }
   return (

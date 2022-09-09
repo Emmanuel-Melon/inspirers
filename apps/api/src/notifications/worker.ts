@@ -14,7 +14,7 @@ queue.process(async job => {
   const channels = await prisma.notificationPreferences.findMany({});
 
 
-  return prisma.notification.create({
+  const notification = await prisma.notification.create({
     data: {
         senderId: "job.requesterId",
         receiverId: "job.requesteeId",
