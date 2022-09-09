@@ -45,12 +45,15 @@ export const Button: FC<ButtonProps> = ({
         border={border || "none"}
         disabled={disabled}
         bg={bg || "brand.primary"}
-        color={color || "brand.white"}
+        color={"brand.primaryText"}
         cursor="pointer"
         leftIcon={icon}
         _focus={{
           outline: "none",
           boxShadow: "none",
+        }}
+        _hover={{
+          bg: "brand.hovered"
         }}
       >
         {children}

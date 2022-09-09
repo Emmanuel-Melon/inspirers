@@ -10,6 +10,7 @@ import {
 import { validateRequest } from "./validation";
 import { respondToRequest } from "./operations/update";
 import { getConnectionById, getConnectionRequestById } from "./operations/read";
+import { pushIntoEvents } from "../enqueue";
 
 const connectionsRouter = Router();
 
@@ -18,6 +19,10 @@ connectionsRouter.post(
   validation(validateRequest),
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(connectionRequest(req.body))
+    .then(data => {
+      pushIntoEvents(data);
+      return data;
+    })
       .then((data) => res.json({ data }))
       .catch(next);
   }

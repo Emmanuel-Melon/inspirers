@@ -1,80 +1,32 @@
 import {
-  Avatar,
-  Image,
-  Img,
   Stack,
-  Text,
-  Link,
   Flex,
   Heading,
-  Box,
 } from "@chakra-ui/react";
-import { FiMoreHorizontal, FiBell } from "react-icons/fi";
-import { Button } from "ui";
-import { Card } from "ui";
-
-const events = [
-  {
-    id: 1,
-    sender: "Emmanuel",
-    body: "mentioned you",
-    subject: "hello",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg",
-  },
-  {
-    id: 2,
-    sender: "Emmanuel",
-    body: "mentioned you",
-    subject: "hello",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg",
-  },
-  {
-    id: 3,
-    sender: "Emmanuel",
-    body: "mentioned you",
-    subject: "hello",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg",
-  },
-  {
-    id: 4,
-    sender: "Emmanuel",
-    body: "mentioned you",
-    subject: "hello",
-    image:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg",
-  },
-];
+import { Button, Spinner } from "ui";
+import { useFetch } from "../../hooks/useSwr";
+import { FiCheckCircle } from "react-icons/fi";
+import { ListNotifications } from "Notifications/ListNotifications";
 
 export default function Notifications() {
+  const { data: notifications, isLoading, isError } = useFetch(`/notifications/job.requesteeId`);
+  const markAllAsRead = () => {}
   return (
-    <Stack gap={4} align="flex-start" color="brand.primaryText">
-      <Flex gap={2} alignItems="center">
-        <FiBell />
-        <Heading size="sm">Notifications</Heading>
+    <Stack gap={4} align="flex-start" color="brand.primaryText" width="100%">
+      <Flex gap={2} alignItems="center" justifyContent="space-between"  width="100%">
+        <Heading size="md" color="brand.primaryText">Notifications</Heading>
+        <Button 
+          icon={<FiCheckCircle />}
+          onClick={markAllAsRead}
+          size="md"
+        >
+          Mark all as read
+        </Button>
       </Flex>
       <Stack width={"100%"}>
-        {events.map((event) => (
-          <Card>
-            <Flex justifyContent="space-between">
-              <Flex gap={4} alignItems="center">
-                <Avatar src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1649189711/neno/avatars/icons8-walter-white.svg" />
-                <Text>
-                  <Box as="span" fontWeight="700" marginRight="2">
-                    {event.sender}
-                  </Box>
-                  {event.body}
-                </Text>
-              </Flex>
-              <Stack alignItems="flex-end">
-                <Text>3h</Text>
-                <FiMoreHorizontal />
-              </Stack>
-            </Flex>
-          </Card>
-        ))}
+        {
+          isLoading ? <Spinner /> : <ListNotifications notifications={notifications?.data}/>
+        }
       </Stack>
     </Stack>
   );

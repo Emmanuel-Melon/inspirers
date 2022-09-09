@@ -27,18 +27,18 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
       type={props.type}
       bg="brand.white"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-      borderRadius="1rem"
+      borderRadius="0.5rem"
       id={props.type}
       onChange={props.onChange}
-      focusBorderColor="brand.accent"
+      focusBorderColor="brand.secondary"
       _hover={{
-        background: "brand.highlight1",
+        background: "brand.hovered",
       }}
       _focus={{
         outline: "none",
         background: "brand.highlight",
       }}
-      _placeholder={{ opacity: 1, color: "brand.primary" }}
+      _placeholder={{ opacity: 1, color: "brand.secondary" }}
     />
   );
 };

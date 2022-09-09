@@ -64,7 +64,7 @@ export const ProfileSectionsTab = () => {
       alignItems="center"
       width="65%"
     >
-      <Tabs width="100%" defaultIndex={1} isLazy variant="unstyled">
+      <Tabs width="100%" defaultIndex={0} isLazy variant="unstyled">
         <TabList
           gap={4}
           bg="brand.highlight2"

@@ -5,15 +5,19 @@
   "license": "MIT",
   "scripts": {
     "api": "nodemon src/server.ts",
-    "dev": "concurrently \"yarn api\"",
+    "dev": "concurrently \"yarn api\" \"yarn start:arena\" \"yarn work\"",
     "db-connect": "pscale connect biti dev --port 3309",
     "start": "ts-node ./src/server.ts",
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json",
     "socket": "nodemon src/lib/socket.ts",
-    "test": "jest --testTimeout=10000"
+    "test": "jest --testTimeout=10000",
+    "start:arena": "ts-node ./src/arena.ts",
+    "work": "ts-node ./src/start.ts",
+    "work:events": "ts-node ./src/notifications/worker.ts"
   },
   "devDependencies": {
+    "@types/bull": "^3.15.9",
     "@types/jest": "^29.0.0",
     "@types/node": "^17.0.12",
     "concurrently": "^7.3.0",
@@ -54,6 +58,7 @@
     "socket.io": "^4.5.1",
     "ts-node": "^10.8.2",
     "uuid": "^8.3.2",
+    "web-push": "^3.5.0",
     "yup": "^0.32.11"
   }
 }
