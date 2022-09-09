@@ -4,13 +4,17 @@ import { NotificationTrigger, NotificationChannel } from "@prisma/client";
 
 
 
-const queue = withErrorHandling<any>(Queues.Event);
+const queue = withErrorHandling<any>(Queues.Notification);
 
 const notificationTemplates = [];
 
-queue.process(job => {
+queue.process(async job => {
   // create a notification object
-  return prisma.notification.create({
+  // get user notification preferences
+  const channels = await prisma.notificationPreferences.findMany({});
+
+
+  const notification = await prisma.notification.create({
     data: {
         senderId: "job.requesterId",
         receiverId: "job.requesteeId",

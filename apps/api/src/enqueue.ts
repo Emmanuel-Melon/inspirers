@@ -7,11 +7,15 @@ import { create, Queues } from "./queue";
 export type Enqueue<T> = (data: T) => Promise<Job<T>>;
 
 export const eventsQueue = create<any>(Queues.Event);
+export const notificationsQueue = create<any>(Queues.Notification);
 // export const emailsQueue = create<SendGrid.MailDataRequired>(Queues.Mail);
 export const pushNotificationsQueue = create<any>(Queues.PushNotifications);
 
 // export const pushEmail: Enqueue<MailDataRequired> = message =>
  // emailsQueue.add(message, { removeOnComplete: true });
 
-  export const pushIntoEvents: Enqueue<any> = message =>
+export const pushIntoEvents: Enqueue<any> = message =>
+  eventsQueue.add(message, { removeOnComplete: false });
+
+export const pushIntoNotification: Enqueue<any> = message =>
   eventsQueue.add(message, { removeOnComplete: false });

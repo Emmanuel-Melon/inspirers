@@ -51,14 +51,13 @@ export default function Layout({ children }: LayoutProps) {
         </Head>
         <Flex height="100%" py="4">
           <Flex
-            bg="linear-gradient(to right, #343434, #211717)"
+            bg="brand.hovered"
             px={labels ? "2" : "4"}
             color="brand.primaryText"
             borderRadius="1rem"
             alignItems="center"
             justifyContent="center"
             overflowY="scroll"
-            boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
             m="4"
             py="8"
             height="fit-content"
