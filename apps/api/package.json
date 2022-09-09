@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "api": "nodemon src/server.ts",
-    "dev": "concurrently \"yarn api\" \"yarn start:arena\"",
+    "dev": "concurrently \"yarn api\" \"yarn start:arena\" \"yarn work\"",
     "db-connect": "pscale connect biti dev --port 3309",
     "start": "ts-node ./src/server.ts",
     "clean": "rm -rf ./dist",
@@ -14,7 +14,7 @@
     "test": "jest --testTimeout=10000",
     "start:arena": "ts-node ./src/arena.ts",
     "work": "ts-node ./src/start.ts",
-    "work:event": "ts-node ./src/notifications/worker.ts"
+    "work:events": "ts-node ./src/notifications/worker.ts"
   },
   "devDependencies": {
     "@types/bull": "^3.15.9",

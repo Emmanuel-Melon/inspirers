@@ -1,4 +1,5 @@
-const SendGrid = require('@sendgrid/mail');
+/**
+ * const SendGrid = require('@sendgrid/mail');
 import { Queues, withErrorHandling } from "../queue";
 import { sendEmail } from "../lib/sendgrid";
 import { fromEmailAddress } from "../config";
@@ -16,3 +17,5 @@ const message = {
 queue.process(job => {
   return sendEmail(job.data);
 });
+
+ */

@@ -1,4 +1,5 @@
-import * as SendGrid from '@sendgrid/mail';
+/**
+ * import * as SendGrid from '@sendgrid/mail';
 import { sendGridAPIKey } from "../config";
 
 SendGrid.setApiKey(sendGridAPIKey);
@@ -13,3 +14,5 @@ export const sendEmail = (message) => {
           console.error(error)
         })
 }
+
+ */

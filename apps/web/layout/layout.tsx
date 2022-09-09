@@ -74,7 +74,7 @@ export default function Layout({ children }: LayoutProps) {
                 >
                   <Flex
                     bg="brand.white"
-                    color="brand.primary"
+                    color="brand.secondary"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -97,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"
@@ -122,7 +122,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"
@@ -150,7 +150,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"
@@ -176,7 +176,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"
@@ -200,7 +200,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"
@@ -224,7 +224,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.primary"
+                    bg="brand.secondary"
                     color="brand.white"
                     borderRadius="1rem"
                     alignItems="center"

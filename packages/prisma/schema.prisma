@@ -191,6 +191,7 @@ model User {
   journeyLimit       Int                 @default(1)
   location           String?
   occupation         String?
+  UserNotifications  UserNotifications[]
 }
 
 enum ResourceType {
@@ -352,21 +353,38 @@ enum NotificationFeedback {
   Write
 }
 
+enum NotificationState {
+  Read
+  Seen
+  Unread
+  Delivered
+}
+
 model Notification {
-  id        String    @id @default(cuid())
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now())
-  deletedAt DateTime? @default(now())
-  senderId String
-  receiverId String
-  read Boolean @default(false)
-  trigger NotificationTrigger
-  channel NotificationChannel
-  message String
-  interactive Boolean @default(true)
+  id                String              @id @default(cuid())
+  createdAt         DateTime?           @default(now())
+  updatedAt         DateTime?           @default(now())
+  deletedAt         DateTime?           @default(now())
+  senderId          String
+  receiverId        String
+  trigger           NotificationTrigger
+  channel           NotificationChannel
+  message           String
+  interactive       Boolean             @default(true)
+  url               String?
+  state             NotificationState @default(Unread)
+  UserNotifications UserNotifications[]
 }
 
 model NotificationPreferences {
-  id        String    @id @default(cuid())
+  id    String  @id @default(cuid())
   email Boolean @default(false)
+}
+
+model UserNotifications {
+  id             String       @id @default(cuid())
+  userId         String
+  notificationId String
+  notification   Notification @relation(fields: [notificationId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
 }

@@ -13,7 +13,7 @@ export const ListNotifications = ({ notifications }: ListNotificationsProps) => 
     return (
         <Stack width={"100%"}>
             {
-                notifications.length === 0 ? (
+                notifications?.length === 0 ? (
                     <>
                         <Heading size="sm">You don't have any notifiations.</Heading>
                         <Text>Start interacting with the app to receive notifications.</Text>

@@ -14,7 +14,7 @@ export default function Notifications() {
   return (
     <Stack gap={4} align="flex-start" color="brand.primaryText" width="100%">
       <Flex gap={2} alignItems="center" justifyContent="space-between"  width="100%">
-        <Heading size="md" color="brand.primary">Notifications</Heading>
+        <Heading size="md" color="brand.primaryText">Notifications</Heading>
         <Button 
           icon={<FiCheckCircle />}
           onClick={markAllAsRead}
@@ -25,7 +25,7 @@ export default function Notifications() {
       </Flex>
       <Stack width={"100%"}>
         {
-          isLoading ? <Spinner /> : <ListNotifications notifications={notifications.data}/>
+          isLoading ? <Spinner /> : <ListNotifications notifications={notifications?.data}/>
         }
       </Stack>
     </Stack>
