@@ -15,7 +15,7 @@ import {
   TabPanel,
   useMultiStyleConfig,
   useTab,
-
+  Button,
   FormControl,
   FormLabel,
   VStack,
@@ -27,7 +27,7 @@ import {
   FiShoppingBag,
   FiCompass,
 } from "react-icons/fi";
-import { Button, TextInput } from "ui";
+import { TextInput } from "ui";
 
 export default function Settings() {
   const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
@@ -42,10 +42,9 @@ export default function Settings() {
       <Button
         {...tabProps}
         size="sm"
-        alignItems="center"
         borderRadius="1rem"
         leftIcon={props.icon}
-        bg={isSelected ? "brand.primary" : "brand.secondary"}
+        bg={isSelected ? "brand.primary" : "brand.highlight1"}
         color={isSelected ? "brand.primaryText" : "brand.primaryText"}
         _hover={{
           bg: isSelected ? "brand.highlight2" : "brand.highlight",
@@ -70,7 +69,7 @@ export default function Settings() {
         alignItems="center"
         width="65%"
       >
-        <Tabs width="100%" defaultIndex={0} isLazy variant="unstyled">
+        <Tabs width="100%" defaultIndex={1} isLazy variant="unstyled">
           <TabList
             gap={4}
             bg="brand.highlight1"
@@ -85,7 +84,7 @@ export default function Settings() {
 
           <TabPanels>
             <TabPanel p="none">
-            <VStack alignItems="flex-start">
+              <VStack alignItems="flex-start" width="100%">
                 <FormControl>
                   <FormLabel>Display Name</FormLabel>
                   <TextInput
@@ -110,12 +109,54 @@ export default function Settings() {
               </VStack>
             </TabPanel>
             <TabPanel p="none">
-              <Text>Some notifications</Text>
+              <VStack alignItems="flex-start" width="100%">
+                <FormControl>
+                  <FormLabel>Display Name</FormLabel>
+                  <TextInput
+                    onChange={onChange}
+                    placeholder="John Doe"
+                    type="text"
+                    value={""}
+                    name="name"
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Username</FormLabel>
+                  <TextInput
+                    onChange={onChange}
+                    placeholder="Must be unique"
+                    type="text"
+                    value={""}
+                    name="username"
+                  />
+                </FormControl>
+                <Button onClick={() => { }}>Save</Button>
+              </VStack>
             </TabPanel>
             <TabPanel p="none">
-              <Text>Password</Text>
-              <Text>Companions</Text>
-              <Text>Plan</Text>
+              <VStack alignItems="flex-start" width="100%">
+                <FormControl>
+                  <FormLabel>Display Name</FormLabel>
+                  <TextInput
+                    onChange={onChange}
+                    placeholder="John Doe"
+                    type="text"
+                    value={""}
+                    name="name"
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Username</FormLabel>
+                  <TextInput
+                    onChange={onChange}
+                    placeholder="Must be unique"
+                    type="text"
+                    value={""}
+                    name="username"
+                  />
+                </FormControl>
+                <Button onClick={() => { }}>Save</Button>
+              </VStack>
             </TabPanel>
           </TabPanels>
         </Tabs>
