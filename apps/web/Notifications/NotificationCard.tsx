@@ -1,4 +1,4 @@
-import { Avatar, Text, Box, Stack, Flex, Heading, AvatarBadge, IconButton } from "@chakra-ui/react"
+import { Avatar, Text, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
 import moment from "moment"
 import { FiMoreHorizontal } from "react-icons/fi"
 import { Button, Card } from "ui"
@@ -37,19 +37,25 @@ export const NotificationCard = ({ onClick, notification }: NotificationCardProp
                     <Avatar src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1649189711/neno/avatars/icons8-walter-white.svg">
                         <AvatarBadge boxSize='1.25em' bg='green.500' />
                     </Avatar>
+                    <VStack>
                     <Text>
                         <Box as="span" fontWeight="700" marginRight="2">
                             {notification.receiverId}
                         </Box>
                         {notification.receiverId}
                     </Text>
+                    </VStack>
                 </Flex>
+                <Flex gap={4}>
+                    <Button>Accept</Button>
+                    <Button>Reject</Button>
                 <Stack alignItems="flex-end">
                     <IconButton aria-label={""} bg="brand.white">
                         <FiMoreHorizontal />
                     </IconButton>
                     <Text>{moment(notification.createdAt).fromNow()}</Text>
                 </Stack>
+                </Flex>
             </Flex>
         </Card>
     )

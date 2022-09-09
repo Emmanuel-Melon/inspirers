@@ -1,11 +1,5 @@
 import { extendTheme, theme as chakraTheme } from "@chakra-ui/react";
 
-// #590696 1st
-
-// #009DAE 2nd
-// LightMode_TxtColor #240808
-
-
 const theme = extendTheme({
   colors: {
     brand: {
