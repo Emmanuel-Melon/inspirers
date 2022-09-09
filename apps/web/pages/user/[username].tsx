@@ -11,8 +11,9 @@ import { CustomModal, Spinner } from "ui";
 import { User } from "@prisma/client";
 import { redirectUnauthorized } from 'utils/auth';
 
-export default function UserProfile(props) {
-  const { data: user, isLoading, isError } = useFetch(`/users/${props.user.id}`) || {};
+export default function UserProfile() {
+  const router = useRouter();
+  const { data: user, isLoading, isError } = useFetch(`/users/${router.query.username}`) || {};
 
   const openModal = () => { }
   return (
@@ -21,11 +22,11 @@ export default function UserProfile(props) {
         isLoading ? <Spinner />: (
           <Flex width="100%" gap={8} height="100%">
             <VStack alignItems="flex-start" width="35%">
-              <UserProfileCard user={user} />
-              <UserBasicInfo user={user} />
-              <UserBioCard user={user} />
+              <UserProfileCard user={user.data} />
+              <UserBasicInfo user={user.data} />
+              <UserBioCard user={user.data} />
             </VStack>
-            <ProfileSectionsTab user={user} />
+            <ProfileSectionsTab user={user.data} />
           </Flex>
         )
       }

@@ -9,8 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
+import { useFetch } from "hooks/useSwr";
 
 export const UserProfileCard = ({ user }) => {
+  console.log(user);
+
   return (
     <>
       <Flex
@@ -33,18 +36,26 @@ export const UserProfileCard = ({ user }) => {
               />
               <VStack alignItems="flex-start">
                 <Heading color="brand.primary" size="sm">
-                  {user?.name}
+                  {user.name}
                 </Heading>
                 <Text color="brand.accent" size="sm">@{user?.username}</Text>
               </VStack>
             </Flex>
-            <Button
+            {
+              true ? <Button
               onClick={() => { }}
               icon={<FiEdit3 />}
               size="sm"
             >
               Edit Profile
+            </Button> : <Button
+              onClick={() => { }}
+              icon={<FiEdit3 />}
+              size="sm"
+            >
+              Connect
             </Button>
+            }
           </Flex>
 
           <VStack alignItems="flex-start" width="100%" gap={4}>

@@ -3,15 +3,15 @@ import concurrently from "concurrently";
 concurrently(
   [
     {
-      command: "npm run work:mail",
+      command: "yarn run work:mail",
       name: "mail"
     },
     {
-      command: "npm run work:events",
+      command: "yarn run work:events",
       name: "event"
     },
     {
-      command: "npm run work:push-notifications",
+      command: "yarn run work:push-notifications",
       name: "push-notifications"
     }
   ],

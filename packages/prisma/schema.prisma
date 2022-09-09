@@ -328,12 +328,19 @@ model RecommendedConnections {
   userId String
 }
 
-enum NotificationTriggers {
+enum NotificationTrigger {
   Event
   Warning
+  ConnectionRequest
+  Mention
+  Accolade
+  Auth
+  Comment
+  Share
+  AcceptedConnection
 }
 
-enum NotificationChannels {
+enum NotificationChannel {
   Mail
   SMS
   InApp
@@ -353,6 +360,10 @@ model Notification {
   senderId String
   receiverId String
   read Boolean @default(false)
+  trigger NotificationTrigger
+  channel NotificationChannel
+  message String
+  interactive Boolean @default(true)
 }
 
 model NotificationPreferences {
