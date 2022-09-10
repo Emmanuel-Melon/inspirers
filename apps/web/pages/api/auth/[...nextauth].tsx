@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import Providers from 'next-auth/providers';
 import prisma from "@inspirers/prisma";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -16,7 +17,29 @@ const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-
+    CredentialsProvider({
+      // The name to display on the sign in form (e.g. 'Sign in with...')
+      name: 'Email and Password',
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: {  label: "Password", type: "password" }
+      },
+      authorize: async (credentials) => {
+        // Add logic here to look up the user from the credentials supplied eg from db or api
+        const user = { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
+  
+        if (user) {
+          // Any object returned will be saved in `user` property of the JWT
+          return Promise.resolve(user)
+        } else {
+          // If you return null or false then the credentials will be rejected
+          return Promise.resolve(null)
+          // You can also Reject this callback with an Error or with a URL:
+          // return Promise.reject(new Error('error message')) // Redirect to error page
+          // return Promise.reject('/path/to/redirect')        // Redirect to a URL
+        }
+      }
+    }),
     FacebookProvider({
       clientId: facebokClientId,
       clientSecret: facebokClientSecret,
