@@ -9,7 +9,7 @@ import { FiCheckCircle } from "react-icons/fi";
 import { ListNotifications } from "Notifications/ListNotifications";
 
 export default function Notifications() {
-  const { data: notifications, isLoading, isError } = useFetch(`/notifications/job.requesteeId`);
+  const { data: notifications, isLoading, isError } = useFetch(`/notifications/cl7uzd9a10146nvbt246jxnc2`);
   const markAllAsRead = () => {}
   return (
     <Stack gap={4} align="flex-start" color="brand.primaryText" width="100%">

@@ -3,53 +3,44 @@ import moment from "moment"
 import { FiMoreHorizontal } from "react-icons/fi"
 import { Button, Card } from "ui"
 import { Notification } from "@prisma/client";
+import {
+    Connection,
+    ConnectionRequest,
+    ConnectionRequestStatus,
+    ConnectionStatus,
+    UserConnections
+} from "@prisma/client";
+import { client } from "../utils/client";
+import { request } from "http";
+import {
+    ConnectionAcceptedTemplate,
+    ConnectionRequestTemplate,
+    EventCard,
+    MentionTemplate
+} from "./NotificationCardTemplates";
 
 type NotificationCardProps = {
     onClick: any;
     notification: Notification;
 }
 
-const ConnectionRequestCard = () => {
-    return (
-        <>
-            <p>Hello</p>
-        </>
-    )
-}
-
-const EventCard = () => {
-    return (
-        <>
-            <p>Hello</p>
-        </>
-    )
-}
-
-const NotificationTemplates = {
-    Event: EventCard
-}
-
 export const NotificationCard = ({ onClick, notification }: NotificationCardProps) => {
-   console.log(notification);
+    const respondToConnectionRequest = (requestId: string, status: string) => {
+        client.put(`/connections/${requestId}/`, {
+            status
+        })
+            .then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+    }
     return (
         <Card onClick={onClick}>
             <Flex justifyContent="space-between">
-                <Flex gap={4} alignItems="center">
-                    <Avatar src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1649189711/neno/avatars/icons8-walter-white.svg">
-                        <AvatarBadge boxSize='1.25em' bg='green.500' />
-                    </Avatar>
-                    <VStack alignItems="flex-start">
-                        <Text>
-                            {notification.title}
-
-                        </Text>
-                        <Text>{notification.message}</Text>
-                        <Flex gap={2}>
-                            <Button size="sm">Accept</Button>
-                            <Button size="sm" bg="brand.highlight1">Reject</Button>
-                        </Flex>
-                    </VStack>
-                </Flex>
+                {notification.trigger === "ConnectionRequest" ? <ConnectionRequestTemplate notification={notification} /> : null}
+                {notification.trigger === "AcceptedConnection" ? <ConnectionAcceptedTemplate notification={notification} /> : null}
+                {notification.trigger === "Mention" ? <MentionTemplate notification={notification} /> : null}
                 <Flex gap={4}>
                     <Stack alignItems="flex-end">
                         <IconButton aria-label={""} bg="brand.white">

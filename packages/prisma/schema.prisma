@@ -191,7 +191,6 @@ model User {
   location              String?
   occupation            String?
   NotificationRecepient NotificationRecepient[]
-  Notification          Notification[]
 }
 
 enum ResourceType {
@@ -337,12 +336,12 @@ enum NotificationTrigger {
   ConnectionRequest
   Mention
   Accolade
-  Auth
+  Auth // for later
   Comment
   Share
   AcceptedConnection
   Reminder
-  System
+  System // for later
 }
 
 enum NotificationChannel {
@@ -382,8 +381,6 @@ model Notification {
   spam        Boolean                 @default(true)
   muted       Boolean                 @default(true)
   entityId    String
-  sender      User                    @relation(fields: [userId], references: [id])
-  userId      String
 }
 
 model NotificationPreferences {

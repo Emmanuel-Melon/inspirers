@@ -1,4 +1,5 @@
-import { ConnectionRequest } from "@prisma/client";
+import { ConnectionRequest, ConnectionStatus } from "@prisma/client";
+import { connect } from "http2";
 
 export const connectionRequest = async (request: ConnectionRequest) => {
   try {
@@ -19,9 +20,21 @@ export const connectionRequest = async (request: ConnectionRequest) => {
 
 export const establishConnection = async (connection) => {
   try {
+
+
+    const request = {
+      status: ConnectionStatus.Active,
+      recepientId: connection.user2,
+      initiatorId: connection.user1
+    }
+
+    console.log(request);
     const res = await prisma.connection.create({
-      data: connection,
+      data: request,
     });
+    console.log(res);
     return res;
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };

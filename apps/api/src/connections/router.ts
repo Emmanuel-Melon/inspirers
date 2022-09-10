@@ -36,7 +36,9 @@ connectionsRouter.put(
   "/:requestId",
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(respondToRequest(req.params.requestId, req.body))
-      .then((data) => establishConnection(data))
+      .then((data) => {
+        return establishConnection(data);
+      })
       .then(data => {
         pushIntoNotification({ 
           ...data,

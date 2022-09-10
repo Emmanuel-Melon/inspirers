@@ -9,7 +9,7 @@ const getNotificationTemplate = (job) => {};
 queue.process(async (job) => {
   // create a notification object
   // get user notification preferences
-  const channels = await prisma.notificationPreferences.findMany({});
+  // const channels = await prisma.notificationPreferences.findMany({});
   const receipient = await prisma.user.findUnique({
     where: {
       id: job.data.recepientId,
@@ -32,7 +32,7 @@ queue.process(async (job) => {
       ...template,
       senderId: job.data.requesterId,
       recepientId: job.data.recepientId,
-      trigger: NotificationTrigger.Event,
+      trigger: job.data.trigger,
       channel: NotificationChannel.InApp,
       url: `/user/${job.data.requesterId}`,
       entityId: "",

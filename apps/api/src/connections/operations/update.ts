@@ -13,11 +13,11 @@ export const respondToRequest = async (requestId, response) => {
           ...response,
         },
       });
-      return {
+      return ({
         user1: requesterId,
         user2: recepientId,
         status: ConnectionRequestStatus.Accepted,
-      };
+      });
     } else if (status === ConnectionRequestStatus.Declined) {
       await prisma.connectionRequest.update({
         where: {
