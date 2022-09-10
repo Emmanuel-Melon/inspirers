@@ -18,4 +18,4 @@ export const pushIntoEvents: Enqueue<any> = message =>
   eventsQueue.add(message, { removeOnComplete: false });
 
 export const pushIntoNotification: Enqueue<any> = message =>
-  eventsQueue.add(message, { removeOnComplete: false });
+notificationsQueue.add(message, { removeOnComplete: false });

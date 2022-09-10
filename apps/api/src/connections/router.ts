@@ -9,8 +9,8 @@ import {
 } from "./operations/list";
 import { validateRequest } from "./validation";
 import { respondToRequest } from "./operations/update";
-import { getConnectionById, getConnectionRequestById } from "./operations/read";
-import { pushIntoEvents, pushNotificationsQueue } from "../enqueue";
+import { getConnectionStatus, getConnectionById, getConnectionRequestById } from "./operations/read";
+import { pushIntoEvents, pushIntoNotification } from "../enqueue";
 import { NotificationTrigger, NotificationChannel } from "@prisma/client";
 
 const connectionsRouter = Router();
@@ -21,9 +21,9 @@ connectionsRouter.post(
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(connectionRequest(req.body))
     .then(data => {
-      pushIntoEvents({ 
+      pushIntoNotification({ 
         ...data,
-        channel: NotificationChannel
+        trigger: NotificationTrigger.ConnectionRequest,
       });
       return data;
     })
@@ -36,11 +36,13 @@ connectionsRouter.put(
   "/:requestId",
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(respondToRequest(req.params.requestId, req.body))
-      .then((data) => establishConnection(data))
+      .then((data) => {
+        return establishConnection(data);
+      })
       .then(data => {
-        pushIntoEvents({ 
+        pushIntoNotification({ 
           ...data,
-          channel: NotificationChannel
+          trigger: NotificationTrigger.AcceptedConnection,
         });
         return data;
       })
@@ -53,6 +55,16 @@ connectionsRouter.get(
   "/:userId/incoming",
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(listIncomingRequests(req.params.userId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+
+connectionsRouter.get(
+  "/:userId/status",
+  (req: Request, res: Response, next: NextFunction) => {
+    return Promise.resolve(getConnectionStatus("cl7uz7igs0285mybtwejrkb8j", req.params.userId))
       .then((data) => res.json({ data }))
       .catch(next);
   }

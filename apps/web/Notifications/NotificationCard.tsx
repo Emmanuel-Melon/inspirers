@@ -1,62 +1,63 @@
-import { Avatar, Text, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
+import { Avatar, Text, LinkBox, LinkOverlay, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
 import moment from "moment"
 import { FiMoreHorizontal } from "react-icons/fi"
 import { Button, Card } from "ui"
 import { Notification } from "@prisma/client";
+import {
+    Connection,
+    ConnectionRequest,
+    ConnectionRequestStatus,
+    ConnectionStatus,
+    UserConnections
+} from "@prisma/client";
+import { client } from "../utils/client";
+import { request } from "http";
+import {
+    ConnectionAcceptedTemplate,
+    ConnectionRequestTemplate,
+    EventCard,
+    MentionTemplate
+} from "./NotificationCardTemplates";
 
 type NotificationCardProps = {
     onClick: any;
     notification: Notification;
 }
 
-const ConnectionRequestCard = () => {
-    return (
-        <>
-            <p>Hello</p>
-        </>
-    )
-}
-
-const EventCard = () => {
-    return (
-        <>
-            <p>Hello</p>
-        </>
-    )
-}
-
-const NotificationTemplates = {
-    Event: EventCard
-}
-
 export const NotificationCard = ({ onClick, notification }: NotificationCardProps) => {
+    const respondToConnectionRequest = (requestId: string, status: string) => {
+        client.put(`/connections/${requestId}/`, {
+            status
+        })
+            .then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+    }
     return (
-        <Card onClick={onClick}>
-            <Flex justifyContent="space-between">
-                <Flex gap={4} alignItems="center">
-                    <Avatar src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1649189711/neno/avatars/icons8-walter-white.svg">
-                        <AvatarBadge boxSize='1.25em' bg='green.500' />
-                    </Avatar>
-                    <VStack>
-                    <Text>
-                        <Box as="span" fontWeight="700" marginRight="2">
-                            {notification.receiverId}
-                        </Box>
-                        {notification.receiverId}
-                    </Text>
-                    </VStack>
+        <LinkBox>
+            <Card onClick={onClick} bg={notification.state === "Unread" ? "brand.highlight" : "brand.white"} >
+                <Flex justifyContent="space-between" >
+                    <LinkOverlay href={`${notification.url}`}>
+                        {notification.trigger === "ConnectionRequest" ? <ConnectionRequestTemplate notification={notification} /> : null}
+                        {notification.trigger === "AcceptedConnection" ? <ConnectionAcceptedTemplate notification={notification} /> : null}
+                        {notification.trigger === "Mention" ? <MentionTemplate notification={notification} /> : null}
+                    </LinkOverlay>
+                    <Flex gap={4}>
+                        <Stack alignItems="flex-end">
+                            {
+                                notification.interactive ? <IconButton aria-label={""} bg="brand.white" borderRadius="50%" _hover={{
+                                    bg: "brand.hovered"
+                                }}>
+                                    <FiMoreHorizontal />
+                                </IconButton> : null
+                            }
+                            <Text>{moment(notification.createdAt).fromNow()}</Text>
+                        </Stack>
+                    </Flex>
                 </Flex>
-                <Flex gap={4}>
-                    <Button>Accept</Button>
-                    <Button>Reject</Button>
-                <Stack alignItems="flex-end">
-                    <IconButton aria-label={""} bg="brand.white">
-                        <FiMoreHorizontal />
-                    </IconButton>
-                    <Text>{moment(notification.createdAt).fromNow()}</Text>
-                </Stack>
-                </Flex>
-            </Flex>
-        </Card>
+            </Card>
+        </LinkBox>
     )
 }

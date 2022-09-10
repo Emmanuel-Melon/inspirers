@@ -3,6 +3,7 @@ import {
   ConnectionRequest,
   ConnectionRequestStatus,
   ConnectionStatus,
+  UserConnections
 } from "@prisma/client";
 
 export const listIncomingRequests = (
@@ -11,12 +12,9 @@ export const listIncomingRequests = (
   try {
     return prisma.connectionRequest.findMany({
       where: {
-        requesteeId: userId,
+        recepientId: userId,
         status: ConnectionRequestStatus.Pending,
-      },
-      include: {
-        requester: true,
-      },
+      }
     });
   } catch (err) {
     throw new Error("something broke!");
@@ -38,12 +36,11 @@ export const listOutgoingRequests = (
   }
 };
 
-export const listConnections = (userId: string): Promise<Connection[]> => {
+export const listConnections = (userId: string): Promise<UserConnections[]> => {
   try {
-    return prisma.connection.findMany({
+    return prisma.userConnections.findMany({
       where: {
-        user1: userId,
-        status: ConnectionStatus.Active,
+        userId: userId,
       },
     });
   } catch (err) {

@@ -49,9 +49,9 @@ export default function Layout({ children }: LayoutProps) {
           />
           <link rel="icon" href="favicon.png" />
         </Head>
-        <Flex height="100%" py="4">
+        <Flex height="100vh" py="4">
           <Flex
-            bg="brand.hovered"
+            bg="brand.highlight1"
             px={labels ? "2" : "4"}
             color="brand.primaryText"
             borderRadius="1rem"
@@ -72,14 +72,18 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.white"
-                    color="brand.secondary"
+                    bg="brand.hovered"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
                     justifyContent="center"
                     boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                     cursor="pointer"
+                    _hover={{
+                      bg: "brand.hovered",
+                      color: "brand.primaryText"
+                    }}
                   >
                     <FiHome size="1.2rem" />
                   </Flex>
@@ -96,8 +100,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -121,8 +125,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -149,8 +153,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -175,8 +179,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -199,8 +203,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"
@@ -223,8 +227,8 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Flex
-                    bg="brand.secondary"
-                    color="brand.white"
+                    bg="brand.white"
+                    color="brand.primaryText"
                     borderRadius="1rem"
                     alignItems="center"
                     p="2"

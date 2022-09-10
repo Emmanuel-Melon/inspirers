@@ -9,21 +9,28 @@ import { FiCheckCircle } from "react-icons/fi";
 import { ListNotifications } from "Notifications/ListNotifications";
 
 export default function Notifications() {
-  const { data: notifications, isLoading, isError } = useFetch(`/notifications/job.requesteeId`);
+  const { data: notifications, isLoading, isError } = useFetch(`/notifications/cl7uzd9a10146nvbt246jxnc2`);
   const markAllAsRead = () => {}
   return (
-    <Stack gap={4} align="flex-start" color="brand.primaryText" width="100%">
-      <Flex gap={2} alignItems="center" justifyContent="space-between"  width="100%">
+    <Stack gap={4} align="center" color="brand.primaryText" width="65%" borderRadius="1rem">
+      <Flex  gap={2} alignItems="center" justifyContent="space-between"  width="100%">
         <Heading size="md" color="brand.primaryText">Notifications</Heading>
+        <Flex gap={4}>
         <Button 
-          icon={<FiCheckCircle />}
           onClick={markAllAsRead}
-          size="md"
+          size="sm"
         >
-          Mark all as read
+          All
         </Button>
+        <Button 
+          onClick={markAllAsRead}
+          size="sm"
+        >
+          Unread
+        </Button>
+        </Flex>
       </Flex>
-      <Stack width={"100%"}>
+      <Stack  width={"100%"}>
         {
           isLoading ? <Spinner /> : <ListNotifications notifications={notifications?.data}/>
         }

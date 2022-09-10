@@ -4,14 +4,17 @@ export const listNotifications = (userId: string): Promise<Notification[]> => {
   try {
     return prisma.notification.findMany({
       where: {
-        receiverId: userId,
+        recepientId: userId,
         channel: NotificationChannel.InApp
       },
       orderBy: [
         {
           createdAt: "desc",
-        }
-      ]
+        },
+      ],
+      include: {
+        Recepient: true
+      }
     });
   } catch (error) {
     return Promise.reject(error);

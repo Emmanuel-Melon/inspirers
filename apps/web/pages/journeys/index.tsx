@@ -21,15 +21,14 @@ export default function Index(props) {
     >
       <VStack width="30%" alignItems="flex-start">
         <>
-          <Heading size="md" color="brand.primary">
+          <Heading size="md">
             Browse templates
           </Heading>
           <VStack
             alignItems="flex-start"
             p="4"
             borderRadius="1rem"
-            bg="brand.highlight2"
-            color="brand.primaryText"
+            bg="brand.highlight1"
             width="100%"
           >
             <Text>Accounting</Text>
@@ -38,10 +37,9 @@ export default function Index(props) {
             <Text>Poetry</Text>
             <Text
               color="brand.primaryText"
-              bg="brand.highlight2"
+              bg="brand.highlight"
               fontWeight="700"
               borderRadius="1rem"
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
               fontSize="12px"
               px="2"
               py="1px"
@@ -52,14 +50,14 @@ export default function Index(props) {
           </VStack>
         </>
         <>
-          <Heading size="md" color="brand.primary">
+          <Heading size="md" color="brand.primaryText">
             Filter Journeys
           </Heading>
           <VStack
             alignItems="flex-start"
             p="4"
             borderRadius="1rem"
-            bg="brand.highlight2"
+            bg="brand.highlight1"
             color="brand.primaryText"
             width="100%"
           >
@@ -67,10 +65,9 @@ export default function Index(props) {
             <Text>Physical</Text>
             <Text
               color="brand.primaryText"
-              bg="brand.highlight2"
+              bg="brand.highlight"
               fontWeight="700"
               borderRadius="1rem"
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
               fontSize="12px"
               px="2"
               py="1px"
@@ -83,11 +80,11 @@ export default function Index(props) {
       </VStack>
       <VStack width="70%" gap={4}>
         <VStack alignItems="flex-start" width="100%">
-          <Flex justifyContent="space-between" width="100%" alignItems="center">
-            <Heading size="md" color="brand.primary">
+          <Flex justifyContent="space-between" width="100%" alignItems="center" color="brand.secondary">
+            <Heading size="md" >
               My Journeys
             </Heading>
-            <Flex gap={2} color="brand.primary">
+            <Flex gap={2}>
               <FiArrowLeftCircle size="1.5rem" />
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
@@ -95,11 +92,11 @@ export default function Index(props) {
           <MyJourneys />
         </VStack>
         <VStack alignItems="flex-start" width="100%">
-          <Flex justifyContent="space-between" width="100%" alignItems="center">
-            <Heading size="md" color="brand.primary">
+          <Flex justifyContent="space-between" width="100%" alignItems="center" color="brand.secondary">
+            <Heading size="md">
               Recommended Journeys
             </Heading>
-            <Flex gap={2} color="brand.primary">
+            <Flex gap={2}>
               <FiArrowLeftCircle size="1.5rem" />
               <FiArrowRightCircle size="1.5rem" />
             </Flex>
@@ -107,11 +104,11 @@ export default function Index(props) {
           <RecommendJourneys />
         </VStack>
         <VStack alignItems="flex-start" width="100%">
-          <Flex justifyContent="space-between" alignItems="center" width="100%">
-            <Heading size="md" color="brand.primary">
+          <Flex justifyContent="space-between" alignItems="center" width="100%" color="brand.secondary">
+            <Heading size="md">
               Featured Mentors
             </Heading>
-            <Flex gap={2} color="brand.primary">
+            <Flex gap={2}>
               <Text>Show All</Text>
               <FiArrowLeftCircle size="1.5rem" />
               <FiArrowRightCircle size="1.5rem" />
