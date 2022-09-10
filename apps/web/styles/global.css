@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Enriqueta&family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&display=swap");
 
 html,
 body {
@@ -38,7 +38,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Enriqueta" !important;
+  font-family: "Inter" !important;
 }
 
 a,

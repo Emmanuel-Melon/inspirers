@@ -1,4 +1,4 @@
-import { Avatar, Text, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
+import { Avatar, Text, LinkBox, LinkOverlay, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
 import moment from "moment"
 import { FiMoreHorizontal } from "react-icons/fi"
 import { Button, Card } from "ui"
@@ -36,20 +36,28 @@ export const NotificationCard = ({ onClick, notification }: NotificationCardProp
             })
     }
     return (
-        <Card onClick={onClick}>
-            <Flex justifyContent="space-between">
-                {notification.trigger === "ConnectionRequest" ? <ConnectionRequestTemplate notification={notification} /> : null}
-                {notification.trigger === "AcceptedConnection" ? <ConnectionAcceptedTemplate notification={notification} /> : null}
-                {notification.trigger === "Mention" ? <MentionTemplate notification={notification} /> : null}
-                <Flex gap={4}>
-                    <Stack alignItems="flex-end">
-                        <IconButton aria-label={""} bg="brand.white">
-                            <FiMoreHorizontal />
-                        </IconButton>
-                        <Text>{moment(notification.createdAt).fromNow()}</Text>
-                    </Stack>
+        <LinkBox>
+            <Card onClick={onClick} bg={notification.state === "Unread" ? "brand.highlight2" : "brand.white"}>
+                <Flex justifyContent="space-between" >
+                    <LinkOverlay href={`${notification.url}`}>
+                        {notification.trigger === "ConnectionRequest" ? <ConnectionRequestTemplate notification={notification} /> : null}
+                        {notification.trigger === "AcceptedConnection" ? <ConnectionAcceptedTemplate notification={notification} /> : null}
+                        {notification.trigger === "Mention" ? <MentionTemplate notification={notification} /> : null}
+                    </LinkOverlay>
+                    <Flex gap={4}>
+                        <Stack alignItems="flex-end">
+                            {
+                                notification.interactive ? <IconButton aria-label={""} bg="brand.white" borderRadius="50%" _hover={{
+                                    bg: "brand.hovered"
+                                }}>
+                                    <FiMoreHorizontal />
+                                </IconButton> : null
+                            }
+                            <Text>{moment(notification.createdAt).fromNow()}</Text>
+                        </Stack>
+                    </Flex>
                 </Flex>
-            </Flex>
-        </Card>
+            </Card>
+        </LinkBox>
     )
 }

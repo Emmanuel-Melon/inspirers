@@ -47,7 +47,7 @@ export default function Settings() {
         bg={isSelected ? "brand.primary" : "brand.highlight1"}
         color={isSelected ? "brand.primaryText" : "brand.primaryText"}
         _hover={{
-          bg: isSelected ? "brand.highlight2" : "brand.highlight",
+          bg: isSelected ? "brand.hovered" : "brand.highlight2",
         }}
       >
         {tabProps.children}
@@ -62,14 +62,14 @@ export default function Settings() {
 
   return (
     <Stack>
-      <Heading>Settings.</Heading>
+      <Heading size="md">Settings</Heading>
       <Flex
         direction="column"
         color="brand.primaryText"
         alignItems="center"
         width="65%"
       >
-        <Tabs width="100%" defaultIndex={1} isLazy variant="unstyled">
+        <Tabs width="100%" defaultIndex={0} isLazy variant="unstyled">
           <TabList
             gap={4}
             bg="brand.highlight1"

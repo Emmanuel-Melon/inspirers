@@ -2,15 +2,16 @@ import { Box } from "@chakra-ui/react";
 
 type CardProps = {
   children: any,
-  onClick: any
+  onClick: any,
+  bg: string
 }
 
-export const Card = ({ children, onClick }: CardProps) => {
+export const Card = ({ children, onClick, bg }: CardProps) => {
   return (
     <Box
       gap={4}
       borderRadius="1rem"
-      bg="brand.white"
+      bg={bg || "brand.white"}
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
       p="4"
       width={"100%"}
