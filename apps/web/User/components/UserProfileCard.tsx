@@ -1,19 +1,77 @@
+import React, { ReactChild, useState } from "react";
+import useSWR, { useSWRConfig } from "swr";
 import {
   Avatar,
   Flex,
+  IconButton,
   Text,
   Heading,
   VStack,
   Box,
   Tag,
+  TagLabel
 } from "@chakra-ui/react";
 import { Button } from "ui";
-import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
-import { useFetch } from "hooks/useSwr";
+import {
+  FiFacebook,
+  FiTwitter,
+  FiLinkedin, FiEdit3, FiUserPlus, FiMoreHorizontal, FiMessageSquare
+} from "react-icons/fi";
+import { useFetch, usePost } from "hooks/useSwr";
+import { client } from "utils/client";
+import { useSession, signIn, signOut } from "next-auth/react";
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+const CompanionView = () => { }
+const UserView = () => { }
+
+const ProfileCardActions = ({ children }) => {
+  return (
+    <Flex gap={4} justifyContent="flex-end" width="100%" alignItems="center">
+      {children}
+    </Flex>
+  )
+}
+
+const ProfileCardActionButton = ({ icon, onClick, text }) => {
+  return (<Button
+    onClick={onClick}
+    icon={icon}
+    size="sm"
+  >
+    {text}
+  </Button>)
+}
 
 export const UserProfileCard = ({ user }) => {
-  console.log(user);
+  const [labels, _setLabels] = useState<boolean>(false);
+  const { data: session, status } = useSession();
+  // const { data, mutate } = usePost("/connections/request");
+  const { mutate } = useSWRConfig();
+  const [isLoading, setLoading] = useState<boolean>();
+  const { data: connection } = useFetch(`/connections/${user?.id}/status`);
+  console.log(connection?.data?.status);
 
+  const createConnectionRequest = () => {
+    // mutate(`http://localhost:5000/api/connections/request`)
+    client.post("/connections/request", {
+      requesterId: session?.user?.id,
+      recepientId: user?.id
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  const cancelConnectionRequest = () => {
+
+  }
+
+  const acceptConnectionRequest = () => {
+
+  }
   return (
     <>
       <Flex
@@ -35,53 +93,119 @@ export const UserProfileCard = ({ user }) => {
                 }
               />
               <VStack alignItems="flex-start">
-                <Heading color="brand.primary" size="sm">
-                  {user.name}
+                <Heading color="brand.primaryText" size="sm">
+                  {user?.name}
                 </Heading>
                 <Text color="brand.accent" size="sm">@{user?.username}</Text>
               </VStack>
             </Flex>
-            {
-              true ? <Button
-              onClick={() => { }}
-              icon={<FiEdit3 />}
-              size="sm"
-            >
-              Edit Profile
-            </Button> : <Button
-              onClick={() => { }}
-              icon={<FiEdit3 />}
-              size="sm"
-            >
-              Connect
-            </Button>
-            }
           </Flex>
 
           <VStack alignItems="flex-start" width="100%" gap={4}>
+            <ProfileCardActions>
+              {
+                session?.user?.id === user?.id ?
+                  <Button
+                    onClick={() => { }}
+                    icon={<FiEdit3 />}
+                    size="sm"
+                  >
+                    Edit Profile
+                  </Button> : null}
+              <IconButton
+                borderRadius="50%"
+                bg="brand.highlight1"
+                aria-label={""}
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+              >
+                <FiMoreHorizontal />
+              </IconButton>
+              <IconButton
+                borderRadius="50%"
+                bg="brand.highlight1"
+                aria-label={""}
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                _hover={{
+                  bg: "brand.hovered"
+                }}
+              >
+                <FiMessageSquare />
+              </IconButton>
+
+              {connection?.data?.status === null && session?.user?.id !== user?.id ? <ProfileCardActionButton
+                onClick={createConnectionRequest}
+                icon={<FiUserPlus />}
+                text="Make Companion"
+              /> : null }
+
+              {connection?.data?.status === "Pending" ? <ProfileCardActionButton
+                onClick={acceptConnectionRequest}
+                icon={<FiUserPlus />}
+                text="Pending"
+              /> : null
+              }
+
+            </ProfileCardActions>
             <Flex gap={4}>
-              <Text>
-                <Box as="span" color="brand.secondary" fontWeight="700">
-                  0
-                </Box>{" "}
-                Connections
-              </Text>
+              <Text>{user?.bio}</Text>
             </Flex>
             <Flex gap={2} flexWrap="wrap">
-              <Tag bg="brand.highlight">Interest</Tag>
-              <Tag bg="brand.highlight1">Interest</Tag>
-              <Tag bg="brand.highlight">Interest</Tag>
+              <Tag
+                bg="brand.highlight"
+                borderRadius='full'
+                size="lg"
+                _hover={{
+                  bg: "brand.hovered"
+                }}
+                cursor="pointer"
+              >
+                <Avatar
+                  src='https://bit.ly/sage-adebayo'
+                  size='xs'
+                  name='Segun Adebayo'
+                  ml={-1}
+                  mr={2}
+                />
+                <TagLabel>Finance</TagLabel>
+              </Tag>
+              <Tag
+                bg="brand.highlight1"
+                borderRadius='full'
+                size="lg"
+                _hover={{
+                  bg: "brand.hovered"
+                }}
+                cursor="pointer"
+              >
+                <Avatar
+                  src='https://bit.ly/sage-adebayo'
+                  size='xs'
+                  name='Segun Adebayo'
+                  ml={-1}
+                  mr={2}
+                />
+                <TagLabel>Software Engineering</TagLabel>
+              </Tag>
+              <Tag
+                bg="brand.highlight2"
+                borderRadius='full'
+                size="lg"
+                _hover={{
+                  bg: "brand.hovered"
+                }}
+                cursor="pointer"
+              >
+                <Avatar
+                  src='https://bit.ly/sage-adebayo'
+                  size='xs'
+                  name='Segun Adebayo'
+                  ml={-1}
+                  mr={2}
+                />
+                <TagLabel>Startups</TagLabel>
+              </Tag>
             </Flex>
-            <VStack alignItems="flex-start">
-              <Heading size="sm">Socials</Heading>
-              <Flex gap={4} flexWrap="wrap" py="2">
-                <FiFacebook size="1.5rem" />
-                <FiTwitter size="1.5rem" />
-                <FiLinkedin size="1.5rem" />
-              </Flex>
-            </VStack>
           </VStack>
-          <Text>{user?.bio}</Text>
         </Flex>
       </Flex>
     </>

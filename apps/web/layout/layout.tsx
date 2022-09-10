@@ -51,7 +51,7 @@ export default function Layout({ children }: LayoutProps) {
         </Head>
         <Flex height="100%" py="4">
           <Flex
-            bg="brand.hovered"
+            bg="brand.gradient"
             px={labels ? "2" : "4"}
             color="brand.primaryText"
             borderRadius="1rem"

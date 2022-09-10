@@ -30,6 +30,7 @@ const NotificationTemplates = {
 }
 
 export const NotificationCard = ({ onClick, notification }: NotificationCardProps) => {
+   console.log(notification);
     return (
         <Card onClick={onClick}>
             <Flex justifyContent="space-between">
@@ -37,24 +38,25 @@ export const NotificationCard = ({ onClick, notification }: NotificationCardProp
                     <Avatar src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1649189711/neno/avatars/icons8-walter-white.svg">
                         <AvatarBadge boxSize='1.25em' bg='green.500' />
                     </Avatar>
-                    <VStack>
-                    <Text>
-                        <Box as="span" fontWeight="700" marginRight="2">
-                            {notification.receiverId}
-                        </Box>
-                        {notification.receiverId}
-                    </Text>
+                    <VStack alignItems="flex-start">
+                        <Text>
+                            {notification.title}
+
+                        </Text>
+                        <Text>{notification.message}</Text>
+                        <Flex gap={2}>
+                            <Button size="sm">Accept</Button>
+                            <Button size="sm" bg="brand.highlight1">Reject</Button>
+                        </Flex>
                     </VStack>
                 </Flex>
                 <Flex gap={4}>
-                    <Button>Accept</Button>
-                    <Button>Reject</Button>
-                <Stack alignItems="flex-end">
-                    <IconButton aria-label={""} bg="brand.white">
-                        <FiMoreHorizontal />
-                    </IconButton>
-                    <Text>{moment(notification.createdAt).fromNow()}</Text>
-                </Stack>
+                    <Stack alignItems="flex-end">
+                        <IconButton aria-label={""} bg="brand.white">
+                            <FiMoreHorizontal />
+                        </IconButton>
+                        <Text>{moment(notification.createdAt).fromNow()}</Text>
+                    </Stack>
                 </Flex>
             </Flex>
         </Card>

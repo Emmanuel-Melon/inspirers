@@ -187,11 +187,11 @@ model User {
   identityProvider      IdentityProvider        @default(GITHUB)
   identityProviderId    String?
   Journey               Journey[]
-  ConnectionRequest     ConnectionRequest[]
   journeyLimit          Int                     @default(1)
   location              String?
   occupation            String?
   NotificationRecepient NotificationRecepient[]
+  Notification          Notification[]
 }
 
 enum ResourceType {
@@ -292,10 +292,12 @@ model Connection {
   createdAt     DateTime?        @default(now())
   updatedAt     DateTime?        @default(now())
   deletedAt     DateTime?        @default(now())
-  status        ConnectionStatus
+  status        ConnectionStatus @default(Active)
   affinityScore Int              @default(0)
-  user1         String
-  user2         String
+  initiatorId   String
+  recepientId   String
+
+  @@unique(fields: [initiatorId, recepientId], name: "participants")
 }
 
 enum ConnectionRequestStatus {
@@ -313,11 +315,9 @@ model ConnectionRequest {
   requesterId String
   recepientId String
   note        String?
-  accepted    Boolean                 @default(false)
   status      ConnectionRequestStatus @default(Pending)
-  requester   User                    @relation(fields: [requesterId], references: [id])
 
-  @@unique([requesterId, recepientId])
+  @@unique(fields: [requesterId, recepientId], name: "participants")
 }
 
 model UserConnections {
@@ -382,6 +382,8 @@ model Notification {
   spam        Boolean                 @default(true)
   muted       Boolean                 @default(true)
   entityId    String
+  sender      User                    @relation(fields: [userId], references: [id])
+  userId      String
 }
 
 model NotificationPreferences {

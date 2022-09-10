@@ -4,7 +4,7 @@ export const respondToRequest = async (requestId, response) => {
   try {
     const { status } = response;
     if (status === ConnectionRequestStatus.Accepted) {
-      const { requesterId, requesteeId } =
+      const { requesterId, recepientId } =
       await prisma.connectionRequest.update({
         where: {
           id: requestId,
@@ -15,7 +15,7 @@ export const respondToRequest = async (requestId, response) => {
       });
       return {
         user1: requesterId,
-        user2: requesteeId,
+        user2: recepientId,
         status: ConnectionRequestStatus.Accepted,
       };
     } else if (status === ConnectionRequestStatus.Declined) {

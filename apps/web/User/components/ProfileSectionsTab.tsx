@@ -46,9 +46,9 @@ export const ProfileSectionsTab = () => {
         borderRadius="1rem"
         leftIcon={props.icon}
         bg={isSelected ? "brand.primary" : "transparent"}
-        color={isSelected ? "brand.white" : "brand.primary"}
+        color="brand.primaryText"
         _hover={{
-          bg: isSelected ? "brand.primary" : "brand.highlight1",
+          bg: isSelected ? "brand.hovered" : "brand.highlight1",
         }}
       >
         {tabProps.children}

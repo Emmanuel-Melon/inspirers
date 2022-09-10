@@ -1,20 +1,20 @@
-import { Connection, ConnectionRequest } from "@prisma/client";
+import { ConnectionRequest } from "@prisma/client";
 
 export const connectionRequest = async (request: ConnectionRequest) => {
   try {
     const [receipient, sender] = await Promise.all([
-      prisma.user.findUnique({ where: { id: request.requesteeId } }),
+      prisma.user.findUnique({ where: { id: request.recepientId } }),
       prisma.user.findUnique({ where: { id: request.requesterId } }),
     ]);
-
-    console.log(receipient);
 
     if (receipient && sender) {
       return prisma.connectionRequest.create({
         data: request,
       });
-    }
-  } catch (err) {}
+    } 
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const establishConnection = async (connection) => {
