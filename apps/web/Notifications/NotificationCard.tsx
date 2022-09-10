@@ -37,7 +37,7 @@ export const NotificationCard = ({ onClick, notification }: NotificationCardProp
     }
     return (
         <LinkBox>
-            <Card onClick={onClick} bg={notification.state === "Unread" ? "brand.highlight2" : "brand.white"}>
+            <Card onClick={onClick} bg={notification.state === "Unread" ? "brand.highlight" : "brand.white"} >
                 <Flex justifyContent="space-between" >
                     <LinkOverlay href={`${notification.url}`}>
                         {notification.trigger === "ConnectionRequest" ? <ConnectionRequestTemplate notification={notification} /> : null}
