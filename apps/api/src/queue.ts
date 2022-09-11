@@ -10,7 +10,8 @@ export enum Queues {
   Mail = "Mail",
   PushNotifications = "PushNotifications",
   Event = "Event",
-  Notification = "Notification"
+  Notification = "Notification",
+  Routine = "Routine"
 }
 
 export function withErrorHandling<T>(
