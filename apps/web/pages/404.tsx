@@ -5,7 +5,7 @@ import { FiHome } from "react-icons/fi";
 export default function ErrorPage404() {
   return (
     <Flex padding="8" alignItems="center" justifyContent="center">
-      <Stack gap="4">
+      <Stack gap="4" align="center">
         <Heading color="brand.primary">404 Page not found.</Heading>
         <Text color="brand.primaryText">
           {" "}

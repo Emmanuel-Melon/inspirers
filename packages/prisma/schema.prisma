@@ -398,6 +398,26 @@ model NotificationRecepient {
   user           User         @relation(fields: [userId], references: [id])
 }
 
+enum RoutineType {
+  Wellness
+  Productivity
+}
+
+enum RoutineFrequency {
+  Daily
+  Weekly
+}
+
+enum RoutinePrivacy {
+  Private
+  Public
+}
+
+enum RoutineSource {
+  User
+  System
+}
+
 model Routine {
   id        String    @id @default(cuid())
   userId    String
@@ -405,5 +425,14 @@ model Routine {
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now())
   deletedAt DateTime? @default(now())
+  startsAt DateTime?
+  finishesAt DateTime? 
   resourceId String
+  journeyId String
+  type RoutineType
+  duration String
+  description String
+  reminders Boolean @default(true)
+  privacy RoutinePrivacy
+  source RoutineSource
 }
