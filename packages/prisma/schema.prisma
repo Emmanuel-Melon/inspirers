@@ -397,3 +397,13 @@ model NotificationRecepient {
   notification   Notification @relation(fields: [notificationId], references: [id])
   user           User         @relation(fields: [userId], references: [id])
 }
+
+model Routine {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+  deletedAt DateTime? @default(now())
+  resourceId String
+}
