@@ -1,13 +1,14 @@
-import { NextFunction, Response, Router, Request } from "express";
-import { validation } from "../middleware/validation";
-import { create } from "./operations/create";
-import { createRoutine } from "./controller";
+import { Router } from "express";
+import { createRoutine, listRoutines, getRoutineById, updateRoutine } from "./controller";
 
 const routinesRouter = Router();
 
-routinesRouter.post(
-  "/",
-  createRoutine
-);
+routinesRouter.post("/", createRoutine);
+
+routinesRouter.put("/:routineId", updateRoutine);
+
+routinesRouter.get("/:userId/list", listRoutines);
+
+routinesRouter.get("/:routineId", getRoutineById);
 
 export default routinesRouter;

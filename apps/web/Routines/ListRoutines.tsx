@@ -1,5 +1,24 @@
-export const ListRoutines = () => {
+import {
+    Avatar,
+    Image,
+    Img,
+    Stack,
+    Text,
+    Link,
+    Flex,
+    Heading,
+    Box,
+    LinkBox, LinkOverlay
+  } from "@chakra-ui/react";
+  import { Routine } from "./Routine";
+
+export const ListRoutines = ({ routines }) => {
+    console.log(routines);
     return (
-        <p>List</p>
+        <Flex gap={4}>
+            {
+                routines?.map(routine => <Routine routine={routine} key={routine.id} />)
+            }
+        </Flex>
     )
 }
