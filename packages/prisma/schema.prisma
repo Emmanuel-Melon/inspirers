@@ -195,6 +195,7 @@ model User {
   weekStart             String                  @default("Sunday")
   completedOnboarding   Boolean                 @default(false)
   timeFormat            Int?                    @default(12)
+  Schedule              Schedule[]
 }
 
 enum ResourceType {
@@ -311,6 +312,7 @@ enum ConnectionRequestStatus {
   Accepted
   Declined
   Pending
+  Cancelled
 }
 
 model ConnectionRequest {
@@ -427,6 +429,20 @@ enum RoutineSource {
   System
 }
 
+enum TimeUnit {
+  DAY    @map("day")
+  HOUR   @map("hour")
+  MINUTE @map("minute")
+}
+
+
+// it takes 21 days to build a habit!
+enum PeriodType {
+  UNLIMITED @map("unlimited")
+  ROLLING   @map("rolling")
+  RANGE     @map("range")
+}
+
 model Routine {
   id                String          @id @default(cuid())
   userId            String
@@ -449,4 +465,13 @@ model Routine {
   periodDays        Int?
   beforeEventBuffer Int             @default(0)
   afterEventBuffer  Int             @default(0)
+  periodType PeriodType @default(UNLIMITED)
+}
+
+model Schedule {
+  id                String          @id @default(cuid())
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  name     String
+  timeZone String?
 }
