@@ -25,10 +25,11 @@ export const establishConnection = async (connection) => {
     const request = {
       status: ConnectionStatus.Active,
       recepientId: connection.user2,
-      initiatorId: connection.user1
+      initiatorId: connection.user1,
+      requestId: "",
+      connectionRequestId: ""
     }
 
-    console.log(request);
     const res = await prisma.connection.create({
       data: request,
     });

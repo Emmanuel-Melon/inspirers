@@ -6,7 +6,12 @@ export const list = async (userId: string): Promise<Routine[]> => {
     return prisma.routine.findMany({
         where: {
             userId
-        }
+        },
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+        ]
     });
   } catch (err) {
     

@@ -4,13 +4,14 @@ import { create } from "./operations/create";
 import { list } from "./operations/list";
 import { update } from "./operations/update";
 import { getById } from "./operations/getById";
+import { deleteById } from "./operations/delete";
 
 export const createRoutine = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  return Promise.resolve(create(req.body))
+  return Promise.resolve(create({ ...req.body, userId: "cl7zrw659000810btyaacqm54" }))
     .then((data) => res.json({ data }))
     .catch(next);
 };
@@ -41,6 +42,17 @@ export const getRoutineById = (
   next: NextFunction
 ) => {
   return Promise.resolve(getById(req.params.routineId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+};
+
+// deleteRoutine
+export const deleteRoutine = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  return Promise.resolve(deleteById(req.params.routineId))
     .then((data) => res.json({ data }))
     .catch(next);
 };

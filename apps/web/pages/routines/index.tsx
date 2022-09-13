@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Avatar,
     Image,
@@ -11,17 +12,53 @@ import {
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../Routines/ListRoutines";
+import { AddRoutine } from "../../Routines/AddRoutine";
 import { Button } from "ui";
+import { FiPlus } from "react-icons/fi";
+import { CustomModal } from "ui";
 
 export default function Routines() {
-    const { data: routines, isLoading, isError } = useFetch(`/routines/cl7uzd9a10146nvbt246jxnc2/list`);
+    const { data: routines, isLoading, isError } = useFetch(`/routines/cl7zrw659000810btyaacqm54/list`);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
     return (
-        <Stack color="brand.primaryText">
-            <Flex justifyContent="space-between">
-                <Heading>Routines</Heading>
-                <Button>New Routine</Button>
-            </Flex>
-            <ListRoutines routines={routines?.data} />
-        </Stack>
+        <>
+            <Stack color="brand.primaryText" gap={4} >
+                <Flex justifyContent="space-between" alignItems="center" gap={8}>
+                    <Stack flex="2">
+                        <Heading size="md">Routines</Heading>
+                        <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
+                    </Stack>
+                    <Flex gap={4}>
+                        <Button
+                            size="md"
+                            onClick={openModal}
+                            bg="brand.white"
+                        >
+                            List View
+                        </Button>
+                        <Button
+                            icon={<FiPlus />}
+                            size="md"
+                            onClick={openModal}
+                        >
+                            New Routine
+                        </Button>
+                    </Flex>
+                </Flex>
+                <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
+            </Stack>
+            <CustomModal show={isOpen} close={closeModal}>
+                <AddRoutine cancel={closeModal} />
+            </CustomModal>
+        </>
     );
 }
