@@ -412,6 +412,8 @@ model NotificationRecepient {
 enum RoutineType {
   Wellness
   Productivity
+  Morning
+  Evening
 }
 
 enum RoutineFrequency {
@@ -429,18 +431,29 @@ enum RoutineSource {
   System
 }
 
+enum RoutineSchedule {
+  Standard
+  Flexible
+}
+
 enum TimeUnit {
   DAY    @map("day")
   HOUR   @map("hour")
   MINUTE @map("minute")
 }
 
-
 // it takes 21 days to build a habit!
 enum PeriodType {
   UNLIMITED @map("unlimited")
   ROLLING   @map("rolling")
   RANGE     @map("range")
+}
+
+model RoutineItem {
+  id        String  @id @default(cuid())
+  title     String
+  routineId String
+  Routine   Routine @relation(fields: [routineId], references: [id])
 }
 
 model Routine {
@@ -465,11 +478,13 @@ model Routine {
   periodDays        Int?
   beforeEventBuffer Int             @default(0)
   afterEventBuffer  Int             @default(0)
-  periodType PeriodType @default(UNLIMITED)
+  periodType        PeriodType      @default(UNLIMITED)
+  scheduleType      RoutineSchedule @default(Standard)
+  items             RoutineItem[]
 }
 
 model Schedule {
-  id                String          @id @default(cuid())
+  id       String  @id @default(cuid())
   user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String
   name     String

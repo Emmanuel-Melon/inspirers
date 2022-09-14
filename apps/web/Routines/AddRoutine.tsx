@@ -23,15 +23,20 @@ import { TextInput } from "ui";
 import { client } from "utils/client";
 
 export const AddRoutine = ({ cancel }) => {
-    const [name, setName] = useState("");
+    const [name, setName] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const handleClick = () => {
+        setIsLoading(true);
         client.post(`/routines`, {
             title: name
         }).then(res => {
             console.log(res);
+            setIsLoading(false);
+            cancel();
         })
         .catch(err => {
             console.log(err);
+            setIsLoading(false);
         })
     }
     return (
@@ -50,7 +55,7 @@ export const AddRoutine = ({ cancel }) => {
                 </FormControl>
                 <Flex gap={4}>
                     <Button size="sm" bg="brand.white" onClick={cancel}>Cancel</Button>
-                    <Button size="sm" onClick={handleClick}>Continue</Button>
+                    <Button size="sm" onClick={handleClick} isLoading={isLoading}>Continue</Button>
                 </Flex>
             </Stack>
         </Stack>

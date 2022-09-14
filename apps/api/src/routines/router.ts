@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createRoutine, listRoutines, getRoutineById, updateRoutine } from "./controller";
+import { createRoutine, listRoutines, getRoutineById, updateRoutine, deleteRoutine } from "./controller";
 
 const routinesRouter = Router();
 
@@ -10,5 +10,7 @@ routinesRouter.put("/:routineId", updateRoutine);
 routinesRouter.get("/:userId/list", listRoutines);
 
 routinesRouter.get("/:routineId", getRoutineById);
+
+routinesRouter.delete("/:routineId", deleteRoutine);
 
 export default routinesRouter;

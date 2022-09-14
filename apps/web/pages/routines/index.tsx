@@ -15,7 +15,7 @@ import { ListRoutines } from "../../Routines/ListRoutines";
 import { AddRoutine } from "../../Routines/AddRoutine";
 import { Button } from "ui";
 import { FiPlus } from "react-icons/fi";
-import { CustomModal } from "ui";
+import { CustomModal, ViewNavigator } from "ui";
 
 export default function Routines() {
     const { data: routines, isLoading, isError } = useFetch(`/routines/cl7zrw659000810btyaacqm54/list`);
@@ -36,23 +36,8 @@ export default function Routines() {
                     <Stack flex="2">
                         <Heading size="md">Routines</Heading>
                         <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
+                        <ViewNavigator view="list" changeView={() => {}} />
                     </Stack>
-                    <Flex gap={4}>
-                        <Button
-                            size="md"
-                            onClick={openModal}
-                            bg="brand.white"
-                        >
-                            List View
-                        </Button>
-                        <Button
-                            icon={<FiPlus />}
-                            size="md"
-                            onClick={openModal}
-                        >
-                            New Routine
-                        </Button>
-                    </Flex>
                 </Flex>
                 <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
             </Stack>
