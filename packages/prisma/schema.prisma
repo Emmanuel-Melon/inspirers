@@ -191,6 +191,11 @@ model User {
   location              String?
   occupation            String?
   NotificationRecepient NotificationRecepient[]
+  timeZone              String                  @default("Europe/London")
+  weekStart             String                  @default("Sunday")
+  completedOnboarding   Boolean                 @default(false)
+  timeFormat            Int?                    @default(12)
+  Schedule              Schedule[]
 }
 
 enum ResourceType {
@@ -286,15 +291,19 @@ model ConnectionInteraction {
   connectionId String
 }
 
+// check connection between two users before displaying profile
 model Connection {
-  id            String           @id @default(cuid())
-  createdAt     DateTime?        @default(now())
-  updatedAt     DateTime?        @default(now())
-  deletedAt     DateTime?        @default(now())
-  status        ConnectionStatus @default(Active)
-  affinityScore Int              @default(0)
-  initiatorId   String
-  recepientId   String
+  id                  String            @id @default(cuid())
+  createdAt           DateTime?         @default(now())
+  updatedAt           DateTime?         @default(now())
+  deletedAt           DateTime?         @default(now())
+  status              ConnectionStatus  @default(Active)
+  affinityScore       Int               @default(0)
+  initiatorId         String
+  recepientId         String
+  requestId           String
+  request             ConnectionRequest @relation(fields: [connectionRequestId], references: [id])
+  connectionRequestId String
 
   @@unique(fields: [initiatorId, recepientId], name: "participants")
 }
@@ -303,6 +312,7 @@ enum ConnectionRequestStatus {
   Accepted
   Declined
   Pending
+  Cancelled
 }
 
 model ConnectionRequest {
@@ -315,6 +325,7 @@ model ConnectionRequest {
   recepientId String
   note        String?
   status      ConnectionRequestStatus @default(Pending)
+  Connection  Connection[]
 
   @@unique(fields: [requesterId, recepientId], name: "participants")
 }
@@ -396,4 +407,87 @@ model NotificationRecepient {
   notificationId String
   notification   Notification @relation(fields: [notificationId], references: [id])
   user           User         @relation(fields: [userId], references: [id])
+}
+
+enum RoutineType {
+  Wellness
+  Productivity
+  Morning
+  Evening
+}
+
+enum RoutineFrequency {
+  Daily
+  Weekly
+}
+
+enum RoutinePrivacy {
+  Private
+  Public
+}
+
+enum RoutineSource {
+  User
+  System
+}
+
+enum RoutineSchedule {
+  Standard
+  Flexible
+}
+
+enum TimeUnit {
+  DAY    @map("day")
+  HOUR   @map("hour")
+  MINUTE @map("minute")
+}
+
+// it takes 21 days to build a habit!
+enum PeriodType {
+  UNLIMITED @map("unlimited")
+  ROLLING   @map("rolling")
+  RANGE     @map("range")
+}
+
+model RoutineItem {
+  id        String  @id @default(cuid())
+  title     String
+  routineId String
+  Routine   Routine @relation(fields: [routineId], references: [id])
+}
+
+model Routine {
+  id                String          @id @default(cuid())
+  userId            String
+  title             String
+  createdAt         DateTime?       @default(now())
+  updatedAt         DateTime?       @default(now())
+  deletedAt         DateTime?       @default(now())
+  startsAt          DateTime?
+  finishesAt        DateTime?
+  resourceId        String?
+  journeyId         String?
+  type              RoutineType?
+  duration          String?
+  description       String?
+  reminders         Boolean         @default(true)
+  privacy           RoutinePrivacy?
+  source            RoutineSource?
+  periodStartDate   DateTime?
+  periodEndDate     DateTime?
+  periodDays        Int?
+  beforeEventBuffer Int             @default(0)
+  afterEventBuffer  Int             @default(0)
+  periodType        PeriodType      @default(UNLIMITED)
+  scheduleType      RoutineSchedule @default(Standard)
+  items             RoutineItem[]
+  startingDate DateTime?
+}
+
+model Schedule {
+  id       String  @id @default(cuid())
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  name     String
+  timeZone String?
 }
