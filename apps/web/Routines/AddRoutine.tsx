@@ -21,10 +21,12 @@ import { FiRotateCw } from "react-icons/fi";
 import { Button } from "ui";
 import { TextInput } from "ui";
 import { client } from "utils/client";
+import { useRouter } from "next/router";
 
 export const AddRoutine = ({ cancel }) => {
     const [name, setName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
     const handleClick = () => {
         setIsLoading(true);
         client.post(`/routines`, {
@@ -33,6 +35,7 @@ export const AddRoutine = ({ cancel }) => {
             console.log(res);
             setIsLoading(false);
             cancel();
+            router.push(`/routines/${res.data.data.id}`)
         })
         .catch(err => {
             console.log(err);

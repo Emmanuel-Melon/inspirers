@@ -40,10 +40,7 @@ export const RoutineStats = ({ routine }) => {
                         >
                             <FiClock size="1rem" />
                         </Box>
-                        <Stack>
-                            <Text color="brand.grey">Duration</Text>
-                            <Text fontWeight="700">2 hours</Text>
-                        </Stack>
+                        <Text color="brand.grey">Thu 15 Sep 14:59</Text>
                     </Flex>
                 </Card>
                 <Card>

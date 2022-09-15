@@ -6,6 +6,9 @@ export const getById = async (routineId: string): Promise<Routine> => {
         return prisma.routine.findUnique({
             where: {
                 id: routineId
+            },
+            include: {
+                items: true
             }
         });
     } catch (err) {
