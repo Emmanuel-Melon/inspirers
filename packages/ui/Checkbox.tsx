@@ -16,7 +16,6 @@ export const CustomCheckbox = ({ text, value, ...props }) => {
       flexDirection="row"
       alignItems="center"
       gridColumnGap={2}
-      bg="brand.white"
       borderRadius="1rem"
       rounded="lg"
       px={3}

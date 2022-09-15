@@ -84,7 +84,7 @@ export const Sidebar = () => {
         }
     ]
     return (
-        <Stack gap={4} p={8} bg="brand.highlight1">
+        <Stack gap={4} p={8} bg="brand.highlight1" height="100vh">
             {
                 links.map(link => <SidebarLink key={link.id} link={link} />)
             }

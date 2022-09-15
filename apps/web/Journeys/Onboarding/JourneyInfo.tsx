@@ -143,7 +143,6 @@ const JourneyQuestions = ({
   return (
     <VStack alignItems="flex-start">
       {options.map((value) => {
-        console.log(value);
         return (
           <CustomCheckbox
             key={value}

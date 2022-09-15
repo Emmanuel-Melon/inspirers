@@ -1,5 +1,5 @@
 import { Avatar, Text, LinkBox, LinkOverlay, Box, Stack, Flex, Heading, AvatarBadge, IconButton, VStack } from "@chakra-ui/react"
-import moment from "moment"
+import moment from "moment";
 import { FiMoreHorizontal } from "react-icons/fi"
 import { Button, Card } from "ui"
 import { Notification } from "@prisma/client";

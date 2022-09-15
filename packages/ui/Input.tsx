@@ -21,13 +21,11 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
       placeholder={props.placeholder}
       cursor="pointer"
       padding="1rem"
-      variant="outline"
+      variant='flushed'
       value={props.value}
       name={props.name}
       type={props.type}
       bg="brand.white"
-      boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-      borderRadius="0.5rem"
       id={props.type}
       onChange={props.onChange}
       focusBorderColor="brand.secondary"
@@ -38,7 +36,7 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
         outline: "none",
         background: "brand.highlight",
       }}
-      _placeholder={{ opacity: 1, color: "brand.secondary" }}
+      _placeholder={{ opacity: 1, color: "brand.primaryText" }}
     />
   );
 };

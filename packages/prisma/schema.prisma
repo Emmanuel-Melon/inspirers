@@ -217,6 +217,8 @@ model Resource {
   createdAt  DateTime?    @default(now())
   updatedAt  DateTime?    @default(now())
   deletedAt  DateTime?    @default(now())
+  Routine    Routine?     @relation(fields: [routineId], references: [id])
+  routineId  String?
 }
 
 model Backpack {
@@ -453,6 +455,8 @@ model RoutineItem {
   id        String  @id @default(cuid())
   title     String
   routineId String
+  progress  Int     @default(0)
+  completed Boolean @default(false)
   Routine   Routine @relation(fields: [routineId], references: [id])
 }
 
@@ -481,7 +485,8 @@ model Routine {
   periodType        PeriodType      @default(UNLIMITED)
   scheduleType      RoutineSchedule @default(Standard)
   items             RoutineItem[]
-  startingDate DateTime?
+  resources         Resource[]
+  startingDate      DateTime?
 }
 
 model Schedule {

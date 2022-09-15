@@ -23,14 +23,15 @@ import {
   HStack,
   Radio,
   FormHelperText,
-  Checkbox
+  Checkbox,
+  Textarea,
 } from "@chakra-ui/react";
 import {
   FiActivity,
-  FiUsers,
+  FiInfo,
   FiClipboard,
   FiShoppingBag,
-  FiCompass,
+  FiUser,
 } from "react-icons/fi";
 import { TextInput } from "ui";
 
@@ -66,15 +67,15 @@ export default function Settings() {
   }, []);
 
   return (
-    <Stack>
+    <Stack width="100%">
       <Heading size="md">Settings</Heading>
       <Flex
         direction="column"
         color="brand.primaryText"
-        alignItems="center"
-        width="65%"
+        alignItems="flex-start"
+        width="100%"
       >
-        <Tabs width="fit-content" defaultIndex={0} isLazy variant="unstyled">
+        <Tabs width="100%" defaultIndex={0} isLazy variant="solid-rounded">
           <TabList
             gap={4}
             bg="brand.highlight1"
@@ -82,18 +83,18 @@ export default function Settings() {
             borderRadius="1rem"
             marginBottom={4}
           >
-            <CustomTab icon={<FiCompass />}>Profile</CustomTab>
+            <CustomTab icon={<FiUser />}>Profile</CustomTab>
             <CustomTab icon={<FiActivity />}>Notifications</CustomTab>
-            <CustomTab icon={<FiUsers />}>Account</CustomTab>
+            <CustomTab icon={<FiInfo />}>Account</CustomTab>
             <CustomTab icon={<FiShoppingBag/>}>Integrations</CustomTab>
           </TabList>
 
           <TabPanels>
             <TabPanel p="none">
-              <VStack alignItems="flex-start" width="100%">
+              <VStack alignItems="flex-start" width="100%" gap={2}>
                 <FormControl>
                   <Flex alignItems="center">
-                  <FormLabel width="20%">Display Name</FormLabel>
+                  <FormLabel width="30%">Display Name</FormLabel>
                   <TextInput
                     onChange={onChange}
                     placeholder="John Doe"
@@ -103,9 +104,9 @@ export default function Settings() {
                   />
                   </Flex>
                 </FormControl>
-                <Flex>
                 <FormControl>
-                  <FormLabel>Username</FormLabel>
+                <Flex>
+                  <FormLabel width="30%">Username</FormLabel>
                   <TextInput
                     onChange={onChange}
                     placeholder="Must be unique"
@@ -113,10 +114,11 @@ export default function Settings() {
                     value={""}
                     name="username"
                   />
+                  </Flex>
                 </FormControl>
-                </Flex>
                 <FormControl>
-                  <FormLabel>Age</FormLabel>
+                <Flex>
+                  <FormLabel width="30%">Age</FormLabel>
                   <TextInput
                     onChange={onChange}
                     placeholder="96"
@@ -124,9 +126,11 @@ export default function Settings() {
                     value={""}
                     name="age"
                   />
+                  </Flex>
                 </FormControl>
                 <FormControl>
-                  <FormLabel>E-mail</FormLabel>
+                <Flex>
+                  <FormLabel width="30%">E-mail</FormLabel>
                   <TextInput
                     onChange={onChange}
                     placeholder="johndoe@email.com"
@@ -134,31 +138,43 @@ export default function Settings() {
                     value={""}
                     name="email"
                   />
+                  </Flex>
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Gender</FormLabel>
+                <Flex>
+                  <FormLabel width="22%">Gender</FormLabel>
+                  <Stack>
                   <RadioGroup defaultValue='None'>
                     <HStack spacing='24px'>
                       <Radio value='Male'>Male</Radio>
                       <Radio value='Female'>Female</Radio>
-                      <Radio value='Trans'>Trans</Radio>
                       <Radio value='None'>Rather not say</Radio>
                     </HStack>
                   </RadioGroup>
                   <FormHelperText>Select where you belong.</FormHelperText>
+                  </Stack>
+                </Flex>
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Bio</FormLabel>
-                  <TextInput
+                <Flex>
+                  <FormLabel width="30%">Bio</FormLabel>
+                  <Textarea
                     onChange={onChange}
+                    variant="filled"
+                    bg="brand.white"
+                    p="4"
+                    borderRadius="1rem"
                     placeholder="I am an executive producer at Good music, I like long walks on the beach on snowy days. Im part necrophiliac so if i like you i'll always try to make you drop dead from jokes literally."
                     type="text"
                     value={""}
                     name="bio"
                   />
+                  </Flex>
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Job Title</FormLabel>
+                <Flex>
+                  <FormLabel width="22%">Job Title</FormLabel>
+                  <Stack>
                   <TextInput
                     onChange={onChange}
                     placeholder="Executive Producer"
@@ -167,6 +183,8 @@ export default function Settings() {
                     name="jobtitle"
                   />
                   <FormHelperText><Checkbox>Show my job title on my profile.</Checkbox></FormHelperText>
+                  </Stack>
+                </Flex>
                 </FormControl>
                 <Button onClick={() => { }}>Save</Button>
               </VStack>
@@ -224,6 +242,7 @@ export default function Settings() {
             <TabPanel p="none">
               <VStack alignItems="flex-start" width="100%">
                 <FormControl>
+                  <Flex gap="20">
                   <FormLabel>Entertainment</FormLabel>
                   <Button onClick={() => { }}
                   colorScheme="brand"
@@ -243,8 +262,10 @@ export default function Settings() {
                     bg: "brand.hovered"
                   }}
                   >Click</Button>
+                  </Flex>
                 </FormControl>
                 <FormControl>
+                <Flex gap="20">
                   <FormLabel>Work</FormLabel>
                   <Button onClick={() => { }}
                   colorScheme="brand"
@@ -264,8 +285,10 @@ export default function Settings() {
                     bg: "brand.hovered"
                   }}
                   >Click</Button>
+                </Flex>
                 </FormControl>
                 <FormControl>
+                <Flex gap="20">
                   <FormLabel>Calendar</FormLabel>
                   <Button onClick={() => { }}
                   colorScheme="brand"
@@ -285,6 +308,7 @@ export default function Settings() {
                     bg: "brand.hovered"
                   }}
                   >Click</Button>
+                   m,.</Flex>
                 </FormControl>
                 <Button onClick={() => { }}>Save</Button>
               </VStack>

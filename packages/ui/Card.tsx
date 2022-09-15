@@ -20,6 +20,7 @@ export const Card = ({ children, onClick, bg }: CardProps) => {
       color="brand.primaryText"
       cursor="pointer"
       onClick={onClick}
+      _hover={{ bg: "brand.hovered2" }}
     >
       {children}
     </Box>

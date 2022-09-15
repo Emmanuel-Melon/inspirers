@@ -27,7 +27,7 @@ import {
     FiGrid,
 } from "react-icons/fi";
 
-export const ViewNavigator = ({ changeView, view }) => {
+export const ViewNavigator = ({ changeView, openModal, view }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
@@ -103,7 +103,7 @@ export const ViewNavigator = ({ changeView, view }) => {
                                 Sort
                             </Button>
                         </Flex>
-                        <Button icon={<FiPlus />} size="sm" onClick={() => { }}>
+                        <Button icon={<FiPlus />} size="sm" onClick={openModal}>
                             New Routine
                         </Button>
                     </Flex>

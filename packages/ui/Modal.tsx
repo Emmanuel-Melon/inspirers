@@ -44,7 +44,7 @@ export const CustomModal: FunctionComponent<ModalProps> = ({
       transform: "translate(-50%, -50%)",
       width: "fit-content",
       padding: 0,
-      borderRadius: "0.2rem",
+      borderRadius: "1rem",
       border: "none",
       outline: "0",
       boxShadow: "rgba(0, 0, 0, 0.08) 0px 4px 12px",
