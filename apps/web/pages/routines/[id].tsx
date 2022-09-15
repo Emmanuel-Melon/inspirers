@@ -71,9 +71,12 @@ export default function Routine() {
                 </Stack>
                 <Stack gap={2} width="100%" flex="1">
                     <Stack>
+                    <Heading size="sm" color="brand.secondary">Active Objective</Heading>
+                        <Card>
+
                         <Flex justifyContent="space-between">
                             <Stack>
-                            <Heading size="sm" color="brand.secondary">Members</Heading>
+                            
                             <Text>Invite companions</Text>
                             </Stack>
                             <IconButton size="sm" bg="brand.highlight2">
@@ -97,6 +100,10 @@ export default function Routine() {
                                 <FiPlus size="1rem" />
                             </Box>
                         </Flex>
+                        </Card>
+
+
+                        
                     </Stack>
                     <RoutineResources routine={routine?.data} />
                     <RoutineTasks routine={routine?.data} />
