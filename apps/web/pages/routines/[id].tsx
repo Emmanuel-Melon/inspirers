@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Avatar,
     Image,
@@ -22,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../Routines/ListRoutines";
-import { Button, Card, CustomCheckbox } from "ui";
+import { Button, Card, CustomCheckbox, CustomModal } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiSettings, FiChevronsDown, FiShare2, FiPlus, FiMoreHorizontal } from "react-icons/fi";
@@ -30,13 +31,28 @@ import { RoutineStats } from "Routines/RoutineStats";
 import { RoutineObjectives } from "Routines/RoutineObjectives";
 import { RoutineResources } from "Routines/RoutineResources";
 import { RoutineTasks } from "Routines/RoutineTasks";
+import { ManageRoutine } from "Routines/ManageRoutine";
+import { ViewNavigator } from "ui";
 
 
 export default function Routine() {
     const router = useRouter();
     const { data: routine, isLoading, isError } = useFetch(`${router.asPath}`);
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
     return (
-        <Stack color="brand.primaryText" gap={4}>
+        <>
+                <Stack color="brand.primaryText" gap={4}>
             <Flex justifyContent="space-between" alignItems="flex-start">
                 <Stack>
                     <Heading size="md">Emmanuel's {routine?.data?.title}</Heading>
@@ -45,7 +61,7 @@ export default function Routine() {
                 <Flex gap={4}>
                     <Button size="md" bg="brand.white" icon={<FiChevronsDown />}>Today</Button>
                     <Button size="md" bg="brand.white" icon={<FiShare2 />}>Share</Button>
-                    <Button size="md" icon={<FiSettings />}>Manage Routine</Button>
+                    <Button size="md" icon={<FiSettings />} onClick={openModal}>Manage Routine</Button>
                 </Flex>
             </Flex>
             <Flex gap={8}>
@@ -58,16 +74,17 @@ export default function Routine() {
                         <Flex justifyContent="space-between">
                             <Stack>
                             <Heading size="sm" color="brand.secondary">Members</Heading>
-                            <Text>You can organize your days and weeks with some routines</Text>
+                            <Text>Invite companions</Text>
                             </Stack>
                             <IconButton size="sm" bg="brand.highlight2">
                                 <FiMoreHorizontal />
                             </IconButton>
                         </Flex>
                         <Flex gap={1}>
-                            <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />
-                            <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />
-                            <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />
+                           {
+                            [].map(() =>  <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />)
+                           }
+    
                             <Box
                                 bg="brand.white"
                                 p="2"
@@ -86,5 +103,9 @@ export default function Routine() {
                 </Stack>
             </Flex>
         </Stack>
+        <CustomModal show={isOpen} close={closeModal}>
+                <ManageRoutine />
+            </CustomModal>
+        </>
     );
 }

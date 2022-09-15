@@ -36,7 +36,7 @@ export default function Routines() {
                     <Stack flex="2">
                         <Heading size="md">Routines</Heading>
                         <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
-                        <ViewNavigator view="list" changeView={() => {}} />
+                        <ViewNavigator view="list" changeView={() => {}} openModal={openModal} />
                     </Stack>
                 </Flex>
                 <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
