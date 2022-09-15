@@ -85,7 +85,7 @@ export const ViewNavigator = ({ changeView, view }) => {
                     <Flex gap={4}>
                         <IconButton
                             bg="brand.white"
-                            color="brand.primary"
+                            color="brand.secondary"
                             aria-label={"info"}
                             size="sm"
                             boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
@@ -95,7 +95,7 @@ export const ViewNavigator = ({ changeView, view }) => {
                         <Flex gap={4}>
                             <Button
                                 bg="brand.white"
-                                color="brand.primary"
+                                color="brand.secondary"
                                 aria-label={"info"}
                                 size="sm"
                                 icon={<FiArrowDown />}
@@ -103,7 +103,7 @@ export const ViewNavigator = ({ changeView, view }) => {
                                 Sort
                             </Button>
                         </Flex>
-                        <Button icon={<FiPlus />} size="md" onClick={() => { }}>
+                        <Button icon={<FiPlus />} size="sm" onClick={() => { }}>
                             New Routine
                         </Button>
                     </Flex>

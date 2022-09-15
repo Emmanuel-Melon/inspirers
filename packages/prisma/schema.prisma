@@ -481,6 +481,7 @@ model Routine {
   periodType        PeriodType      @default(UNLIMITED)
   scheduleType      RoutineSchedule @default(Standard)
   items             RoutineItem[]
+  startingDate DateTime?
 }
 
 model Schedule {

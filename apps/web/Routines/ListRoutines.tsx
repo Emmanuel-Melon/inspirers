@@ -1,14 +1,8 @@
 import {
-    Avatar,
-    Image,
-    Img,
     Stack,
     Text,
-    Link,
-    Flex,
     Heading,
-    Box,
-    LinkBox, LinkOverlay
+    Box
 } from "@chakra-ui/react";
 import { RoutineItem } from "./Routine";
 import { Routine } from "@prisma/client";
@@ -16,10 +10,10 @@ import { FiRotateCw } from "react-icons/fi";
 
 const EmptyState = () => {
     return (
-        <Stack 
-            bg="brand.highlight1" 
-            p="8" 
-            gap={4} 
+        <Stack
+            bg="brand.highlight1"
+            p="8"
+            gap={4}
             alignItems="center"
             borderRadius="1rem"
             textAlign="center"
@@ -43,7 +37,6 @@ export const ListRoutines = ({ isLoading, isError, routines }: ListRoutinesProps
     if (isError) {
         return <p>Failed to Load Routines</p>
     }
-
     if (isLoading) {
         return <p>Loading Routines</p>
     }
