@@ -33,7 +33,7 @@ import {
 import { Button, Card, CustomCheckbox, CustomModal, TextInput, ViewNavigator } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { FiFlag, FiPlayCircle, FiClock, FiPlus, FiMoreHorizontal, FiUserPlus, FiTrash } from "react-icons/fi";
+import { FiFlag, FiPlayCircle, FiX, FiPlus, FiMoreHorizontal, FiUserPlus, FiTrash } from "react-icons/fi";
 import { client } from "../utils/client";
 import { Routine, RoutineType } from "@prisma/client";
 
@@ -57,13 +57,6 @@ const Objective = ({ deleteItem, objective }) => {
                     <Flex>
                         <Heading size="sm" onClick={openModal}>{objective.title}</Heading>
                     </Flex>
-                    <Stack>
-                        <Flex gap={4}>
-                            <IconButton size="sm" bg="brand.white">
-                                <FiUserPlus />
-                            </IconButton>
-                        </Flex>
-                    </Stack>
                     <Stack>
                         <Text color="brand.secondaryText">{objective.progress}% completed</Text>
                         <Progress
@@ -134,17 +127,27 @@ const Objective = ({ deleteItem, objective }) => {
 const NewObjective = ({ closeEditor, onSave }) => {
     const [title, setTitle] = useState("");
     return (
-        <Flex gap={4}>
+        <Stack>
+                    <Flex gap={4}>
             <TextInput
                 placeholder="New objective"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
+                autofocus
             />
-            <Flex gap={2}>
-                <Button size="md" bg="white" onClick={closeEditor}>Cancel</Button>
-                <Button size="md" onClick={onSave}>Save</Button>
-            </Flex>
+
         </Flex>
+        <Flex gap={2}>
+                <Button size="md" onClick={() => {
+                    onSave().then(res => {
+                        closeEditor();
+                    });
+                }}>Save</Button>
+                                <IconButton size="md" bg="white" onClick={closeEditor}>
+                    <FiX />
+                </IconButton>
+            </Flex>
+        </Stack>
     )
 }
 
@@ -159,7 +162,7 @@ export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
         setEdit(false);
     }
     const onSave = (data) => {
-        client.post(`/routines/${routine.id}`, {
+        return client.post(`/routines/${routine.id}`, {
             title: "Hello",
             routineId: routine.id
         })
@@ -183,7 +186,7 @@ export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
         <Stack alignItems="flex-start" width="100%" color="brand.primaryText">
             <Flex gap={2} justifyContent="space-between" width="100%">
                 <Stack>
-                    <Heading size="sm" color="brand.secondary">Objectives</Heading>
+                    <Heading size="sm" color="brand.secondary">Upcoming Objectives</Heading>
                     <Text color="brand.secondaryText">Today, I will complete the following</Text>
                 </Stack>
                 <Flex gap={2}>

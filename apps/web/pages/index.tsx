@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { Insights } from "../Journeys/components/Insights";
 import { Timeline } from "../Journeys/components/Timeline";
@@ -18,19 +18,11 @@ export default function Index(props) {
     router.push("/journeys/new");
   }
   return (
-    <Flex direction="column" gap={4} my="8">
+    <Stack width="100%" gap={4}>
       <JourneyOverviewCard user={props.user} getStarted={getStarted} />
-      <Flex>
-        <Flex width="60%" direction="column" gap={4} marginRight={8}>
-          <Insights insights={[]} />
-          <Timeline events={[]} />
-        </Flex>
-        <Flex width="40%" direction="column" gap={4}>
-          <Milestones milestones={[]} getStarted={getStarted} />
-          <Activities activities={[]} getStarted={getStarted} />
-        </Flex>
-      </Flex>
-    </Flex>
+      <Insights insights={[]} />
+      <Timeline events={[]} />
+    </Stack>
   );
 }
 

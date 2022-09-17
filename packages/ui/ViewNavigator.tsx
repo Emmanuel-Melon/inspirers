@@ -82,7 +82,7 @@ export const ViewNavigator = ({ changeView, openModal, view }) => {
                     </Flex>
                 </Flex>
                 <Flex alignItems="center" gap={4} justifyContent="space-between">
-                    <Flex gap={4}>
+                    <Flex gap={2}>
                         <IconButton
                             bg="brand.white"
                             color="brand.secondary"
@@ -92,17 +92,6 @@ export const ViewNavigator = ({ changeView, openModal, view }) => {
                         >
                             <FiInfo />
                         </IconButton>
-                        <Flex gap={4}>
-                            <Button
-                                bg="brand.white"
-                                color="brand.secondary"
-                                aria-label={"info"}
-                                size="sm"
-                                icon={<FiArrowDown />}
-                            >
-                                Sort
-                            </Button>
-                        </Flex>
                         <Button icon={<FiPlus />} size="sm" onClick={openModal}>
                             New Routine
                         </Button>

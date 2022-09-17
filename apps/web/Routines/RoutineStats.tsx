@@ -1,23 +1,9 @@
 import {
-    Avatar,
-    Image,
-    Img,
     Stack,
     Text,
-    Link,
     Flex,
     Heading,
     Box,
-    LinkBox, LinkOverlay,
-    Progress,
-    VStack,
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
-    Tag
 } from "@chakra-ui/react";
 import { Button, Card, CustomCheckbox } from "ui";
 import { useRouter } from "next/router";
@@ -29,20 +15,6 @@ export const RoutineStats = ({ routine }) => {
         <Stack gap={2}>
             <Heading size="sm" color="brand.secondary">Overview</Heading>
             <Flex gap={4}>
-                <Card bg="brand.secondary">
-                    <Flex gap={4} alignItems="center" color="brand.white">
-                        <Box
-                            bg="brand.highlight3"
-                            p="2"
-                            borderRadius="1rem"
-                            color="brand.grey"
-                            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                        >
-                            <FiClock size="1rem" />
-                        </Box>
-                        <Text color="brand.grey">Thu 15 Sep 14:59</Text>
-                    </Flex>
-                </Card>
                 <Card>
                     <Flex gap={2} alignItems="center">
                         <Box
@@ -56,7 +28,7 @@ export const RoutineStats = ({ routine }) => {
                         </Box>
                         <Stack>
                             <Text color="brand.secondaryText">Starts</Text>
-                            <Text fontWeight="700">{moment(routine?.createdAt).format("hh:mm")} PM</Text>
+                            <Text fontWeight="700">{moment(routine?.startsAt).format("hh:mm A")}</Text>
                         </Stack>
                     </Flex>
                 </Card>
@@ -73,7 +45,7 @@ export const RoutineStats = ({ routine }) => {
                         </Box>
                         <Stack>
                             <Text color="brand.secondaryText">Ends at</Text>
-                            <Text fontWeight="700">{moment(routine?.createdAt).add(2, "hours").format("hh:mm")} PM</Text>
+                            <Text fontWeight="700">{moment(routine?.finishesAt).format("hh:mm A")}</Text>
                         </Stack>
                     </Flex>
                 </Card>

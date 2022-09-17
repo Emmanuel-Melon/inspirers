@@ -24,7 +24,7 @@ import {
 import { Button, Card, CustomCheckbox } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { FiFlag, FiPlayCircle, FiClock, FiPlus, FiArrowRight, FiMoreHorizontal } from "react-icons/fi";
+import { FiFlag, FiPlayCircle, FiClock, FiPlus, FiArrowRight, FiMoreHorizontal, FiLink } from "react-icons/fi";
 
 const RoutineResource = () => {
     return (
@@ -78,7 +78,12 @@ export const RoutineResources = ({ routine }) => {
                 </IconButton>
             </Flex>
             {
-                resources.length === 0 ? <Card>Empty State</Card> : resources.map(resource => <RoutineResource key={resource.id} resource={resource} />)
+                resources.length === 0 ? <Card>
+                    <Flex gap={4} alignItems="center">
+                    <Text color="brand.secondaryText">No Resources Linked</Text>
+                    <Button size="sm" icon={<FiLink />} bg="brand.highlight1">Link Resources</Button>
+                    </Flex>
+                </Card> : resources.map(resource => <RoutineResource key={resource.id} resource={resource} />)
             }
         </Stack>
     )
