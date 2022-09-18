@@ -22,6 +22,9 @@ const theme = extendTheme({
       hovered2: "linear-gradient(267.15deg, rgba(169, 113, 26, 0.04) -14.36%, rgba(248, 189, 250, 0.3) 25.12%, rgba(0, 157, 174, 0.035) 89.33%)",
     },
   },
+  sizes: {
+    
+  }
 });
 
 export default theme;

@@ -28,7 +28,6 @@ export default function Index(props) {
             <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
           </Stack>
         </Flex>
-        <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
       </Stack>
     </>
   );

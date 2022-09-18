@@ -20,7 +20,6 @@ export default function Index(props) {
   return (
     <Stack width="100%" gap={4}>
       <JourneyOverviewCard user={props.user} getStarted={getStarted} />
-      <Insights insights={[]} />
       <Timeline events={[]} />
     </Stack>
   );

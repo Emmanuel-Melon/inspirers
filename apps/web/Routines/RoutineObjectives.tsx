@@ -186,7 +186,7 @@ export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
         <Stack alignItems="flex-start" width="100%" color="brand.primaryText">
             <Flex gap={2} justifyContent="space-between" width="100%">
                 <Stack>
-                    <Heading size="sm" color="brand.secondary">Upcoming Objectives</Heading>
+                    <Heading size="sm" color="brand.secondary">My Quests</Heading>
                     <Text color="brand.secondaryText">Today, I will complete the following</Text>
                 </Stack>
                 <Flex gap={2}>

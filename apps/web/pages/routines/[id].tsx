@@ -44,7 +44,7 @@ export default function Routine() {
 
     return (
         <>
-            <Stack color="brand.primaryText" gap={4} width="1150px">
+            <Stack color="brand.primaryText" gap={4} width="100%">
                 <Flex justifyContent="space-between" alignItems="flex-start">
                     <Flex gap={2} alignItems="center">
                     <Stack>
@@ -69,7 +69,7 @@ export default function Routine() {
                     <Stack gap={2} width="100%" flex="1">
                         <Stack>
                             <Flex justifyContent="space-between" alignItems="center">
-                                <Heading size="sm" color="brand.secondary">Active Objective</Heading>
+                                <Heading size="sm" color="brand.secondary">Quest</Heading>
                                 <IconButton size="sm" bg="brand.highlight2">
                                     <FiMoreHorizontal />
                                 </IconButton>

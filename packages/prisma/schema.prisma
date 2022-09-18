@@ -159,6 +159,7 @@ model Task {
   updatedAt   DateTime?   @default(now())
   deletedAt   DateTime?   @default(now())
   due         DateTime?
+  group String?
 }
 
 enum IdentityProvider {

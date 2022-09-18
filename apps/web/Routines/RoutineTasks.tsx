@@ -56,7 +56,7 @@ export const RoutineTasks = ({ routine }) => {
     return (
         <Stack alignItems="flex-start">
             <Flex justifyContent="space-between" width="100%">
-                <Stack>a
+                <Stack>
                     <Heading size="sm" color="brand.secondary">Tasks</Heading>
                     <Text color="brand.secondaryText">Break down your plans into tasks</Text>
                 </Stack>
@@ -66,7 +66,7 @@ export const RoutineTasks = ({ routine }) => {
             </Flex>
             {
                 tasks.length === 0 ? <Card>
-                    <Flex gap={4} alignItems="center">
+                    <Flex gap={4} alignItems="center" justifyContent="space-between">
                         <Text color="brand.secondaryText">No Tasks Linked</Text>
                         <Button size="sm" icon={<FiLink />} bg="brand.highlight1">Link Task</Button>
                     </Flex>

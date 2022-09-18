@@ -46,10 +46,10 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
   return (
     <Flex direction="column" width="100%" height="100%">
       <Flex direction="column" gap={4}>
-        <Heading color="brand.primary">
+        <Heading color="brand.primaryText">
           {context.currentStep.id} - {context.currentStep.title}
         </Heading>
-        <Text>
+        <Text color="brand.secondaryText">
           Plan your own personal and professional development. Easily track your
           progress towards long-term goals.
         </Text>
@@ -58,7 +58,7 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
           bg="brand.white"
           borderRadius="0rem 1rem 1rem 0rem"
           borderLeft="solid 0.25rem"
-          borderColor="brand.accent"
+          borderColor="brand.secondary"
           boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
         >
           <Image
@@ -69,30 +69,26 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
               "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg"
             }
           />
-          <Text color="brand.primary">{guide?.mimi?.greeting}</Text>
+          <Text color="brand.secondaryText">{guide?.mimi?.greeting}</Text>
         </Flex>
-        <Heading size="md" color="brand.primary">
+        <Heading size="md" color="brand.secondary">
           What is a journey?
         </Heading>
         <Text>{context.currentStep.description}</Text>
-        <Heading size="sm" color="brand.primary">
+        <Heading size="sm" color="brand.secondary">
           Using a template
         </Heading>
         <Text>
           Immerse yourself in the world of resources and transformation built by
           the community.
         </Text>
-        <Heading size="sm" color="brand.primary">
+        <Heading size="sm" color="brand.secondary">
           Blank journey
         </Heading>
         <Text>
           Create your own systems to continue to build momentum and stay focused
           on the things that matter most.
         </Text>
-
-        <Button onClick={() => {}} icon={<FiInfo />}>
-          Learn More
-        </Button>
       </Flex>
     </Flex>
   );

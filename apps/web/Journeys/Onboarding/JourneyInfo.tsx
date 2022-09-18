@@ -33,7 +33,7 @@ export const SecondStepGuide = ({ guide }) => {
   return (
     <Flex gap={8} height="100%">
       <Flex direction="column" gap={4}>
-        <Heading color="brand.primary">
+        <Heading color="brand.primaryText">
           {context.currentStep.id}/{context.steps.length} -{" "}
           {context.currentStep.title}
         </Heading>
@@ -53,13 +53,13 @@ export const SecondStepGuide = ({ guide }) => {
               "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg"
             }
           />
-          <Text color="brand.primary">
+          <Text color="brand.secondaryText">
             Hi, my name is Ney and I'll be your guide in this journey
           </Text>
         </Flex>
         {context.blueprint === "template" ? (
           <>
-            <Heading size="md" color="brand.primary">
+            <Heading size="md" color="brand.primaryText">
               Browse templates
             </Heading>
             <VStack
@@ -100,24 +100,24 @@ export const SecondStepGuide = ({ guide }) => {
               <FiBookOpen />
               <Heading size="sm">Academic</Heading>
             </Flex>
-            <Text>
+            <Text color="brand.secondaryText">
               Study, prepar for exams and organize your academic life.
             </Text>
             <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiBriefcase />
               <Heading size="sm">Business</Heading>
             </Flex>
-            <Text>Plan your business and manage your work.</Text>
+            <Text color="brand.secondaryText">Plan your business and manage your work.</Text>
             <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiClipboard />
               <Heading size="sm">Career</Heading>
             </Flex>
-            <Text>Career guidance and development.</Text>
+            <Text color="brand.secondaryText">Career guidance and development.</Text>
             <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiHeart />
               <Heading size="sm">Personal</Heading>
             </Flex>
-            <Text>Improve your personal life.</Text>
+            <Text color="brand.secondaryText">Improve your personal life.</Text>
           </Flex>
         )}
       </Flex>
@@ -170,7 +170,7 @@ const JourneyTypeSelector = ({ defaultValue, options, updateJourneyType }) => {
   const group = getRootProps();
   return (
     <>
-      <Text color="brand.primary">Type of journey</Text>
+      <Text color="brand.secondaryText">Type of journey</Text>
       <HStack {...group}>
         {options.map((value) => {
           const radio = getRadioProps({ value });
@@ -180,14 +180,14 @@ const JourneyTypeSelector = ({ defaultValue, options, updateJourneyType }) => {
               {...radio}
               bg="brand.white"
               checked={{
-                bg: "brand.primary",
+                bg: "brand.primaryText",
                 color: "brand.white",
               }}
               hover={{
                 borderColor: "brand.highlight2",
               }}
               border="groove 0.10rem"
-              borderColor="brand.primary"
+              borderColor="brand.primaryText"
               name="journeyType"
             >
               {value}
@@ -305,7 +305,7 @@ export const SecondStep = ({ user }) => {
             borderRadius="1rem"
             color="brand.primaryText"
           >
-            <Text color="brand.primary">
+            <Text color="brand.secondaryText">
               Name your journey{" "}
               <Box as="span" color="brand.danger">
                 *
@@ -326,7 +326,7 @@ export const SecondStep = ({ user }) => {
 
             {journey.journeyType === "academic" ? (
               <>
-                <Text color="brand.primary">Your field</Text>
+                <Text color="brand.secondaryText">Your field</Text>
                 <TextInput
                   placeholder="E.g Engineering, Medicine etc."
                   type="text"
@@ -334,7 +334,7 @@ export const SecondStep = ({ user }) => {
                   value={journey.field}
                   name="field"
                 />
-                <Text color="brand.primary">Academic level</Text>
+                <Text color="brand.secondaryText">Academic level</Text>
                 <Select
                   placeholder="e.g undergraduate or postgrade"
                   borderRadius="1rem"
@@ -345,17 +345,11 @@ export const SecondStep = ({ user }) => {
                   <option value={journey.background}>Postgraduate</option>
                   <option value={journey.background}>Other</option>
                 </Select>
-                <Text color="brand.primary">What's your goal?</Text>
-                <JourneyQuestions
-                  options={academicOptions}
-                  defaultValue="academic"
-                  name="academic"
-                />
               </>
             ) : null}
             {journey.journeyType === "business" ? (
               <>
-                <Text color="brand.primary">Business type</Text>
+                <Text color="brand.primaryText">Business type</Text>
                 <TextInput
                   placeholder="E.g Tech, Education"
                   type="text"
@@ -363,17 +357,11 @@ export const SecondStep = ({ user }) => {
                   value={journey.field}
                   name="field"
                 />
-                <Text color="brand.primary">What's your goal?</Text>
-                <JourneyQuestions
-                  options={businessOptions}
-                  defaultValue="business"
-                  name="business"
-                />
               </>
             ) : null}
             {journey.journeyType === "career" ? (
               <>
-                <Text color="brand.primary">Field</Text>
+                <Text color="brand.primaryText">Field</Text>
                 <TextInput
                   placeholder="E.g Engineering, Medicine etc."
                   type="text"
@@ -381,7 +369,7 @@ export const SecondStep = ({ user }) => {
                   value={journey.interest}
                   name="interest"
                 />
-                <Text color="brand.primary">Experience level</Text>
+                <Text color="brand.primaryText">Experience level</Text>
                 <Select
                   placeholder="e.g undergrad or postgrade"
                   borderRadius="1rem"
@@ -391,22 +379,6 @@ export const SecondStep = ({ user }) => {
                   <option value={journey.background}>Early Career</option>
                   <option value={journey.background}>Mid Level/ Senior</option>
                 </Select>
-                <Text color="brand.primary">What's your goal?</Text>
-
-                <JourneyQuestions
-                  options={careerOptions}
-                  defaultValue="career"
-                  name="career"
-                />
-              </>
-            ) : null}
-            {journey.journeyType === "personal" ? (
-              <>
-                <JourneyQuestions
-                  options={personalOptions}
-                  defaultValue="personal"
-                  name="personal"
-                />
               </>
             ) : null}
             <Flex gap={4}>

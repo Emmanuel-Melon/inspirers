@@ -8,12 +8,18 @@ import {
   Heading,
   VStack,
   Box,
+  Stack,
   Tag,
-  TagLabel
+  TagLabel,
+  TagLeftIcon
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import {
   FiFacebook,
+  FiCode,
+  FiBriefcase,
+  FiFolder,
+  FiCreditCard,
   FiTwitter,
   FiLinkedin, FiEdit3, FiUserPlus, FiMoreHorizontal, FiMessageSquare
 } from "react-icons/fi";
@@ -28,7 +34,7 @@ const UserView = () => { }
 
 const ProfileCardActions = ({ children }) => {
   return (
-    <Flex gap={4} justifyContent="flex-end" width="100%" alignItems="center">
+    <Flex gap={4} justifyContent="flex-start" width="100%" alignItems="center">
       {children}
     </Flex>
   )
@@ -92,12 +98,12 @@ export const UserProfileCard = ({ user }) => {
                   "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg"
                 }
               />
-              <VStack alignItems="flex-start">
+              <Stack alignItems="flex-start">
                 <Heading color="brand.primaryText" size="sm">
                   {user?.name}
                 </Heading>
-                <Text color="brand.accent" size="sm">@{user?.username}</Text>
-              </VStack>
+                <Text color="brand.secondary" size="sm">@{user?.username}</Text>
+              </Stack>
             </Flex>
           </Flex>
 
@@ -146,9 +152,6 @@ export const UserProfileCard = ({ user }) => {
               }
 
             </ProfileCardActions>
-            <Flex gap={4}>
-              <Text>{user?.bio}</Text>
-            </Flex>
             <Flex gap={2} flexWrap="wrap">
               <Tag
                 bg="brand.highlight"
@@ -159,13 +162,7 @@ export const UserProfileCard = ({ user }) => {
                 }}
                 cursor="pointer"
               >
-                <Avatar
-                  src='https://bit.ly/sage-adebayo'
-                  size='xs'
-                  name='Segun Adebayo'
-                  ml={-1}
-                  mr={2}
-                />
+                <TagLeftIcon boxSize='12px' as={FiCreditCard} />
                 <TagLabel>Finance</TagLabel>
               </Tag>
               <Tag
@@ -177,13 +174,7 @@ export const UserProfileCard = ({ user }) => {
                 }}
                 cursor="pointer"
               >
-                <Avatar
-                  src='https://bit.ly/sage-adebayo'
-                  size='xs'
-                  name='Segun Adebayo'
-                  ml={-1}
-                  mr={2}
-                />
+                <TagLeftIcon boxSize='12px' as={FiCode} />
                 <TagLabel>Software Engineering</TagLabel>
               </Tag>
               <Tag
@@ -195,13 +186,7 @@ export const UserProfileCard = ({ user }) => {
                 }}
                 cursor="pointer"
               >
-                <Avatar
-                  src='https://bit.ly/sage-adebayo'
-                  size='xs'
-                  name='Segun Adebayo'
-                  ml={-1}
-                  mr={2}
-                />
+                <TagLeftIcon boxSize='12px' as={FiBriefcase} />
                 <TagLabel>Startups</TagLabel>
               </Tag>
             </Flex>

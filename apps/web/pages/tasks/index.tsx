@@ -2,15 +2,6 @@ import { client } from "../../utils/client";
 import { useState } from "react";
 import {
   Flex,
-  Text,
-  Heading,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
 import { TaskList } from "../../Tasks/components/TaskList";
@@ -18,25 +9,37 @@ import { TaskViewMenu } from "../../Tasks/components/TaskViewMenu";
 import { TaskBoard } from "../../Tasks/components/TaskBoard";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Button } from "ui";
+import { CustomModal } from "ui";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useFetch } from "../../hooks/useSwr";
+import { AddTask } from "../../Tasks/components/AddTask";
 
 export default function Tasks(props) {
   const [isLoading, setIsLoading] = useState(false);
-  const [view, setView] = useState("kanban");
+  const [view, setView] = useState("list");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data: tasks, isError } = useFetch(`/tasks/${props?.user?.id}/list`);
+  const [show, setShow] = useState(false);
+  function openModal() {
+    setShow(true);
+  }
+
+  function closeModal() {
+    setShow(false);
+  }
 
   function addTaskItem(data) {
     setIsLoading(true);
     client
-      .post("/api/tasks", {
+      .post("/tasks", {
         ...data,
-        userId: 1,
+        userId: props?.user?.id
       })
       .then((response) => {
         setIsLoading(false);
-      });
+      })
+      .then(() => closeModal())
   }
 
   const changeView = (view) => {
@@ -51,71 +54,30 @@ export default function Tasks(props) {
             changeView={changeView}
             view={view}
             addNewJourney={onOpen}
+            openModal={openModal}
           />
           <Flex>
             {view === "list" ? (
-              <Flex gap={8}>
-                <Flex
-                  h="500px"
-                  overflowY="scroll"
-                  css={{
-                    "::-webkit-scrollbar": { display: "none" },
-                  }}
-                >
-                  <TaskList tasks={data} />
-                </Flex>
-                <Flex direction="column" width={"35%"} gap={4}>
-                  <Text>White</Text>
-                  <Flex
-                    boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                    p="4"
-                    gap={4}
-                    borderRadius="1rem"
-                    bg="brand.white"
-                  >
-                    <Text>White</Text>
-                  </Flex>
-                </Flex>
-              </Flex>
+              <TaskList tasks={tasks?.data} />
             ) : (
               <DndProvider backend={HTML5Backend}>
-                <TaskBoard />
+                <TaskBoard tasks={tasks?.data} />
               </DndProvider>
             )}
           </Flex>
         </Flex>
       </Flex>
+      <CustomModal show={show} close={closeModal}>
+        <AddTask
+          addTask={addTaskItem}
+          journey={{ id: "cl85wpf3f833650btnkive11j" }}
+          isLoading={isLoading}
+        />
+      </CustomModal>
     </>
   );
 }
 
-const data = [
-  {
-    id: 14,
-    title: "Throw Some D's",
-    userId: 1,
-    description:
-      "As a privat user, I want to keep the inspirational resources on my own board and use a personal planner..etc?",
-    completed: false,
-    createdAt: "2022-07-05T09:40:16.053Z",
-  },
-  {
-    id: 15,
-    title: "Out Here Grinding",
-    userId: 1,
-    description: "Making things look great",
-    completed: false,
-    createdAt: "2022-07-05T09:42:40.739Z",
-  },
-  {
-    id: 16,
-    title: "Hustler's Ambition",
-    userId: 1,
-    description: "Out here on a mission",
-    completed: false,
-    createdAt: "2022-07-05T09:43:32.044Z",
-  },
-];
 
 export async function getServerSideProps(context) {
   const { session, user } = await unstable_getServerSession(

@@ -20,6 +20,10 @@ import { ListUsers } from "./ListUsers";
 import { EmptyState } from "./EmptyState";
 import { EmptyStateImages } from "./EmptyState";
 import { WhatToDisplay } from "./EmptyState";
+import { ResourceList } from "User/ResourcesList";
+import { UserCompanions } from "User/Companions";
+import { UserActivity } from "User/Activity";
+import { CurrentJourney } from "User/CurrentJourney";
 
 import {
   FiActivity,
@@ -72,7 +76,7 @@ export const ProfileSectionsTab = () => {
           borderRadius="1rem"
           marginBottom={4}
         >
-          <CustomTab icon={<FiCompass />}>Journeys</CustomTab>
+          <CustomTab icon={<FiCompass />}>Journey</CustomTab>
           <CustomTab icon={<FiActivity />}>Activity</CustomTab>
           <CustomTab icon={<FiUsers />}>Companions</CustomTab>
           <CustomTab icon={<FiClipboard />}>Tasks</CustomTab>
@@ -83,32 +87,32 @@ export const ProfileSectionsTab = () => {
           <TabPanel p="none">
             {/* Below here status "on" will show what will render the data present if the data exists while "off" will render the empty state */}
             <WhatToDisplay
-              status="off"
-              panelTitle="Journeys"
+              status="on"
+              panelTitle="Journey"
               url={EmptyStateImages.JourneyEmptyStateImage}
-              input={<Text>Success</Text>}
+              input={<CurrentJourney />}
               getStarted={getStarted}
             />
           </TabPanel>
           <TabPanel p="none">
             <WhatToDisplay
-              status="off"
+              status="on"
               panelTitle="Activity"
               url={EmptyStateImages.ActivityEmptyStateImage}
-              input={<ListUsers users={[]} />}
+              input={<UserActivity />}
             />
           </TabPanel>
           <TabPanel p="none">
             <WhatToDisplay
-              status="off"
+              status="on"
               panelTitle="Companions"
               url={EmptyStateImages.MenteesEmptyStateImage}
-              input={<ListUsers users={[]} />}
+              input={<UserCompanions />}
             />
           </TabPanel>
           <TabPanel p="none">
             <WhatToDisplay
-              status="off"
+              status="on"
               panelTitle="Tasks"
               url={EmptyStateImages.TasksEmptyStateImage}
               input={<TaskList tasks={[]} />}
@@ -116,10 +120,10 @@ export const ProfileSectionsTab = () => {
           </TabPanel>
           <TabPanel p="none">
             <WhatToDisplay
-              status="off"
+              status="on"
               panelTitle="Backpacks"
               url={EmptyStateImages.BackpacksEmptyStateImage}
-              input={<TaskList tasks={[]} />}
+              input={<ResourceList />}
             />
           </TabPanel>
         </TabPanels>

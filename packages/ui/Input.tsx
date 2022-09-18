@@ -21,11 +21,11 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
       placeholder={props.placeholder}
       cursor="pointer"
       padding="1rem"
-      variant='flushed'
+      variant='filled'
       value={props.value}
       name={props.name}
       type={props.type}
-      bg="brand.white"
+      bg="brand.highlight1"
       id={props.type}
       onChange={props.onChange}
       focusBorderColor="brand.secondary"

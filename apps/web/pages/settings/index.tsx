@@ -34,8 +34,17 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { TextInput } from "ui";
+import { useFetch } from "../../hooks/useSwr";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { UserInfo } from "Settings/UserInfo";
+import { IntegrationSettings } from "Settings/IntegrationSettings";
+import { NotificationSettings } from "Settings/NotificationSettings";
+import { AccountSettings } from "Settings/AccountSettings";
 
-export default function Settings() {
+
+export default function Settings(props) {
+  const { data: user, isError } = useFetch(`/users/${props?.user?.id}`);
   const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
     // 1. Reuse the `useTab` hook
     const tabProps = useTab({ ...props, ref });
@@ -50,7 +59,7 @@ export default function Settings() {
         size="sm"
         borderRadius="1rem"
         leftIcon={props.icon}
-        bg={isSelected ? "brand.primary" : "brand.highlight1"}
+        bg={isSelected ? "brand.primary" : "brand.highlight2"}
         color={isSelected ? "brand.primaryText" : "brand.primaryText"}
         _hover={{
           bg: isSelected ? "brand.hovered" : "brand.highlight2",
@@ -65,6 +74,7 @@ export default function Settings() {
     const { name, value } = e.target;
 
   }, []);
+
 
   return (
     <Stack width="100%">
@@ -86,236 +96,47 @@ export default function Settings() {
             <CustomTab icon={<FiUser />}>Profile</CustomTab>
             <CustomTab icon={<FiActivity />}>Notifications</CustomTab>
             <CustomTab icon={<FiInfo />}>Account</CustomTab>
-            <CustomTab icon={<FiShoppingBag/>}>Integrations</CustomTab>
+            <CustomTab icon={<FiShoppingBag />}>Integrations</CustomTab>
           </TabList>
 
           <TabPanels>
             <TabPanel p="none">
-              <VStack alignItems="flex-start" width="100%" gap={2}>
-                <FormControl>
-                  <Flex alignItems="center">
-                  <FormLabel width="30%">Display Name</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="John Doe"
-                    type="text"
-                    value={""}
-                    name="name"
-                  />
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="30%">Username</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="Must be unique"
-                    type="text"
-                    value={""}
-                    name="username"
-                  />
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="30%">Age</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="96"
-                    type="number"
-                    value={""}
-                    name="age"
-                  />
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="30%">E-mail</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="johndoe@email.com"
-                    type="text"
-                    value={""}
-                    name="email"
-                  />
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="22%">Gender</FormLabel>
-                  <Stack>
-                  <RadioGroup defaultValue='None'>
-                    <HStack spacing='24px'>
-                      <Radio value='Male'>Male</Radio>
-                      <Radio value='Female'>Female</Radio>
-                      <Radio value='None'>Rather not say</Radio>
-                    </HStack>
-                  </RadioGroup>
-                  <FormHelperText>Select where you belong.</FormHelperText>
-                  </Stack>
-                </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="30%">Bio</FormLabel>
-                  <Textarea
-                    onChange={onChange}
-                    variant="filled"
-                    bg="brand.white"
-                    p="4"
-                    borderRadius="1rem"
-                    placeholder="I am an executive producer at Good music, I like long walks on the beach on snowy days. Im part necrophiliac so if i like you i'll always try to make you drop dead from jokes literally."
-                    type="text"
-                    value={""}
-                    name="bio"
-                  />
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex>
-                  <FormLabel width="22%">Job Title</FormLabel>
-                  <Stack>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="Executive Producer"
-                    type="text"
-                    value={""}
-                    name="jobtitle"
-                  />
-                  <FormHelperText><Checkbox>Show my job title on my profile.</Checkbox></FormHelperText>
-                  </Stack>
-                </Flex>
-                </FormControl>
-                <Button onClick={() => { }}>Save</Button>
-              </VStack>
+              <UserInfo user={user?.data}  />
             </TabPanel>
             <TabPanel p="none">
-              <VStack alignItems="flex-start" width="100%">
-                <FormControl>
-                  <FormLabel>Display Name</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="John Doe"
-                    type="text"
-                    value={""}
-                    name="name"
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Username</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="Must be unique"
-                    type="text"
-                    value={""}
-                    name="username"
-                  />
-                </FormControl>
-                <Button onClick={() => { }}>Save</Button>
-              </VStack>
+              <NotificationSettings user={user?.data} />
             </TabPanel>
             <TabPanel p="none">
-              <VStack alignItems="flex-start" width="100%">
-                <FormControl>
-                  <FormLabel>Display Name</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="John Doe"
-                    type="text"
-                    value={""}
-                    name="name"
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>Username</FormLabel>
-                  <TextInput
-                    onChange={onChange}
-                    placeholder="Must be unique"
-                    type="text"
-                    value={""}
-                    name="username"
-                  />
-                </FormControl>
-                <Button onClick={() => { }}>Save</Button>
-              </VStack>
+              <AccountSettings user={user?.data} />
             </TabPanel>
             <TabPanel p="none">
-              <VStack alignItems="flex-start" width="100%">
-                <FormControl>
-                  <Flex gap="20">
-                  <FormLabel>Entertainment</FormLabel>
-                  <Button onClick={() => { }}
-                  colorScheme="brand"
-                  boxShadow="none"
-                  px={4}
-                  width={"10%"}
-                  size={"sm"}
-                  border={"none"}
-                  bg={"brand.primary"}
-                  color={"brand.primaryText"}
-                  cursor="pointer"
-                  _focus={{
-                    outline: "none",
-                    boxShadow: "none",
-                  }}
-                  _hover={{
-                    bg: "brand.hovered"
-                  }}
-                  >Click</Button>
-                  </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex gap="20">
-                  <FormLabel>Work</FormLabel>
-                  <Button onClick={() => { }}
-                  colorScheme="brand"
-                  boxShadow="none"
-                  px={4}
-                  width={"10%"}
-                  size={"sm"}
-                  border={"none"}
-                  bg={"brand.primary"}
-                  color={"brand.primaryText"}
-                  cursor="pointer"
-                  _focus={{
-                    outline: "none",
-                    boxShadow: "none",
-                  }}
-                  _hover={{
-                    bg: "brand.hovered"
-                  }}
-                  >Click</Button>
-                </Flex>
-                </FormControl>
-                <FormControl>
-                <Flex gap="20">
-                  <FormLabel>Calendar</FormLabel>
-                  <Button onClick={() => { }}
-                  colorScheme="brand"
-                  boxShadow="none"
-                  px={4}
-                  width={"10%"}
-                  size={"sm"}
-                  border={"none"}
-                  bg={"brand.primary"}
-                  color={"brand.primaryText"}
-                  cursor="pointer"
-                  _focus={{
-                    outline: "none",
-                    boxShadow: "none",
-                  }}
-                  _hover={{
-                    bg: "brand.hovered"
-                  }}
-                  >Click</Button>
-                   m,.</Flex>
-                </FormControl>
-                <Button onClick={() => { }}>Save</Button>
-              </VStack>
+              <IntegrationSettings user={user?.data} />
             </TabPanel>
           </TabPanels>
         </Tabs>
       </Flex>
     </Stack>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { session, user } = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  const { email, name, image, bio } = session?.user || {};
+  const { id } = user || {};
+
+  return {
+    props: {
+      user: {
+        id: id || null,
+        email: email || null,
+        name: name || null,
+        bio: bio || null,
+        image: image || null,
+      },
+    },
+  };
 }

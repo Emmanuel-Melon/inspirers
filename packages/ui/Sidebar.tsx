@@ -1,6 +1,7 @@
 import React, { ReactChild, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Box, Flex, Heading, Text, Stack, LinkBox, LinkOverlay } from "@chakra-ui/react";
+import { BeakerIcon } from '@heroicons/react/24/solid'
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import Link from "next/link";
@@ -16,29 +17,31 @@ import {
     FiMonitor,
     FiClipboard
 } from "react-icons/fi";
-import { VStack } from "@chakra-ui/react";
-import { Button, UnAuthorized } from "ui";
 
 const SidebarLink = ({ link }) => {
     return (
-        <LinkBox                     _hover={{
-            bg: "brand.highlight",
-        }}>
+        <LinkBox>
             <LinkOverlay href={link.url}>
                 <Flex
+                    bg="brand.white"
+                    color="brand.primaryText"
+                    borderRadius="1rem"
                     alignItems="center"
-                    justifyContent="flex-start"
-                    gap={4}
+                    p="2"
+                    justifyContent="center"
+                    boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+                    cursor="pointer"
+                    _hover={{
+                        color: "brand.accent",
+                    }}
                 >
                     {link.icon}
-                    <Text>{link.name}</Text>
                 </Flex>
             </LinkOverlay></LinkBox>
     )
 }
 
-export const Sidebar = () => {
-    const [labels, _setLabels] = useState<boolean>(true);
+export const Sidebar = ({ session }) => {
     const links = [
         {
             id: 1,
@@ -49,7 +52,7 @@ export const Sidebar = () => {
         {
             id: 1,
             name: "Profile",
-            url: "/",
+            url: `/user/${session?.user?.id}`,
             icon: <FiUser size="1rem" />
         },
         {
@@ -84,143 +87,18 @@ export const Sidebar = () => {
         }
     ]
     return (
-        <Stack gap={4} p={8} bg="brand.highlight1" height="100vh">
+        <Stack
+            gap={4}
+            p={4}
+            bg="brand.highlight1"
+            height="100%"
+            m="4"
+            borderRadius="1rem"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+        >
             {
                 links.map(link => <SidebarLink key={link.id} link={link} />)
             }
         </Stack>
     )
 }
-
-/**
- *             <Link href="/journeys">
-                <Flex
-                    direction="column"
-                    alignItems="center"
-                    _hover={{
-                        color: "brand.accent",
-                    }}
-                >
-                    <Flex
-                        bg="brand.white"
-                        color="brand.primaryText"
-                        borderRadius="1rem"
-                        alignItems="center"
-                        p="2"
-                        justifyContent="center"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                        cursor="pointer"
-                        _hover={{
-                            color: "brand.accent",
-                        }}
-                    >
-                        <FiMap size="1rem" />
-                    </Flex>
-
-                    {labels ? <Link href="/journeys">Journeys</Link> : null}
-                </Flex>
-            </Link>
-            <Link href="/reflections">
-                <Flex
-                    direction="column"
-                    alignItems="center"
-                    _hover={{
-                        color: "brand.accent",
-                    }}
-                >
-                    <Flex
-                        bg="brand.white"
-                        color="brand.primaryText"
-                        borderRadius="1rem"
-                        alignItems="center"
-                        p="2"
-                        justifyContent="center"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                        cursor="pointer"
-                        _hover={{
-                            color: "brand.accent",
-                        }}
-                    >
-                        <FiMonitor size="1rem" />
-                    </Flex>
-
-                    {labels ? <Link href="/reflections">Reflections</Link> : null}
-                </Flex>
-            </Link>
-
-            <Link href="/routines">
-                <Flex
-                    direction="column"
-                    alignItems="center"
-                    _hover={{
-                        color: "brand.accent",
-                    }}
-                >
-                    <Flex
-                        bg="brand.white"
-                        color="brand.primaryText"
-                        borderRadius="1rem"
-                        alignItems="center"
-                        p="2"
-                        justifyContent="center"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                        cursor="pointer"
-                        _hover={{
-                            color: "brand.accent",
-                        }}
-                    >
-                        <FiRotateCw size="1rem" />
-                    </Flex>
-
-                    {labels ? <Link href="/routines">Routines</Link> : null}
-                </Flex>
-            </Link>
-            <Link href="/notifications">
-                <Flex
-                    direction="column"
-                    alignItems="center"
-                    _hover={{
-                        color: "brand.accent",
-                    }}
-                >
-                    <Flex
-                        bg="brand.white"
-                        color="brand.primaryText"
-                        borderRadius="1rem"
-                        alignItems="center"
-                        p="2"
-                        justifyContent="center"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                        cursor="pointer"
-                    >
-                        <FiBell size="1rem" />
-                    </Flex>
-                    {labels ? (
-                        <Link href="/notifications">Notifications</Link>
-                    ) : null}
-                </Flex>
-            </Link>
-            <Link href="/tasks">
-                <Flex
-                    direction="column"
-                    alignItems="center"
-                    _hover={{
-                        color: "brand.accent",
-                    }}
-                >
-                    <Flex
-                        bg="brand.white"
-                        color="brand.primaryText"
-                        borderRadius="1rem"
-                        alignItems="center"
-                        p="2"
-                        justifyContent="center"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                        cursor="pointer"
-                    >
-                        <FiCheckCircle size="1rem" />
-                    </Flex>
-                    {labels ? <Link href="/tasks">Tasks</Link> : null}
-                </Flex>
-            </Link>
- */

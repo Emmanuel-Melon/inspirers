@@ -23,7 +23,6 @@ export default function UserProfile() {
           <Flex width="100%" gap={8} height="100%">
             <VStack alignItems="flex-start" width="35%">
               <UserProfileCard user={user.data} />
-              <UserBasicInfo user={user.data} />
               <UserBioCard user={user.data} />
             </VStack>
             <ProfileSectionsTab user={user.data} />

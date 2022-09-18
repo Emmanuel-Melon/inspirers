@@ -9,6 +9,7 @@ import { Button, Card, CustomCheckbox } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiFlag, FiPlayCircle, FiClock, FiPlus } from "react-icons/fi";
+import { BeakerIcon } from '@heroicons/react/24/solid';
 
 export const RoutineStats = ({ routine }) => {
     return (

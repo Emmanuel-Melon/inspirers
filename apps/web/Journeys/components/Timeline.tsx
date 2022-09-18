@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Flex, Heading, Text, Avatar } from "@chakra-ui/react";
-import { Button } from "ui";
+import { Button, EmptyState } from "ui";
+import { FiCalendar } from "react-icons/fi";
 
 type Event = {
   avatar: string;
@@ -50,11 +51,15 @@ export const Timeline = ({ events = [] }) => {
   return (
     <Flex direction="column" gap={4}>
       <Flex>
-        <Heading color="brand.primary" size="md">
+        <Heading color="brand.primaryText" size="md">
           Timeline
         </Heading>
       </Flex>
-      <Text>Connect with friends to view their activity.</Text>
+      <EmptyState 
+        heading="Your timeline"
+        description="Connect with friends to view their activity."
+        icon={<FiCalendar />}
+      />
       {events &&
         events.map((event) => {
           return <FeedItem event={event} />;

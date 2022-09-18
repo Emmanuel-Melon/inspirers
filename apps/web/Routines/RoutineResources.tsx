@@ -79,7 +79,7 @@ export const RoutineResources = ({ routine }) => {
             </Flex>
             {
                 resources.length === 0 ? <Card>
-                    <Flex gap={4} alignItems="center">
+                    <Flex gap={4} alignItems="center" justifyContent="space-between">
                     <Text color="brand.secondaryText">No Resources Linked</Text>
                     <Button size="sm" icon={<FiLink />} bg="brand.highlight1">Link Resources</Button>
                     </Flex>
