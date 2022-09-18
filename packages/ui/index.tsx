@@ -11,3 +11,4 @@ export * from "./UnAuthorized";
 export * from "./Spinner";
 export * from "./ViewNavigator";
 export * from "./Sidebar";
+export * from "./ViewEmptyState";

@@ -6,7 +6,8 @@ import {
     updateRoutine, 
     deleteRoutine, 
     addRoutineItem,
-    deleteRoutineItem 
+    deleteRoutineItem,
+    updateRoutineItem
 } from "./controller";
 
 const routinesRouter = Router();
@@ -24,5 +25,7 @@ routinesRouter.get("/:routineId", getRoutineById);
 routinesRouter.delete("/:routineId", deleteRoutine);
 
 routinesRouter.delete("/:routineId/:objectiveId", deleteRoutineItem );
+
+routinesRouter.put("/:routineId/:objectiveId", updateRoutineItem );
 
 export default routinesRouter;

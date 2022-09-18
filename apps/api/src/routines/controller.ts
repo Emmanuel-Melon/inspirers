@@ -2,7 +2,7 @@ import { NextFunction, Response, Router, Request } from "express";
 import { validation } from "../middleware/validation";
 import { create, addObjective } from "./operations/create";
 import { list } from "./operations/list";
-import { update } from "./operations/update";
+import { update, updateObjective } from "./operations/update";
 import { getById } from "./operations/getById";
 import { deleteById, removeObjective } from "./operations/delete";
 
@@ -32,6 +32,16 @@ export const deleteRoutineItem = (
   next: NextFunction
 ) => {
   return Promise.resolve(removeObjective(req.params.objectiveId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+};
+
+export const updateRoutineItem = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  return Promise.resolve(updateObjective(req.params.objectiveId, req.body))
     .then((data) => res.json({ data }))
     .catch(next);
 };

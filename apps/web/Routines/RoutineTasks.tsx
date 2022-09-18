@@ -7,25 +7,13 @@ import {
     Link,
     Flex,
     Heading,
-    Box,
-    LinkBox, LinkOverlay,
-    Progress,
-    VStack,
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
     Tag,
     IconButton
 } from "@chakra-ui/react";
 import { Button, Card, CustomCheckbox } from "ui";
-import { useRouter } from "next/router";
-import moment from "moment";
-import { FiFlag, FiPlayCircle, FiClock, FiMoreHorizontal, FiArrowRight } from "react-icons/fi";
+import { FiMoreHorizontal, FiArrowRight, FiLink } from "react-icons/fi";
 
-const RoutineTask = () => {
+const RoutineTask = ({ task }) => {
     return (
         <Card onClick={() => { }} bg={""}>
             <Flex gap={2} justifyContent="space-between">
@@ -70,14 +58,19 @@ export const RoutineTasks = ({ routine }) => {
             <Flex justifyContent="space-between" width="100%">
                 <Stack>
                     <Heading size="sm" color="brand.secondary">Tasks</Heading>
-                    <Text color="brand.secondaryText">You can organize your days and weeks with some routines</Text>
+                    <Text color="brand.secondaryText">Break down your plans into tasks</Text>
                 </Stack>
                 <IconButton size="sm" bg="brand.highlight2" aria-label={""}>
                     <FiMoreHorizontal />
                 </IconButton>
             </Flex>
             {
-                tasks.length === 0 ? <Card>Empty State</Card> : tasks.map(task => <RoutineTask key={task.id} task={task} />)
+                tasks.length === 0 ? <Card>
+                    <Flex gap={4} alignItems="center" justifyContent="space-between">
+                        <Text color="brand.secondaryText">No Tasks Linked</Text>
+                        <Button size="sm" icon={<FiLink />} bg="brand.highlight1">Link Task</Button>
+                    </Flex>
+                </Card> : tasks.map(task => <RoutineTask key={task.id} task={task} />)
             }
         </Stack>
     )

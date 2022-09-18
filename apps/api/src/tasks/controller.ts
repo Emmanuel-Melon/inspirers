@@ -2,22 +2,31 @@ import prisma from "@inspirers/prisma";
 import { TaskObject } from "types/Task";
 
 export const addTask = async (data) => {
-  const newEntry = await prisma.task.create({ data });
-  return newEntry;
+  try {
+    return prisma.task.create({ data });
+  } catch (err) {
+
+  }
 };
 
 export const getTaskById = async (taskId: string) => {
-  const newEntry = await prisma.task.findUnique({
+  return prisma.task.findUnique({
     where: {
       id: taskId.toString(),
     },
   });
-  return newEntry;
 };
 
 export const getUserTasks = async (userId: string) => {
-  const newEntry = await prisma.task.findMany();
-  return newEntry;
+  try {
+    return prisma.task.findMany({
+      where: {
+        userId
+      }
+    });
+  } catch (err) {
+
+  }
 };
 
 export const removeTask = async (taskId: string) => {

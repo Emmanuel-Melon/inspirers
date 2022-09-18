@@ -44,7 +44,7 @@ export const Activities: FC<ActivityListProps> = ({ activities = [] }) => {
   return (
     <Flex direction="column" gap={4}>
       <Flex justifyContent="space-between" alignItems="center">
-        <Heading color="brand.primary" size="md">
+        <Heading color="brand.secondary" size="md">
           Activities
         </Heading>
         <Text
@@ -64,15 +64,7 @@ export const Activities: FC<ActivityListProps> = ({ activities = [] }) => {
         <br />
         {(activities && activities?.length === 0) || !activities ? (
           <VStack gap="4">
-            <Image
-              display="block"
-              alt="Bussy"
-              src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1659214988/inspirers/images/dbef0821-2fe8-4aaf-a95a-32db3141a17e.png"
-            />
-            <Heading>Oops! no activities yet.</Heading>
-            <Badge colorScheme={"purple"}>
-              Click get started to create your first task now ; )
-            </Badge>
+            <Heading size="sm">Oops! no activities yet.</Heading>
           </VStack>
         ) : (
           activities?.map((activity) => (

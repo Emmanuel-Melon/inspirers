@@ -41,40 +41,6 @@ export const FourthStepGuide = () => {
   );
 };
 
-const accounts = [
-  {
-    id: 1,
-    name: "Emmanuel Daniel",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["fintech", "business", "design"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 2,
-    name: "Ladu Lumori",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["documentation", "ui"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 3,
-    name: "Sandra Nadege",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["business", "communication", "poetry"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-  {
-    id: 4,
-    name: "Bernadetta",
-    avatar:
-      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg",
-    tags: ["fintech", "communication", "design"],
-    bio: "You are all set now, let us begin navigating the journey.",
-  },
-];
 
 export const FourthStep = () => {
   const context = useContext(JourneyOnboardingContext);
@@ -103,7 +69,7 @@ export const FourthStep = () => {
       </Flex>
       <Text fontWeight="700">People you may know!</Text>
       <Flex direction="column" gap={8}>
-        {accounts.map((account) => {
+        {[].map((account) => {
           return (
             <Flex
               gap={4}

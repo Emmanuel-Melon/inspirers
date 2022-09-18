@@ -156,7 +156,7 @@ export const KanbanList = ({ list }) => {
               </PopoverTrigger>
             </Flex>
             <List gap={4} width="100%" height="450px" overflowY="scroll">
-              {list.cards.map((item) => (
+              {list?.cards?.map((item) => (
                 <KanbanListItem
                   item={item}
                   key={item._id}

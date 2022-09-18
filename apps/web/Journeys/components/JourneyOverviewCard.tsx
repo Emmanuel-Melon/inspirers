@@ -66,7 +66,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
           <Box>
             <Flex gap={2} alignItems="center">
               <Avatar src={user?.image} />
-              <Heading color="brand.primary" size="lg" as="h1">
+              <Heading color="brand.primaryText" size="lg" as="h1">
                 Hi, {user?.name || "Guest"}{" "}
               </Heading>
             </Flex>

@@ -19,9 +19,9 @@ tasksRouter.get(
 );
 
 tasksRouter.get(
-  "/user/:userId",
+  "/:userId/list",
   (req: Request, res: Response, next: NextFunction) => {
-    return Promise.resolve(getUserTasks(req.params.taskId))
+    return Promise.resolve(getUserTasks(req.params.userId))
       .then((data) => res.json({ data }))
       .catch(next);
   }

@@ -43,7 +43,7 @@ import {
 
 import { buttonColors } from "utils/ui";
 
-export const TaskDetailView = ({ item }) => {
+export const TaskDetailView = ({ deleteTask, item }) => {
   const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
     // 1. Reuse the `useTab` hook
     const tabProps = useTab({ ...props, ref });
@@ -71,21 +71,13 @@ export const TaskDetailView = ({ item }) => {
   });
   return (
     <Flex p="8" width="800px" gap={8} color="brand.primaryText">
-      <Stack>
+      <Stack gap={2}>
         <Flex justifyContent="space-between" alignItems="center">
           <VStack alignItems="flex-start">
-            <Heading size="md" color="brand.primary">
-              {item.name}
+            <Heading size="md" color="brand.primaryText">
+              {item.title}
             </Heading>
           </VStack>
-          <Flex gap={2}>
-            <IconButton size="sm" bg="brand.highlight">
-              <FiSliders />
-            </IconButton>
-            <IconButton size="sm" bg="brand.highlight">
-              <FiX />
-            </IconButton>
-          </Flex>
         </Flex>
         <Divider />
         <Flex gap={2} direction="column">
@@ -112,31 +104,8 @@ export const TaskDetailView = ({ item }) => {
             <FiUsers />
             <Text>Assignees</Text>
           </Flex>
-          <Flex gap={2}>
-            <Flex gap={2} alignItems="center">
-              <Avatar
-                size="sm"
-                src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg"
-              />
-              <Text>Ladu Lumori</Text>
-            </Flex>
-            <Flex gap={2} alignItems="center">
-              <Avatar
-                size="sm"
-                src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg"
-              />
-              <Text>Ladu Lumori</Text>
-            </Flex>
-            <Flex gap={2} alignItems="center">
-              <Avatar
-                size="sm"
-                src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997900/inspirers/images/conifer-trophy-1.svg"
-              />
-              <Text>Ladu Lumori</Text>
-            </Flex>
-          </Flex>
         </Flex>
-        <Tabs width="100%" defaultIndex={1} isLazy>
+        <Tabs width="100%" defaultIndex={1} isLazy variant="solid-rounded">
           <TabList gap={4}>
             <CustomTab icon={<FiActivity />}>Activity</CustomTab>
             <CustomTab icon={<FiUsers />}>Comments</CustomTab>
@@ -144,7 +113,7 @@ export const TaskDetailView = ({ item }) => {
           </TabList>
 
           <TabPanels>
-            <TabPanel p="none">
+            <TabPanel p="4">
               <Flex gap={16}>
                 <Text>Items</Text>
                 <Stack spacing={3}>
@@ -157,7 +126,7 @@ export const TaskDetailView = ({ item }) => {
                 </Stack>
               </Flex>
             </TabPanel>
-            <TabPanel p="none">
+            <TabPanel p="4">
               <Flex gap={16}>
                 <Text>Items</Text>
                 <Stack spacing={3}>
@@ -170,7 +139,7 @@ export const TaskDetailView = ({ item }) => {
                 </Stack>
               </Flex>
             </TabPanel>
-            <TabPanel p="none">
+            <TabPanel p="4">
               <Flex gap={16}>
                 <Stack spacing={3}>
                   <Checkbox colorScheme="red" defaultChecked>
@@ -225,6 +194,7 @@ export const TaskDetailView = ({ item }) => {
           bg="brand.highlight2"
           color="brand.primary"
           width="100%"
+          onClick={deleteTask}
         >
           Delete
         </Button>

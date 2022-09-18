@@ -21,20 +21,21 @@ export const TextInput: FunctionComponent<InputProps> = (props) => {
       placeholder={props.placeholder}
       cursor="pointer"
       padding="1rem"
-      variant='flushed'
+      variant='filled'
       value={props.value}
       name={props.name}
       type={props.type}
-      bg="brand.white"
+      bg="brand.highlight1"
       id={props.type}
       onChange={props.onChange}
       focusBorderColor="brand.secondary"
+      autoFocus={props.autofocus}
       _hover={{
         background: "brand.hovered",
       }}
       _focus={{
         outline: "none",
-        background: "brand.highlight",
+        background: "brand.highlight2",
       }}
       _placeholder={{ opacity: 1, color: "brand.primaryText" }}
     />

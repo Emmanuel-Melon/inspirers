@@ -248,9 +248,7 @@ const BodyTxt = (props) => {
               <b>not just a dreamer</b>
             </Heading>
             <Text align="left" maxW={260} color="#240808" mb={4}>
-              Inspirers is a unique community to help you reach your goals,
-              change your habits, share your journey with other peers and master
-              the art of success.
+            Whether you're looking to build a business or grow your career or just live life to the fullest, Inspirers is here to help.
             </Text>
             <Button
               _hover={{ bg: "#bbe192" }}

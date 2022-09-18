@@ -31,7 +31,7 @@ export const ThirdStepGuide = ({ guide }) => {
   return (
     <Flex height="100%">
       <Flex direction="column" gap={4}>
-        <Heading color="brand.primary" size="md">
+        <Heading color="brand.primaryText" size="md">
           {context.currentStep.id} - {context.currentStep.title}
         </Heading>
         <Flex
@@ -50,7 +50,7 @@ export const ThirdStepGuide = ({ guide }) => {
               "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg"
             }
           />
-          <Text color="brand.primary">Let's talk about your goals.</Text>
+          <Text color="brand.secondaryText">Let's talk about your goals.</Text>
         </Flex>
         {context.blueprint === "template" ? (
           <>
@@ -90,12 +90,12 @@ export const ThirdStepGuide = ({ guide }) => {
             color="brand.primaryText"
             borderRadius="1rem"
           >
-            <Flex alignItems="center" gap={2} color="brand.primary">
+            <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiTarget />
               <Heading size="sm">Specific</Heading>
             </Flex>
             <Text>Well defined, clear, and unambiguous.</Text>
-            <Flex alignItems="center" gap={2} color="brand.primary">
+            <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiTrendingUp />
               <Heading size="sm">Measurable</Heading>
             </Flex>
@@ -103,19 +103,19 @@ export const ThirdStepGuide = ({ guide }) => {
               With specific criteria that measure your progress toward the
               accomplishment of the goal.
             </Text>
-            <Flex alignItems="center" gap={2} color="brand.primary">
+            <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiThumbsUp />
               <Heading size="sm">Attainable</Heading>
             </Flex>
             <Text>Attainable and not impossible to achieve.</Text>
-            <Flex alignItems="center" gap={2} color="brand.primary">
+            <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiCheckCircle />
               <Heading size="sm">Realistic</Heading>
             </Flex>
             <Text>
               Within reach, realistic, and relevant to your life purpose.
             </Text>
-            <Flex alignItems="center" gap={2} color="brand.primary">
+            <Flex alignItems="center" gap={2} color="brand.secondary">
               <FiClock />
               <Heading size="sm">Timely</Heading>
             </Flex>
@@ -158,9 +158,9 @@ export const ThirdStep = ({ onChange }) => {
     >
       <Flex direction="column" gap={4} borderRadius="1rem">
         <Heading size="md" color="brand.secondary">
-          People you may knows!
+          Set your goals
         </Heading>
-        <RecommendedAccounts />
+        
       </Flex>
 
       <Flex width="200">

@@ -16,9 +16,11 @@ import { AddRoutine } from "../../Routines/AddRoutine";
 import { Button } from "ui";
 import { FiPlus } from "react-icons/fi";
 import { CustomModal, ViewNavigator } from "ui";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-export default function Routines() {
-    const { data: routines, isLoading, isError } = useFetch(`/routines/cl7zrw659000810btyaacqm54/list`);
+export default function Routines(props) {
+    const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const openModal = () => {
@@ -47,3 +49,29 @@ export default function Routines() {
         </>
     );
 }
+
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(
+      context.req,
+      context.res,
+      authOptions
+    );
+    const { createdAt, ...user } = session?.user;
+  
+    if (!session) {
+      return {
+        redirect: {
+          destination: "/auth/login",
+          permanent: false,
+        },
+      };
+    }
+  
+    return {
+      props: {
+        user
+      },
+    };
+  }
+  
