@@ -21,16 +21,20 @@ import { FiRotateCw } from "react-icons/fi";
 import { Button } from "ui";
 import { TextInput } from "ui";
 import { client } from "utils/client";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 export const AddRoutine = ({ cancel }) => {
     const [name, setName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { data: session, status } = useSession();
+
     const router = useRouter();
     const handleClick = () => {
         setIsLoading(true);
         client.post(`/routines`, {
-            title: name
+            title: name,
+            userId: session?.user?.id
         }).then(res => {
             console.log(res);
             setIsLoading(false);
