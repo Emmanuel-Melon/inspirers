@@ -11,7 +11,7 @@ export const createRoutine = (
   res: Response,
   next: NextFunction
 ) => {
-  return Promise.resolve(create({ ...req.body, userId: "cl7zrw659000810btyaacqm54" }))
+  return Promise.resolve(create({ ...req.body }))
     .then((data) => res.json({ data }))
     .catch(next);
 };
