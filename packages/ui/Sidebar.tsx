@@ -17,6 +17,7 @@ import {
     FiMonitor,
     FiClipboard,
     FiShoppingBag,
+    FiPackage
 } from "react-icons/fi";
 
 const SidebarLink = ({ link }) => {
@@ -91,6 +92,12 @@ export const Sidebar = ({ session }) => {
             name: "Backpack",
             url: "/backpack",
             icon: <FiShoppingBag size="1rem" />
+        },
+        {
+            id: 9,
+            name: "Apps",
+            url: "/apps",
+            icon: <FiPackage size="1rem" />
         }
     ]
     return (
