@@ -7,7 +7,7 @@ import {
   FiCreditCard,
   FiSettings,
   FiTruck,
-  FiTrash,
+  FiEdit,
 } from "react-icons/fi";
 import { UserObject } from "types/User";
 import { FC } from "react";
@@ -29,24 +29,17 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
 }) => {
   const router = useRouter();
 
-  function inviteFriends() {}
+  function inviteFriends() { }
   function getStarted() {
     router.push("/journeys/new");
   }
 
-  /**
-     * {
-                                false ? <Flex gap={1}>
-                                {
-                                    [].map(companion => <Companion key={companion.id} companion={companion} />)
-                                }
-                            </Flex> : null
-                            }
-     */
+  console.log(journey?.data);
+  console.log(user);
 
   const deleteJourney = () => {
     client
-      .delete(`/journeys/${journey.id}`)
+      .delete(`/journeys/${journey?.id}`)
       .then((res) => {
         router.push("/");
       })
@@ -62,39 +55,39 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
         width="100%"
       >
         {
-          true ?         <Flex justifyContent="space-between">
-          <Box>
-            <Flex gap={2} alignItems="center">
-              <Avatar src={user?.image} />
-              <Heading color="brand.primaryText" size="lg" as="h1">
-                Hi, {user?.name || "Guest"}{" "}
-              </Heading>
+          true ? <Flex justifyContent="space-between">
+            <Box>
+              <Flex gap={2} alignItems="center">
+                <Avatar src={user?.image} />
+                <Heading color="brand.primaryText" size="lg" as="h1">
+                  Hi, {journey?.data?.user?.name || "Guest"}{" "}
+                </Heading>
+              </Flex>
+              <Text my="4">
+                It's time for you to take the leap. What is your ultimate goal?
+              </Text>
+            </Box>
+            <Flex gap={4}>
+              {journey?.data?.userId === user?.id ? (
+                <Button
+                  onClick={deleteJourney}
+                  icon={<FiEdit />}
+                >
+                  Edit Journey
+                </Button>
+              ) : (
+                <Button onClick={getStarted} icon={<FiTruck />}>
+                  Get Started
+                </Button>
+              )}
             </Flex>
-            <Text my="4">
-              It's time for you to take the leap. What is your ultimate goal?
-            </Text>
-          </Box>
-          <Flex gap={4}>
-            {journey?.active && journey.usrId === user.id ? (
-              <Button
-                onClick={deleteJourney}
-                icon={<FiTrash />}
-                bg="brand.danger"
-              >
-                Delete Journey
-              </Button>
-            ) : null}
-            <Button onClick={getStarted} icon={<FiTruck />}>
-              Get Started
-            </Button>
-          </Flex>
-        </Flex> : null
+          </Flex> : null
         }
         <Flex
           justifyContent="space-between"
           p="8"
           color="brand.primaryText"
-          bg="brand.highlight1"
+          bg="brand.white"
           borderRadius="1rem"
         >
           <Flex alignItems="center" gap={8}>

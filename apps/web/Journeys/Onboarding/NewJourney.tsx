@@ -1,12 +1,13 @@
 import { FirstStep, FirstStepGuide } from "./JourneyType";
 import { SecondStep, SecondStepGuide } from "./JourneyInfo";
 import { ThirdStep, ThirdStepGuide } from "./JourneyGoals";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import {
   JourneyOnboardingConsumer,
   JourneyOnboardingProvider,
 } from "../../providers/JourneyOnboardingProvider";
 
+// use this template https://dribbble.com/shots/18615057-Scheduling-tool
 export const NewJourney = ({ user }) => {
   return (
     <JourneyOnboardingProvider>
@@ -24,13 +25,11 @@ export const NewJourney = ({ user }) => {
                 <ThirdStepGuide user={user} guide={value.currentStep} />
               ) : null}
             </Flex>
-            <Flex direction="column" width="45%">
-              <Flex>
+            <Stack width="45%">
                 {value.currentStep.id === 1 ? <FirstStep user={user} /> : null}
                 {value.currentStep.id === 2 ? <SecondStep user={user} /> : null}
                 {value.currentStep.id === 3 ? <ThirdStep user={user} /> : null}
-              </Flex>
-            </Flex>
+            </Stack>
           </Flex>
         )}
       </JourneyOnboardingConsumer>

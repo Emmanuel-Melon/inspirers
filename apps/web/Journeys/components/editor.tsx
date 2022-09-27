@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Button, EditableComponent } from "ui";
 import { FiPlus } from "react-icons/fi";
 import { AddTask } from "../../Tasks/components/AddTask";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 
 const initialBlock = { id: uuidv4(), html: "", tag: "p" };
 
@@ -55,13 +55,6 @@ export const JourneyEditor = ({ journey }) => {
       <Heading>{journey.title}</Heading>
       <Flex justifyContent="space-between" direction="column" gap={8}>
         <Flex gap={4} direction="column">
-          <Heading size="md">Add Milestones</Heading>
-          <Text>These are major goals in your journy.</Text>
-          <Button size="sm" icon={<FiPlus />} width="fit-content">
-            Add Milestone
-          </Button>
-        </Flex>
-        <Flex gap={4} direction="column">
           <Heading size="md">Add Tasks</Heading>
           <Text>These are major goals in your journy.</Text>
           <Button size="sm" icon={<FiPlus />} width="fit-content">
@@ -69,9 +62,14 @@ export const JourneyEditor = ({ journey }) => {
           </Button>
         </Flex>
       </Flex>
-      <Flex gap={4} direction="column">
-        <Heading size="md">Pack Resources</Heading>
-        <Text>These are major goals in your journy.</Text>
+      <Flex justifyContent="space-between" direction="column" gap={8}>
+        <Flex gap={4} direction="column">
+          <Heading size="md">Add Tasks</Heading>
+          <Text>These are major goals in your journy.</Text>
+          <Button size="sm" icon={<FiPlus />} width="fit-content">
+            Add Task
+          </Button>
+        </Flex>
       </Flex>
       {false ? (
         <Stack>
