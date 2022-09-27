@@ -16,7 +16,7 @@ import {
     FiShoppingBag,
     FiUser,
 } from "react-icons/fi";
-import { TextInput, Button } from "ui";
+import { Input, Button } from "ui";
 
 export const IntegrationSettings = ({ user }) => {
 
