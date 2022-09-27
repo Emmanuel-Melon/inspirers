@@ -15,12 +15,9 @@ import {
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../Routines/ListRoutines";
 import { AddRoutine } from "../../Routines/AddRoutine";
-import { CustomModal, ViewNavigator } from "ui";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
-import { GetServerSidePropsContext } from "next";
 
-// infer SSR Props!
+
+
 import { Card, Modal, IconButton, LayoutController } from "ui";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -75,18 +72,9 @@ export default function Routines(props) {
           <Stack flex="2">
             <Heading size="md">Routines</Heading>
             <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
-            <ViewNavigator view="list" changeView={() => { }} openModal={openModal} />
           </Stack>
         </Flex>
         <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
-      </Stack>
-      <CustomModal show={isOpen} close={closeModal}>
-        <AddRoutine cancel={closeModal} />
-      </CustomModal>
-            <Text  color="brand.secondaryText">The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
-            <LayoutController layouts={layouts} view="list" changeView={() => { }} openModal={openModal} />
-          </Stack>
-        </Flex>
         <Flex justifyContent="space-between" gap={4}>
           <Box flex="2">
             <ListRoutines routines={routines} isLoading={isLoading} isError={isError} />

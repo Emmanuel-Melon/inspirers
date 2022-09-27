@@ -35,7 +35,6 @@ import {
     FiMonitor,
     FiClipboard,
     FiShoppingBag,
-    FiPackage
     FiPackage,
     FiLogOut,
     FiHelpCircle
@@ -81,7 +80,6 @@ export const Sidebar = ({ session }) => {
             id: 2,
             name: "Profile",
             url: `/user/${session?.user?.id}`,
-            icon: <FiUser size="1rem" />
             icon: <FiHome size="1rem" />,
             active: true
         },
