@@ -9,6 +9,7 @@ export * from "./Checkbox";
 export * from "./EditableComponent";
 export * from "./UnAuthorized";
 export * from "./Spinner";
-export * from "./ViewNavigator";
+export * from "./LayoutController";
 export * from "./Sidebar";
 export * from "./ViewEmptyState";
+export * from "./IconButton";

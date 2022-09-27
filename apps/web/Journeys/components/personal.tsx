@@ -4,7 +4,7 @@ import { TaskList } from "Tasks/components/TaskList";
 import { AddTask } from "Tasks/components/AddTask";
 import { Button } from "ui";
 import { client } from "utils/client";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 import { FiPlus, FiFilter, FiCalendar } from "react-icons/fi";
 import { AddBackPackItemModal } from "./AddBackPackItemModal";
 import { AddTaskModal } from "Tasks/components/AddTaskModal";

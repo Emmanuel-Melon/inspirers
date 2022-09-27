@@ -10,7 +10,7 @@ import {
   HStack,
   useCheckboxGroup,
 } from "@chakra-ui/react";
-import { TextInput } from "ui/Input";
+import { Input } from "ui/Input";
 import Image from "next/image";
 import { Button } from "ui";
 import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
@@ -311,7 +311,7 @@ export const SecondStep = ({ user }) => {
                 *
               </Box>
             </Text>
-            <TextInput
+            <Input
               placeholder="e.g Getting into Harvard"
               type="text"
               onChange={onChange}
@@ -327,7 +327,7 @@ export const SecondStep = ({ user }) => {
             {journey.journeyType === "academic" ? (
               <>
                 <Text color="brand.secondaryText">Your field</Text>
-                <TextInput
+                <Input
                   placeholder="E.g Engineering, Medicine etc."
                   type="text"
                   onChange={onChange}
@@ -350,7 +350,7 @@ export const SecondStep = ({ user }) => {
             {journey.journeyType === "business" ? (
               <>
                 <Text color="brand.primaryText">Business type</Text>
-                <TextInput
+                <Input
                   placeholder="E.g Tech, Education"
                   type="text"
                   onChange={onChange}
@@ -362,7 +362,7 @@ export const SecondStep = ({ user }) => {
             {journey.journeyType === "career" ? (
               <>
                 <Text color="brand.primaryText">Field</Text>
-                <TextInput
+                <Input
                   placeholder="E.g Engineering, Medicine etc."
                   type="text"
                   onChange={onChange}

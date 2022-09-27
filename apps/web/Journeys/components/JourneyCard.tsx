@@ -7,21 +7,25 @@ import {
   Box,
   Tag,
 } from "@chakra-ui/react";
-import { Button } from "ui";
+import { Button, Card } from "ui";
 import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
 
-export const JourneyCard = ({ user }) => {
+export const JourneyCard = ({ journey }) => {
+  console.log(journey);
   return (
-    <Flex direction="column" color="brand.primaryText" width="100%">
-      <Flex gap={4} justifyContent="space-between" direction="column">
-        <VStack alignItems="flex-start" width="100%">
-          <Flex gap={2} flexWrap="wrap">
-            <Tag bg="brand.highlight">Tech</Tag>
-            <Tag bg="brand.highlight1">Software</Tag>
-            <Tag bg="brand.highlight">Mentorship</Tag>
-          </Flex>
-        </VStack>
+    <Card>
+      <Flex direction="column" color="brand.primaryText" width="100%">
+        <Heading>{journey.title}</Heading>
+        <Flex gap={4} justifyContent="space-between" direction="column">
+          <VStack alignItems="flex-start" width="100%">
+            <Flex gap={2} flexWrap="wrap">
+              <Tag bg="brand.highlight">Tech</Tag>
+              <Tag bg="brand.highlight1">Software</Tag>
+              <Tag bg="brand.highlight">Mentorship</Tag>
+            </Flex>
+          </VStack>
+        </Flex>
       </Flex>
-    </Flex>
+    </Card>
   );
 };

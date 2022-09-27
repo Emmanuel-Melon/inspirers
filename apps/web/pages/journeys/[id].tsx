@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Flex, Stack, Text } from "@chakra-ui/react";
-import {              JourneyOverviewCard } from "../../Journeys/components/JourneyOverviewCard";
+import { JourneyOverviewCard } from "../../Journeys/components/JourneyOverviewCard";
 import { OutlineOverview } from "../../Journeys/Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -10,11 +10,23 @@ import { PersonalJourney } from "../../Journeys/components/personal";
 import { JourneyEditor } from "../../Journeys/components/editor";
 import { Spinner } from "ui";
 
+// use roles!
 export default function Journey(props) {
   const router = useRouter();
 
   const [started, _setStarted] = useState<boolean>(false);
   const { data: journey, isLoading, isError } = useFetch(`${router.asPath}`);
+
+  // list goals here!
+  // list resources here!
+  // when you click on a goal, it should open up the goal editor
+  // goal editor should have a list of resources
+  // goal editor should allow you to add routines
+  // goal editor should allow you to add resources
+  // goal editor should allow you to add a task
+  // show journey overview
+  // show routine stats
+  // show all reflections
 
   if (router.isFallback) {
     return <Text color="brand.primary">Processing Request</Text>;
@@ -24,7 +36,7 @@ export default function Journey(props) {
     return <Text>An error has occured</Text>;
   }
 
-  if (journey.userId === props.user?.id) {
+  if (journey?.userId === props.user?.id) {
     return (
       <Stack gap={4} width="100%">
         <JourneyOverviewCard user={props.user} journey={journey} />
@@ -36,7 +48,6 @@ export default function Journey(props) {
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
       <JourneyOverviewCard user={props.user} journey={journey} />
-
       {!isLoading ? <JourneyEditor journey={journey} /> : <Spinner />}
     </Flex>
   );

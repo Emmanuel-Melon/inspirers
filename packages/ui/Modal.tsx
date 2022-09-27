@@ -4,10 +4,10 @@ import React, {
   FunctionComponent,
   ReactChild,
 } from "react";
-import Modal from "react-modal";
+import BaseModal from "react-modal";
 import { Flex } from "@chakra-ui/react";
 
-Modal.setAppElement("#__next");
+BaseModal.setAppElement("#__next");
 
 type ModalProps = {
   show: boolean;
@@ -15,7 +15,7 @@ type ModalProps = {
   close: () => void;
 };
 
-export const CustomModal: FunctionComponent<ModalProps> = ({
+export const Modal: FunctionComponent<ModalProps> = ({
   show,
   close,
   children,
@@ -53,6 +53,7 @@ export const CustomModal: FunctionComponent<ModalProps> = ({
       background: "rgba(187, 100, 100, 0.4)",
     },
   };
+  // modal bug is here
   return (
     <Modal isOpen={show} onRequestClose={close} style={customStyles}>
       {children}

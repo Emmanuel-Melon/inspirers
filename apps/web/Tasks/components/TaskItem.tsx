@@ -34,7 +34,7 @@ import {
   FiTrash,
 } from "react-icons/fi";
 import { client } from "utils/client";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 import { TaskDetailView } from "./TaskDetailView";
 
 type TaskItemProps = {
@@ -166,9 +166,9 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           />
         </Flex>
       </Popover>
-      <CustomModal show={show} close={closeModal}>
+      <Modal show={show} close={closeModal}>
         <TaskDetailView item={task} deleteTask={deleteTask} />
-      </CustomModal>
+      </Modal>
     </>
   );
 };

@@ -31,7 +31,7 @@ import {
     FiShoppingBag,
     FiUser,
 } from "react-icons/fi";
-import { TextInput, Button } from "ui";
+import { Input, Button } from "ui";
 import { client } from "../utils/client";
 
 export const UserInfo = ({ user }) => {
@@ -68,12 +68,16 @@ export const UserInfo = ({ user }) => {
     }
 
     return (
-        <Stack alignItems="flex-start" width="100%" gap={2}>
+        <Stack
+            alignItems="flex-start"
+            width="100%"
+            gap={2}
+        >
             <Text>Manage your personal info</Text>
-            <FormControl>
+            <FormControl >
                 <Flex alignItems="center">
                     <FormLabel width="30%" color="brand.secondaryText">Display Name</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={onChange}
                         placeholder={user?.name}
                         type="text"
@@ -85,7 +89,7 @@ export const UserInfo = ({ user }) => {
             <FormControl>
                 <Flex>
                     <FormLabel width="30%" color="brand.secondaryText">Username</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={onChange}
                         placeholder={user?.username}
                         type="text"
@@ -97,7 +101,7 @@ export const UserInfo = ({ user }) => {
             <FormControl>
                 <Flex>
                     <FormLabel width="30%" color="brand.secondaryText">E-mail</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={onChange}
                         placeholder={user?.email}
                         type="text"
@@ -122,7 +126,10 @@ export const UserInfo = ({ user }) => {
                     />
                 </Flex>
             </FormControl>
-            <Button onClick={updateUserInfo} size="md" isLoading={isLoading}>Update</Button>
+            <Flex gap={4}>
+                <Button onClick={updateUserInfo} size="md" isLoading={isLoading}>Save Changes</Button>
+                <Button size="md" bg="brand.white">Cancel</Button>
+            </Flex>
         </Stack>
     )
 }

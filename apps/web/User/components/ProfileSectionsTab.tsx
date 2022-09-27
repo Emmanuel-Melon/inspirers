@@ -49,10 +49,11 @@ export const ProfileSectionsTab = () => {
         alignItems="center"
         borderRadius="1rem"
         leftIcon={props.icon}
-        bg={isSelected ? "brand.primary" : "transparent"}
-        color="brand.primaryText"
+        bg={isSelected ? "brand.accent" : "transparent"}
+        color={isSelected ? "brand.white" : "brand.primaryText"}
         _hover={{
-          bg: isSelected ? "brand.hovered" : "brand.highlight1",
+          bg: isSelected ? "brand.hovered" : "brand.highlight3",
+          color: isSelected ? "brand.primaryText" : "brand.primaryText",
         }}
       >
         {tabProps.children}
@@ -66,12 +67,12 @@ export const ProfileSectionsTab = () => {
       direction="column"
       color="brand.primaryText"
       alignItems="center"
-      width="65%"
+      width="100%"
     >
       <Tabs width="100%" defaultIndex={0} isLazy variant="unstyled">
         <TabList
           gap={4}
-          bg="brand.highlight2"
+          bg="brand.highlight3"
           p="4"
           borderRadius="1rem"
           marginBottom={4}

@@ -5,13 +5,12 @@ import {
     Flex,
     Heading,
     Box,
-    Input,
     FormControl,
     FormLabel,
     HStack,
     useRadioGroup
 } from "@chakra-ui/react";
-import { Button, Card, CustomCheckbox, TextInput, RadioCard } from "ui";
+import { Button, Card, CustomCheckbox, Input, RadioCard } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiFlag, FiPlayCircle, FiClock, FiPlus } from "react-icons/fi";
@@ -53,7 +52,7 @@ export const ManageRoutine = ({ closeModal }) => {
                 <Stack gap={2}>
                     <FormControl>
                         <FormLabel>Title</FormLabel>
-                        <TextInput
+                        <Input
                             onChange={e => setTitle(e.target.value)}
                             placeholder="e.g name@domain.com"
                             type="text"
@@ -63,7 +62,7 @@ export const ManageRoutine = ({ closeModal }) => {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Starting Date</FormLabel>
-                        <TextInput
+                        <Input
                             onChange={e => setStartDay(e.target.value)}
                             placeholder="e.g name@domain.com"
                             type="date"

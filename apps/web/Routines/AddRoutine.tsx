@@ -19,7 +19,7 @@ import {
 import { Routine } from "@prisma/client";
 import { FiRotateCw } from "react-icons/fi";
 import { Button } from "ui";
-import { TextInput } from "ui";
+import { Input } from "ui";
 import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -52,7 +52,7 @@ export const AddRoutine = ({ cancel }) => {
             <Stack gap={2}>
                 <FormControl>
                     <FormLabel>Name</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Morning Routine"
                         type="text"

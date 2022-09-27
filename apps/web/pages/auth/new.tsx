@@ -5,6 +5,7 @@ import {
   Heading,
   VStack,
   Text,
+  Stack,
   Box,
   FormControl,
   FormLabel,
@@ -13,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { TextInput } from "ui/Input";
+import { Input } from "ui/Input";
 import { Button } from "ui";
 import toast, { Toaster } from "react-hot-toast";
 import { client } from "../../utils/client";
@@ -71,19 +72,18 @@ export default function NewUser(props) {
   }, []);
   return (
     <>
-      <Flex width="100%" gap={8}>
-        <VStack flex="1" alignItems="flex-start">
+      <Stack gap={8} width="50%">
+      <VStack flex="1" alignItems="flex-start">
           <Flex gap={2} alignItems="center">
             <Avatar src={props.user.image} />
             <Heading size="md">Welcome, {props.user.name}</Heading>
           </Flex>
-          <Text>Inspirers is a platform where you can share your passions with your peers. We encourage you to grow into a better version of yourself. You will never be alone on this journey to self-development.</Text>
         </VStack>
 
-        <VStack alignItems="flex-start" bg="brand.white" flex="2" p="4">
+        <Stack alignItems="flex-start" bg="brand.white" flex="2" p="4" borderRadius="1rem">
           <FormControl>
             <FormLabel>What should we call you?</FormLabel>
-            <TextInput
+            <Input
               onChange={onChange}
               placeholder="John Doe"
               type="text"
@@ -93,7 +93,7 @@ export default function NewUser(props) {
           </FormControl>
           <FormControl>
             <FormLabel>Username</FormLabel>
-            <TextInput
+            <Input
               onChange={onChange}
               placeholder="Must be unique"
               type="text"
@@ -102,8 +102,8 @@ export default function NewUser(props) {
             />
           </FormControl>
           <Button onClick={updateUserInfo} isLoading={isLoading}>Done</Button>
-        </VStack>
-      </Flex>
+        </Stack>
+      </Stack>
       <Toaster position="bottom-center" />
     </>
 

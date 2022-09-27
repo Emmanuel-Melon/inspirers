@@ -7,7 +7,7 @@ client.get(url).then((res: { data: any }) => res.data);
 export const useFetch = (url: string) => {
   const { data, error } = useSWR(url, fetcher);
   return {
-    data,
+    data: data?.data,
     isLoading: !error && !data,
     isError: error,
   };

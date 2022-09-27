@@ -20,8 +20,6 @@ export const connectionRequest = async (request: ConnectionRequest) => {
 
 export const establishConnection = async (connection) => {
   try {
-
-
     const request = {
       status: ConnectionStatus.Active,
       recepientId: connection.user2,
@@ -29,12 +27,9 @@ export const establishConnection = async (connection) => {
       requestId: "",
       connectionRequestId: ""
     }
-
-    const res = await prisma.connection.create({
+    return prisma.connection.create({
       data: request,
     });
-    console.log(res);
-    return res;
   } catch (err) {
     console.log(err);
   }

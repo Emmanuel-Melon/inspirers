@@ -45,6 +45,60 @@ journeyRouter.get(
   }
 );
 
+journeyRouter.get(
+  "/:journeyId/goals/recommendations",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+journeyRouter.get(
+  "/:journeyId/routines/recommendations",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+journeyRouter.get(
+  "/:journeyId/goals",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+journeyRouter.get(
+  "/:journeyId/goals/:goalId",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+journeyRouter.post(
+  "/:journeyId/goals",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
+journeyRouter.put(
+  "/:journeyId/goals/:goalId",
+  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
+    return Promise.resolve(getJourneyById(req.params.journeyId))
+      .then((data) => res.json({ data }))
+      .catch(next);
+  }
+);
+
 journeyRouter.put(
   "/:journeyId",
   (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {

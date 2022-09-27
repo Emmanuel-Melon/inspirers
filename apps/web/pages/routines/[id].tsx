@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../Routines/ListRoutines";
-import { Button, Card, CustomCheckbox, CustomModal } from "ui";
+import { Button, Card, CustomCheckbox, Modal } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiSettings, FiCalendar, FiShare2, FiPlus, FiMoreHorizontal } from "react-icons/fi";
@@ -24,7 +24,7 @@ import { RoutineObjectives } from "Routines/RoutineObjectives";
 import { RoutineResources } from "Routines/RoutineResources";
 import { RoutineTasks } from "Routines/RoutineTasks";
 import { ManageRoutine } from "Routines/ManageRoutine";
-import { ViewNavigator } from "ui";
+import { LayoutController } from "ui";
 
 
 export default function Routine() {
@@ -48,8 +48,8 @@ export default function Routine() {
                 <Flex justifyContent="space-between" alignItems="flex-start">
                     <Flex gap={2} alignItems="center">
                     <Stack>
-                        <Heading size="md">Emmanuel's {routine?.data?.title}</Heading>
-                        <Text color="brand.secondaryText">{routine?.data?.description}</Text>
+                        <Heading size="md">Emmanuel's {routine?.title}</Heading>
+                        <Text color="brand.secondaryText">{routine?.description}</Text>
                     </Stack>
                     <Tag size="md" bg="brand.highlight1" color="brand.secondary" fontWeight="700">
                         <TagLeftIcon boxSize='12px' as={FiCalendar} />
@@ -63,8 +63,8 @@ export default function Routine() {
                 </Flex>
                 <Flex gap={8}>
                     <Stack gap={4} width="100%" flex="2">
-                        <RoutineStats routine={routine?.data} />
-                        <RoutineObjectives routine={routine?.data} />
+                        <RoutineStats routine={routine} />
+                        <RoutineObjectives routine={routine} />
                     </Stack>
                     <Stack gap={2} width="100%" flex="1">
                         <Stack>
@@ -100,14 +100,11 @@ export default function Routine() {
                                 </Flex>
                             </Card>
                         </Stack>
-                        <RoutineResources routine={routine?.data} />
-                        <RoutineTasks routine={routine?.data} />
+                        <RoutineResources routine={routine} />
+                        <RoutineTasks routine={routine} />
                     </Stack>
                 </Flex>
             </Stack>
-            <CustomModal show={isOpen} close={closeModal}>
-                <ManageRoutine closeModal={closeModal} />
-            </CustomModal>
         </>
     );
 }

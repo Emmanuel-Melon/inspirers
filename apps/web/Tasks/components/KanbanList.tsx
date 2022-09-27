@@ -41,7 +41,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import { Button } from "ui";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 import { client } from "utils/client";
 import { JourneyOnboardingContext } from "providers/JourneyOnboardingProvider";
 

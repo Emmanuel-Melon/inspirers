@@ -1,18 +1,19 @@
 import React, { FC } from "react";
-import { Button as ChakraButton, ScaleFade } from "@chakra-ui/react";
+import { Button as ButtonBase, ScaleFade } from "@chakra-ui/react";
 
-type ButtonProps = {
-  size?: string;
+export type ButtonProps = {
+  size?: "xs" | "sm" | "md" | "lg";
   onClick: (e: React.MouseEvent) => void;
   fullWidth?: boolean;
-  icon?: any;
+  icon?: React.ReactElement;
   color?: string;
   bg?: string;
   loadingText?: string;
   isLoading?: boolean;
   width?: string;
   disabled?: boolean;
-  variant?: string;
+  variant?: string; // add button variants
+  border?: string;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -20,11 +21,11 @@ export const Button: FC<ButtonProps> = ({
   onClick,
   icon,
   bg,
-  color,
+  color = "brand.primaryText",
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "lg",
+  size = "md",
   width = "100%",
   variant,
   fullWidth,
@@ -32,20 +33,21 @@ export const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <ScaleFade initialScale={0.1} in={true}>
-      <ChakraButton
+      <ButtonBase
         onClick={onClick}
         colorScheme="brand"
         isLoading={isLoading}
-        loadingText={loadingText || "loading"}
+        loadingText={loadingText || "Loading"}
         boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
         px={4}
         width={width}
         size={size}
+        borderRadius="0.5rem"
         variant={variant}
         border={border || "none"}
         disabled={disabled}
         bg={bg || "brand.primary"}
-        color={"brand.primaryText"}
+        color={color}
         cursor="pointer"
         leftIcon={icon}
         _focus={{
@@ -57,7 +59,7 @@ export const Button: FC<ButtonProps> = ({
         }}
       >
         {children}
-      </ChakraButton>
+      </ButtonBase>
     </ScaleFade>
   );
 };

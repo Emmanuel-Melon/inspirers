@@ -30,7 +30,7 @@ import {
     PopoverCloseButton,
     PopoverAnchor,
 } from "@chakra-ui/react";
-import { Button, Card, CustomCheckbox, CustomModal, TextInput, ViewNavigator } from "ui";
+import { Button, Card, CustomCheckbox, Modal, Input, LayoutController } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiFlag, FiPlayCircle, FiX, FiPlus, FiMoreHorizontal, FiUserPlus, FiTrash } from "react-icons/fi";
@@ -102,7 +102,7 @@ const Objective = ({ deleteItem, objective }) => {
                     </Flex>
                 </Flex>
             </Card>
-            <CustomModal show={isOpen} close={closeModal}>
+            <Modal show={isOpen} close={closeModal}>
                 <Stack h="50vh" w="50vh">
                     <Heading as="h2">{objective.title}</Heading>
                     <Text>Progress: {objective.progress}% </Text>
@@ -119,7 +119,7 @@ const Objective = ({ deleteItem, objective }) => {
                         <Button>Edit</Button>
                     </Flex>
                 </Stack>
-            </CustomModal>
+            </Modal>
         </>
     )
 }
@@ -129,7 +129,7 @@ const NewObjective = ({ closeEditor, onSave }) => {
     return (
         <Stack>
                     <Flex gap={4}>
-            <TextInput
+            <Input
                 placeholder="New objective"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
@@ -162,9 +162,9 @@ export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
         setEdit(false);
     }
     const onSave = (data) => {
-        return client.post(`/routines/${routine.id}`, {
+        return client.post(`/routines/${routine?.id}`, {
             title: "Hello",
-            routineId: routine.id
+            routineId: routine?.id
         })
             .then(res => {
                 console.log(res);

@@ -22,7 +22,7 @@ import {
     FiShoppingBag,
     FiUser,
 } from "react-icons/fi";
-import { TextInput, Button } from "ui";
+import { Input, Button } from "ui";
 import Head from "next/head";
 
 export const AccountSettings = ({ user }) => {
@@ -46,12 +46,20 @@ export const AccountSettings = ({ user }) => {
 
     return (
         <Stack alignItems="flex-start" width="100%" gap={2}>
-            <Heading size="md">Security</Heading>
-            <Stack alignItems="flex-end" width="100%" >
+            <Heading size="sm">Security</Heading>
+            <Stack
+            alignItems="flex-start"
+            width="100%"
+            gap={2}
+            bg="brand.white"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+            borderRadius="1rem"
+            p="4"
+        >
             <FormControl>
                 <Flex alignItems="center">
                     <FormLabel width="30%" color="brand.secondaryText">Old Password</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={onChange}
                         placeholder=""
                         type="password"
@@ -63,7 +71,7 @@ export const AccountSettings = ({ user }) => {
             <FormControl>
                 <Flex alignItems="center">
                     <FormLabel width="30%" color="brand.secondaryText">New Password</FormLabel>
-                    <TextInput
+                    <Input
                         onChange={onChange}
                         placeholder=""
                         type="password"
@@ -72,11 +80,13 @@ export const AccountSettings = ({ user }) => {
                     />
                 </Flex>
             </FormControl>
-            <Button onClick={() => { }} size="md">Update Password</Button>
+            <Flex justifyContent="flex-end" width="100%">
+            <Button onClick={() => { }} size="sm">Update Password</Button>
+            </Flex>
             </Stack>
             <Divider />
-            <Heading size="md">Danger Zone</Heading>
-            <Button onClick={() => { }} bg="brand.danger" size="md">Delete Account</Button>
+            <Heading size="sm">Danger Zone</Heading>
+            <Button onClick={() => { }} bg="brand.white" size="sm">Delete Account</Button>
         </Stack>
     )
 }

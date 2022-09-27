@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input as InputBase, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { FiSearch, FiInfo } from "react-icons/fi";
 
 type InputProps = {
@@ -14,9 +14,9 @@ type InputProps = {
   onChange: any;
 };
 
-export const TextInput: FunctionComponent<InputProps> = (props) => {
+export const Input: FunctionComponent<InputProps> = (props) => {
   return (
-    <Input
+    <InputBase
       autoComplete="off"
       placeholder={props.placeholder}
       cursor="pointer"
