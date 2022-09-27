@@ -9,7 +9,7 @@ export const list = async (userId: string): Promise<Routine[]> => {
         },
         orderBy: [
           {
-            createdAt: "desc",
+            createdAt: "asc",
           },
         ]
     });

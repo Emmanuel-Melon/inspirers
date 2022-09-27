@@ -10,6 +10,7 @@ type ListRoutinesProps = {
     routines: Routine[];
 }
 
+// dynamic
 export const ListRoutines = ({ isLoading, isError, routines }: ListRoutinesProps) => {
     if (isError) {
         return <Text>Failed to Load Routines</Text>

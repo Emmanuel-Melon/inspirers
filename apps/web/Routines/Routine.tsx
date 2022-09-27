@@ -11,7 +11,6 @@ import {
     Box,
     LinkBox,
     LinkOverlay,
-    IconButton,
     Popover,
     PopoverTrigger,
     PopoverContent,
@@ -21,11 +20,13 @@ import {
     PopoverArrow,
     PopoverCloseButton,
     PopoverAnchor,
-    Tag
+    Tag,
+    TagLeftIcon,
+    TagLabel
 } from "@chakra-ui/react";
-import { Button, Card } from "ui";
+import { Button, Card, IconButton } from "ui";
 import { Routine, RoutineType } from "@prisma/client";
-import { FiMoreHorizontal, FiTrash2, FiSunrise, FiBriefcase, FiHeart } from "react-icons/fi";
+import { FiMoreHorizontal, FiTrash2, FiSunrise, FiBriefcase, FiHeart, FiBarChart2, FiClock, FiUsers } from "react-icons/fi";
 import moment from "moment";
 import { client } from "utils/client";
 
@@ -52,28 +53,38 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
     }
     return (
         <LinkBox >
-            <Card width="100%" >
-                <Flex justifyContent="space-between">
+            <Card bg={routine.reminders ? "brand.highlight3" : "brand.white" }>
+                <Flex justifyContent="space-between" >
                     <Flex gap={4} alignItems="center">
                         <Box
                             bg="brand.highlight1"
                             p="4"
-                            borderRadius="1rem"
+                            borderRadius="50%"
                             color="brand.secondary"
-                            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
                         >
-                            { routine.type === RoutineType.Productivity ? <FiBriefcase size="1.5rem" /> : null }
-                            { routine.type === RoutineType.Wellness ? <FiHeart size="1.5rem" /> : null }
-                            
+                            {routine.type === RoutineType.Productivity ? <FiBriefcase size="1rem" /> : null}
+                            {routine.type === RoutineType.Wellness ? <FiHeart size="1rem" /> : null}
+
                         </Box>
                         <Stack>
-                        <Stack>
-                        <Tag width="fit-content" bg="brand.highlight3">{moment(routine.createdAt).format("h:mm")} - {moment(routine.createdAt).format("h:mm")} </Tag>
-                        </Stack>
                             <LinkOverlay href={`routines/${routine.id}`}>
                                 <Heading size="sm">{routine.title}</Heading>
                             </LinkOverlay>
                             <Text>{routine.description}</Text>
+                            <Flex gap={4}>
+                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
+                                    <TagLeftIcon as={FiBarChart2} />
+                                    <TagLabel>Beginner</TagLabel>
+                                </Tag>
+                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
+                                    <TagLeftIcon as={FiClock} />
+                                    <TagLabel>2 Hours</TagLabel>
+                                </Tag>
+                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
+                                    <TagLeftIcon as={FiUsers} />
+                                    <TagLabel>2 Companions</TagLabel>
+                                </Tag>
+                            </Flex>
                         </Stack>
                     </Flex>
                     <Stack alignItems="flex-end">
@@ -103,10 +114,12 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
                                 </PopoverBody>
                             </PopoverContent>
                         </Popover>
-                        <Text>{moment(routine.createdAt).fromNow()}</Text>
+                        
                     </Stack>
                 </Flex>
             </Card>
         </LinkBox>
     )
 }
+
+// <Tag width="fit-content" bg="brand.highlight3">{moment(routine.createdAt).format("h:mm")} - {moment(routine.createdAt).format("h:mm")} </Tag>
