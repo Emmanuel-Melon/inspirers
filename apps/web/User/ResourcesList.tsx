@@ -1,9 +1,10 @@
 import { useFetch } from "hooks/useSwr";
 import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { ResourceCard } from "Backpack/ListRecentlyAdded";
-import { Card, IconButton } from "ui";
+import { IconButton } from "ui";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { ListCategories } from "Backpack/ListCategories";
+import { Resource } from "@prisma/client";
 
 export const ResourceList = () => {
     const { data: resources, isLoading, isError } = useFetch(`/backpacks/cl8bqg96n14593e1bt8hzr0u1e`);
@@ -25,12 +26,12 @@ export const ResourceList = () => {
             >
                 <Flex justifyContent="space-between" alignItems="center">
                     <Heading size="sm">Recently Added</Heading>
-                    <IconButton>
+                    <IconButton label="recently added settings" onClick={() => {} }>
                         <FiMoreHorizontal />
                     </IconButton>
                 </Flex>
                 {
-                    resources?.map((resource) => {
+                    resources?.map((resource: Resource) => {
                         return (
                             <ResourceCard resource={resource} />
                         )

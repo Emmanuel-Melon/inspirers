@@ -1,27 +1,26 @@
-import { useState, useRef, useEffect } from 'react'
+import { FC, useState, useRef, useEffect } from 'react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-
 import {
-    Avatar,
     Box,
-    Image,
-    Img,
     Stack,
     Text,
     Flex,
     Heading,
 } from "@chakra-ui/react";
-import { Button, Card } from "ui";
-import moment from 'moment';
+import { Card } from "ui";
 import Link from "next/link";
+import { Resource } from "@prisma/client";
 
 import {
     FiVideo,
     FiExternalLink,
 } from "react-icons/fi";
-import { useFetch } from "../hooks/useSwr";
 
-export const ResourceCard = ({ resource }) => {
+type ResourceCardProps = {
+    resource: Resource;
+}
+
+export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
     return (
         <Card>
         <Flex alignItems="center" justifyContent="space-between">
@@ -44,7 +43,11 @@ export const ResourceCard = ({ resource }) => {
     )
 }
 
-export const ListRecentlyAdded = ({ resources }) => {
+type ListRecentlyAddedProps = {
+    resources: Resource[];
+}
+
+export const ListRecentlyAdded: FC<ListRecentlyAddedProps> = ({ resources }) => {
     const [parent] = useAutoAnimate(/* optional config */)
     return (
         <Stack color="brand.primaryText">
