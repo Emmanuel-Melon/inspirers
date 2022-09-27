@@ -11,7 +11,7 @@ import {
   FiCheckSquare,
   FiLink2,
 } from "react-icons/fi";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 const colors = {
   Progress: "brand.secondary",
   Blocked: "brand.danger",
@@ -111,9 +111,9 @@ export const KanbanListItem = ({ item }) => {
           borderRadius="1rem"
         />
       </Flex>
-      <CustomModal show={show} close={closeModal}>
+      <Modal show={show} close={closeModal}>
         <TaskDetailView item={item} />
-      </CustomModal>
+      </Modal>
     </>
   );
 };

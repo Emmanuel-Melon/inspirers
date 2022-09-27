@@ -39,12 +39,12 @@ export default function Layout({ children }: LayoutProps) {
           <Flex height="100%" as="main">
             <Sidebar session={session}/>
             <Stack width="100%">
-              <Navbar />
               <Box
               as="section"
               px="8"
               height="100%"
               width="100%"
+              py="4"
             >
               {children}
             </Box>

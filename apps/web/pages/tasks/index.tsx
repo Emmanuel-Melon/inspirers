@@ -9,7 +9,7 @@ import { TaskViewMenu } from "../../Tasks/components/TaskViewMenu";
 import { TaskBoard } from "../../Tasks/components/TaskBoard";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
@@ -67,13 +67,13 @@ export default function Tasks(props) {
           </Flex>
         </Flex>
       </Flex>
-      <CustomModal show={show} close={closeModal}>
+      <Modal show={show} close={closeModal}>
         <AddTask
           addTask={addTaskItem}
           journey={{ id: "cl85wpf3f833650btnkive11j" }}
           isLoading={isLoading}
         />
-      </CustomModal>
+      </Modal>
     </>
   );
 }

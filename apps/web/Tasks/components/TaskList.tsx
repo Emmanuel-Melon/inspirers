@@ -17,6 +17,10 @@ export const TaskList = ({ addTask, journey, tasks }: TaskListProps) => {
         icon={<FiClipboard size="1.5rem" />}
         heading="No Tasks"
         description="Wake up early, sit straight, and meditate. It will give you a refreshing start to your day and help you be more productive."
+        action={{
+          title: "Create Task",
+          handler: () => {}
+        }}
       />
     )
   }

@@ -39,6 +39,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/": "formkit/auto-animate",
     "@types/cookie": "^0.5.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/module-alias": "^2.0.1",

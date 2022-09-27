@@ -1,5 +1,4 @@
 import { Flex, Text, Heading, Stack } from "@chakra-ui/react";
-import { JourneyCard } from "../../Journeys/components/JourneyCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
@@ -10,9 +9,10 @@ import { MyJourneys } from "../../Journeys/components/MyJourneys";
 import { FeaturedMentors } from "Journeys/components/FeaturedMentors";
 import { RecommendJourneys } from "Journeys/components/RecommendedJourneys";
 import { ListRoutines } from "../../Routines/ListRoutines";
+import { JourneyCard } from "../../Journeys/components/JourneyCard";
 
 export default function Index(props) {
-  const { data: routines, isLoading, isError } = useFetch(`/routines/cl7zrw659000810btyaacqm54/list`);
+  const { data: journeys, isLoading, isError } = useFetch(`/journeys/${props.user?.id}/list`);
   return (
     <>
       <Stack
@@ -28,6 +28,9 @@ export default function Index(props) {
             <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
           </Stack>
         </Flex>
+        {
+          journeys?.data?.map(journey => <JourneyCard journey={journey} />)
+        }
       </Stack>
     </>
   );

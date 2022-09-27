@@ -32,8 +32,11 @@ import {
   FiClipboard,
   FiShoppingBag,
   FiUser,
+  FiBell,
+  FiPackage,
+  FiLock
 } from "react-icons/fi";
-import { TextInput } from "ui";
+import { Input } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -59,10 +62,11 @@ export default function Settings(props) {
         size="sm"
         borderRadius="1rem"
         leftIcon={props.icon}
-        bg={isSelected ? "brand.primary" : "brand.highlight2"}
-        color={isSelected ? "brand.primaryText" : "brand.primaryText"}
+        bg={isSelected ? "brand.accent" : "brand.highlight3"}
+        color={isSelected ? "brand.white" : "brand.secondaryText"}
         _hover={{
-          bg: isSelected ? "brand.hovered" : "brand.highlight2",
+          bg: isSelected ? "brand.hovered" : "brand.highlight3",
+          color: isSelected ? "brand.secondaryText" : "brand.secondaryText",
         }}
       >
         {tabProps.children}
@@ -85,32 +89,43 @@ export default function Settings(props) {
         alignItems="flex-start"
         width="100%"
       >
-        <Tabs width="100%" defaultIndex={0} isLazy variant="solid-rounded">
+        <Tabs width="100%" defaultIndex={0} isLazy variant="solid-rounded" >
           <TabList
             gap={4}
-            bg="brand.highlight1"
+            bg="brand.highlight3"
             p="4"
             borderRadius="1rem"
             marginBottom={4}
           >
             <CustomTab icon={<FiUser />}>Profile</CustomTab>
-            <CustomTab icon={<FiActivity />}>Notifications</CustomTab>
+            <CustomTab icon={<FiBell />}>Notifications</CustomTab>
             <CustomTab icon={<FiInfo />}>Account</CustomTab>
-            <CustomTab icon={<FiShoppingBag />}>Integrations</CustomTab>
+            <CustomTab icon={<FiPackage />}>Integrations</CustomTab>
+            <CustomTab icon={<FiLock />}>Privacy</CustomTab>
           </TabList>
 
           <TabPanels>
-            <TabPanel p="none">
-              <UserInfo user={user?.data}  />
+            <TabPanel p="none"
+            >
+              <UserInfo user={user} />
             </TabPanel>
-            <TabPanel p="none">
-              <NotificationSettings user={user?.data} />
+            <TabPanel p="none"
+            >
+              <NotificationSettings user={user} />
             </TabPanel>
-            <TabPanel p="none">
-              <AccountSettings user={user?.data} />
+            <TabPanel p="none"
+            >
+              <AccountSettings user={user} />
             </TabPanel>
-            <TabPanel p="none">
-              <IntegrationSettings user={user?.data} />
+            <TabPanel p="none"
+
+            >
+              <IntegrationSettings user={user} />
+            </TabPanel>
+            <TabPanel p="none"
+
+            >
+              <Text>Privacy</Text>
             </TabPanel>
           </TabPanels>
         </Tabs>

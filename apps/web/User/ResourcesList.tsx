@@ -1,5 +1,41 @@
+import { useFetch } from "hooks/useSwr";
+import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { ResourceCard } from "Backpack/ListRecentlyAdded";
+import { Card, IconButton } from "ui";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { ListCategories } from "Backpack/ListCategories";
+
 export const ResourceList = () => {
+    const { data: resources, isLoading, isError } = useFetch(`/backpacks/cl8bqg96n14593e1bt8hzr0u1e`);
     return (
-        <p>hey</p>
+        <Stack gap={4}>
+            <Stack
+                bg="brand.highlight1"
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                p={4}
+                borderRadius="1rem"
+            >
+                <ListCategories />
+            </Stack>
+            <Stack
+                bg="brand.highlight1"
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                p={4}
+                borderRadius="1rem"
+            >
+                <Flex justifyContent="space-between" alignItems="center">
+                    <Heading size="sm">Recently Added</Heading>
+                    <IconButton>
+                        <FiMoreHorizontal />
+                    </IconButton>
+                </Flex>
+                {
+                    resources?.map((resource) => {
+                        return (
+                            <ResourceCard resource={resource} />
+                        )
+                    })}
+            </Stack>
+        </Stack>
     )
 }

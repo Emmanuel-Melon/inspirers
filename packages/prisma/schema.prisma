@@ -62,11 +62,14 @@ model Field {
 }
 
 model Goal {
-  id        String   @id @default(cuid())
-  title     String
-  achieved  Boolean
-  journeyId String?
-  Journey   Journey? @relation(fields: [journeyId], references: [id])
+  id           String       @id @default(cuid())
+  title        String
+  achieved     Boolean
+  journeyId    String?
+  Journey      Journey?     @relation(fields: [journeyId], references: [id])
+  eta          DateTime
+  reflectionId String?
+  Reflections  Reflection[]
 }
 
 model Interest {
@@ -159,7 +162,7 @@ model Task {
   updatedAt   DateTime?   @default(now())
   deletedAt   DateTime?   @default(now())
   due         DateTime?
-  group String?
+  group       String?
 }
 
 enum IdentityProvider {
@@ -197,6 +200,9 @@ model User {
   completedOnboarding   Boolean                 @default(false)
   timeFormat            Int?                    @default(12)
   Schedule              Schedule[]
+  ApiKey                ApiKey[]
+  Webhook               Webhook[]
+  Credential            Credential[]
 }
 
 enum ResourceType {
@@ -209,17 +215,25 @@ enum ResourceType {
   Course
 }
 
+enum ResourceOrigin {
+  External
+  Internal
+  Integration
+}
+
 model Resource {
-  id         String       @id @default(cuid())
-  Backpack   Backpack?    @relation(fields: [backpackId], references: [id])
-  backpackId String?
-  title      String
-  type       ResourceType
-  createdAt  DateTime?    @default(now())
-  updatedAt  DateTime?    @default(now())
-  deletedAt  DateTime?    @default(now())
-  Routine    Routine?     @relation(fields: [routineId], references: [id])
-  routineId  String?
+  id          String         @id @default(cuid())
+  Backpack    Backpack?      @relation(fields: [backpackId], references: [id])
+  backpackId  String?
+  title       String
+  type        ResourceType
+  createdAt   DateTime?      @default(now())
+  updatedAt   DateTime?      @default(now())
+  deletedAt   DateTime?      @default(now())
+  Routine     Routine?       @relation(fields: [routineId], references: [id])
+  routineId   String?
+  resourceUrl String?
+  origin      ResourceOrigin @default(External)
 }
 
 model Backpack {
@@ -277,6 +291,8 @@ model Reflection {
   actionItems ReflectionActionItem[]
   description String
   thoughts    String
+  Goal        Goal?                  @relation(fields: [goalId], references: [id])
+  goalId      String?
 }
 
 enum ConnectionStatus {
@@ -476,6 +492,7 @@ model Routine {
   duration          String?
   description       String?
   reminders         Boolean         @default(true)
+  // ongoing        Boolean         @default(false)
   privacy           RoutinePrivacy?
   source            RoutineSource?
   periodStartDate   DateTime?
@@ -496,4 +513,73 @@ model Schedule {
   userId   String
   name     String
   timeZone String?
+}
+
+model ApiKey {
+  id         String    @id @unique @default(cuid())
+  userId     String
+  note       String?
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime?
+  lastUsedAt DateTime?
+  hashedKey  String    @unique()
+  user       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  app        App?      @relation(fields: [appId], references: [slug], onDelete: Cascade)
+  appId      String?
+}
+
+enum AppCategories {
+  calendar
+  messaging
+  other
+  payment
+  video
+  web3
+  automation
+}
+
+enum WebhookTriggerEvents {
+  BOOKING_CREATED
+  BOOKING_RESCHEDULED
+  BOOKING_CANCELLED
+  FORM_SUBMITTED
+  MEETING_ENDED
+}
+
+model Webhook {
+  id              String                 @id @unique
+  userId          String?
+  eventTypeId     Int?
+  subscriberUrl   String
+  payloadTemplate String?
+  createdAt       DateTime               @default(now())
+  active          Boolean                @default(true)
+  eventTriggers   WebhookTriggerEvents[]
+  user            User?                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  app             App?                   @relation(fields: [appId], references: [slug], onDelete: Cascade)
+  appId           String?
+  secret          String?
+
+  @@unique([userId, subscriberUrl], name: "courseIdentifier")
+}
+
+model Credential {
+  id     String  @id @unique @default(cuid())
+  key    Json
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+  app    App?    @relation(fields: [appId], references: [slug], onDelete: Cascade)
+  appId  String?
+}
+
+model App {
+  slug        String          @id @unique
+  dirName     String          @unique
+  keys        Json?
+  categories  AppCategories[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  credentials Credential[]
+  Webhook     Webhook[]
+  ApiKey      ApiKey[]
 }

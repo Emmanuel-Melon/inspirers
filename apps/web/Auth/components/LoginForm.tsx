@@ -10,7 +10,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
-import { TextInput } from "ui/Input";
+import { Input } from "ui/Input";
 import { Button } from "ui";
 import { UserObject } from "types/User";
 import { useRouter } from "next/router";
@@ -126,7 +126,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
         justifyContent="center"
         alignItems="center"
         bg="#fff"
-        boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
+        boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
         borderRadius="0.5rem"
         borderTop="solid 0.5rem"
         borderColor="brand.primary"
@@ -140,7 +140,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
           >
             <FormControl>
               <FormLabel>Email address</FormLabel>
-              <TextInput
+              <Input
                 onChange={onChange}
                 placeholder="e.g name@domain.com"
                 type="text"
@@ -150,7 +150,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
             </FormControl>
             <FormControl>
               <FormLabel>Password</FormLabel>
-              <TextInput
+              <Input
                 onChange={onChange}
                 placeholder="Must be 8 characters"
                 type="password"

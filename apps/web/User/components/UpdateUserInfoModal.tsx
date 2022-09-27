@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CustomModal } from "ui";
+import { Modal } from "ui";
 
 export const UpdateUserInfoModal = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
@@ -9,9 +9,9 @@ export const UpdateUserInfoModal = () => {
     return (
         <>
             <p>hello</p>
-            <CustomModal show={isOpen} open={openModal}>
+            <Modal show={isOpen} open={openModal}>
                 <p>Man</p>
-            </CustomModal>
+            </Modal>
         </>
     )
 }

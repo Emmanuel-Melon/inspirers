@@ -25,7 +25,7 @@ import {
   FiClock,
   FiX,
 } from "react-icons/fi";
-import { TextInput } from "ui";
+import { Input } from "ui";
 import { client } from "utils/client";
 
 type AddTaskProps = {
@@ -43,7 +43,7 @@ export const AddTask = ({ addTask, journey, isLoading }: AddTaskProps) => {
       <Stack gap={2}>
         <FormControl>
           <FormLabel>Title</FormLabel>
-          <TextInput
+          <Input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Fix my car"
             type="text"
@@ -53,7 +53,7 @@ export const AddTask = ({ addTask, journey, isLoading }: AddTaskProps) => {
         </FormControl>
         <FormControl>
           <FormLabel>Description</FormLabel>
-          <TextInput
+          <Input
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             type="text"

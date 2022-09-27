@@ -7,6 +7,7 @@ import {
   Heading,
   Image,
   Link,
+  Stack
 } from "@chakra-ui/react";
 
 export const WhatToDisplay = (props): any => {
@@ -35,7 +36,7 @@ export const EmptyStateImages: object = {
 
 export const EmptyState = (props) => {
   return (
-    <VStack gap="8">
+    <Stack gap="8">
       <Heading>No {props.panelTitle} yet.</Heading>
       <Image alt="Image not loaded." src={props.url} />
       <Flex gap={4} alignItems="center">
@@ -55,6 +56,6 @@ export const EmptyState = (props) => {
           </Button>
         </Link>
       </Flex>
-    </VStack>
+    </Stack>
   );
 };
