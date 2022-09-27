@@ -19,7 +19,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
   show,
   close,
   children,
-}: ModalProps) => {
+}) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   // Tracks mouse position
@@ -53,10 +53,9 @@ export const Modal: FunctionComponent<ModalProps> = ({
       background: "rgba(187, 100, 100, 0.4)",
     },
   };
-  // modal bug is here
   return (
-    <Modal isOpen={show} onRequestClose={close} style={customStyles}>
+    <BaseModal isOpen={show} onRequestClose={close} style={customStyles}>
       {children}
-    </Modal>
+    </BaseModal>
   );
 };
