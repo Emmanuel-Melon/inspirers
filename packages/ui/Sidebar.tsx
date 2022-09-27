@@ -35,6 +35,7 @@ import {
     FiMonitor,
     FiClipboard,
     FiShoppingBag,
+    FiPackage
     FiPackage,
     FiLogOut,
     FiHelpCircle
@@ -74,32 +75,45 @@ export const Sidebar = ({ session }) => {
             id: 1,
             name: "Home",
             url: "/",
+            icon: <FiHome size="1rem" />
+        },
+        {
+            id: 2,
+            name: "Profile",
+            url: `/user/${session?.user?.id}`,
+            icon: <FiUser size="1rem" />
             icon: <FiHome size="1rem" />,
             active: true
         },
         {
-            id: 1,
+            id: 3,
             name: "Journeys",
             url: "/journeys",
             icon: <FiMap size="1rem" />
         },
         {
-            id: 1,
+            id: 4,
             name: "Routines",
             url: "/routines",
             icon: <FiRotateCw size="1rem" />
         },
         {
-            id: 1,
+            id: 5,
             name: "Tasks",
             url: "/tasks",
             icon: <FiClipboard size="1rem" />
         },
         {
-            id: 1,
+            id: 6,
             name: "Notifications",
             url: "/notifications",
             icon: <FiBell size="1rem" />
+        },
+        {
+            id: 7,
+            name: "Settings",
+            url: "/settings",
+            icon: <FiSettings size="1rem" />
         },
         {
             id: 8,
