@@ -1,32 +1,32 @@
-FROM node:16.13.2-alpine AS builder
-RUN apk update
+ARG NODE_VERSION=16
+ARG ALPINE_VERSION=3.15
+
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+RUN apk update && apk add git
 # Set working directory
 WORKDIR /app
 RUN yarn global add turbo
-
-# turbo prune
+COPY . .
 RUN turbo prune --scope=api --docker
 
 # Add lockfile and package.json's of isolated subworkspace
-FROM node:16.13.2-alpine AS installer
-# RUN apk update
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS installer
+RUN apk update && apk add git
 WORKDIR /app
+
+# First install dependencies (as they change less often)
 COPY .gitignore .gitignore
-COPY turbo.json turbo.json
-
-# Install dependencies
-COPY package.json ./
-COPY yarn.lock ./
-COPY ./apps/api/package.json ./apps/api/package.json
-COPY ./packages/prisma/package.json ./packages/prisma/package.json
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/yarn.lock ./yarn.lock
 RUN yarn install
-# RUN yarn turbo run build 
 
-# Copy source files
-COPY ./apps/api ./apps/api
-COPY ./packages ./packages
+# Build the project and its dependencies
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN yarn turbo run build --filter=api...
 
-FROM node:16.13.2-alpine AS runner
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+RUN apk update && apk add git
 WORKDIR /app
 
 # Don't run production as root
@@ -35,5 +35,13 @@ RUN adduser --system --uid 1001 expressjs
 USER expressjs
 COPY --from=installer /app .
 
-# EXPOSE 5000
+# CMD ["npm", "run", "dev"]
 CMD ["node", "-e", "(function() { setInterval(() => { console.log(\"hello\") }, 5000) })()"]
+
+# exec into the container and run the following command to see the output
+# docker exec -it <container-id> sh -c "ls -la /app/apps/api/dist"
+# inspect the packages and prisma folders to see that they are included in the image
+# prisma is a dependency of the api package
+# @inspirers/prisma cannot be found in the container. 
+# only found eslint-config-custom  tsconfig
+# try running yarn install

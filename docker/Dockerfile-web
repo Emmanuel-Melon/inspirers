@@ -1,25 +1,45 @@
-FROM node:16-alpine as server-builder
+ARG NODE_VERSION=16
+ARG ALPINE_VERSION=3.15
 
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+RUN apk update && apk add git
+# Set working directory
 WORKDIR /app
-
+RUN yarn global add turbo
 COPY . .
-RUN --mount=type=cache,target=/app/.yarn/cache \
-    npx turbo prune --scope=@me/application-a && \
-    cp -R .yarn .yarnrc.yml tsconfig.json out/ && \
-    cd out && \
-    yarn install && \
-    yarn turbo run build --filter=@me/application-a && \
-    yarn workspaces focus --all --production && \
-    rm -rf node_modules/.cache .yarn/cache applications/application-a/.next/cache
+RUN turbo prune --scope=web --docker
 
-
-FROM node:16-alpine as app
-
-ENV NODE_ENV=production
+# Add lockfile and package.json's of isolated subworkspace
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS installer
+RUN apk update && apk add git
 WORKDIR /app
-COPY --chown=node:node --from=server-builder /app/out .
 
-WORKDIR /app/applications/web-server
-USER 1000
+# First install the dependencies (as they change less often)
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/yarn.lock ./yarn.lock
+RUN yarn install
 
-CMD ["yarn", "start"]
+# Build the project
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+RUN yarn turbo run build --filter=web...
+
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+RUN apk update && apk add git
+WORKDIR /app
+
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
+
+COPY --from=installer /app/apps/web/next.config.js .
+COPY --from=installer /app/apps/web/package.json .
+
+# Automatically leverage output traces to reduce image size 
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+
+CMD node apps/web/server.js
