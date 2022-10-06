@@ -21,6 +21,16 @@ services:
       - 5000:5000
     networks:
       - app_network
+  docs:
+    container_name: docs
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-docs
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - app_network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
