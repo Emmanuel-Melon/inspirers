@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sen&family=Sen&display=swap");
 
 html,
 body {
@@ -6,7 +6,7 @@ body {
   margin: 0;
   background: #F8F8F7 !important;
   background-image: linear-gradient( 174.2deg,  #F8F8F7 7.1%, rgba(240,246,238,1) 67.4% ) !important;
-  font-family: "Quicksand" !important;
+  font-family: "Sen" !important;
   height: 100%;
 }
 
@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter" !important;
+  font-family: "Sen" !important;
 }
 
 a,

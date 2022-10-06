@@ -23,7 +23,9 @@ export type LayoutControllerProps = {};
 export type LayoutButtonProps = {};
 
 
-
+// handle icons from here!
+// it's redundant to have to pass in the icon from every page
+// we can just handle it here
 const LayoutButton: FC<LayoutButtonProps> = ({ layout, view, changeView }) => {
     return (
         <Button
@@ -48,7 +50,7 @@ export const LayoutController: FC<LayoutControllerProps> = ({ changeView, openMo
                 color="brand.primaryText"
                 justifyContent="space-between"
             >
-                <Flex gap={4} p="4" justifyContent="space-between">
+                <Flex gap={4} justifyContent="space-between">
                     <Flex gap={4}>
                         <Flex alignItems="center" gap={2}>
                             <FiLayout />
@@ -58,14 +60,6 @@ export const LayoutController: FC<LayoutControllerProps> = ({ changeView, openMo
                             layouts.length > 0 ? layouts.map(layout => <LayoutButton layout={layout} key={layout.id} />) : null
                         }
                     </Flex>
-                </Flex>
-                <Flex gap={2} alignItems="center">
-                    <IconButton label="info button" onClick={() => { }}>
-                        <FiInfo />
-                    </IconButton>
-                    <Button icon={<FiPlus />} size="sm" onClick={openModal}>
-                        New Routine
-                    </Button>
                 </Flex>
             </Flex>
         </>

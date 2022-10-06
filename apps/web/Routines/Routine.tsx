@@ -91,7 +91,7 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
 
                         <Popover>
                             <PopoverTrigger>
-                                <IconButton aria-label={""} bg="brand.white" borderRadius="50%" _hover={{
+                                <IconButton aria-label={""} _hover={{
                                     bg: "brand.hovered"
                                 }}>
                                     <FiMoreHorizontal />

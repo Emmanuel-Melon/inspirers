@@ -7,12 +7,15 @@ import {
     Flex,
     Heading,
     Box,
+    LinkBox,
+    LinkOverlay
 } from "@chakra-ui/react";
 import { Button, Card, IconButton } from "ui";
 
-import {    
+import {
     FiMoreHorizontal,
-    FiFolder
+    FiFolder,
+    FiPlus
 } from "react-icons/fi";
 
 const categories = [
@@ -38,26 +41,31 @@ const categories = [
 
 export const Category = ({ category }) => {
     return (
-        <Card>
-            <Flex gap={4}>
-                <Flex alignItems="center">
-                    <Box
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                        color="brand.secondary"
-                        fontWeight="700"
-                        bg="brand.highlight1"
-                        p="4"
-                        borderRadius="1rem"
-                    >
-                        <FiFolder />
-                    </Box>
+        <LinkBox>
+            <Card>
+                <Flex gap={4}>
+                    <Flex alignItems="center">
+                        <Box
+                            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                            color="brand.secondary"
+                            fontWeight="700"
+                            bg="brand.highlight1"
+                            p="4"
+                            borderRadius="1rem"
+                        >
+                            <FiFolder />
+                        </Box>
+                    </Flex>
+                    <LinkOverlay href={`/backpack/${category.title.toLowerCase()}`}>
+                        <Stack>
+                            <Heading size="sm">{category.title}</Heading>
+                            <Text color='brand.secondaryText'>{category.text}</Text>
+                        </Stack>
+                    </LinkOverlay>
                 </Flex>
-                <Stack>
-                    <Heading size="sm">{category.title}</Heading>
-                    <Text color='brand.secondaryText'>{category.text}</Text>
-                </Stack>
-            </Flex>
-        </Card>
+            </Card>
+        </LinkBox>
+
     )
 }
 
@@ -68,7 +76,15 @@ export const ListCategories = () => {
     return (
         <Stack color='brand.primaryText'>
             <Flex justifyContent="space-between">
-                <Heading size="sm">Categories</Heading>
+                <Heading size="md">Folders</Heading>
+                <Flex gap={2}>
+                    <IconButton>
+                        <FiPlus />
+                    </IconButton>
+                    <IconButton>
+                        <FiMoreHorizontal />
+                    </IconButton>
+                </Flex>
             </Flex>
             <Flex gap={4}>
                 {categories.map(category => <Category key={category.id} category={category} />)}
