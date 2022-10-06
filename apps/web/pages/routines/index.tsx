@@ -57,6 +57,12 @@ const layouts = [
     active: false,
   }
 ];
+
+// add a small feature called challenges?
+// quests/
+// autogenerate routines
+// autogenerate resources
+// autogenerate goals                                                                                 
 export default function Routines(props) {
   const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
   const [isOpen, setIsOpen] = useState<boolean>(false);

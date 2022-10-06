@@ -53,30 +53,30 @@ const users = [
 ]
 
 
-const Companion = ({ companion }) => {
+export const Companion = ({ companion }) => {
   return (
     <Flex justifyContent="space-between">
-    <Flex gap={2} alignItems="center">
-      <Avatar src={companion.avatar} />
-      <Stack>
-        <Heading size="sm">{companion.name}</Heading>
-        <Text color="brand.secondary">@{companion.username}</Text>
-      </Stack>
-    </Flex>
-    <Flex gap={2}>
-      <Button
-        icon={<FiMessageSquare />}
-        size="sm"
-        onClick={() => console.log("message")}
-        bg="white"
-      >
-        Message
-      </Button>
-      <IconButton>
-        <FiMoreHorizontal />
-      </IconButton>
-    </Flex>
-  </Flex >
+      <Flex gap={2} alignItems="center">
+        <Avatar src={companion.avatar} />
+        <Stack>
+          <Heading size="sm">{companion.name}</Heading>
+          <Text color="brand.secondary">@{companion.username}</Text>
+        </Stack>
+      </Flex>
+      <Flex gap={2}>
+        <Button
+          icon={<FiMessageSquare />}
+          size="sm"
+          onClick={() => console.log("message")}
+          bg="white"
+        >
+          Message
+        </Button>
+        <IconButton>
+          <FiMoreHorizontal />
+        </IconButton>
+      </Flex>
+    </Flex >
   )
 }
 
@@ -93,15 +93,10 @@ export const UserCompanions = () => {
     );
   }
   return (
-    <Card>
-      <Stack gap={4}>
-      <Text>We connect like-minded people to catalyze and accelerate change through events, ideas and experiences.</Text>
-      <Stack gap={2}>
-        {
-          users.map((companion) => <Companion companion={companion} key={companion.id} />)
-        }
-      </Stack>
-      </Stack>
-    </Card>
+    <Stack gap={2}>
+      {
+        users.map((companion) => <Companion companion={companion} key={companion.id} />)
+      }
+    </Stack>
   )
 }

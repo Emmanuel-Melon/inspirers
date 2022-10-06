@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 
-import { Button } from "ui";
+import { Button, Input } from "ui";
 import {
   FiPlus,
   FiTrash,
@@ -25,7 +25,6 @@ import {
   FiClock,
   FiX,
 } from "react-icons/fi";
-import { Input } from "ui";
 import { client } from "utils/client";
 
 type AddTaskProps = {
