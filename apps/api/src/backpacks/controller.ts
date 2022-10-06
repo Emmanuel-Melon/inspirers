@@ -9,6 +9,7 @@ export const addBackpack = (backpack) => {
 };
 
 export const addResource = (backpackId, resource) => {
+  console.log(backpackId)
   try {
     return prisma.resource.create({
       data: {
@@ -47,6 +48,15 @@ export const modifyResource = async (resourceId, resource) => {
 
 export const getResources = (backpackId) => {
   try {
-    return prisma.resource.findMany();
+    return prisma.resource.findMany({
+      where: {
+        backpackId,
+      },
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ]
+    });
   } catch (err) {}
 };

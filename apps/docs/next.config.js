@@ -18,4 +18,5 @@ module.exports = withTM({
   images: {
     domains: ["cloudinary.com/", "res.cloudinary.com"]
   },
+  output: 'standalone',
 });

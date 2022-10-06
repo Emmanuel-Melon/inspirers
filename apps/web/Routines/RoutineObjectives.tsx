@@ -29,11 +29,16 @@ import {
     PopoverArrow,
     PopoverCloseButton,
     PopoverAnchor,
+    List,
+    ListItem,
+    ListIcon,
+    OrderedList,
+    UnorderedList,
 } from "@chakra-ui/react";
 import { Button, Card, CustomCheckbox, Modal, Input, LayoutController } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { FiFlag, FiPlayCircle, FiX, FiPlus, FiMoreHorizontal, FiUserPlus, FiTrash } from "react-icons/fi";
+import { FiFlag, FiPlayCircle, FiX, FiPlus, FiMoreHorizontal, FiUserPlus, FiTrash2 } from "react-icons/fi";
 import { client } from "../utils/client";
 import { Routine, RoutineType } from "@prisma/client";
 
@@ -84,15 +89,20 @@ const Objective = ({ deleteItem, objective }) => {
                                 <PopoverCloseButton />
                                 <PopoverHeader>Manage Routine</PopoverHeader>
                                 <PopoverBody>
-                                    <Stack>
-                                        <Button
-                                            size="sm"
-                                            onClick={() => deleteItem(objective.id)}
-                                            icon={<FiTrash />}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </Stack>
+                                <List spacing={2} color='brand.secondaryText'>
+                                                <ListItem>
+                                                    <ListIcon as={FiTrash2} color='brand.secondaryText' />
+                                                    Delete
+                                                </ListItem>
+                                                <ListItem>
+                                                    <ListIcon as={FiTrash2} color='brand.secondaryText' />
+                                                    Delete
+                                                </ListItem>
+                                                <ListItem>
+                                                    <ListIcon as={FiTrash2} color='brand.secondaryText' />
+                                                    Delete
+                                                </ListItem>
+                                            </List>
                                 </PopoverBody>
                             </PopoverContent>
                         </Popover>

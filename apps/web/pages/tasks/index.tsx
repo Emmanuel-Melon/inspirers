@@ -1,5 +1,5 @@
-import { client } from "../../utils/client";
 import { useState } from "react";
+import { client } from "../../utils/client";
 import {
   Flex,
   useDisclosure,
@@ -39,7 +39,7 @@ export default function Tasks(props) {
       .then((response) => {
         setIsLoading(false);
       })
-      .then(() => closeModal())
+      .then(() => closeModal());
   }
 
   const changeView = (view) => {

@@ -10,11 +10,11 @@ export type IconButtonProps = {
 }
 
 export const IconButton: FC<IconButtonProps> = ({ 
-    color = "brand.secondary",
+    color = "brand.secondaryText",
     children, 
     label, 
     onClick,
-    size = "sm",
+    size = "md",
 }) => {
     return (
         <IconButtonBase
