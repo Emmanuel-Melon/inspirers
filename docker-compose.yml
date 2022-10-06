@@ -1,63 +1,39 @@
-version: '3'
+version: "3"
+
 services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-web
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - app_network
   api:
     container_name: api
     build:
       context: .
-      dockerfile: Dockerfile-api
+      dockerfile: ./docker/Dockerfile-api
+    restart: always
     ports:
       - 5000:5000
-    env_file:
-      - ./.env
-    depends_on:
-      - db
-  db:
-    container_name: db
-    image: mysql
-    ports:
-      - 3306:3306
-    expose:
-      # Opens port 3306 on the container
-      - '3306'
-    cap_add:
-      - SYS_NICE
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'db'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'password'
-    volumes:
-      - db:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-  redis:
-    image: redis:6
-  dev:
-    container_name: dev
-    build:
-      dockerfile: Dockerfile-dev
-      context: .
-    env_file:
-      - .env
+    networks:
+      - app_network
   docs:
     container_name: docs
     build:
-      dockerfile: Dockerfile-docs
-      context: ./
-    ports:
-      - 3001:3001
-    env_file:
-      - ./.env
-  web:
-    build:
       context: .
-      dockerfile: Dockerfile-app
+      dockerfile: ./docker/Dockerfile-docs
+    restart: always
     ports:
       - 3001:3001
-    env_file: .env
-volumes:
-  db:
-    driver: local
+    networks:
+      - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true
