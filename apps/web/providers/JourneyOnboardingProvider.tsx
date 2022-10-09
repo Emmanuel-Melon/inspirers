@@ -18,7 +18,7 @@ const initialState = {
   },
   currentStep: {
     id: 1,
-    title: "Journey",
+    title: "New Journey",
     active: true,
     skippable: false,
     journeyId: "",
@@ -60,7 +60,7 @@ export const JourneyOnboardingProvider = ({
 }: JourneyOnboardingProps) => {
   const [state, dispatch] = useReducer(stepsReducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
-  const updateBluePrint = (value: string) => setBluePrint(value);
+  const onBluePrintChange = (value: string) => setBluePrint(value);
 
   const moveForward = (targetStepId) => {
     dispatch({
@@ -94,7 +94,7 @@ export const JourneyOnboardingProvider = ({
         ...state,
         moveBackwards,
         moveForward,
-        updateBluePrint,
+        onBluePrintChange,
         blueprint,
         updateJourney,
       }}

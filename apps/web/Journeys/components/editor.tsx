@@ -51,7 +51,44 @@ export const JourneyEditor = ({ journey }) => {
   };
 
   return (
-    <Stack gap={4} color="brand.primaryText">
+    <Flex>
+          <Stack gap={4} color="brand.primaryText" flex="1">
+      <Heading>{journey?.title}</Heading>
+      <Flex justifyContent="space-between" direction="column" gap={8}>
+        <Flex gap={4} direction="column">
+          <Heading size="md">Add Tasks</Heading>
+          <Text>These are major goals in your journy.</Text>
+          <Button size="sm" icon={<FiPlus />} width="fit-content">
+            Add Task
+          </Button>
+        </Flex>
+      </Flex>
+      <Flex justifyContent="space-between" direction="column" gap={8}>
+        <Flex gap={4} direction="column">
+          <Heading size="md">Add Tasks</Heading>
+          <Text>These are major goals in your journy.</Text>
+          <Button size="sm" icon={<FiPlus />} width="fit-content">
+            Add Task
+          </Button>
+        </Flex>
+      </Flex>
+      {false ? (
+        <Stack>
+          {blocks.map((block, key) => (
+            <EditableComponent
+              key={key}
+              id={block.id}
+              tag={block.tag}
+              html={block.html}
+              updatePage={updatePageHandler}
+              addBlock={addBlockHandler}
+              deleteBlock={deleteBlockHandler}
+            />
+          ))}
+        </Stack>
+      ) : null}
+    </Stack>
+          <Stack gap={4} color="brand.primaryText" flex="1">
       <Heading>{journey.title}</Heading>
       <Flex justifyContent="space-between" direction="column" gap={8}>
         <Flex gap={4} direction="column">
@@ -87,5 +124,6 @@ export const JourneyEditor = ({ journey }) => {
         </Stack>
       ) : null}
     </Stack>
+    </Flex>
   );
 };

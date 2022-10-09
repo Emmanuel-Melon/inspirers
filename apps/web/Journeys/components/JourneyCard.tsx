@@ -1,31 +1,54 @@
+import { FC } from "react";
 import {
-  Avatar,
   Flex,
-  Text,
   Heading,
-  VStack,
+  Stack,
   Box,
   Tag,
+  LinkBox,
+  LinkOverlay
 } from "@chakra-ui/react";
-import { Button, Card } from "ui";
-import { FiFacebook, FiTwitter, FiLinkedin, FiEdit3 } from "react-icons/fi";
+import { Card } from "ui";
+import { FiMap } from "react-icons/fi";
+import { Journey } from "@prisma/client";
 
-export const JourneyCard = ({ journey }) => {
-  console.log(journey);
+export type JourneyCardProps = {
+  journey: Journey;
+}
+
+// has completed onboarding vs detect page visit for the first time
+// show a list of things to do when yo visit a Journey's page for the first time
+// use this design for the onboarding: https://dribbble.com/shots/9830577-Guided-onboarding
+// use small dots to indicate progress during onboarding
+export const JourneyCard: FC<JourneyCardProps> = ({ journey }) => {
   return (
-    <Card>
-      <Flex direction="column" color="brand.primaryText" width="100%">
-        <Heading>{journey.title}</Heading>
-        <Flex gap={4} justifyContent="space-between" direction="column">
-          <VStack alignItems="flex-start" width="100%">
-            <Flex gap={2} flexWrap="wrap">
-              <Tag bg="brand.highlight">Tech</Tag>
-              <Tag bg="brand.highlight1">Software</Tag>
-              <Tag bg="brand.highlight">Mentorship</Tag>
-            </Flex>
-          </VStack>
-        </Flex>
+    <LinkBox>
+        <Card>
+      <Flex gap={4} alignItems="center">
+        <Box
+          bg="brand.highlight1"
+          p="4"
+          color="brand.secondaryText"
+          borderRadius="1rem"
+        >
+          <FiMap />
+        </Box>
+        <Stack gap={2} color="brand.primaryText">
+          <LinkOverlay href={`journeys/${journey.id}`}>
+          <Heading size="md">{journey.title}</Heading>
+          </LinkOverlay>
+          <Flex gap={4} justifyContent="space-between" direction="column">
+            <Stack alignItems="flex-start" width="100%">
+              <Flex gap={2} flexWrap="wrap">
+                <Tag bg="brand.highlight2">Tech</Tag>
+                <Tag bg="brand.highlight1">Software</Tag>
+                <Tag bg="brand.highlight2">Mentorship</Tag>
+              </Flex>
+            </Stack>
+          </Flex>
+        </Stack>
       </Flex>
     </Card>
+    </LinkBox>
   );
 };

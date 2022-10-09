@@ -24,7 +24,7 @@ export const JourneyProvider = ({
 }: JourneyProps) => {
   const [state, dispatch] = useReducer(journeyReducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
-  const updateBluePrint = (value: string) => setBluePrint(value);
+  const onBluePrintChange = (value: string) => setBluePrint(value);
 
 
   return (
