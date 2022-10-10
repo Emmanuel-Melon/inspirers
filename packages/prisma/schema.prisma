@@ -205,6 +205,41 @@ model User {
   Credential            Credential[]
 }
 
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+model InvitationKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+
+  Invitation Invitation[]
+}
+
+model Invitation {
+  id              String           @id @default(cuid())
+  email           String
+  status          InvitationStatus @default(PENDING)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  expiresAt       DateTime
+  key             InvitationKey    @relation(fields: [invitationKeyId], references: [id])
+  invitationKeyId String
+}
+
+model InvitationList {
+  id        String    @id @default(cuid())
+  email     String
+  createdAt DateTime? @default(now())
+  invitedBy String?
+}
+
 enum ResourceType {
   Video
   Book
@@ -241,30 +276,29 @@ model Folder {
 }
 
 model Resource {
-  id          String         @id @default(cuid())
-  Backpack    Backpack?      @relation(fields: [backpackId], references: [id])
-  backpackId  String?
-  title       String
-  type        ResourceType
-  createdAt   DateTime?      @default(now())
-  updatedAt   DateTime?      @default(now())
-  deletedAt   DateTime?      @default(now())
-  Routine     Routine?       @relation(fields: [routineId], references: [id])
-  routineId   String?
-  resourceUrl String?
-  origin      ResourceOrigin @default(External)
-  tags        Tag[]
-  Folder   Folder? @relation(fields: [folderId], references: [id])
-  folderId String?
-  progress    Int?
-  completed   Boolean?       @default(false)
-  completedAt DateTime?
-  due         DateTime?
-  next        DateTime?
-  notes       String?
-  reflectionId String?
+  id             String         @id @default(cuid())
+  Backpack       Backpack?      @relation(fields: [backpackId], references: [id])
+  backpackId     String?
+  title          String
+  type           ResourceType
+  createdAt      DateTime?      @default(now())
+  updatedAt      DateTime?      @default(now())
+  deletedAt      DateTime?      @default(now())
+  Routine        Routine?       @relation(fields: [routineId], references: [id])
+  routineId      String?
+  resourceUrl    String?
+  origin         ResourceOrigin @default(External)
+  tags           Tag[]
+  Folder         Folder?        @relation(fields: [folderId], references: [id])
+  folderId       String?
+  progress       Int?
+  completed      Boolean?       @default(false)
+  completedAt    DateTime?
+  due            DateTime?
+  next           DateTime?
+  notes          String?
+  reflectionId   String?
   completionTime Int?
-  
 }
 
 model Backpack {

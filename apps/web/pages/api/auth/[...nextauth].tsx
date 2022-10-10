@@ -3,7 +3,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@inspirers/prisma";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import InspirersCustomAdapter from "lib/custom-prisma-adapter";
 import { 
@@ -16,7 +15,6 @@ const inspirersAdapter = InspirersCustomAdapter(prisma);
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-
     FacebookProvider({
       clientId: facebokClientId,
       clientSecret: facebokClientSecret,
@@ -28,14 +26,14 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
+    })
   ],
   database: process.env.DATABASE_URL,
   secret,
   pages: {
     signIn: "/auth", // Displays signin buttons
     // signOut: "/auth/signout", // Displays form with sign out button
-    // error: "/auth/error", // Error code passed in query string as ?error=
+    error: "/auth/error", // Error code passed in query string as ?error=
     // verifyRequest: "/auth/verify-request", // Used for check email page
     newUser: "/auth/new", // If set, new users will be directed here on first sign in
   },
