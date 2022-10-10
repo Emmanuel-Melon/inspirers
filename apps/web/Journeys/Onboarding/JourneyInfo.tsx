@@ -9,10 +9,11 @@ import {
   useRadioGroup,
   HStack,
   useCheckboxGroup,
+  Stack
 } from "@chakra-ui/react";
 import { Input } from "ui/Input";
 import Image from "next/image";
-import { Button } from "ui";
+import { Button, IconButton } from "ui";
 import { JourneyOnboardingContext } from "../../providers/JourneyOnboardingProvider";
 import { client } from "../../utils/client";
 import { ListBluePrints } from "../components/ListBluePrints";
@@ -23,100 +24,90 @@ import {
   FiBriefcase,
   FiClipboard,
   FiHeart,
+  FiArrowLeft
 } from "react-icons/fi";
-import { RadioCard } from "ui";
+import { Card, RadioCard } from "ui";
 import toast, { Toaster } from "react-hot-toast";
 import { CustomCheckbox } from "ui";
 
 export const SecondStepGuide = ({ guide }) => {
   const context = useContext(JourneyOnboardingContext);
   return (
-    <Flex gap={8} height="100%">
-      <Flex direction="column" gap={4}>
-        <Heading color="brand.primaryText">
-          {context.currentStep.id}/{context.steps.length} -{" "}
-          {context.currentStep.title}
-        </Heading>
-        <Flex
-          alignItems="center"
-        >
-          <Image
-            height="180"
-            width="180"
-            alt="start journey"
-            src={
-              "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg"
-            }
-          />
-          <Text color="brand.secondaryText">
-            Hi, my name is Ney and I'll be your guide in this journey
-          </Text>
-        </Flex>
-        {context.blueprint === "template" ? (
-          <>
-            <Heading size="md" color="brand.primaryText">
-              Browse templates
-            </Heading>
-            <VStack
-              alignItems="flex-start"
-              p="4"
-              borderRadius="1rem"
-              bg="brand.highlight2"
+    <Stack gap={4}>
+      {context.blueprint === "template" ? (
+        <>
+          <Heading size="md" color="brand.primaryText">
+            Browse templates
+          </Heading>
+          <VStack
+            alignItems="flex-start"
+            p="4"
+            borderRadius="1rem"
+            bg="brand.highlight2"
+            color="brand.primaryText"
+          >
+            <Text>Accounting</Text>
+            <Text>Software Engineering</Text>
+            <Text>Cooking</Text>
+            <Text>Poetry</Text>
+            <Text
               color="brand.primaryText"
+              bg="brand.highlight2"
+              fontWeight="700"
+              borderRadius="1rem"
+              boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
+              fontSize="12px"
+              px="2"
+              py="1px"
+              width="fit-content"
             >
-              <Text>Accounting</Text>
-              <Text>Software Engineering</Text>
-              <Text>Cooking</Text>
-              <Text>Poetry</Text>
-              <Text
-                color="brand.primaryText"
-                bg="brand.highlight2"
-                fontWeight="700"
-                borderRadius="1rem"
-                boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
-                fontSize="12px"
-                px="2"
-                py="1px"
-                width="fit-content"
-              >
-                Show More
-              </Text>
-            </VStack>
-          </>
-        ) : (
-          <Flex
-            direction="column"
-            gap={4}
+              Show More
+            </Text>
+          </VStack>
+        </>
+      ) : (
+        <Card>
+          <Stack
+            gap={2}
             color="brand.primaryText"
             borderRadius="1rem"
+            p="4"
           >
             <Text>Explore the different journey types</Text>
-            <Flex alignItems="center" gap={2} color="brand.secondary">
-              <FiBookOpen />
-              <Heading size="sm">Academic</Heading>
-            </Flex>
-            <Text color="brand.secondaryText">
-              Study, prepar for exams and organize your academic life.
-            </Text>
-            <Flex alignItems="center" gap={2} color="brand.secondary">
-              <FiBriefcase />
-              <Heading size="sm">Business</Heading>
-            </Flex>
-            <Text color="brand.secondaryText">Plan your business and manage your work.</Text>
-            <Flex alignItems="center" gap={2} color="brand.secondary">
-              <FiClipboard />
-              <Heading size="sm">Career</Heading>
-            </Flex>
-            <Text color="brand.secondaryText">Career guidance and development.</Text>
-            <Flex alignItems="center" gap={2} color="brand.secondary">
-              <FiHeart />
-              <Heading size="sm">Personal</Heading>
-            </Flex>
-            <Text color="brand.secondaryText">Improve your personal life.</Text>
-          </Flex>
-        )}
-      </Flex>
-    </Flex>
+            <Stack>
+              <Flex alignItems="center" gap={2} color="brand.secondary">
+                <FiBookOpen />
+                <Heading size="sm">Academic</Heading>
+              </Flex>
+              <Text color="brand.secondaryText">
+                Study, prepar for exams and organize your academic life.
+              </Text>
+            </Stack>
+            <Stack>
+              <Flex alignItems="center" gap={2} color="brand.secondary">
+                <FiBriefcase />
+                <Heading size="sm">Business</Heading>
+              </Flex>
+              <Text color="brand.secondaryText">Plan your business and manage your work.</Text>
+            </Stack>
+            <Stack>
+              <Flex alignItems="center" gap={2} color="brand.secondary">
+                <FiClipboard />
+                <Heading size="sm">Career</Heading>
+              </Flex>
+              <Text color="brand.secondaryText">Career guidance and development.</Text>
+            </Stack>
+            <Stack>
+              <Flex alignItems="center" gap={2} color="brand.secondary">
+                <FiHeart />
+                <Heading size="sm">Personal</Heading>
+              </Flex>
+              <Text color="brand.secondaryText">Improve your personal life.</Text>
+            </Stack>
+          </Stack>
+        </Card>
+      )}
+    </Stack>
   );
 };
 
@@ -247,29 +238,6 @@ export const SecondStep = ({ user }) => {
 
   const options = ["academic", "business", "career", "personal"];
 
-  const academicOptions = [
-    "Earn a scholarship",
-    "Exam Preparation",
-    "Research",
-    "Write thesis/ Paper",
-    "publish",
-  ];
-  const businessOptions = [
-    "Start a business",
-    "Launch/ Promote Product",
-    "Analyze Growth",
-    "Investors/ Funding",
-    "Partnership",
-  ];
-  const careerOptions = [
-    "Get a Promotion",
-    "Learn new skills",
-    "land a new job",
-    "netowrk",
-    "other",
-  ];
-  const personalOptions = ["Lifestyle Change", "Diet", "other"];
-
   const updateJourneyType = (value) => {
     setJourneyInfo((currentState) => {
       return {
@@ -281,13 +249,20 @@ export const SecondStep = ({ user }) => {
 
   return (
     <VStack width="100%" alignItems="flex-start">
+      <Flex alignItems="center" gap={4}>
+        <IconButton size="sm" onClick={context.moveBackwards} label="Go to previous step">
+          <FiArrowLeft />
+        </IconButton>
+        <Heading color="brand.primaryText" size="md">
+          {context.currentStep.title}
+        </Heading>
+      </Flex>
+      <Text>{context.currentStep.description}</Text>
       <Flex
         width="100%"
         direction="column"
         gap={4}
-        bg="brand.highlight2"
-        p="8"
-        borderRadius="1rem"
+
       >
         {context.blueprint === "template" ? (
           <Flex gap={2}>
@@ -376,24 +351,26 @@ export const SecondStep = ({ user }) => {
                 </Select>
               </>
             ) : null}
-            <Flex gap={4}>
-              <Button
-                onClick={context.moveBackwards}
-                bg="brand.white"
-                color="brand.primaryText"
-                icon={<FiX />}
-                disabled={
-                  context.currentStep.id === 1 || context.currentStep.id === 5
-                }
-              >
-                Back
-              </Button>
+            <Flex gap={4} justifyContent="flex-end">
+              {
+                false ? <Button
+                  onClick={context.moveBackwards}
+                  bg="brand.white"
+                  color="brand.primaryText"
+                  icon={<FiX />}
+                  disabled={
+                    context.currentStep.id === 1 || context.currentStep.id === 5
+                  }
+                >
+                  Back
+                </Button> : null
+              }
               <Button
                 onClick={handleNext}
                 icon={<FiArrowRight />}
                 isLoading={isLoading}
               >
-                Next
+                Continue
               </Button>
             </Flex>
           </Flex>

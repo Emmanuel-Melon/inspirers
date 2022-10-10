@@ -1,9 +1,9 @@
-import { NewJourney } from "../../Journeys/Onboarding/NewJourney";
+import { JourneyOnboardingSteps } from "../../Journeys/Onboarding/JourneyOnboardingSteps";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function NewJourneyPage(props) {
-  return <NewJourney user={props.user} />;
+  return <JourneyOnboardingSteps user={props.user} />;
 }
 
 export async function getServerSideProps(context) {

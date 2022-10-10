@@ -2,14 +2,20 @@ import { Flex, Text, Heading, Stack } from "@chakra-ui/react";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
-import { JourneyBluePrint } from "../../Journeys/components/JourneyBluePrint";
-import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { InstructorCard } from "../../Journeys/components/InstructorCard";
-import { MyJourneys } from "../../Journeys/components/MyJourneys";
-import { FeaturedMentors } from "Journeys/components/FeaturedMentors";
-import { RecommendJourneys } from "Journeys/components/RecommendedJourneys";
-import { ListRoutines } from "../../Routines/ListRoutines";
 import { JourneyCard } from "../../Journeys/components/JourneyCard";
+import { ListJourneys } from "Journeys/ListJourneys";
+
+// Journey creation
+// whole page vs modal?
+// progress saving!
+// can users return to a journey during creation?
+// can users edit a journey during creation?
+// is there a preview mode?
+// can users create a journey from a template?
+// can users create a journey from a goal?
+// can users create a journey from a routine?
+// if a user creates a journey from a goal, should the goal be added to the journey?
+// use this for recommendations' feedback: https://dribbble.com/shots/15900878-Video-Branding-Editor
 
 export default function Index(props) {
   const { data: journeys, isLoading, isError } = useFetch(`/journeys/${props.user?.id}/list`);
@@ -18,7 +24,7 @@ export default function Index(props) {
       <Stack
         justifyContent="space-between"
         width="100%"
-        gap={8}
+        gap={2}
         color="brand.primaryText"
         py="4"
       >
@@ -28,9 +34,10 @@ export default function Index(props) {
             <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
           </Stack>
         </Flex>
-        {
-          journeys?.data?.map(journey => <JourneyCard journey={journey} />)
-        }
+        <Stack>
+        <ListJourneys journeys={journeys} isLoading={isLoading} isError={isError} />
+
+        </Stack>
       </Stack>
     </>
   );

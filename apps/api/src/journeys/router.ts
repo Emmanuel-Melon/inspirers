@@ -1,8 +1,8 @@
 import { NextFunction, Response, Router, Request } from "express";
 // import { Request } from "../express";
+import { Goal } from "@prisma/client";
 import { IdInObject } from "./id";
 import {
-  addJourney,
   getUserJourneys,
   getJourneyById,
   updateJourney,
@@ -12,6 +12,9 @@ import {
   deleteBlueprint,
   deleteJourney,
 } from "./controller";
+
+import { createGoal, createJourney } from "./operations/create";
+import { listGoals } from "./operations/list";
 
 const journeyRouter = Router();
 
@@ -66,7 +69,7 @@ journeyRouter.get(
 journeyRouter.get(
   "/:journeyId/goals",
   (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
-    return Promise.resolve(getJourneyById(req.params.journeyId))
+    return Promise.resolve(listGoals(req.params.journeyId))
       .then((data) => res.json({ data }))
       .catch(next);
   }
@@ -83,8 +86,8 @@ journeyRouter.get(
 
 journeyRouter.post(
   "/:journeyId/goals",
-  (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
-    return Promise.resolve(getJourneyById(req.params.journeyId))
+  (req: Request<any, IdInObject, Goal>, res: Response, next: NextFunction) => {
+    return Promise.resolve(createGoal(req.params.journeyId, req.body))
       .then((data) => res.json({ data }))
       .catch(next);
   }
@@ -118,7 +121,7 @@ journeyRouter.put(
 );
 
 journeyRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
-  return Promise.resolve(addJourney(req.body))
+  return Promise.resolve(createJourney(req.body))
     .then((data) => res.json({ data }))
     .catch(next);
 });

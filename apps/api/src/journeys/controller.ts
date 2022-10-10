@@ -27,24 +27,6 @@ export const deleteBlueprint = async (blueprintId: string) => {
   });
 };
 
-interface JourneyAttrs {
-  bluePrintId: string;
-  title: string;
-  description: string;
-  userId: string;
-  blueprint: string;
-  [key: string]: string;
-}
-
-export const addJourney = async (journey) => {
-  return prisma.journey.create({
-    data: {
-      title: journey.title,
-      description: journey.description,
-      userId: journey.userId,
-    },
-  });
-};
 
 export const getUserJourneys = async (userId) => {
   return prisma.journey.findMany({

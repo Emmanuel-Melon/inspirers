@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Flex, Stack, Text } from "@chakra-ui/react";
+import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { JourneyOverviewCard } from "../../Journeys/components/JourneyOverviewCard";
-import { OutlineOverview } from "../../Journeys/Overview/OutlineView";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
 import { PersonalJourney } from "../../Journeys/components/personal";
 import { JourneyEditor } from "../../Journeys/components/editor";
-import { Spinner } from "ui";
+import { Card, Spinner } from "ui";
+import { ListRoutines } from "Routines/ListRoutines";
 
 // use roles!
 export default function Journey(props) {
@@ -16,6 +16,7 @@ export default function Journey(props) {
 
   const [started, _setStarted] = useState<boolean>(false);
   const { data: journey, isLoading, isError } = useFetch(`${router.asPath}`);
+  const { data: routines } = useFetch(`/routines/${props.user?.id}/list`);
 
   // list goals here!
   // list resources here!
@@ -40,7 +41,27 @@ export default function Journey(props) {
     return (
       <Stack gap={4} width="100%">
         <JourneyOverviewCard user={props.user} journey={journey} />
-        <PersonalJourney journey={journey} />
+        <Flex gap={8}>
+          <Flex gap={4} flex="2" overflowX="scroll">
+          <Flex gap={4}>
+            <Card>
+              <Text>33 Days</Text>
+            </Card>
+            <Card>
+              <Text>33 Days</Text>
+            </Card>
+            <Card>
+              <Text>33 Days</Text>
+            </Card>
+            <Card>
+              <Text>33 Days</Text>
+            </Card>
+          </Flex>
+          </Flex>
+          <Stack flex="1">
+            <PersonalJourney journey={journey} />
+          </Stack>
+        </Flex>
       </Stack>
     );
   }

@@ -1,8 +1,9 @@
-import { Flex, Heading, Text, Box, Avatar } from "@chakra-ui/react";
-import { Button } from "ui";
+import { FC, useCallback, useState } from "react";
+import { Flex, Heading, Text, Box, Avatar, Stack } from "@chakra-ui/react";
+import { Button, Card, Modal } from "ui";
 import {
   FiEye,
-  FiShare,
+  FiShare2,
   FiPackage,
   FiCreditCard,
   FiSettings,
@@ -10,10 +11,10 @@ import {
   FiEdit,
 } from "react-icons/fi";
 import { UserObject } from "types/User";
-import { FC } from "react";
 import { useRouter } from "next/router";
-import { NewJourney } from "../Onboarding/NewJourney";
+import { JourneyOnboardingSteps } from "../Onboarding/JourneyOnboardingSteps";
 import { client } from "utils/client";
+import { EditJourney } from "../EditJourney";
 
 type JourneyOverviewCard = UserObject & {
   // rest of the props
@@ -28,14 +29,21 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
   user,
 }) => {
   const router = useRouter();
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const openModal = useCallback(() => {
+    setShow(true);
+  }, []);
+  const closeModal = useCallback(() => {
+    setShow(false);
+  }, []);
+
 
   function inviteFriends() { }
   function getStarted() {
     router.push("/journeys/new");
   }
-
-  console.log(journey?.data);
-  console.log(user);
 
   const deleteJourney = () => {
     client
@@ -49,18 +57,14 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
   };
   return (
     <>
-      <Flex
-        direction="column"
-        borderRadius="0rem 0.1rem 0.1rem 0rem"
-        width="100%"
-      >
+      <Stack>
         {
           true ? <Flex justifyContent="space-between">
             <Box>
               <Flex gap={2} alignItems="center">
                 <Avatar src={user?.image} />
                 <Heading color="brand.primaryText" size="lg" as="h1">
-                  Hi, {journey?.data?.user?.name || "Guest"}{" "}
+                  Hello, {journey?.user?.name || "Inspirer!"}{" "}
                 </Heading>
               </Flex>
               <Text my="4">
@@ -68,9 +72,9 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
               </Text>
             </Box>
             <Flex gap={4}>
-              {journey?.data?.userId === user?.id ? (
+              {journey?.userId === user?.id ? (
                 <Button
-                  onClick={deleteJourney}
+                  onClick={openModal}
                   icon={<FiEdit />}
                 >
                   Edit Journey
@@ -83,47 +87,48 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
             </Flex>
           </Flex> : null
         }
-        <Flex
-          justifyContent="space-between"
-          p="8"
-          color="brand.primaryText"
-          bg="brand.white"
-          borderRadius="1rem"
-        >
-          <Flex alignItems="center" gap={8}>
-            <Flex alignItems="center" gap={4}>
-              <Text fontWeight={"700"}>Companions</Text>
+        <Card>
+          <Flex
+            justifyContent="space-between"
+            color="brand.primaryText"
+          >
+            <Flex alignItems="center" gap={8}>
+              <Flex alignItems="center" gap={4}>
+                <Text fontWeight={"700"}>Companions</Text>
+              </Flex>
+              <Button
+                onClick={inviteFriends}
+                variant="outline"
+                bg="#fff"
+                icon={<FiShare2 />}
+              >
+                Invite Friends
+              </Button>
             </Flex>
-            <Button
-              onClick={inviteFriends}
-              variant="outline"
-              bg="#fff"
-              color="brand.primary"
-              icon={<FiShare />}
-            >
-              Invite Friends
-            </Button>
-          </Flex>
-          <Flex gap={8} alignItems="center">
-            <Flex alignItems="center" gap={1}>
-              <FiEye color="#116979" />
-              <Text>Public</Text>
-            </Flex>
-            <Flex alignItems="center" gap={1}>
-              <FiPackage color="#116979" />
-              <Text>Integrations</Text>
-            </Flex>
-            <Flex alignItems="center" gap={1}>
-              <FiCreditCard color="#116979" />
-              <Text>Plan</Text>
-            </Flex>
-            <Flex alignItems="center" gap={1}>
-              <FiSettings color="#116979" />
-              <Text>Settings</Text>
+            <Flex gap={8} alignItems="center">
+              <Flex alignItems="center" gap={1}>
+                <FiEye color="#116979" />
+                <Text>Public</Text>
+              </Flex>
+              <Flex alignItems="center" gap={1}>
+                <FiPackage color="#116979" />
+                <Text>Integrations</Text>
+              </Flex>
+              <Flex alignItems="center" gap={1}>
+                <FiCreditCard color="#116979" />
+                <Text>Plan</Text>
+              </Flex>
+              <Flex alignItems="center" gap={1}>
+                <FiSettings color="#116979" />
+                <Text>Settings</Text>
+              </Flex>
             </Flex>
           </Flex>
-        </Flex>
-      </Flex>
+        </Card>
+      </Stack>
+      <Modal show={show} close={closeModal}>
+        <EditJourney />
+      </Modal>
     </>
   );
 };
