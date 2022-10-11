@@ -1,19 +1,27 @@
 import React, { FC } from "react";
 import { Button as ButtonBase, ScaleFade } from "@chakra-ui/react";
 
-export type ButtonProps = {
-  size?: "xs" | "sm" | "md" | "lg";
+type ButtonVariant = "Outlined" | "Link" | null;
+type ButtonColor = "Primary" | "Secondary" | null;
+
+// type Button
+// <Button variant="outlined" color="secondary">Hello</Button>
+// <Button variant="outlined" color="primary">Hello</Button>
+// Use the variant prop to change the visual style of the Button. You can set the value to solid, ghost, outline, or link.
+// https://chakra-ui.com/docs/components/button#button-variants
+
+type ButtonProps = {
+  size?: string;
   onClick: (e: React.MouseEvent) => void;
   fullWidth?: boolean;
-  icon?: React.ReactElement;
-  color?: string;
+  icon?: any; // optional 
+  color?: ButtonColor;
   bg?: string;
   loadingText?: string;
   isLoading?: boolean;
   width?: string;
   disabled?: boolean;
-  variant?: string; // add button variants
-  border?: string;
+  variant?: ButtonVariant;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -29,8 +37,9 @@ export const Button: FC<ButtonProps> = ({
   width = "100%",
   variant,
   fullWidth,
-  border,
+  border
 }) => {
+
   return (
     <ScaleFade initialScale={0.1} in={true}>
       <ButtonBase
@@ -44,10 +53,10 @@ export const Button: FC<ButtonProps> = ({
         size={size}
         borderRadius="0.5rem"
         variant={variant}
-        border={border || "none"}
+        border= "border.primary"
         disabled={disabled}
-        bg={bg || "brand.primary"}
-        color={color}
+        bg={color === "Primary" ? "brand.primary" : "brand.secondary" }
+        color={"brand.primaryText"}
         cursor="pointer"
         leftIcon={icon}
         _focus={{
@@ -63,3 +72,32 @@ export const Button: FC<ButtonProps> = ({
     </ScaleFade>
   );
 };
+
+
+// import darken , mode , whiten } from @ chakra - ul / theme - tool
+// export const ButtonStyles = {
+//  // style object for base or default style
+//  baseStyle : { } ,
+//  // styles for different sizes ( " sm " , " md " , " lg " )
+//   sizes : { } ,
+// } ;
+//   // styles for different visual variants ( " outline " , " solid " )
+//   variants : {
+//     primary : ( props ) ⇒ ( {
+//       bg : " primary " ,
+//       color : " white " ,
+//       _hover : {
+//         bg : mode ( darken ( " primary " , 20 ) , whiten ( " primary " , 20 ) ) ( pr
+//         boxShadow : " md " ,
+//       } ,
+//     } ) ,
+//     secondary : ( props ) ⇒ ( {
+//       bg : " secondary " ,
+//       color : " white " ,
+//       _hover : {
+//         bg : mode ( darken ( " secondary " , 20 ) , whiten ( " secondary " , 20 )
+//         boxShadow : " md " ,
+//       } ,
+//     } ) ,
+//   // default values for size and variant
+//   defaultProps : { } ,

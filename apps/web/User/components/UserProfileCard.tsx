@@ -57,16 +57,7 @@ export const UserProfileCard = ({ user }) => {
   const { mutate } = useSWRConfig();
   const [isLoading, setLoading] = useState<boolean>();
   const { data: connection } = useFetch(`/connections/${user?.id}/status`);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const openModal = () => {
-      setIsOpen(true);
-
-  }
-
-  const closeModal = () => {
-      setIsOpen(false);
-  }
+  console.log(user);
 
   const createConnectionRequest = () => {
     // mutate(`http://localhost:5000/api/connections/request`)

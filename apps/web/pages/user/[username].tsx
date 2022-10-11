@@ -16,7 +16,7 @@ export default function UserProfile() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const { data: user, isLoading, isError } = useFetch(`/users/${router.query.username}`);
-
+console.log(user)
   const openModal = () => { }
   const closeModal = () => {
     setIsModalOpen(false);
@@ -26,12 +26,11 @@ export default function UserProfile() {
       {
         isLoading ? <Spinner />: (
           <Flex width="100%" gap={8} height="100%">
-            <Stack alignItems="flex-start" flex="1" height="100vh" bg="brand.white" p="4">
-              <UserProfileCard user={user} />
-            </Stack>
-            <Stack p="4" flex="2">
-              <ProfileSectionsTab user={user} />
-            </Stack>
+            <VStack alignItems="flex-start" width="35%">
+              <UserProfileCard user={user?.data} />
+              <UserBioCard user={user?.data} />
+            </VStack>
+            <ProfileSectionsTab user={user?.data} />
           </Flex>
         )
       }
