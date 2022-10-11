@@ -10,6 +10,7 @@ import {
   Container,
   useMediaQuery,
   Image,
+  useColorMode,
 } from "@chakra-ui/react";
 // import Image from "next/image";
 // import { Button } from "ui";
@@ -98,9 +99,10 @@ const Header = () => {
       align="center"
       gap="2rem"
     >
-      <Heading display="block" color="#240808">
+      <Heading display="block" color="#240808" fontFamily="logo">
         Inspirers
       </Heading>
+      
       <Spacer />
       <Flex gap={8}>
         <Button
@@ -134,6 +136,7 @@ const Header = () => {
       <Heading display="block" color="#240808">
         Inspirers
       </Heading>
+      <Example />
       <Spacer />
       <Flex gap={8}>
         <Button
@@ -167,6 +170,7 @@ const Header = () => {
       <Heading display="block" color="#240808">
         Inspirers
       </Heading>
+      <Example />
       <Spacer />
       <Flex gap={8}>
         <Button
@@ -189,6 +193,16 @@ const Header = () => {
     </Flex>
   );
 };
+function Example() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  return (
+    <header>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
+    </header>
+  );
+}
 
 const BodyImg = () => {
   const [Tablet, Desktop] = useMediaQuery([
@@ -248,7 +262,8 @@ const BodyTxt = (props) => {
               <b>not just a dreamer</b>
             </Heading>
             <Text align="left" maxW={260} color="#240808" mb={4}>
-            Whether you're looking to build a business or grow your career or just live life to the fullest, Inspirers is here to help.
+              Whether you're looking to build a business or grow your career or
+              just live life to the fullest, Inspirers is here to help.
             </Text>
             <Button
               _hover={{ bg: "#bbe192" }}

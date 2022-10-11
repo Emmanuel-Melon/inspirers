@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { JourneyContext, JourneyConsumer, JourneyProvider } from "providers/JourneyProvider";
 import { fetcher } from "../hooks/useSwr";
-
+import "@fontsource/raleway";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const getLayout = Component?.getLayout || ((page) => page);
