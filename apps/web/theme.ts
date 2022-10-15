@@ -3,14 +3,23 @@ import {
   type ThemeConfig,
   theme as chakraTheme,
 } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 
 const config = {
-  initialColorMode: "light",
+  initialColorMode: "system",
   useSystemColorMode: false,
 };
 
 const theme: ThemeConfig = extendTheme({
   config,
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: mode("#FDFDFD", "#160D25")(props),
+        color: mode("#3F300C", "#EBE0F9")(props),
+      },
+    }),
+  },
   colors: {
     brand: {
       primary: "#D1FEB5",
@@ -34,20 +43,16 @@ const theme: ThemeConfig = extendTheme({
       hovered2:
         "linear-gradient(267.15deg, rgba(169, 113, 26, 0.04) -14.36%, rgba(248, 189, 250, 0.3) 25.12%, rgba(0, 157, 174, 0.035) 89.33%)",
     },
-    dark: {
-      primary: "#D1FEB5",
-      // add your custom colors here
-    },
   },
 
   components: {
-    Button: {},
-    Icon: {},
-    Avatar: {
-      sm: {},
-      md: {},
-      lg: {},
-    },
+    // Button: {},
+    // Icon: {},
+    // Avatar: {
+    //   sm: {},
+    //   md: {},
+    //   lg: {},
+    // },
   },
   sizes: {
     // this is global // applies to all components
