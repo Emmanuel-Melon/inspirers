@@ -1,6 +1,6 @@
 import React, { ReactChild } from "react";
 import { useSession, signIn } from "next-auth/react";
-import { Box, Flex, Stack } from "@chakra-ui/react";
+import { Box, Flex, Stack, useColorModeValue } from "@chakra-ui/react";
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import { Sidebar, UnAuthorized } from "ui";
@@ -9,12 +9,13 @@ type LayoutProps = {
   children: ReactChild | ReactChild[];
 };
 
-
 // preserve layout when navigating
 // pre-fetch
 // nesting layout
 export default function Layout({ children }: LayoutProps) {
   const { data: session, status } = useSession();
+  const bgColor = useColorModeValue("black", "white");
+  const textColor = useColorModeValue("white", "black");
 
   if (status === "loading") {
     return (
@@ -37,17 +38,11 @@ export default function Layout({ children }: LayoutProps) {
         </Head>
         <body>
           <Flex height="100%" as="main">
-            <Sidebar session={session}/>
+            <Sidebar session={session} />
             <Stack width="100%">
-              <Box
-              as="section"
-              px="8"
-              height="100%"
-              width="100%"
-              py="4"
-            >
-              {children}
-            </Box>
+              <Box as="section" px="8" height="100%" width="100%" py="4">
+                {children}
+              </Box>
             </Stack>
           </Flex>
         </body>
