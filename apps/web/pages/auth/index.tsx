@@ -5,8 +5,10 @@ import { Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getProviders, useSession } from "next-auth/react";
 
-const Login: NextPage = (props) => {
-  const [mode, setMode] = useState<string>("signup");
+const Login: NextPage & {
+  authPage: boolean;
+} = (props) => {
+  const [mode, setMode] = useState<"login" | "signup">("signup");
   const session = useSession();
   const router = useRouter();
 
@@ -30,7 +32,7 @@ const Login: NextPage = (props) => {
       <AuthForm
         mode={mode}
         toggleMode={toggleMode}
-        providers={props.providers}
+        providers={props?.providers}
       />
     </Flex>
   );

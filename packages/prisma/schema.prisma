@@ -64,12 +64,18 @@ model Field {
 model Goal {
   id           String       @id @default(cuid())
   title        String
-  achieved     Boolean
+  achieved     Boolean      @default(false)
   journeyId    String?
   Journey      Journey?     @relation(fields: [journeyId], references: [id])
-  eta          DateTime
+  eta          DateTime?
   reflectionId String?
   Reflections  Reflection[]
+  completedAt  DateTime?
+  completed    Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  progress     Int          @default(0)
+  userId       Int
 }
 
 model Interest {
@@ -175,6 +181,11 @@ enum UserPermissionRole {
   ADMIN
 }
 
+enum UserRole {
+  Mentor
+  Learner
+}
+
 model User {
   id                    String                  @id @default(cuid())
   name                  String?
@@ -203,6 +214,118 @@ model User {
   ApiKey                ApiKey[]
   Webhook               Webhook[]
   Credential            Credential[]
+  // Role                  UserRole                @default(Learner)
+  Memberships           Membership[]
+}
+
+model WaitlistMember {
+  id         String    @id @default(cuid())
+  email      String    @unique
+  createdAt  DateTime  @default(now())
+  Waitlist   Waitlist? @relation(fields: [waitlistId], references: [id])
+  waitlistId String?
+}
+
+model Waitlist {
+  id        String           @id @default(cuid())
+  createdAt DateTime?        @default(now())
+  members   WaitlistMember[]
+}
+
+enum MembershipRole {
+  MEMBER
+  ADMIN
+  OWNER
+}
+
+model Membership {
+  teamId               Int
+  userId               String
+  accepted             Boolean        @default(false)
+  role                 MembershipRole
+  team                 Team           @relation(fields: [teamId], references: [id])
+  user                 User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  disableImpersonation Boolean        @default(false)
+
+  @@id([userId, teamId])
+}
+
+model Team {
+  id           Int          @id @default(autoincrement())
+  name         String?
+  slug         String?      @unique
+  logo         String?
+  bio          String?
+  hideBranding Boolean      @default(false)
+  members      Membership[]
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+model InvitationKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  isValid   Boolean  @default(true)
+}
+
+enum SharableLinkType {
+  JOURNEY
+  TASK
+  GOAL
+}
+
+enum SharableLinkStatus {
+  ACTIVE
+  EXPIRED
+}
+
+enum SharableLinkPermission {
+  READ
+  EDIT
+  WRITE
+}
+
+model SharableLink {
+  id         String                 @id @default(cuid())
+  key        String                 @unique
+  createdAt  DateTime               @default(now())
+  updatedAt  DateTime               @updatedAt
+  expiresAt  DateTime
+  isValid    Boolean                @default(true)
+  type       SharableLinkType
+  status     SharableLinkStatus
+  permission SharableLinkPermission
+  resourceId String?
+}
+
+// could be renamed to ReferralLink
+model Invitation {
+  id              String           @id @default(cuid())
+  email           String?
+  status          InvitationStatus @default(PENDING)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  expiresAt       DateTime
+  invitationKeyId String?
+  accepted        Boolean          @default(false)
+  acceptedAt      DateTime?
+  keyId           String?
+  url             String?
+}
+
+model InvitationList {
+  id        String    @id @default(cuid())
+  email     String
+  createdAt DateTime? @default(now())
+  invitedBy String?
 }
 
 enum ResourceType {
@@ -241,30 +364,29 @@ model Folder {
 }
 
 model Resource {
-  id          String         @id @default(cuid())
-  Backpack    Backpack?      @relation(fields: [backpackId], references: [id])
-  backpackId  String?
-  title       String
-  type        ResourceType
-  createdAt   DateTime?      @default(now())
-  updatedAt   DateTime?      @default(now())
-  deletedAt   DateTime?      @default(now())
-  Routine     Routine?       @relation(fields: [routineId], references: [id])
-  routineId   String?
-  resourceUrl String?
-  origin      ResourceOrigin @default(External)
-  tags        Tag[]
-  Folder   Folder? @relation(fields: [folderId], references: [id])
-  folderId String?
-  progress    Int?
-  completed   Boolean?       @default(false)
-  completedAt DateTime?
-  due         DateTime?
-  next        DateTime?
-  notes       String?
-  reflectionId String?
+  id             String         @id @default(cuid())
+  Backpack       Backpack?      @relation(fields: [backpackId], references: [id])
+  backpackId     String?
+  title          String
+  type           ResourceType
+  createdAt      DateTime?      @default(now())
+  updatedAt      DateTime?      @default(now())
+  deletedAt      DateTime?      @default(now())
+  Routine        Routine?       @relation(fields: [routineId], references: [id])
+  routineId      String?
+  resourceUrl    String?
+  origin         ResourceOrigin @default(External)
+  tags           Tag[]
+  Folder         Folder?        @relation(fields: [folderId], references: [id])
+  folderId       String?
+  progress       Int?
+  completed      Boolean?       @default(false)
+  completedAt    DateTime?
+  due            DateTime?
+  next           DateTime?
+  notes          String?
+  reflectionId   String?
   completionTime Int?
-  
 }
 
 model Backpack {
@@ -492,7 +614,6 @@ enum TimeUnit {
   MINUTE @map("minute")
 }
 
-// it takes 21 days to build a habit!
 enum PeriodType {
   UNLIMITED @map("unlimited")
   ROLLING   @map("rolling")

@@ -37,16 +37,16 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       refetchOnWindowFocus={true}
       refetchInterval={5 * 60}
     >
-      <ChakraProvider theme={theme} resetCSS>
-        {Component.authPage || Component.publicPage ? (
-          <Component {...pageProps} />
-        ) : (
-          <SWRConfig
-            value={{
-              refreshInterval: 3000,
-              fetcher: (resource, _init) => fetcher(resource)
-            }}
-          >
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (resource, _init) => fetcher(resource)
+        }}
+      >
+        <ChakraProvider theme={theme} resetCSS>
+          {Component.authPage || Component.publicPage ? (
+            <Component {...pageProps} />
+          ) : (
             <JourneyProvider>
               <JourneyConsumer>
                 {
@@ -58,9 +58,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
                 }
               </JourneyConsumer>
             </JourneyProvider>
-          </SWRConfig>
-        )}
-      </ChakraProvider>
+          )}
+        </ChakraProvider>
+      </SWRConfig>
     </SessionProvider>
   );
 }

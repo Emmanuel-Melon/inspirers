@@ -2,13 +2,10 @@ import { FC, useState, useRef, useEffect } from 'react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import {
     Box,
-<<<<<<< Updated upstream
-=======
     Image,
     Img,
     LinkBox,
     LinkOverlay,
->>>>>>> Stashed changes
     Stack,
     Text,
     Flex,
@@ -30,17 +27,11 @@ import {
     IconButton,
     Tag
 } from "@chakra-ui/react";
-<<<<<<< Updated upstream
-import { Card } from "ui";
-import Link from "next/link";
-import { Resource } from "@prisma/client";
-=======
 import { Button, Card, Modal } from "ui";
 import moment from 'moment';
 import Link from "next/link";
 import { Resource } from "@prisma/client";
 import { client } from "utils/client";
->>>>>>> Stashed changes
 
 import {
     FiVideo,
@@ -53,9 +44,6 @@ import {
     FiShare2,
     FiRotateCw
 } from "react-icons/fi";
-<<<<<<< Updated upstream
-
-=======
 import { useFetch } from "../hooks/useSwr";
 import psl from "psl";
 
@@ -66,14 +54,10 @@ import psl from "psl";
 // popover disappears when mouse leaves the popover
 // use a modal?
 
->>>>>>> Stashed changes
 type ResourceCardProps = {
     resource: Resource;
 }
 
-<<<<<<< Updated upstream
-export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
-=======
 // users could upload audio, video.
 export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
     const [isHovering, setIsHovering] = useState(false);
@@ -117,7 +101,6 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
     const openModal = () => setIsModalOpen(true);
   
     const closeModal = () => setIsModalOpen(false);
->>>>>>> Stashed changes
     return (
         <>
                 <LinkBox>
@@ -202,19 +185,11 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
     )
 }
 
-<<<<<<< Updated upstream
-type ListRecentlyAddedProps = {
-    resources: Resource[];
-}
-
-export const ListRecentlyAdded: FC<ListRecentlyAddedProps> = ({ resources }) => {
-=======
 // link resources to routines
 // queue resources in routines
 // queue tasks in routines
 // drag and drop to reorder tasks/resources in routines
 export const ListRecentlyAdded = ({ resources }) => {
->>>>>>> Stashed changes
     const [parent] = useAutoAnimate(/* optional config */)
     return (
         <Stack color="brand.primaryText">

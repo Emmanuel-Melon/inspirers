@@ -14,6 +14,7 @@
     "test": "jest --testTimeout=10000",
     "start:arena": "ts-node ./src/arena.ts",
     "work": "ts-node ./src/start.ts",
+    "work:mail": "ts-node ./src/mail/worker.ts",
     "work:notifications": "ts-node ./src/notifications/worker.ts",
     "work:routines": "ts-node ./src/routines/worker.ts"
   },
@@ -59,6 +60,7 @@
     "querystring": "^0.2.1",
     "redis": "^4.2.0",
     "serverless-http": "^3.0.1",
+    "short-uuid": "^4.2.0",
     "socket.io": "^4.5.1",
     "ts-node": "^10.8.2",
     "uuid": "^8.3.2",

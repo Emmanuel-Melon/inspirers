@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { Input as InputBase, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { FiSearch, FiInfo } from "react-icons/fi";
 
 type InputProps = {
   placeholder?: string;
@@ -10,8 +9,9 @@ type InputProps = {
   name?: string;
   icon?: any;
   label?: string;
-  value?: string;
-  onChange: any;
+  value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autofocus?: boolean;
 };
 
 export const Input: FunctionComponent<InputProps> = (props) => {

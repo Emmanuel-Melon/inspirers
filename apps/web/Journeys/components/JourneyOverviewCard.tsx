@@ -10,18 +10,17 @@ import {
   FiTruck,
   FiEdit,
 } from "react-icons/fi";
-import { UserObject } from "types/User";
+import { User } from "types/User";
 import { useRouter } from "next/router";
 import { JourneyOnboardingSteps } from "../Onboarding/JourneyOnboardingSteps";
 import { client } from "utils/client";
 import { EditJourney } from "../EditJourney";
+import { InviteFriend } from "../../User/InviteFriendModal";
 
-type JourneyOverviewCard = UserObject & {
+type JourneyOverviewCard = User & {
   // rest of the props
-};
-
-const Companion = ({ companion }) => {
-  return <Avatar src={companion.avatar} />;
+  journey: any;
+  user: User;
 };
 
 export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
@@ -97,7 +96,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
                 <Text fontWeight={"700"}>Companions</Text>
               </Flex>
               <Button
-                onClick={inviteFriends}
+                onClick={openModal}
                 variant="outline"
                 bg="#fff"
                 icon={<FiShare2 />}
@@ -127,7 +126,7 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
         </Card>
       </Stack>
       <Modal show={show} close={closeModal}>
-        <EditJourney />
+        <InviteFriend />
       </Modal>
     </>
   );
