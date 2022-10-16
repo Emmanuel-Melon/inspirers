@@ -1,10 +1,6 @@
 require("dotenv").config({ path: "../../.env" });
 
-const withTM = require("next-transpile-modules")([
-  "ui",
-  "@inspirers/prisma"
-]);
-
+const withTM = require("next-transpile-modules")(["ui", "@inspirers/prisma"]);
 
 module.exports = withTM({
   reactStrictMode: false,
@@ -23,5 +19,26 @@ module.exports = withTM({
   },
   images: {
     domains: ["cloudinary.com/", "res.cloudinary.com"],
-  }
+  },
+  i18n: {
+    // These are all the locales you want to support in
+    // your application
+    locales: ["en-US", "ar"],
+    // This is the default locale you want to be used when visiting
+    // a non-locale prefixed path e.g. `/hello`
+    defaultLocale: "en-US",
+    // This is a list of locale domains and the default locale they
+    // should handle (these are only required when setting up domain routing)
+    // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
+    domains: [
+      {
+        domain: "example.com",
+        defaultLocale: "en-US",
+      },
+      {
+        domain: "example.ar",
+        defaultLocale: "ar",
+      }
+    ],
+  },
 });
