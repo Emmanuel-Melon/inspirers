@@ -1771,6 +1771,7 @@
   dependencies:
     "@chakra-ui/form-control" "2.0.11"
 
+
 "@chakra-ui/theme-tools@2.0.12", "@chakra-ui/theme-tools@^2.0.12":
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-2.0.12.tgz#b29d9fb626d35e3b00f532c64f95ea261d8f6997"
@@ -1799,6 +1800,7 @@
     "@chakra-ui/react-use-update-effect" "2.0.4"
     "@chakra-ui/styled-system" "2.3.4"
     "@chakra-ui/theme" "2.1.13"
+
 
 "@chakra-ui/tooltip@2.2.0":
   version "2.2.0"
@@ -10181,6 +10183,11 @@ web-push@^3.5.0:
     jws "^4.0.0"
     minimist "^1.2.5"
     urlsafe-base64 "^1.0.0"
+
+web@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/web/-/web-0.0.2.tgz#d9e227387306db8c4b239f0f4bae7fc14b4c117a"
+  integrity sha512-DDf86rBor7Hn4uRgXbCxcOKyP8aiokvkd648k/xjKUO4hQSLvupfDC3dHCBXQ4lJFxYW62/CEWpSINbSQRr57A==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
