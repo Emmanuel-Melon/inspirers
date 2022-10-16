@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "api": "nodemon src/server.ts",
-    "dev": "concurrently \"yarn api\" \"yarn start:arena\" \"yarn work\"",
+    "dev": "concurrently \"yarn api\"",
     "db-connect": "pscale connect biti dev --port 3309",
     "start": "ts-node ./src/server.ts",
     "clean": "rm -rf ./dist",

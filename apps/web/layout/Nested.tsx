@@ -21,7 +21,7 @@ export default function NestedLayout({ children }: LayoutProps) {
           p="8"
           width="10%"
           height="100%"
-          color="#fff"
+          color="#00f"
           boxShadow="rgba(0, 0, 0, 0.08) 0px 4px 12px"
         >
           <Box as="aside">

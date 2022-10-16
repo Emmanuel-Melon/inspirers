@@ -1,12 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Sen&family=Sen&display=swap");
+
 
 html,
 body {
   padding: 0;
   margin: 0;
-  background: #F8F8F7 !important;
-  background-image: linear-gradient( 174.2deg,  #F8F8F7 7.1%, rgba(240,246,238,1) 67.4% ) !important;
-  font-family: "Sen" !important;
   height: 100%;
 }
 
@@ -20,27 +17,17 @@ a {
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-  color: #fff;
 }
 
 li:hover {
-  color: #ECB390;
 }
 
 /* typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Sen" !important;
-}
 
 a,
 p,
@@ -49,14 +36,14 @@ label {
   margin: 0;
 }
 .image_rotate {
-    animation: rotation 2s infinite linear;
+  animation: rotation 2s infinite linear;
 }
 
 @keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(359deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
