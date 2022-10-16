@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { IconButton as IconButtonBase } from "@chakra-ui/react";
 
 export type IconButtonProps = {
-    children: React.ReactNode;
-    label: string;
-    onClick: () => void;
+    children?: React.ReactNode;
+    label?: string;
+    onClick?: () => void;
     size?: "xs" | "sm" | "md" | "lg";
     color?: string;
 }

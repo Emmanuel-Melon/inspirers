@@ -34,7 +34,7 @@ const theme: ThemeConfig = extendTheme({
       grey: "#f0f0f0",
       danger: "#df4759",
       success: "#5cb85c",
-      primaryText: "#240808",
+      primaryText: "#151F0E",
       secondaryText: "#625555",
       hovered:
         "linear-gradient(267.15deg, #D1FEB5 -14.36%, #F7F8C5 25.12%, #F7E4EF 89.33%)",

@@ -25,6 +25,9 @@ export const createGoal = async (journeyId: string, goal: Goal): Promise<Goal> =
 const MAX_JOURNEYS = 2;
 export const createJourney = async (journey: Journey): Promise<Journey> => {
 
+    // get MAX_JOURNEYS from the user
+    console.log(journey);
+
     const count = await prisma.journey.count({
         where: {
             userId: journey.userId,

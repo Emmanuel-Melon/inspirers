@@ -3,6 +3,7 @@ import { GetStaticProps, GetStaticPropsContext, NextApiRequest } from 'next';
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
+
 export const identityProviderNameMap: { [key in IdentityProvider]: string } = {
   [IdentityProvider.GITHUB]: "Github",
   [IdentityProvider.GOOGLE]: "Google",
@@ -31,3 +32,4 @@ export const redirectUnauthorized = async (context: GetStaticPropsContext) => {
     },
   };
 }
+

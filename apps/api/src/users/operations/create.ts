@@ -1,4 +1,4 @@
-import { Invitation, User } from "@prisma/client";
+import { Invitation, User, WaitlistMember } from "@prisma/client";
 import short from "short-uuid";
 import { v5 as uuidv5 } from "uuid";
 import { host } from "../../config";
@@ -28,6 +28,10 @@ export const generateInvitationLink = async (
   } catch (err) {}
 };
 
-export const joinWaitingList = (user: User) => {
-  
+export const joinWaitingList = (member: WaitlistMember): Promise<WaitlistMember> => {
+  try {
+    return prisma.waitlistMember.create({
+      data: member
+    });
+  } catch(err) {}
 }

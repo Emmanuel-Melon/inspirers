@@ -77,19 +77,6 @@ export const Sidebar = ({ session }) => {
             icon: <FiHome size="1rem" />
         },
         {
-            id: 2,
-            name: "Profile",
-            url: `/user/${session?.user?.id}`,
-            icon: <FiHome size="1rem" />,
-            active: true
-        },
-        {
-            id: 3,
-            name: "Journeys",
-            url: "/journeys",
-            icon: <FiMap size="1rem" />
-        },
-        {
             id: 4,
             name: "Routines",
             url: "/routines",
@@ -106,12 +93,6 @@ export const Sidebar = ({ session }) => {
             name: "Notifications",
             url: "/notifications",
             icon: <FiBell size="1rem" />
-        },
-        {
-            id: 7,
-            name: "Settings",
-            url: "/settings",
-            icon: <FiSettings size="1rem" />
         },
         {
             id: 8,
@@ -140,11 +121,13 @@ export const Sidebar = ({ session }) => {
     return (
         <Stack
             py={8}
-            px={4}
+            px={8}
             height="100vh"
             justifyContent="space-between"
             boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
             width="fit-content"
+            bg="brand.highlight1"
+            alignItems="flex-start"
         >
             <Stack gap={4} alignItems="flex-start">
                 {

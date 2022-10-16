@@ -64,10 +64,10 @@ model Field {
 model Goal {
   id           String       @id @default(cuid())
   title        String
-  achieved     Boolean
+  achieved     Boolean      @default(false)
   journeyId    String?
   Journey      Journey?     @relation(fields: [journeyId], references: [id])
-  eta          DateTime
+  eta          DateTime?
   reflectionId String?
   Reflections  Reflection[]
   completedAt  DateTime?
@@ -215,7 +215,21 @@ model User {
   Webhook               Webhook[]
   Credential            Credential[]
   // Role                  UserRole                @default(Learner)
-  Memberships            Membership[]
+  Memberships           Membership[]
+}
+
+model WaitlistMember {
+  id         String    @id @default(cuid())
+  email      String    @unique
+  createdAt  DateTime  @default(now())
+  Waitlist   Waitlist? @relation(fields: [waitlistId], references: [id])
+  waitlistId String?
+}
+
+model Waitlist {
+  id        String           @id @default(cuid())
+  createdAt DateTime?        @default(now())
+  members   WaitlistMember[]
 }
 
 enum MembershipRole {
@@ -254,12 +268,12 @@ enum InvitationStatus {
 }
 
 model InvitationKey {
-  id         String       @id @default(cuid())
-  key        String       @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  expiresAt  DateTime
-  isValid   Boolean      @default(true)
+  id        String   @id @default(cuid())
+  key       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  isValid   Boolean  @default(true)
 }
 
 enum SharableLinkType {
@@ -280,17 +294,16 @@ enum SharableLinkPermission {
 }
 
 model SharableLink {
-  id         String       @id @default(cuid())
-  key        String       @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  id         String                 @id @default(cuid())
+  key        String                 @unique
+  createdAt  DateTime               @default(now())
+  updatedAt  DateTime               @updatedAt
   expiresAt  DateTime
-  isValid   Boolean      @default(true)
+  isValid    Boolean                @default(true)
   type       SharableLinkType
   status     SharableLinkStatus
   permission SharableLinkPermission
   resourceId String?
-
 }
 
 // could be renamed to ReferralLink
@@ -304,8 +317,8 @@ model Invitation {
   invitationKeyId String?
   accepted        Boolean          @default(false)
   acceptedAt      DateTime?
-  keyId          String?
-  url           String?
+  keyId           String?
+  url             String?
 }
 
 model InvitationList {

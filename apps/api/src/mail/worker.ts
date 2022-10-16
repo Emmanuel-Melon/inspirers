@@ -1,10 +1,9 @@
-/**
- * const SendGrid = require('@sendgrid/mail');
+import { MailService, MailDataRequired } from "@sendgrid/mail";
 import { Queues, withErrorHandling } from "../queue";
 import { sendEmail } from "../lib/sendgrid";
 import { fromEmailAddress } from "../config";
 
-const queue = withErrorHandling<SendGrid.MailDataRequired>(Queues.Mail);
+const queue = withErrorHandling<MailDataRequired>(Queues.Mail);
 
 const message = {
   to: 'test@example.com',
@@ -17,5 +16,3 @@ const message = {
 queue.process(job => {
   return sendEmail(job.data);
 });
-
- */
