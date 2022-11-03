@@ -41,7 +41,7 @@ import {
     useCheckboxGroup,
     useCheckbox
 } from "@chakra-ui/react";
-import { useFetch } from "../hooks/useSwr";
+import { useFetch } from "hooks/useSwr";
 import { useSession } from "next-auth/react";
 
 import {
