@@ -3,6 +3,13 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
+generator zod {
+  provider      = "zod-prisma"
+  output        = "./zod"
+  imports       = "./zod-utils"
+  relationModel = "default"
+}
+
 datasource db {
   provider             = "postgresql"
   url                  = env("DATABASE_URL")
