@@ -13,6 +13,11 @@ import { FiSend, FiCopy, FiFacebook, FiTwitter, FiLinkedin } from "react-icons/f
 import Image from "next/image";
 import { client } from "utils/client";
 import { copyLink } from "utils/ui";
+import {IntlProvider, FormattedMessage, FormattedNumber} from 'react-intl'
+
+const messagesInFrench = {
+  myMessage: "سنخبرك بمجرد أن نكون مستعدين.",
+}
 
 // only show the form if the link is valid
 const Join: NextPage & {
@@ -47,6 +52,7 @@ const Join: NextPage & {
                 {
                     view === "form" ? (
                         <>
+                        <IntlProvider messages={messagesInFrench} locale="ar" defaultLocale="ar">
                             <Heading>We will let you know as soon as we are ready.</Heading>
                             <Input
                                 placeholder="Enter your email"
@@ -65,6 +71,7 @@ const Join: NextPage & {
                                     Send
                                 </Button>
                             </Flex>
+                            </IntlProvider>
                         </>
                     ) : (
                         <Stack gap={8}>
