@@ -4,7 +4,9 @@ import {
   addResource,
   getResources,
   deleteResource,
-  modifyResource
+  modifyResource,
+  addFolder,
+  getFolders
 } from "./controller";
 
 const backpackRouter = Router();
@@ -15,13 +17,43 @@ backpackRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
     .catch(next);
 });
 
+backpackRouter.post("/:backpackId/folders", (req: Request, res: Response, next: NextFunction) => {
+  return Promise.resolve(addFolder(req.body))
+    .then((data) => res.json({ data }))
+    .catch(next);
+});
+
 backpackRouter.get("/:backpackId", (req: Request, res: Response, next: NextFunction) => {
   return Promise.resolve(getResources(req.params.backpackId))
     .then((data) => res.json({ data }))
     .catch(next);
 });
 
-backpackRouter.post("/:backpackId", (req: Request, res: Response, next: NextFunction) => {
+backpackRouter.get("/:backpackId/folders", (req: any, res: Response, next: NextFunction) => {
+  return Promise.resolve(getFolders(req.params.backpackId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+});
+
+backpackRouter.get("/:backpackId/folders/:folderId", (req: Request, res: Response, next: NextFunction) => {
+  return Promise.resolve(getResources(req.params.backpackId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+});
+
+backpackRouter.put("/:backpackId/folders/:folderId", (req: Request, res: Response, next: NextFunction) => {
+  return Promise.resolve(getResources(req.params.backpackId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+});
+
+backpackRouter.delete("/:backpackId/folders/:folderId", (req: Request, res: Response, next: NextFunction) => {
+  return Promise.resolve(getResources(req.params.backpackId))
+    .then((data) => res.json({ data }))
+    .catch(next);
+});
+
+backpackRouter.post("/:backpackId", (req: any, res: Response, next: NextFunction) => {
   return Promise.resolve(addResource(req.params.backpackId, req.body))
     .then((data) => res.json({ data }))
     .catch(next);

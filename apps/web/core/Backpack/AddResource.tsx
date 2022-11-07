@@ -1,78 +1,25 @@
-import React, { useState } from "react";
-import {
-    Flex,
-    Text,
-    Heading,
-    Select,
-    Stack,
-    Tag,
-    Divider
-} from "@chakra-ui/react";
-import toast, { Toaster } from "react-hot-toast";
-
-import { Button, IconButton, Input } from "ui";
-import {
-    FiPlus,
-    FiTrash,
-    FiCheck,
-    FiTag,
-    FiUserPlus,
-    FiLink2,
-    FiClock,
-    FiX,
-    FiLink,
-    FiImage,
-    FiVideo,
-    FiMoreHorizontal,
-    FiEye
-} from "react-icons/fi";
-import { client } from "utils/client";
-import { ResourceType } from "@prisma/client";
+import React, { FC, useState } from "react";
 import { AddResourceForm } from "./AddResourceForm";
 import { UploadView } from "./UploadView";
 import { InviteCompanionView } from "./InviteCompanionView";
 import { ExpandedResourceView } from "./ExpandedResourceView";
-
-
-// clear form fields after submit
-// add loading state
-// add drag and drop for images/videos uploads
-// pick links from the clipboard
-// add tags
-// add a preview of the link
-// 
-
-
-
-
-type AddResourceProps = {}
+import { Backpack } from "@prisma/client";
 
 type AddResourceState = "success" | "error" | "loading" | "empty";
-type AddResourceStateMap = {
-    [key in AddResourceState]: "Hello"
+
+type AddResourceViewMap = {
+    [key in AddResourceView]: any;
 }
+
 type AddResourceView = "form" | "invite" | "video" | "image" | "expanded";
 
-export const AddResource = ({ closeModal }) => {
-    const [title, setTitle] = useState<string>("");
-    const [url, setUrl] = useState<string>("");
-    const [isLoading, setIsLoading] = useState(false);
+type AddResourceProps = {
+    closeModal: () => void;
+    backpack: Backpack;
+}
+
+export const AddResource: FC<AddResourceProps> = ({ backpack, closeModal }) => {
     const [view, setView] = useState<AddResourceView>("form");
-
-    // text overflows when the url is too long
-    const addResource = () => {
-        setIsLoading(true);
-        client.post(`/backpacks/cl8u2b5ci24107gbt0drlynhj`, {
-            title,
-            resourceUrl: url,
-            type: ResourceType.Video
-        })
-            .then((response) => {
-                setIsLoading(false);
-                successToast("Resources Added");
-            }).then(() => closeModal())
-    }
-
     const toggleView = (view: AddResourceView) => {
         setView(view);
     }
@@ -85,13 +32,11 @@ export const AddResource = ({ closeModal }) => {
         }
     }
 
-    const errorToast = (message: string) => toast.error(message);
-    const successToast = (message: string) => toast.success(message);
-
     // it's best to use a context provider to manage the state of the modal
+    
     return (
         <>
-            {view === "form" && <AddResourceForm previousView={previousView} toggleView={toggleView} />}
+            {view === "form" && <AddResourceForm previousView={previousView} toggleView={toggleView} closeModal={closeModal} backpack={backpack} />}
             {view === "invite" && <InviteCompanionView previousView={previousView} toggleView={toggleView} />}
             {view === "image" && <UploadView previousView={previousView} toggleView={toggleView} />}
             {view === "video" && <UploadView previousView={previousView} toggleView={toggleView} />}

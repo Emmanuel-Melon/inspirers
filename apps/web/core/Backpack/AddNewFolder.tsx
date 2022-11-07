@@ -47,19 +47,18 @@ import { Folder, ResourceType } from "@prisma/client";
 // add a preview of the link
 // submit form on enter
 
-export const AddNewFolder = ({ closeModal, toggleView }) => {
+export const AddNewFolder = ({ closeModal, toggleView, backpack }) => {
 
     const [title, setTitle] = useState<string>("");
     const [url, setUrl] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const backpackId = "cl9odbs5g0255vwbtk7wo8osu";
 
     const addResource = (e: SubmitEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        client.post(`/backpacks/${backpackId}/folders`, {
+        client.post(`/backpacks/${backpack?.id}/folders`, {
             title,
-            backpackId: "cl9odbs5g0255vwbtk7wo8osu"
+            backpackId: backpack?.id
         })
             .then((response) => {
                 setIsLoading(false);
@@ -99,7 +98,7 @@ export const AddNewFolder = ({ closeModal, toggleView }) => {
                             bg="brand.highlight1"
                             boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
                         >
-                            Backpack
+                            {backpack?.name || "Backpack"}
                         </Tag>
                         <FiChevronsRight />
                         <Text size="sm">New Folder</Text>

@@ -42,6 +42,7 @@ import {
     useCheckbox
 } from "@chakra-ui/react";
 import { useFetch } from "../hooks/useSwr";
+import { useSession } from "next-auth/react";
 
 import {
     FiPlus,
@@ -76,7 +77,14 @@ const Folder = ({ folder }) => {
 export const LinkFolderModal = ({ routine, ...props }) => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [name, setName] = useState<string>("");
+    // this component needs to access the current backpack!
+
     const { data: folders, isLoading, isError } = useFetch(`/backpacks/cl9odbs5g0255vwbtk7wo8osu/folders`);
+
+    // two options
+    // we can fetch the current user's backpack and then fetch the folders from the session object!
+    const session = useSession();
+    console.log(session);
 
     function openModal() {
         setShowModal(true);
@@ -122,7 +130,7 @@ export const LinkFolderModal = ({ routine, ...props }) => {
                     <Stack px="4" py="2">
                         <CheckboxGroup>
                             {
-                                folders.map((folder) => <Folder folder={folder} />)
+                                folders?.map((folder) => <Folder folder={folder} />)
                             }
                         </CheckboxGroup>
                     </Stack>

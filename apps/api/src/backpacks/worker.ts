@@ -1,44 +1,21 @@
 import { Queues, withErrorHandling } from "../queue";
 import prisma from "@inspirers/prisma";
-import { NotificationTrigger, NotificationChannel } from "@prisma/client";
+import { Backpack } from "@prisma/client";
+import { addBackpack } from "./controller";
 
-const queue = withErrorHandling<any>(Queues.Notification);
-
-const getNotificationTemplate = (job) => {};
+const queue = withErrorHandling<any>(Queues.Backpack);
 
 queue.process(async (job) => {
   // create a notification object
   // get user notification preferences
   // const channels = await prisma.notificationPreferences.findMany({});
-  const receipient = await prisma.user.findUnique({
-    where: {
-      id: job.data.recepientId,
-    },
-  });
+  console.log('check this!')
+  console.log(job);
+  const { userId, id } = job.data;
 
-  console.log(receipient);
-
-  const notificationTemplates = {
-    ConnectionRequest: {
-      message: "Hello!",
-      title: "New Friend Request",
-    },
-  };
-
-  const template = notificationTemplates[job.data.trigger];
-
-  const notification = await prisma.notification.create({
-    data: {
-      ...template,
-      senderId: job.data.requesterId,
-      recepientId: job.data.recepientId,
-      trigger: job.data.trigger,
-      channel: NotificationChannel.InApp,
-      url: `/user/${job.data.requesterId}`,
-      entityId: "",
-    },
-  });
-
-  // dispatch according to channel
-  return notification;
+  return addBackpack({
+    userId,
+    name: "My Backpack",
+    journeyId: id,
+  } as Backpack);
 });

@@ -35,7 +35,7 @@ import { UserCompanions } from "core/User/Companions";
 
 export const InviteCompanionView = ({ previousView, toggleView }) => {
     return (
-        <Stack p="8" gap={2} color="brand.primaryText" width="500px">
+        <Stack p="8" gap={2} color="brand.primaryText">
             <Flex alignItems="center" gap={4}>
                 <IconButton onClick={previousView} label="go back">
                     <FiArrowLeft />

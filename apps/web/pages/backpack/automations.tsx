@@ -13,7 +13,7 @@ import { Button, IconButton, Input, Modal } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 
 import { ListRecentlyAdded } from "../../Backpack/ListRecentlyAdded";
-import { ListCategories } from 'Backpack/ListCategories';
+import { ListFolders } from 'Backpack/ListFolders';
 import { QuickAccess } from 'Backpack/QuickAccess';
 import { LayoutController } from "ui";
 import { AddResource } from "Backpack/AddResource";

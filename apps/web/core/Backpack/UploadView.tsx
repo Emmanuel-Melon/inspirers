@@ -24,7 +24,7 @@ export const UploadView = ({ previousView, toggleView }) => {
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
     return (
-        <Stack p="8" gap={2} color="brand.primaryText" width="500px">
+        <Stack p="8" gap={2} color="brand.primaryText">
             <Flex alignItems="center" gap={4}>
                 <IconButton onClick={previousView}>
                     <FiArrowLeft />
