@@ -1,42 +1,5 @@
 # Inspirers
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2590dcd2-77a9-4b8a-ab9c-c59fa49f9a8a/deploy-status)](https://app.netlify.com/sites/inspirers/deploys)
-Achieve your dreams and inspire others
-
-- Ready to become a legend in your own right? The journey begins here , at Inspirers.
-
-## Table of contents
-
-- [Inspirers](#inspirers)
-  - [Table of contents](#table-of-contents)
-    - [Things to learn](#things-to-learn)
-  - [Frontend Technologies](#frontend-technologies)
-  - [Backend Technologies](#backend-technologies)
-  - [Requirements](#requirements)
-  - [Setup](#setup)
-    - [Database](#database)
-      - [MacOS](#macos)
-      - [Via Docker](#via-docker)
-        - [Pull Docker Image](#pull-docker-image)
-        - [Run Container](#run-container)
-        - [Expose Container](#expose-container)
-  - [Directory Structure](#directory-structure)
-    - [Apps](#apps)
-        - [API](#api)
-        - [DOCS](#docs)
-        - [Web](#web)
-    - [Packages](#packages)
-        - [prisma](#prisma)
-        - [tsconfig](#tsconfig)
-        - [Types](#types)
-        - [UI](#ui)
-    - [Contribution.md](#contributionmd)
-    - [Package.json](#packagejson)
-  - [App capabilities](#app-capabilities)
-
-### Things to learn
-
-1. [Next.js _api_ folder](https://nextjs.org/docs/api-routes/introduction)
 
 ## Frontend Technologies
 
@@ -48,12 +11,8 @@ We use the following tech stack in the frontend part of the project:
 
 ## Backend Technologies
 
-For the backend stack, we use:
-
 - [REST APIs with Express.js](https://www.expressjs.com/): We use Express.js framework which is a back-end framework that runs on node.js to build fast scalable APi's.
 - [Node.js](https://www.nodejs.org/): We use Node.js as our runtime.
-- [MySQL](https://www.mysql.com/): We use MySQL as our database and store all the data used in the app in a MySQL database located on planetscale.
-- [PlanetScale](https://www.planetscale.com): **PlanetScale** is now the most scalable MySQL platform. And is what we use as the host of our MySQL database.
 - [Prisma](https://www.prisma.io/): We use prisma as our ORM.
 
 ## Requirements
