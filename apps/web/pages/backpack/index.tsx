@@ -160,14 +160,10 @@ export default function Backpack() {
                             <StatNumber>56</StatNumber>
                             <StatHelpText>Sep 12 - Sep 28</StatHelpText>
                         </Stat>
-                        <ListRecentlyAdded resources={resources} isLoading={isLoading} view={view} />
                     </Stack>
                 </Flex>
                 
             </Stack>
-            <Modal show={show} close={closeModal}>
-                <AddNewFolder closeModal={closeModal} backpack={backpack} />
-            </Modal>
         </>
     );
 }
