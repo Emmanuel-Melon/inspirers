@@ -9,6 +9,7 @@
     "db-connect": "pscale connect biti dev --port 3309",
     "start": "ts-node ./src/server.ts",
     "clean": "rm -rf ./dist",
+    "build": "tsc --project tsconfig.json",
     "compile": "tsc --project tsconfig.json",
     "socket": "nodemon src/lib/socket.ts",
     "test": "jest --testTimeout=10000",
