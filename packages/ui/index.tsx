@@ -13,3 +13,4 @@ export * from "./LayoutController";
 export * from "./Sidebar";
 export * from "./ViewEmptyState";
 export * from "./IconButton";
+export * from "./ComingSoon";

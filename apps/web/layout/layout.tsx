@@ -3,7 +3,7 @@ import { useSession, signIn } from "next-auth/react";
 import { Box, Flex, Stack, useColorModeValue } from "@chakra-ui/react";
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
-import { Sidebar, UnAuthorized } from "ui";
+import { ComingSoon, Sidebar, UnAuthorized } from "ui";
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -50,5 +50,5 @@ export default function Layout({ children }: LayoutProps) {
     );
   }
 
-  return <UnAuthorized onClick={signIn} />;
+  return <ComingSoon />;
 }
