@@ -50,5 +50,5 @@ export default function Layout({ children }: LayoutProps) {
     );
   }
 
-  return <ComingSoon />;
+  return <Heading>Coming Soon</Heading>;
 }
