@@ -1,41 +1,18 @@
 # CONTRIBUTING
 
-# Project;
+## Frontend Technologies
 
-- Current name: INSPIRERS(Trademark Pending)
-- Kind: FullStack Application(built using next.js)
-- Creator: E-man
-- Contributors: La
-- Executive Supervisor: COCO.
-- Main gitHub branch: (https://github.com/Emmanuel-Melon/inspirers.git)
-- Database: PostgreSQL
+We use the following tech stack in the frontend part of the project:
 
-## Frameworks used in project;
+- [TypeScript](https://www.typescriptlang.org/): We use TypeScript in all our web dev projects in Neno. this helps us to avoid type errors, write readable code, and maintain consistency throughout our codebase.
+- [React](https://reactjs.org/): The most popular JavaScript framework in the world. We majorly use React.js to build projects because it is powerful, fast, and backed by Facebook with a large community. Also, importantly, it is still very in active support and maintained by Facebook.
+- [Next.js](https://nextjs.org/): We use Next.js for server-side rendering. Next.js makes it easy to build an SSR-enabled React.js app with almost zero configuration, yet maintaining the powerful features of React.js and highly performant.
 
-- [Next.js(Entire App)](https://next.js.com/)
+## Backend Technologies
 
-## Languages used;
-
-- Typescript 
-- Javascript 
-
-## Database(SQL database);
-
-PostgreSQL.
-
-## Cloning the project;
-
-Using Terminal
-Go to terminal and insert command into your desired destination.;
-`gh repo clone Emmanuel-Melon/inspirers`
-
-Using Code Editor
-Clone from : `https://github.com/Emmanuel-Melon/inspirers.git`
-
-## Setting up the project;
-
-Make sure you have a code editor installed.(I recommend VS code)
-Make sure you have node.js installed
+- [REST APIs with Express.js](https://www.expressjs.com/): We use Express.js framework which is a back-end framework that runs on node.js to build fast scalable APi's.
+- [Node.js](https://www.nodejs.org/): We use Node.js as our runtime.
+- [Prisma](https://www.prisma.io/): We use prisma as our ORM.
 
 ## Creating a pull request;
 
