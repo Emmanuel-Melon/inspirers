@@ -1,7 +1,8 @@
 import { Queues, withErrorHandling } from "../queue";
 import prisma from "@inspirers/prisma";
 
-const queue = withErrorHandling<any>(Queues.Journey);
+/**
+ * const queue = withErrorHandling<any>(Queues.Journey);
 
 queue.process(async (job) => {
     // const { userId, id } = job.data;
@@ -14,3 +15,5 @@ queue.process(async (job) => {
   // 5. Set as current Journey
   // 6. Set as current Backpack
 });
+
+ */
