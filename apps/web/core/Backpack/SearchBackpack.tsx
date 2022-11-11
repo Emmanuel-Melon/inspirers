@@ -47,7 +47,7 @@ import {
     FiChevronDown,
     FiFilter
 } from "react-icons/fi";
-import { useFetch } from "../../hooks/useSwr";
+import { useFetch } from "../hooks/useSwr";
 import psl from "psl";
 
 
@@ -71,6 +71,7 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
         // run against regex
         const matches = url?.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
         // extract hostname (will be null if no match is found)
+        console.log(matches);
         return matches && matches[0];
     }
 
@@ -83,6 +84,8 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
     };
 
     const url = getHostnameFromRegex(resource.resourceUrl);
+
+    console.log(resource);
 
     // https://www.youtube.com/watch?v=2OY4tE2TrcI
     const icon = `url(${url}/favicon.ico)`;
@@ -117,7 +120,7 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
                     >
-                        <Flex gap={4} alignItems="center" justifyContent="center">
+                        <Flex gap={4} alignItems="flex-start" justifyContent="flex-start">
                             <Box
                                 boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px" color="brand.secondary"
                                 bg="brand.highlight1"
@@ -130,9 +133,24 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
                                 <LinkOverlay href={`${resource.resourceUrl}`} target="_blank">
                                     <Heading size="xs">{resource.title}</Heading>
                                 </LinkOverlay>
+                                <Progress
+                                    value={resource?.progress || 0}
+                                    borderRadius="1rem"
+                                    size="sm"
+                                    colorScheme='green'
+                                />
+                            </Stack>
+                            <Stack>
+                                <Text>Added</Text>
+                                <Text fontSize="xs" color="brand.secondaryText">{moment(resource.createdAt).fromNow()}</Text>
+                            </Stack>
+                            <Stack>
+                                <Text>Type</Text>
+                                <Text fontSize="xs" color="brand.secondaryText">{resource.type}</Text>
                             </Stack>
                             <Stack>
                                 <LinkOverlay href={`${resource.resourceUrl}`} target="_blank">
+                                    <Text size="xs">Topics</Text>
                                 </LinkOverlay>
                                 <Flex gap={2}>
                                     {

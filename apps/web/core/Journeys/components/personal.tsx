@@ -62,10 +62,12 @@ export const PersonalJourney = ({ journey }) => {
         </Card>
         <Card bg="brand.highlight1">
           <Flex justifyContent="space-between" alignItems="center">
-            <Stack>
-              <Heading size="sm">Pack Resources</Heading>
-              <Text color="brand.secondaryText">Hello, World my dear friends!</Text>
-            </Stack>
+            <Flex gap={4}>
+              <Stack>
+                <Heading size="sm">Pack Resources</Heading>
+                <Text color="brand.secondaryText">Hello, World my dear friends!</Text>
+              </Stack>
+            </Flex>
             <IconButton onClick={openModal} label="Some Action">
               <FiArrowRight />
             </IconButton>

@@ -4,38 +4,90 @@ import prisma from "@inspirers/prisma";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import InspirersCustomAdapter from "lib/custom-prisma-adapter";
-import { 
-  facebokClientId,
-  facebokClientSecret,
-  secret 
+import CredentialsProvider from "next-auth/providers/credentials";
+import jwt from 'jsonwebtoken';
+import {
+  facebookClientId,
+  facebookClientSecret,
+  secret,
+  authUrl,
+  githubClientId,
+  githubClientSecret,
+  googleClientId,
+  googleClientSecret,
+  databaseUrl,
+  jwtSecret
 } from "config";
 
-const inspirersAdapter = InspirersCustomAdapter(prisma);
+
+// https://www.youtube.com/watch?v=A5ZN--P9vXM
+// https://morioh.com/p/e6c38e941a60
+// https://www.youtube.com/watch?v=K8L6KVGG-7o
+// https://www.reddit.com/r/nextjs/comments/pm8q9r/nextauth_customer_authentication_how_to_set/
+// https://www.reddit.com/r/nextjs/comments/puoa33/configuring_axios_with_an_access_token_for_every/
+// https://www.reddit.com/r/nextjs/comments/qnm7bj/next_auth_with_bearer_token_in_axios_request/
+// https://arunoda.me/blog/add-auth-support-to-a-next-js-app-with-a-custom-backend
+// accurate example: https://medium.com/vmlyrpoland-tech/nextjs-with-full-stack-authorization-based-on-jwt-and-external-api-e9977f9fdd5e
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "you@inspirers.com",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+        }
+      },
+      async authorize(credentials, req) {
+
+        if(!credentials) {
+          throw new Error("Email and password are required");
+        }
+        const res = await fetch(`${authUrl}/login`, {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" }
+        });
+        const user = await res.json();
+        // If no error and we have user data, return it
+        if (res.ok && user) {
+          return user;
+        }
+        // Return null if user data could not be retrieved
+        return null;
+      }
+    }),
     FacebookProvider({
-      clientId: facebokClientId,
-      clientSecret: facebokClientSecret,
+      clientId: facebookClientId,
+      clientSecret: facebookClientSecret,
     }),
     GithubProvider({
-      clientId: process.env.GITHUB_ID || "",
-      clientSecret: process.env.GITHUB_SECRET || "",
+      clientId: githubClientId,
+      clientSecret: githubClientSecret,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
     })
   ],
-  database: process.env.DATABASE_URL,
-  secret,
+  database: databaseUrl,
+  secret, // setting session to jwt makes user data unavailable in the client
+  session: {
+    strategy: "jwt",
+  },
+  jwt:{
+
+  },
   pages: {
-    signIn: "/auth", // Displays signin buttons
-    // signOut: "/auth/signout", // Displays form with sign out button
-    error: "/auth/error", // Error code passed in query string as ?error=
-    // verifyRequest: "/auth/verify-request", // Used for check email page
-    newUser: "/auth/new", // If set, new users will be directed here on first sign in
+    signIn: "/auth",
+    error: "/auth/error",
+    newUser: "/auth/new",
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
@@ -47,35 +99,32 @@ export const authOptions = {
       };
     },
     async session({ session, user, token }) {
-      // console.log(user);
-      return {
-        session,
-        user,
-      };
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      session.jwt = token.jwt;
+      return session;
     },
-    // async redirect(url: string, baseUrl: string) { },
-    // async session(session, token) {
-    // const encodedToken = jwt.sign(token, process.env.SECRET, { algorithm: 'HS256'});
-    // session.id = token.id;
-    //session.token = encodedToken;
-    // return Promise.resolve(session);
-    // }
-    /**
-     * ,
-     */
-     async jwt({ token, user, account, profile, isNewUser }) { 
-      console.log('got data!');
+    async jwt({ token, user, account, profile, isNewUser }) {
+      // merge accounts!
+      if (account) {
+        if(account.provider === 'google'){
+          const tokenData = {id : profile.id, googleToken: account.id_token || null };
+          const jwtToken = await jwt.sign(JSON.stringify(tokenData), jwtSecret);
+          token.jwt = jwtToken;
+        } else if(account.provider === 'gitub') {
+          // do gitub stuff
+          console.log("github stuff");
+        }
+        token.accessToken = account.access_token;
+        token.id = profile.id
+        
 
-      /**
-       *       const isUserSignedIn = user ? true : false;
-      // make a http call to our graphql api
-      // store this in postgres
-      if(isUserSignedIn) {
-        token.id = user.id.toString();
       }
-       */
+      if (user) {
+        token.accessToken = user.token;
+      }
       return token;
-    }
+    },
   },
   debug: true,
 };

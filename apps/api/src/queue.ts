@@ -11,7 +11,10 @@ export enum Queues {
   PushNotifications = "PushNotifications",
   Event = "Event",
   Notification = "Notification",
-  Routine = "Routine"
+  Routine = "Routine",
+  Backpack = "Backpack",
+  Journey = "Journey"
+  
 }
 
 export function withErrorHandling<T>(

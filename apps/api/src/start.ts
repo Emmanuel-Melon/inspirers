@@ -13,6 +13,14 @@ concurrently(
     {
       command: "yarn run work:routines",
       name: "routine"
+    },
+    {
+      command: "yarn run work:backpacks",
+      name: "backpack"
+    },
+    {
+      command: "yarn run work:journeys",
+      name: "journey"
     }
   ],
   {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Stack,
   Text,
@@ -9,8 +9,6 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
-  StatArrow,
-  StatGroup,
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../core/Routines/ListRoutines";
@@ -21,22 +19,17 @@ import { AddRoutine } from "../../core/Routines/AddRoutine";
 import { Card, Modal, IconButton, LayoutController } from "ui";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, ServerResponse } from "next";
+import { JourneyContext } from "providers/JourneyProvider";
 import {
-  FiBarChart2,
-  FiFilter,
   FiList,
   FiSettings,
-  FiArrowDown,
-  FiPlus,
-  FiLayout,
   FiCalendar,
-  FiLayers,
   FiGrid,
 } from "react-icons/fi";
+import { useSession } from "next-auth/react";
 
 // infer SSR Props!
-
 const layouts = [
   {
     id: 1,
@@ -58,18 +51,25 @@ const layouts = [
   }
 ];
 
-// add a small feature called challenges?
-// quests/
-// autogenerate routines
-// autogenerate resources
-// autogenerate goals                                                                                 
+// try this layout for Routines: https://britetodo.com/?ref=roastortoast
 export default function Routines(props) {
   const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [view, setView] = useState("list");
 
-  const openModal = () => setIsOpen(true);
+  const openModal = () => setIsModalOpen(true);
 
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => setIsModalOpen(false);
+
+  const changeView = (view: string): void => {
+    setView(view);
+  };
+
+  const context = useContext(JourneyContext);
+  const {data: session} = useSession();
+
+  console.log(session);
+
 
   return (
     <>
@@ -79,7 +79,11 @@ export default function Routines(props) {
             <Heading size="md">Routines</Heading>
             <Text>The key to managing your time is performing the right habits everyday. These habits will improve your life and help you optimize it to reach your goals.</Text>
           </Stack>
+          <Flex>
+            <Button onClick={openModal}>New Routine</Button>
+          </Flex>
         </Flex>
+        <LayoutController layouts={layouts} changeView={changeView} />
         <ListRoutines routines={routines?.data} isLoading={isLoading} isError={isError} />
         <Flex justifyContent="space-between" gap={4}>
           <Box flex="2">
@@ -90,7 +94,7 @@ export default function Routines(props) {
               <Stack gap={2}>
                 <Flex justifyContent="space-between" alignItems="center">
                   <Heading size="xs">Mid-Day Routine</Heading>
-                  <IconButton label={""} onClick={function (): void {} } color="brand.secondary">
+                  <IconButton label={""} onClick={function (): void { }} color="brand.secondary">
                     <FiSettings />
                   </IconButton>
                 </Flex>
@@ -129,6 +133,9 @@ export default function Routines(props) {
           </Stack>
         </Flex>
       </Stack>
+      <Modal show={isModalOpen} close={closeModal}>
+        <AddRoutine cancel={closeModal} />
+      </Modal>
     </>
   );
 }
@@ -136,20 +143,11 @@ export default function Routines(props) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req, res, query } = context;
   const session = await unstable_getServerSession(req, res, authOptions);
-  const { createdAt, ...user } = session?.user;
 
-  if (!session?.user?.id) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
-
+  console.log(session);
   return {
     props: {
-      user
+      user: {}
     },
   };
 }

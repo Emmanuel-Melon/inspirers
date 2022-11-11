@@ -14,3 +14,4 @@ export * from "./Sidebar";
 export * from "./ViewEmptyState";
 export * from "./IconButton";
 export * from "./ComingSoon";
+export * from "./Tab";

@@ -12,6 +12,7 @@ import {
   deleteBlueprint,
   deleteJourney,
 } from "./controller";
+import { pushIntoBacpack, pushIntoJourney } from "../enqueue";
 
 import { createGoal, createJourney } from "./operations/create";
 import { listGoals } from "./operations/list";
@@ -122,6 +123,10 @@ journeyRouter.put(
 
 journeyRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
   return Promise.resolve(createJourney(req.body))
+  .then((data) => {
+    Promise.all([pushIntoJourney(data), pushIntoBacpack(data)]);
+    return data;
+  })
     .then((data) => res.json({ data }))
     .catch(next);
 });
@@ -130,6 +135,10 @@ journeyRouter.post(
   "/blueprint",
   (req: Request<any, any, IdInObject>, res: Response, next: NextFunction) => {
     return Promise.resolve(addBlueprint(req.body))
+    .then((data) => {
+      Promise.all([pushIntoJourney(data), pushIntoBacpack(data)]);
+      return data;
+    })
       .then((data) => res.json({ data }))
       .catch(next);
   }

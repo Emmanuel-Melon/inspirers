@@ -10,7 +10,7 @@ import { identityProviderNameMap } from "utils/auth";
 /** @return { import("next-auth/adapters").Adapter } */
 export default function InspirersCustomAdapter(prismaClient: PrismaClient) {
   return {
-    createUser: async (data: Prisma.UserCreateInput) => {
+    signup: async (data: Prisma.UserCreateInput) => {
       const user = await prismaClient.user.create({ data });
       return user;
     },

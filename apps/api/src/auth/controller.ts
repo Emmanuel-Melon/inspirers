@@ -1,14 +1,19 @@
 import prisma from "@inspirers/prisma";
-import { User } from "types/User";
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
 import { secret } from "../config";
 import { AuthenticationError } from "../utils/errors";
+import {
+  createJWT,
+  generateSalt,
+  hashPassword,
+  comparePasswords,
+  ErrorCode,
+} from "@inspirers/lib/auth";
+import { User } from "@prisma/client";
 
-export const createUser = async (user) => {
-  const salt = bcrypt.genSaltSync();
+export const signup = async (user: User) => {
+  const salt = generateSalt();
 
-  const userExists = prisma.user.findUnique({
+  const userExists = await prisma.user.findUnique({
     where: { email: user.email },
   });
 
@@ -16,19 +21,11 @@ export const createUser = async (user) => {
     const newEntry = await prisma.user.create({
       data: {
         ...user,
-        password: bcrypt.hashSync(user.password, salt),
+        password: await hashPassword(user.password, salt),
       },
     });
 
-    const token = jwt.sign(
-      {
-        email: user.email,
-        id: user.id,
-        time: Date.now(),
-      },
-      "hello",
-      { expiresIn: "8h" }
-    );
+    const token = createJWT(userExists, secret);
 
     return {
       ...newEntry,
@@ -37,42 +34,42 @@ export const createUser = async (user) => {
   }
 
   if (userExists && (await userExists).password === null) {
-    // create password
+    return prisma.user.update({
+      where: { email: user.email },
+      data: {
+        password: await hashPassword(user.password, salt),
+      },
+    });
   }
 
   return userExists;
 };
 
-export interface Credentials {
-  email: string;
-  password: string;
-}
-
-export const loginUser = async (credentials: Credentials) => {
+export const login = async (
+  credentials: Pick<User, "email" | "password">
+) => {
   try {
-    return prisma.user
-    .findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: credentials.email },
-    })
-    .then((user) => {
-      console.log(user);
-
-      if (!user) {
-        return Promise.reject("Damn");
-      }
-      return bcrypt
-        .compare(credentials.password, user.password)
-        .then((isValidPassword) => {
-          if (!isValidPassword) {
-            return Promise.reject(
-              new AuthenticationError("Invalid username or password")
-            );
-          }
-
-          return Promise.resolve(jwt.sign(user, secret));
-        });
     });
-  } catch (err) {
 
-  }
+    if (!user) {
+      throw new Error(ErrorCode.UserNotFound);
+    }
+
+    if(user && user.password === null) {
+      throw new Error(ErrorCode.UserMissingPassword);
+    }
+    const isValidPassword = await comparePasswords(
+      credentials.password,
+      user.password
+    );
+
+    if (!isValidPassword) {
+      return Promise.reject(
+        new AuthenticationError(ErrorCode.IncorrectPassword)
+      );
+    }
+    return Promise.resolve(createJWT(user, secret));
+  } catch (err) {}
 };

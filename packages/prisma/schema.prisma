@@ -82,7 +82,7 @@ model Goal {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   progress     Int          @default(0)
-  userId       Int
+  userId       String
 }
 
 model Interest {
@@ -92,23 +92,28 @@ model Interest {
 }
 
 model Journey {
-  id          String     @id @default(cuid())
-  title       String?
-  description String?
-  userId      String
-  bluePrintId String?
-  journeyType String?
-  fieldId     String?
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  interests   Interest[]
-  goals       Goal[]
-  tasks       Task[]
-  active      Boolean    @default(false)
-  completed   Boolean    @default(false)
-  completedAt DateTime?
-  createdAt   DateTime?  @default(now())
-  updatedAt   DateTime?  @default(now())
-  deletedAt   DateTime?  @default(now())
+  id           String       @id @default(cuid())
+  title        String?
+  description  String?
+  userId       String
+  bluePrintId  String?
+  journeyType  String?
+  fieldId      String?
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  active       Boolean      @default(false)
+  completed    Boolean      @default(false)
+  completedAt  DateTime?
+  createdAt    DateTime?    @default(now())
+  updatedAt    DateTime?    @default(now())
+  deletedAt    DateTime?    @default(now())
+  backpacks    Backpack[]
+  routines     Routine[]
+  reflections  Reflection[]
+  interests    Interest[]
+  goals        Goal[]
+  tasks        Task[]
+  tags         Tag[]
+  applications App[]
 }
 
 model JourneyBluePrint {
@@ -215,6 +220,8 @@ model User {
   NotificationRecepient NotificationRecepient[]
   timeZone              String                  @default("Europe/London")
   weekStart             String                  @default("Sunday")
+  dayStart              String?                 @default("08:00")
+  dayEnd                String?                 @default("17:00")
   completedOnboarding   Boolean                 @default(false)
   timeFormat            Int?                    @default(12)
   Schedule              Schedule[]
@@ -359,15 +366,30 @@ model Tag {
   deletedAt  DateTime? @default(now())
   Resource   Resource? @relation(fields: [resourceId], references: [id])
   resourceId String?
+  color      String?   @default("#000000")
+  Journey    Journey?  @relation(fields: [journeyId], references: [id])
+  journeyId  String?
+}
+
+enum FoldrPrivacy {
+  Private
+  Public
 }
 
 model Folder {
-  id        String     @id @default(cuid())
-  title     String
-  createdAt DateTime?  @default(now())
-  updatedAt DateTime?  @default(now())
-  deletedAt DateTime?  @default(now())
-  Resources Resource[]
+  id            String        @id @default(cuid())
+  title         String
+  createdAt     DateTime?     @default(now())
+  updatedAt     DateTime?     @default(now())
+  deletedAt     DateTime?     @default(now())
+  Resources     Resource[]
+  backpackId    String?
+  Backpack      Backpack?     @relation(fields: [backpackId], references: [id])
+  description   String?
+  resourceLimit Int           @default(1000)
+  privacy       FoldrPrivacy? @default(Private)
+  Routine       Routine?      @relation(fields: [routineId], references: [id])
+  routineId     String?
 }
 
 model Resource {
@@ -397,14 +419,60 @@ model Resource {
 }
 
 model Backpack {
-  id          String     @id @default(cuid())
+  id          String       @id @default(cuid())
   description String?
+  name        String?
   userId      String
   journeyId   String
   resources   Resource[]
-  createdAt   DateTime?  @default(now())
-  updatedAt   DateTime?  @default(now())
-  deletedAt   DateTime?  @default(now())
+  createdAt   DateTime?    @default(now())
+  updatedAt   DateTime?    @default(now())
+  deletedAt   DateTime?    @default(now())
+  folders     Folder[]
+  maxFolders  Int          @default(10)
+  Automation  Automation[]
+  Journey     Journey      @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+}
+
+enum AutomationTrigger {
+  CREATION
+  DELETION
+  MOVEMENT
+  COMPLETION
+  SCHEDULED
+  EXPIRY
+}
+
+enum AutomationPeriod {
+  ONCE
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+model AutomationRule {
+  id      String            @id @default(cuid())
+  trigger AutomationTrigger
+  period  AutomationPeriod
+}
+
+model AutomationAction {
+  id     String  @id @default(cuid())
+  data   String
+  ruleId String?
+}
+
+model Automation {
+  id         String    @id @default(cuid())
+  title      String
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now())
+  deletedAt  DateTime? @default(now())
+  userId     String
+  journeyId  String
+  backpackId String?
+  Backpack   Backpack? @relation(fields: [backpackId], references: [id])
 }
 
 model VerificationToken {
@@ -453,6 +521,8 @@ model Reflection {
   thoughts    String
   Goal        Goal?                  @relation(fields: [goalId], references: [id])
   goalId      String?
+  Journey     Journey?               @relation(fields: [journeyId], references: [id])
+  journeyId   String?
 }
 
 enum ConnectionStatus {
@@ -651,7 +721,6 @@ model Routine {
   duration          String?
   description       String?
   reminders         Boolean         @default(true)
-  // ongoing        Boolean         @default(false)
   privacy           RoutinePrivacy?
   source            RoutineSource?
   periodStartDate   DateTime?
@@ -664,6 +733,10 @@ model Routine {
   items             RoutineItem[]
   resources         Resource[]
   startingDate      DateTime?
+  linkedFolderId    String?
+  position          Int             @default(0)
+  folders           Folder[]
+  Journey           Journey?        @relation(fields: [journeyId], references: [id])
 }
 
 model Schedule {
@@ -741,4 +814,6 @@ model App {
   credentials Credential[]
   Webhook     Webhook[]
   ApiKey      ApiKey[]
+  Journey     Journey?        @relation(fields: [journeyId], references: [id])
+  journeyId   String?
 }

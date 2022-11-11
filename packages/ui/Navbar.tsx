@@ -1,4 +1,18 @@
-import { Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import {
+    Stack,
+    Flex,
+    Heading,
+    Stat,
+    StatLabel,
+    StatNumber,
+    StatHelpText,
+    Text,
+    InputGroup,
+    InputLeftAddon,
+    InputRightAddon,
+    Kbd
+} from "@chakra-ui/react";
 import { Input } from "./Input";
 
 export const Navbar = () => {
@@ -11,7 +25,6 @@ export const Navbar = () => {
       width="100%"
       px="8"
       gap={8}
-      my="4"
       justifyContent="space-between"
     >
       <Flex>

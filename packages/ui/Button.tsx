@@ -12,32 +12,34 @@ type ButtonColor = "Primary" | "Secondary" | null;
 
 type ButtonProps = {
   size?: string;
-  onClick: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent) => void;
   fullWidth?: boolean;
   icon?: any; // optional 
-  color?: ButtonColor;
+  color?: ButtonColor | string;
   bg?: string;
   loadingText?: string;
   isLoading?: boolean;
   width?: string;
   disabled?: boolean;
   variant?: ButtonVariant;
+  type?: "button" | "submit" | "reset" | undefined;
 };
 
 export const Button: FC<ButtonProps> = ({
   children,
   onClick,
   icon,
-  bg,
+  bg = "brand.primary",
   color = "brand.primaryText",
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "md",
+  size = "sm",
   width = "100%",
   variant,
   fullWidth,
-  border
+  border = "solid 0.10rem #eee",
+  type = "button"
 }) => {
 
   return (
@@ -55,7 +57,7 @@ export const Button: FC<ButtonProps> = ({
         variant={variant}
         disabled={disabled}
         bg={bg}
-        color={"brand.primaryText"}
+        color={color}
         cursor="pointer"
         leftIcon={icon}
         _focus={{
@@ -65,6 +67,7 @@ export const Button: FC<ButtonProps> = ({
         _hover={{
           bg: "brand.hovered"
         }}
+        type="type"
       >
         {children}
       </ButtonBase>

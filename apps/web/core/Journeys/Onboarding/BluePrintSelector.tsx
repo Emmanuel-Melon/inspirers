@@ -8,7 +8,7 @@ import {
   useRadioGroup,
   Box
 } from "@chakra-ui/react";
-import { RadioCard } from "ui/RadioCard";
+import { Card, RadioCard } from "ui";
 import { useState } from "react";
 import { FiCopy, FiMap } from "react-icons/fi";
 
@@ -21,12 +21,13 @@ type SelectorCardProps = {
 
 const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
   return (
-    <Flex gap={4} alignItems="center">
+    <Stack>
       <Box
         bg="brand.highlight1"
         p="4"
         borderRadius="1rem"
         color="brand.secondaryText"
+        width="fit-content"
       >
         {value === "Blank" ? <FiMap /> : <FiCopy />}
       </Box>
@@ -46,9 +47,9 @@ const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
             </Box> : null
           }
         </Text>
-        <Text textAlign="center">{description}</Text>
+        <Text>{description}</Text>
       </Stack>
-    </Flex>
+    </Stack>
   );
 };
 
@@ -92,7 +93,7 @@ export const BluePrintSelector: FC<BluePrintSelectorProps> = ({
         Start a new journey
       </Heading>
       <Text color="brand.secondaryText">
-        We'll streamline your setup experience accordingly.
+        We will streamline your setup experience accordingly.
       </Text>
       <Flex gap={2} color="brand.primaryText">
         <RadioGroup>
@@ -103,15 +104,17 @@ export const BluePrintSelector: FC<BluePrintSelectorProps> = ({
                 <RadioCard
                   key={value.value}
                   {...radio}
-                  
+                  border="solid 0.15rem"
+                  borderColor="brand.white"
                   checked={{
+                    border: "solid 0.15rem",
                     borderColor: "brand.primary",
-                    borderRadius: "1rem",
                   }}
                   hover={{
+                    border: "solid 0.15rem",
                     borderColor: "brand.secondary",
-                    borderRadius: "1rem",
                   }}
+
                 >
                   <SelectorCard {...radio} />
                 </RadioCard>

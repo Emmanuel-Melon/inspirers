@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import React, { cloneElement, useRef } from "react";
-import { useDrop, XYCoord } from "react-dnd";
+// import { useDrop, XYCoord } from "react-dnd";
 
 export const DropWrapper = ({
   onDrop,
@@ -9,7 +9,8 @@ export const DropWrapper = ({
   index,
   moveItem,
 }: any) => {
-  const ref: any = useRef(null);
+  /**
+   * const ref: any = useRef(null);
   const [{ isOver }, drop] = useDrop({
     accept: type,
     hover(item: any, monitor) {
@@ -48,5 +49,11 @@ export const DropWrapper = ({
     },
   });
 
-  return <Flex ref={drop}>{cloneElement(children, { isOver })}</Flex>;
+  {cloneElement(children, { isOver })}
+  ref={drop}
+   */
+
+  return <Flex >
+    hey
+  </Flex>;
 };

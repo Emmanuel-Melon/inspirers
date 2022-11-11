@@ -11,6 +11,7 @@ export const createRoutine = (
   res: Response,
   next: NextFunction
 ) => {
+
   return Promise.resolve(create({ ...req.body }))
     .then((data) => res.json({ data }))
     .catch(next);
@@ -57,7 +58,7 @@ export const updateRoutine = (
   };
 
 export const listRoutines = (
-  req: Request,
+  req: any,
   res: Response,
   next: NextFunction
 ) => {

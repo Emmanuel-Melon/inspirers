@@ -42,7 +42,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      width: "fit-content",
+      width: "50%",
       padding: 0,
       borderRadius: "1rem",
       border: "none",
@@ -50,7 +50,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
       boxShadow: "rgba(0, 0, 0, 0.08) 0px 4px 12px",
     },
     overlay: {
-      background: "rgba(187, 100, 100, 0.4)",
+      background: "rgba(0, 0, 0, 0.08)",
     },
   };
   return (

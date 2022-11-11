@@ -1,9 +1,18 @@
 import prisma from "@inspirers/prisma";
+import { Backpack, Folder } from "@prisma/client";
 
-export const addBackpack = (backpack) => {
+export const addBackpack = (backpack: Backpack): Promise<Backpack> => {
   try {
     return prisma.backpack.create({
       data: backpack,
+    });
+  } catch (err) {}
+};
+
+export const addFolder = (folder: Folder): Promise<Folder> => {
+  try {
+    return prisma.folder.create({
+      data: folder,
     });
   } catch (err) {}
 };
@@ -52,6 +61,21 @@ export const getResources = (backpackId) => {
       where: {
         backpackId,
       },
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ],
+      include: {
+        tags: true,
+      }
+    });
+  } catch (err) {}
+};
+
+export const getFolders = (backpackId: string) => {
+  try {
+    return prisma.folder.findMany({
       orderBy: [
         {
           createdAt: "desc",

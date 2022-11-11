@@ -39,7 +39,7 @@ const categories = [
     }
 ]
 
-export const Category = ({ category }) => {
+export const Folder = ({ folder }) => {
     return (
         <LinkBox>
             <Card>
@@ -56,10 +56,10 @@ export const Category = ({ category }) => {
                             <FiFolder />
                         </Box>
                     </Flex>
-                    <LinkOverlay href={`/backpack/${category.title.toLowerCase()}`}>
+                    <LinkOverlay href={`/backpack/${folder.title.toLowerCase()}`}>
                         <Stack>
-                            <Heading size="sm">{category.title}</Heading>
-                            <Text color='brand.secondaryText'>{category.text}</Text>
+                            <Heading size="sm">{folder.title}</Heading>
+                            <Text color='brand.secondaryText'>{folder.text}</Text>
                         </Stack>
                     </LinkOverlay>
                 </Flex>
@@ -69,7 +69,7 @@ export const Category = ({ category }) => {
     )
 }
 
-export const ListCategories = () => {
+export const ListFolders = () => {
     const addCategory = () => {
 
     }
@@ -87,7 +87,7 @@ export const ListCategories = () => {
                 </Flex>
             </Flex>
             <Flex gap={4}>
-                {categories.map(category => <Category key={category.id} category={category} />)}
+                {categories.map(folder => <Folder key={folder.id} folder={folder} />)}
             </Flex>
         </Stack>
     );
