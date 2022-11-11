@@ -6,11 +6,11 @@ import {
 import { Button, Spinner } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { FiCheckCircle } from "react-icons/fi";
-import { ListNotifications } from "core/Notifications/ListNotifications";
+import { ListNotifications } from "../../core/Notifications/ListNotifications";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-export default function Notifications(props) {
+export default function Notifications() {
   const { data: notifications, isLoading, isError } = useFetch(`/notifications/${props.user?.id}`);
   const markAllAsRead = () => {}
   return (

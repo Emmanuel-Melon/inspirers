@@ -19,7 +19,7 @@ import { AddRoutine } from "../../core/Routines/AddRoutine";
 import { Card, Modal, IconButton, LayoutController } from "ui";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { GetServerSidePropsContext, ServerResponse } from "next";
+import { GetServerSidePropsContext } from "next";
 import { JourneyContext } from "providers/JourneyProvider";
 import {
   FiList,
@@ -52,7 +52,7 @@ const layouts = [
 ];
 
 // try this layout for Routines: https://britetodo.com/?ref=roastortoast
-export default function Routines(props) {
+export default function Routines() {
   const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [view, setView] = useState("list");

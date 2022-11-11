@@ -19,13 +19,13 @@ import { Button, Card, CustomCheckbox, Modal } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiSettings, FiCalendar, FiShare2, FiPlus, FiMoreHorizontal } from "react-icons/fi";
-import { RoutineStats } from "core/Routines/RoutineStats";
+import { RoutineStats } from "../../core/Routines/RoutineStats";
 import { RoutineObjectives } from "core/Routines/RoutineObjectives";
 import { RoutineResources } from "core/Routines/RoutineResources";
 import { RoutineTasks } from "core/Routines/RoutineTasks";
 import { ManageRoutine } from "core/Routines/ManageRoutine";
 import { LayoutController } from "ui";
-import { LinkFolderModal } from "Backpack/LinkFolder";
+import { LinkFolderModal } from "../../core/Backpack/LinkFolder";
 
 
 export default function Routine() {

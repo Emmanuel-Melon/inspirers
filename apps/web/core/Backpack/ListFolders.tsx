@@ -10,7 +10,7 @@ import {
     LinkOverlay
 } from "@chakra-ui/react";
 import { Card, IconButton, EmptyState } from "ui";
-import { useFetch } from "../hooks/useSwr";
+import { useFetch } from "hooks/useSwr";
 import { RiFolder5Line } from "react-icons/ri";
 import {
     FiMoreHorizontal,
