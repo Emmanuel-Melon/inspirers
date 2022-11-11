@@ -16,7 +16,8 @@
     "work": "ts-node ./src/start.ts",
     "work:mail": "ts-node ./src/mail/worker.ts",
     "work:notifications": "ts-node ./src/notifications/worker.ts",
-    "work:routines": "ts-node ./src/routines/worker.ts"
+    "work:routines": "ts-node ./src/routines/worker.ts",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
