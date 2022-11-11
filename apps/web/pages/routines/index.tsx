@@ -68,9 +68,6 @@ export default function Routines(props) {
   const context = useContext(JourneyContext);
   const {data: session} = useSession();
 
-  console.log(session);
-
-
   return (
     <>
       <Stack color="brand.primaryText" gap={4} >
@@ -144,10 +141,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req, res, query } = context;
   const session = await unstable_getServerSession(req, res, authOptions);
 
-  console.log(session);
   return {
     props: {
-      user: {}
+      user: {
+        ...session?.user,
+      }
     },
   };
 }

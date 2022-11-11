@@ -1,4 +1,0 @@
-runtime: nodejs16
-env_variables:
-  DATABASE_URL: "mysql://5e6qo78utssk:pscale_pw_qHorpDf2rUI1_4rfXqri1i3AtedmjlYfLXfb-Rz2yPE@awfgvbowqavy.us-east-1.psdb.cloud/biti?"
-service: "api"
