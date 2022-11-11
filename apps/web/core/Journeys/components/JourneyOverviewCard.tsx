@@ -59,7 +59,6 @@ export const JourneyOverviewCard: FC<JourneyOverviewCard> = ({
         alert("failed to delete");
       });
   };
-
   return (
     <>
       <Stack>
