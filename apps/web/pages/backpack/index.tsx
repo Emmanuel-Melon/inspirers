@@ -17,20 +17,7 @@ import { Button, IconButton, Input, Modal } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyContext } from "providers/JourneyProvider";
 
-<<<<<<< HEAD
-import { ListRecentlyAdded } from "../../core/Backpack/ListRecentlyAdded";
-import { ListCategories } from 'core/Backpack/ListCategories';
-import { QuickAccess } from 'core/Backpack/QuickAccess';
-import { LayoutController } from "ui";
-import { AddResource } from "core/Backpack/AddResource";
-=======
-import { ListRecentlyAdded } from "../../Backpack/ListRecentlyAdded";
-import { ListFolders } from 'Backpack/ListFolders';
-import { QuickAccess } from 'Backpack/QuickAccess';
-import { LayoutController } from "ui";
-import { AddResource } from "Backpack/AddResource";
-import { AddNewFolder } from "Backpack/AddNewFolder";
->>>>>>> bf10eaf (feat: add folders and resources)
+
 import {
     FiBarChart2,
     FiFilter,
