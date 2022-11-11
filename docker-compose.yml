@@ -25,7 +25,7 @@ services:
     container_name: docs
     build:
       context: .
-      dockerfile: ./docker/Dockerfile-docs
+      dockerfile: ./docker/Dockerfile-app
     restart: always
     ports:
       - 3001:3001

@@ -53,13 +53,12 @@ export const GetProviderIcon = (providerName: string) => {
 
 type AuthFormProps = {
   mode: "login" | "signup";
-  toggleMode: any;
-  providers: any;
+  providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>;
 };
 
-export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
+export const AuthForm = ({ mode, providers }: AuthFormProps) => {
   const router = useRouter();
-  const [user, setUser] = useState<Pick<User, "login" |"password">>({
+  const [authState, setAuthState] = useState<Pick<User, "login" | "password">>({
     login: "",
     password: "",
   });
@@ -67,7 +66,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((currentState) => {
+    setAuthState((currentState) => {
       return {
         ...currentState,
         [name]: value,
@@ -79,36 +78,20 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
     e.preventDefault();
     if (mode === "login") {
       setIsLoading(true);
-
-      signIn("email", { email: user.login })
+      signIn("credentials", { email: authState.login, password: authState.password })
         .then((res) => {
-
+          setIsLoading(false);
+          router.push("/");
         })
         .catch((err) => {
 
         });
-      /**
-             * const account = await client.post("/users/login", {
-                email: user.login || null,
-                password: user.password
-            });
-             */
-      setIsLoading(false);
-
-      router.push("/");
     } else {
-      signIn("email", {
-        email: user.login,
+      signIn("credentials", {
+        email: authState.login,
         redirect: false,
-        password: user.password,
+        password: authState.password,
       });
-      /**
-             * client.post("users", {
-                ...user,
-                email: user.login || null,
-                password: user.password
-            });
-             */
     }
   };
 
@@ -129,7 +112,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
                   onChange={onChange}
                   placeholder="e.g name@domain.com"
                   type="text"
-                  value={user.login}
+                  value={authState.login}
                   name="login"
                 />
               </FormControl>
@@ -139,7 +122,7 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
                   onChange={onChange}
                   placeholder="Must be 8 characters"
                   type="password"
-                  value={user.password}
+                  value={authState.password}
                   name="password"
                 />
               </FormControl>
@@ -167,30 +150,33 @@ export const AuthForm = ({ mode, toggleMode, providers }: AuthFormProps) => {
             </Heading>
             <Flex gap={4} direction="column">
               {providers &&
-                Object.values(providers).map((provider) => {
+                Object.values(providers).map((provider, index) => {
                   const style = getProviderStyles(provider?.name);
                   return (
-                    <Button
-                      bg={style?.bg || "brand.white"}
-                      color={style?.color || "brand.white"}
-                      icon={GetProviderIcon(provider?.name)}
-                      border={
-                        provider?.name === "Google"
-                          ? "solid 0.10rem #000"
-                          : "none"
-                      }
-                      onClick={() =>
-                        signIn(provider?.id)
-                          .then((res) => {
-                            console.log(res);
-                          })
-                          .catch((err) => {
-                            console.log(err);
-                          })
-                      }
-                    >
-                      {provider?.name}
-                    </Button>
+                    <>
+                      {provider?.name !== "Credentials" && (<Button
+                        bg={style?.bg || "brand.white"}
+                        color={style?.color || "brand.white"}
+                        icon={GetProviderIcon(provider?.name)}
+                        key={`${index}-${provider?.name}`}
+                        border={
+                          provider?.name === "Google"
+                            ? "solid 0.10rem #000"
+                            : "none"
+                        }
+                        onClick={() =>
+                          signIn(provider?.id)
+                            .then((res) => {
+                              console.log(res);
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                            })
+                        }
+                      >
+                        {provider?.name}
+                      </Button>)}
+                    </>
                   );
                 })}
             </Flex>

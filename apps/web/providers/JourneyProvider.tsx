@@ -12,10 +12,11 @@ type JourneyProps = {
 
 const initialState = {
   journey: {
-    id: "",
+    id: "cla15t1mr0005ksbt3cx1dyqn",
     title: "",
     description: "",
-    userId: ""
+    userId: "",
+
   }
 };
 
@@ -25,6 +26,7 @@ export const JourneyProvider = ({
   const [state, dispatch] = useReducer(journeyReducer, initialState);
   const [blueprint, setBluePrint] = useState<string>("template");
   const onBluePrintChange = (value: string) => setBluePrint(value);
+
 
 
   return (

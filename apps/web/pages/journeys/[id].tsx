@@ -43,20 +43,11 @@ export default function Journey(props) {
         <JourneyOverviewCard user={props.user} journey={journey} />
         <Flex gap={8}>
           <Flex gap={4} flex="2" overflowX="scroll">
-          <Flex gap={4}>
-            <Card>
-              <Text>33 Days</Text>
-            </Card>
-            <Card>
-              <Text>33 Days</Text>
-            </Card>
-            <Card>
-              <Text>33 Days</Text>
-            </Card>
-            <Card>
-              <Text>33 Days</Text>
-            </Card>
-          </Flex>
+          <Stack gap={4}>
+            {
+              routines?.map(routine => <Card>Hello</Card>)
+            }
+          </Stack>
           </Flex>
           <Stack flex="1">
             <PersonalJourney journey={journey} />

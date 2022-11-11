@@ -57,7 +57,7 @@ export const LayoutController: FC<LayoutControllerProps> = ({ changeView, openMo
                             <Text color="brand.secondaryText">Layout</Text>
                         </Flex>
                         {
-                            layouts.length > 0 ? layouts.map(layout => <LayoutButton layout={layout} key={layout.id} />) : null
+                            layouts.length > 0 ? layouts.map(layout => <LayoutButton view={view} changeView={changeView} layout={layout} key={layout.id} />) : null
                         }
                     </Flex>
                 </Flex>

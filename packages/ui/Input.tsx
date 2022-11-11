@@ -21,22 +21,22 @@ export const Input: FunctionComponent<InputProps> = (props) => {
         autoComplete="off"
         placeholder={props.placeholder}
         cursor="pointer"
-        padding="1rem"
         value={props.value}
         name={props.name}
         type={props.type}
         bg="brand.white"
         id={props.type}
+        variant="filled"
         onChange={props.onChange}
-        focusBorderColor="brand.grey"
+        focusBorderColor="brand.white"
         color="brand.secondaryText"
         autoFocus={props.autofocus}
         _hover={{
-          background: "brand.hovered",
+          background: "brand.white",
         }}
         _focus={{
           outline: "none",
-          background: "brand.highlight",
+          background: "brand.white",
         }}
         _placeholder={{ opacity: 1, color: "brand.secondaryText" }}
       />

@@ -76,9 +76,6 @@ export const getResources = (backpackId) => {
 export const getFolders = (backpackId: string) => {
   try {
     return prisma.folder.findMany({
-      where: {
-        backpackId,
-      },
       orderBy: [
         {
           createdAt: "desc",

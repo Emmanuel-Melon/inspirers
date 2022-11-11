@@ -47,6 +47,7 @@ Before we install the project, Here is what you need to be able to run Inspirers
 
 ### Database
 
+Use [BCrypt](https://bcrypt-generator.com/) to generate a password.
 #### MacOS
 - Download and install the PostgreSQL app from [here](https://postgresapp.com/downloads.html).
 - Run the server.

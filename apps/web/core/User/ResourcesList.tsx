@@ -3,7 +3,7 @@ import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { ResourceCard } from "core/Backpack/ListRecentlyAdded";
 import { IconButton } from "ui";
 import { FiMoreHorizontal } from "react-icons/fi";
-import { ListCategories } from "core/Backpack/ListCategories";
+import { ListFolders } from "core/Backpack/ListFolders";
 import { Resource } from "@prisma/client";
 
 export const ResourceList = () => {
@@ -16,7 +16,7 @@ export const ResourceList = () => {
                 p={4}
                 borderRadius="1rem"
             >
-                <ListCategories />
+                <ListFolders />
             </Stack>
             <Stack
                 bg="brand.highlight1"

@@ -44,7 +44,7 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
   const context = useContext(JourneyOnboardingContext);
   return (
     <Stack>
-      <Card bg="brand.highlight1">
+      <Card bg="brand.white">
         <Stack>
           <Stack>
             <Image
@@ -58,8 +58,8 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
             <Text color="brand.secondaryText">{guide?.mimi?.greeting}</Text>
           </Stack>
           <Stack gap={2}>
-            <Stack>
-              <Heading size="sm" color="brand.secondary">
+            <Stack gap={2}>
+              <Heading size="sm" color="brand.primaryText">
                 Using a template
               </Heading>
               <Text>
@@ -68,8 +68,8 @@ export const FirstStepGuide = ({ guide, blueprint }) => {
               </Text>
             </Stack>
             <Divider />
-            <Stack>
-              <Heading size="sm" color="brand.secondary">
+            <Stack gap={2}>
+              <Heading size="sm" color="brand.primaryText">
                 Blank journey
               </Heading>
               <Text>

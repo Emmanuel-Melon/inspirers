@@ -1,24 +1,38 @@
 import { useState } from "react";
 import {
-    Avatar,
-    Image,
-    Img,
     Stack,
     Text,
-    Link,
     Flex,
-    Heading,
-    Box,
-    LinkBox,
-    LinkOverlay,
     FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
+    Tag,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
 } from "@chakra-ui/react";
 import { Routine } from "@prisma/client";
-import { FiRotateCw } from "react-icons/fi";
-import { Button } from "ui";
+import {
+    FiPlus,
+    FiTrash,
+    FiCheck,
+    FiTag,
+    FiUserPlus,
+    FiLink2,
+    FiClock,
+    FiX,
+    FiLink,
+    FiImage,
+    FiVideo,
+    FiMoreHorizontal,
+    FiEye,
+    FiMaximize2,
+    FiArrowRight,
+    FiChevronsRight,
+    FiFolder,
+    FiRotateCw,
+    FiUsers
+} from "react-icons/fi";
+import { Button, IconButton } from "ui";
 import { Input } from "ui";
 import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
@@ -30,7 +44,8 @@ export const AddRoutine = ({ cancel }) => {
     const { data: session, status } = useSession();
 
     const router = useRouter();
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         setIsLoading(true);
         client.post(`/routines`, {
             title: name,
@@ -39,32 +54,120 @@ export const AddRoutine = ({ cancel }) => {
             console.log(res);
             setIsLoading(false);
             cancel();
-            router.push(`/routines/${res.data.data.id}`)
+            router.push(`/routines/${res?.data.id}`)
         })
-        .catch(err => {
-            console.log(err);
-            setIsLoading(false);
-        })
+            .catch(err => {
+                console.log(err);
+                setIsLoading(false);
+            })
     }
     return (
-        <Stack p="8" width="420px" gap={4} color="brand.primaryText">
-            <Heading size="sm" color="brand.secondary">Add a new Routine</Heading>
-            <Stack gap={2}>
-                <FormControl>
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Morning Routine"
-                        type="text"
-                        value={name}
-                        name="name"
-                    />
-                </FormControl>
-                <Flex gap={4}>
-                    <Button size="sm" bg="brand.white" onClick={cancel}>Cancel</Button>
-                    <Button size="sm" onClick={handleClick} isLoading={isLoading}>Continue</Button>
+        <form onSubmit={handleClick}>
+            <Stack color="brand.primaryText">
+                <Flex px="4" py="2" justifyContent="space-between" alignItems="center">
+                    <Flex gap={1} alignItems="center" color="brand.secondaryText">
+                        <Tag
+                            color="brand.secondaryText"
+                            bg="brand.highlight2"
+                            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                        >
+                            Journey
+                        </Tag>
+                        <FiChevronsRight />
+                        <Text size="sm">New Routine</Text>
+                    </Flex>
+                    <Flex gap={2} alignItems="center">
+                        <IconButton label={""} onClick={() => { }}>
+                            <FiMaximize2 />
+                        </IconButton>
+                        <IconButton label={""} onClick={cancel}>
+                            <FiX />
+                        </IconButton>
+                    </Flex>
+                </Flex>
+                <Stack px="4" py="2">
+                    <FormControl>
+                        <Input
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Routine name"
+                            type="text"
+                            value={name}
+                            name="name"
+                            autofocus={true}
+                        />
+                    </FormControl>
+                </Stack>
+                <Flex px="4" py="2" gap={2}>
+                    <Menu>
+                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
+                            Journey
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Download</MenuItem>
+                            <MenuItem>Create a Copy</MenuItem>
+                            <MenuItem>Mark as Draft</MenuItem>
+                            <MenuItem>Delete</MenuItem>
+                            <MenuItem>Attend a Workshop</MenuItem>
+                        </MenuList>
+                    </Menu>
+                    <Menu>
+                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
+                            Journey
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Download</MenuItem>
+                            <MenuItem>Create a Copy</MenuItem>
+                            <MenuItem>Mark as Draft</MenuItem>
+                            <MenuItem>Delete</MenuItem>
+                            <MenuItem>Attend a Workshop</MenuItem>
+                        </MenuList>
+                    </Menu>
+                    <Menu>
+                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
+                            Journey
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Download</MenuItem>
+                            <MenuItem>Create a Copy</MenuItem>
+                            <MenuItem>Mark as Draft</MenuItem>
+                            <MenuItem>Delete</MenuItem>
+                            <MenuItem>Attend a Workshop</MenuItem>
+                        </MenuList>
+                    </Menu>
+                    <Menu>
+                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
+                            Journey
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>Download</MenuItem>
+                            <MenuItem>Create a Copy</MenuItem>
+                            <MenuItem>Mark as Draft</MenuItem>
+                            <MenuItem>Delete</MenuItem>
+                            <MenuItem>Attend a Workshop</MenuItem>
+                        </MenuList>
+                    </Menu>
+                </Flex>
+                <Flex px="4" py="4" alignItems="center" justifyContent="space-between" bg="brand.highlight2">
+                    <Flex gap={2}>
+                        <IconButton onClick={() => toggleView("image")} label={""}>
+                            <FiImage />
+                        </IconButton>
+                        <IconButton onClick={() => toggleView("video")} label={""}>
+                            <FiVideo />
+                        </IconButton>
+                        <IconButton onClick={() => toggleView("invite")} label={""}>
+                            <FiUserPlus />
+                        </IconButton>
+                        <IconButton onClick={() => toggleView("expanded")} label={""}>
+                            <FiMoreHorizontal />
+                        </IconButton>
+                    </Flex>
+                    <Flex gap={2}>
+                        <Button size="sm" bg="brand.white" onClick={cancel}>Draft</Button>
+                        <Button size="sm" type="submit" isLoading={isLoading}>Continue</Button>
+                    </Flex>
                 </Flex>
             </Stack>
-        </Stack>
+        </form>
     )
 }

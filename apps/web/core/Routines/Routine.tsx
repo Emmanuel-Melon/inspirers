@@ -22,13 +22,22 @@ import {
     PopoverAnchor,
     Tag,
     TagLeftIcon,
-    TagLabel
+    TagLabel,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
 } from "@chakra-ui/react";
 import { Button, Card, IconButton } from "ui";
 import { Routine, RoutineType } from "@prisma/client";
 import { FiMoreHorizontal, FiTrash2, FiSunrise, FiBriefcase, FiHeart, FiBarChart2, FiClock, FiUsers } from "react-icons/fi";
 import moment from "moment";
 import { client } from "utils/client";
+import { LinkFolderModal } from "Backpack/LinkFolder";
 
 
 
@@ -53,9 +62,10 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
     }
     return (
         <LinkBox >
-            <Card bg={routine.reminders ? "brand.highlight3" : "brand.white" }>
+            <Card>
                 <Flex justifyContent="space-between" >
                     <Flex gap={4} alignItems="center">
+
                         <Box
                             bg="brand.highlight1"
                             p="4"
@@ -88,7 +98,6 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
                         </Stack>
                     </Flex>
                     <Stack alignItems="flex-end">
-
                         <Popover>
                             <PopoverTrigger>
                                 <IconButton aria-label={""} _hover={{

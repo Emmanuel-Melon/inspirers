@@ -25,13 +25,18 @@ import { RoutineResources } from "core/Routines/RoutineResources";
 import { RoutineTasks } from "core/Routines/RoutineTasks";
 import { ManageRoutine } from "core/Routines/ManageRoutine";
 import { LayoutController } from "ui";
+import { LinkFolderModal } from "Backpack/LinkFolder";
 
 
 export default function Routine() {
     const router = useRouter();
     const { data: routine, isLoading, isError } = useFetch(`${router.asPath}`);
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { data: tasks, isLoading: loadingTasks, isError: tasksError } = useFetch(`/tasks/cl85vw6x902664pbt1jyyl2fo/list`);
+
+    const { data: folders, isLoading: loadingFolders, isError: foldersError } = useFetch(`/backpacks/cl9odbs5g0255vwbtk7wo8osu/folders`);
+
+    const [isModalOpen, setIsOpen] = useState<boolean>(false);
 
     const openModal = () => {
         setIsOpen(true);
@@ -47,19 +52,21 @@ export default function Routine() {
             <Stack color="brand.primaryText" gap={4} width="100%">
                 <Flex justifyContent="space-between" alignItems="flex-start">
                     <Flex gap={2} alignItems="center">
-                    <Stack>
-                        <Heading size="md">Emmanuel's {routine?.title}</Heading>
-                        <Text color="brand.secondaryText">{routine?.description}</Text>
-                    </Stack>
-                    <Tag size="md" bg="brand.highlight1" color="brand.secondary" fontWeight="700">
-                        <TagLeftIcon boxSize='12px' as={FiCalendar} />
-                        {moment(new Date()).format("MMM Do YY")}
-                    </Tag>
+                        <Stack>
+                            <Heading size="md">Emmanuel's {routine?.title}</Heading>
+                            <Text color="brand.secondaryText">{routine?.description}</Text>
+                        </Stack>
+                        <Tag size="md" bg="brand.highlight1" color="brand.secondary" fontWeight="700">
+                            <TagLeftIcon boxSize='12px' as={FiCalendar} />
+                            {moment(new Date()).format("MMM Do YY")}
+                        </Tag>
                     </Flex>
                     <Flex gap={4}>
+                    <Button size="md" bg="brand.white" icon={<FiPlus />}>Automate</Button>
                         <Button size="md" bg="brand.white" icon={<FiShare2 />}>Share</Button>
                         <Button size="md" icon={<FiSettings />} onClick={openModal}>Manage Routine</Button>
                     </Flex>
+                    <LinkFolderModal routine={routine} />
                 </Flex>
                 <Flex gap={8}>
                     <Stack gap={4} width="100%" flex="2">
@@ -75,14 +82,8 @@ export default function Routine() {
                                 </IconButton>
                             </Flex>
                             <Card>
-                                <Flex justifyContent="space-between">
-                                    <Stack>
-
-                                        
-                                    </Stack>
-                                </Flex>
                                 <Flex gap={1} alignItems="center">
-                                <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />
+                                    <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />
                                     {
                                         [].map(() => <Avatar size="sm" src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/arabica-1092.svg" />)
                                     }
@@ -105,6 +106,9 @@ export default function Routine() {
                     </Stack>
                 </Flex>
             </Stack>
+            <Modal show={isModalOpen} close={closeModal}>
+                <ManageRoutine />
+            </Modal>
         </>
     );
 }

@@ -60,9 +60,7 @@ export default function Tasks(props) {
             {view === "list" ? (
               <TaskList tasks={tasks?.data} />
             ) : (
-              <DndProvider backend={HTML5Backend}>
-                <TaskBoard tasks={tasks?.data} />
-              </DndProvider>
+              <TaskBoard tasks={tasks?.data} />
             )}
           </Flex>
         </Flex>

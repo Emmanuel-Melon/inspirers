@@ -1,8 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-
-import autoAnimate from '@formkit/auto-animate'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
-
+import { FC } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import {
     Stack,
     Text,
@@ -12,23 +9,24 @@ import {
     LinkBox,
     LinkOverlay
 } from "@chakra-ui/react";
-import { Button, Card, IconButton, EmptyState } from "ui";
+import { Card, IconButton, EmptyState } from "ui";
 import { useFetch } from "../hooks/useSwr";
-import { HiOutlineFolder } from "react-icons/hi";
 import { RiFolder5Line } from "react-icons/ri";
-
 import {
     FiMoreHorizontal,
     FiFolder,
-    FiPlus,
     FiFolderPlus
 } from "react-icons/fi";
-
+import { Backpack, Folder } from "@prisma/client";
 
 // link Google Drive
 // import youtube subscriptions and playlists
 // notify users when a new video is uploaded
-export const Folder = ({ folder }) => {
+
+export type FolderOverviewProps = {
+    folder: Folder;
+};
+export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
     return (
         <LinkBox  width="30%">
             <Card>
@@ -61,10 +59,14 @@ export const Folder = ({ folder }) => {
     )
 }
 
-export const ListFolders = ({ backpack }) => {
+
+export type ListFoldersProps = {
+    backpack: Backpack;
+};
+export const ListFolders: FC<ListFoldersProps> = ({ backpack }) => {
 
     const { data: folders, isLoading, isError } = useFetch(`/backpacks/${backpack?.id}/folders`);
-    const [parent] = useAutoAnimate(/* optional config */);
+    const [parent] = useAutoAnimate();
 
     if (isError) {
         return <Text>Failed to Load Folders</Text>
@@ -98,7 +100,7 @@ export const ListFolders = ({ backpack }) => {
                 </Flex>
             </Flex>
             <Flex gap={4} flexWrap="wrap" ref={parent}>
-                {folders?.map(folder => <Folder key={folder.id} folder={folder} />)}
+                {folders?.map((folder: Folder) => <FolderOverview key={folder.id} folder={folder} />)}
             </Flex>
         </Stack>
     );

@@ -4,7 +4,6 @@ import cors from "./middleware/cors";
 // import compression from "compression";
 import * as helmet from "helmet";
 import morganLogger from "morgan";
-import authenticate from "./middleware/authenticate";
 import { catchErrors } from "./utils/errors";
 
 export function init(app) {
@@ -17,8 +16,6 @@ export function init(app) {
   app.use(express.urlencoded({ extended: true }));
   // app.use(helmet());
   app.use(morganLogger("dev"));
-  app.use(catchErrors);
   app.use(routers);
-
-  app.use(`/.netlify/functions/api`, routers);
+  app.use(catchErrors);
 }

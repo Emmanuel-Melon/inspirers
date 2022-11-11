@@ -14,7 +14,7 @@ export const IconButton: FC<IconButtonProps> = ({
     children, 
     label, 
     onClick,
-    size = "md",
+    size = "sm",
 }) => {
     return (
         <IconButtonBase

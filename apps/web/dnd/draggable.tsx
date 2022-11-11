@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import React, { FunctionComponent } from "react";
-import { useDrag } from "react-dnd";
+// import { useDrag } from "react-dnd";
 
 type DragWrapperProps = {
   moveItem: Function;
@@ -14,12 +14,17 @@ export const DragWrapper: FunctionComponent<DragWrapperProps> = ({
   type,
   item,
 }) => {
-  const [{ isDragging }, drag]: any = useDrag(() => ({
+
+  /**
+   *   const [{ isDragging }, drag]: any = useDrag(() => ({
     type: type,
     item,
   }));
+
+  ref={drag} style={{ opacity: isDragging ? 0 : 1 }}
+   */
   return (
-    <Flex ref={drag} style={{ opacity: isDragging ? 0 : 1 }}>
+    <Flex >
       {children}
     </Flex>
   );

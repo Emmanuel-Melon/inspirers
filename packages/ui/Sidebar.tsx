@@ -23,6 +23,7 @@ import { Avatar, Card, Navbar, Spinner } from "ui";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
 import {
     FiHome,
     FiSettings,
@@ -39,6 +40,10 @@ import {
     FiLogOut,
     FiHelpCircle
 } from "react-icons/fi";
+
+import { RiApps2Line, RiHandbagLine, RiNotification3Line } from "react-icons/ri";
+
+import { HiOutlineBell, HiOutlineHome, HiOutlineTemplate, HiOutlineClipboardCheck, HiOutlineCollection } from "react-icons/hi";
 
 const SidebarLink = ({ link }) => {
     return (
@@ -74,37 +79,37 @@ export const Sidebar = ({ session }) => {
             id: 1,
             name: "Home",
             url: "/",
-            icon: <FiHome size="1rem" />
+            icon: <HiOutlineHome size="1rem" />
         },
         {
             id: 4,
             name: "Routines",
             url: "/routines",
-            icon: <FiRotateCw size="1rem" />
+            icon: <HiOutlineTemplate size="1rem" />
         },
         {
             id: 5,
             name: "Tasks",
             url: "/tasks",
-            icon: <FiClipboard size="1rem" />
+            icon: <HiOutlineClipboardCheck size="1rem" />
         },
         {
             id: 6,
             name: "Notifications",
             url: "/notifications",
-            icon: <FiBell size="1rem" />
+            icon: <RiNotification3Line size="1rem" />
         },
         {
             id: 8,
             name: "Backpack",
             url: "/backpack",
-            icon: <FiShoppingBag size="1rem" />
+            icon: <RiHandbagLine size="1rem" />
         },
         {
             id: 9,
             name: "Apps",
             url: "/apps",
-            icon: <FiPackage size="1rem" />
+            icon: <RiApps2Line size="1rem" />
         }
     ];
 
@@ -120,13 +125,10 @@ export const Sidebar = ({ session }) => {
     const router = useRouter();
     return (
         <Stack
-            py={8}
-            px={8}
+            p={4}
             height="100vh"
             justifyContent="space-between"
-            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
             width="fit-content"
-            bg="brand.highlight1"
             alignItems="flex-start"
         >
             <Stack gap={4} alignItems="flex-start">

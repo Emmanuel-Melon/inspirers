@@ -8,7 +8,7 @@ import { getProviders, useSession } from "next-auth/react";
 const Login: NextPage & {
   authPage: boolean;
 } = (props) => {
-  const [mode, setMode] = useState<"login" | "signup">("signup");
+  const [mode, setMode] = useState<"login" | "signup">("login");
   const session = useSession();
   const router = useRouter();
 

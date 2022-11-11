@@ -1,6 +1,6 @@
 import React, { ReactChild } from "react";
 import { useSession, signIn } from "next-auth/react";
-import { Box, Flex, Stack, useColorModeValue, Heading } from "@chakra-ui/react";
+import { Box, Flex, Stack, useColorModeValue, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import { Sidebar, UnAuthorized } from "ui";
@@ -37,18 +37,20 @@ export default function Layout({ children }: LayoutProps) {
           <link rel="icon" href="favicon.png" />
         </Head>
         <body>
-          <Flex height="100%" as="main">
-            <Sidebar session={session} />
-            <Stack width="100%">
-              <Box as="section" px="8" height="100%" width="100%" py="4">
+          <Grid as="main" templateColumns='repeat(6, 1fr)'>
+            <GridItem rowSpan={2} colSpan={1}>
+              <Sidebar session={session} />
+            </GridItem>
+            <GridItem rowSpan={2} colSpan={5}>
+              <Box as="section" p="4">
                 {children}
               </Box>
-            </Stack>
-          </Flex>
+            </GridItem>
+          </Grid>
         </body>
       </>
     );
   }
 
-  return <Heading>Coming Soon</Heading>;
+  return <UnAuthorized onClick={signIn}/>;
 }

@@ -8,13 +8,35 @@ import {
     FormControl,
     FormLabel,
     HStack,
-    useRadioGroup
+    useRadioGroup,
+    Tag
 } from "@chakra-ui/react";
-import { Button, Card, CustomCheckbox, Input, RadioCard } from "ui";
+import { Button, Card, CustomCheckbox, IconButton, Input, RadioCard } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { FiFlag, FiPlayCircle, FiClock, FiPlus } from "react-icons/fi";
-import { client } from "../../utils/client";
+
+import {
+    FiPlus,
+    FiTrash,
+    FiCheck,
+    FiTag,
+    FiUserPlus,
+    FiLink2,
+    FiClock,
+    FiX,
+    FiLink,
+    FiImage,
+    FiVideo,
+    FiMoreHorizontal,
+    FiEye,
+    FiMaximize2,
+    FiArrowRight,
+    FiChevronsRight,
+    FiFolder,
+    FiRotateCw,
+    FiUsers
+} from "react-icons/fi";
+import { client } from "utils/client";
 
 
 export const ManageRoutine = ({ closeModal }) => {
@@ -46,18 +68,38 @@ export const ManageRoutine = ({ closeModal }) => {
             })
     }
     return (
-        <Stack gap={4} width="400px">
-            <Box p="8">
-                <Heading size="md" color="brand.secondary" my="4">Manage Routine</Heading>
-                <Stack gap={2}>
+        <Stack gap={4}>
+            <Box>
+            <Flex px="4" py="2" justifyContent="space-between" alignItems="center">
+                    <Flex gap={1} alignItems="center"  color="brand.secondaryText">
+                        <Tag
+                            color="brand.secondaryText"
+                            bg="brand.highlight2"
+                            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                        >
+                            Another Routine
+                        </Tag>
+                        <FiChevronsRight />
+                        <Text size="sm">Manage</Text>
+                    </Flex>
+                    <Flex gap={2} alignItems="center">
+                        <IconButton label={""} onClick={() => { }}>
+                            <FiMaximize2 />
+                        </IconButton>
+                        <IconButton label={""} onClick={closeModal}>
+                            <FiX />
+                        </IconButton>
+                    </Flex>
+                </Flex>
+                <Stack gap={2}  px="4" py="2">
                     <FormControl>
-                        <FormLabel>Title</FormLabel>
                         <Input
                             onChange={e => setTitle(e.target.value)}
-                            placeholder="e.g name@domain.com"
+                            placeholder="Routine Name"
                             type="text"
                             value={title}
-                            name="login"
+                            name="title"
+                            autofocus={true}
                         />
                     </FormControl>
                     <FormControl>
@@ -67,12 +109,12 @@ export const ManageRoutine = ({ closeModal }) => {
                             placeholder="e.g name@domain.com"
                             type="date"
                             value={startDay}
-                            name="login"
+                            name="title"
 
                         />
                     </FormControl>
-                    <Flex justifyContent="space-between" alignItems="center">
-                        <Text>Routine Schedule</Text>
+                    <Flex gap={4} alignItems="center">
+                        <Text>Schedule</Text>
                         <HStack {...group}>
                             {options.map((value) => {
                                 const radio = getRadioProps({ value });
@@ -82,14 +124,14 @@ export const ManageRoutine = ({ closeModal }) => {
                                         {...radio}
                                         bg="brand.white"
                                         checked={{
-                                            bg: "brand.secondary",
+                                            bg: "brand.secondaryText",
                                             color: "brand.white",
                                         }}
                                         hover={{
                                             borderColor: "brand.highlight2",
                                         }}
                                         border="groove 0.10rem"
-                                        borderColor="brand.secondary"
+                                        borderColor="brand.secondaryText"
                                         name="journeyType"
                                     >
                                         {value}

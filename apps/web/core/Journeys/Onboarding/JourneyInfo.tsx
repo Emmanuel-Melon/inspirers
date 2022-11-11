@@ -29,6 +29,7 @@ import {
 import { Card, RadioCard } from "ui";
 import toast, { Toaster } from "react-hot-toast";
 import { CustomCheckbox } from "ui";
+import { RiEmpathizeLine, RiStore3Line, RiBriefcase2Line } from "react-icons/ri";
 
 export const SecondStepGuide = ({ guide }) => {
   const context = useContext(JourneyOnboardingContext);
@@ -68,15 +69,17 @@ export const SecondStepGuide = ({ guide }) => {
       ) : (
         <Card>
           <Stack
-            gap={2}
+            gap={4}
             color="brand.primaryText"
             borderRadius="1rem"
             p="4"
           >
-            <Text>Explore the different journey types</Text>
+            <Heading size="md">Explore the different journey types</Heading>
             <Stack>
-              <Flex alignItems="center" gap={2} color="brand.secondary">
-                <FiBookOpen />
+              <Flex alignItems="center" gap={2}>
+                <Box color="brand.secondaryText">
+                  <FiBookOpen size="1rem" />
+                </Box>
                 <Heading size="sm">Academic</Heading>
               </Flex>
               <Text color="brand.secondaryText">
@@ -84,22 +87,28 @@ export const SecondStepGuide = ({ guide }) => {
               </Text>
             </Stack>
             <Stack>
-              <Flex alignItems="center" gap={2} color="brand.secondary">
-                <FiBriefcase />
+              <Flex alignItems="center" gap={2} color="brand.primaryText">
+                <Box color="brand.secondaryText">
+                  <RiStore3Line size="1rem" />
+                </Box>
                 <Heading size="sm">Business</Heading>
               </Flex>
               <Text color="brand.secondaryText">Plan your business and manage your work.</Text>
             </Stack>
             <Stack>
-              <Flex alignItems="center" gap={2} color="brand.secondary">
-                <FiClipboard />
+              <Flex alignItems="center" gap={2} color="brand.primaryText">
+                <Box color="brand.secondaryText">
+                  <RiBriefcase2Line size="1rem" />
+                </Box>
                 <Heading size="sm">Career</Heading>
               </Flex>
               <Text color="brand.secondaryText">Career guidance and development.</Text>
             </Stack>
             <Stack>
-              <Flex alignItems="center" gap={2} color="brand.secondary">
-                <FiHeart />
+              <Flex alignItems="center" gap={2} color="brand.primaryText">
+                <Box color="brand.secondaryText">
+                  <RiEmpathizeLine size="1rem" />
+                </Box>
                 <Heading size="sm">Personal</Heading>
               </Flex>
               <Text color="brand.secondaryText">Improve your personal life.</Text>
@@ -184,6 +193,44 @@ const JourneyTypeSelector = ({ defaultValue, options, updateJourneyType }) => {
     </>
   );
 };
+
+/**
+ * 
+  const router = useRouter();
+
+  const { t } = useLocale();
+  const [teamId, setTeamId] = useState<number>();
+
+  const result = stepRouteSchema.safeParse(router.query);
+  const currentStep = result.success ? result.data.step[0] : INITIAL_STEP;
+
+  const headers = [
+    {
+      title: `${t("create_new_team")}`,
+      subtitle: [`${t("create_new_team_description")}`],
+    },
+    // {
+    //   title: `${t("general_settings")}`,
+    //   subtitle: [`${t("general_settings_description")}`],
+    // },
+    {
+      title: `${t("add_team_members")}`,
+      subtitle: [`${t("add_team_members_description")}`],
+    },
+  ];
+
+  const goToIndex = (index: number) => {
+    const newStep = steps[index];
+    router.push(
+      {
+        pathname: `/settings/teams/new/${stepTransform(newStep)}`,
+      },
+      undefined
+    );
+  };
+
+  const currentStepIndex = steps.indexOf(currentStep);
+ */
 
 export const SecondStep = ({ user }) => {
   const context = useContext(JourneyOnboardingContext);
@@ -287,6 +334,7 @@ export const SecondStep = ({ user }) => {
               onChange={onChange}
               value={journey.title}
               name="title"
+              autofocus={true}
             />
             <JourneyTypeSelector
               defaultValue={journey.journeyType}

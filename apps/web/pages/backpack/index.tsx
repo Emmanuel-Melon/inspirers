@@ -17,10 +17,7 @@ import { Button, IconButton, Input, Modal } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyContext } from "providers/JourneyProvider";
 
-
 import {
-    FiBarChart2,
-    FiFilter,
     FiList,
     FiSettings,
     FiChevronsDown,

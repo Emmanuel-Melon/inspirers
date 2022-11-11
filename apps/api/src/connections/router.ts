@@ -10,7 +10,7 @@ import {
 import { validateRequest } from "./validation";
 import { respondToRequest } from "./operations/update";
 import { getConnectionStatus, getConnectionById, getConnectionRequestById } from "./operations/read";
-import { pushIntoEvents, pushIntoNotification } from "../enqueue";
+import { NotificationData, pushIntoEvents, pushIntoNotification } from "../enqueue";
 import { NotificationTrigger, NotificationChannel } from "@prisma/client";
 
 const connectionsRouter = Router();
@@ -21,10 +21,10 @@ connectionsRouter.post(
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(connectionRequest(req.body))
     .then(data => {
-      pushIntoNotification({ 
+      pushIntoNotification({
         ...data,
         trigger: NotificationTrigger.ConnectionRequest,
-      });
+      } as unknown as NotificationData);
       return data;
     })
       .then((data) => res.json({ data }))
@@ -43,7 +43,7 @@ connectionsRouter.put(
         pushIntoNotification({ 
           ...data,
           trigger: NotificationTrigger.AcceptedConnection,
-        });
+        } as unknown as NotificationData);
         return data;
       })
       .then((data) => res.json({ data }))

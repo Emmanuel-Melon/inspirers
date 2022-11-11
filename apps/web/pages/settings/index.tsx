@@ -36,7 +36,7 @@ import {
   FiPackage,
   FiLock
 } from "react-icons/fi";
-import { Input } from "ui";
+import { CustomTab, Input } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -46,33 +46,10 @@ import { NotificationSettings } from "Settings/NotificationSettings";
 import { AccountSettings } from "Settings/AccountSettings";
 
 
+
 export default function Settings(props) {
   const { data: user, isError } = useFetch(`/users/${props?.user?.id}`);
-  const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
-    // 1. Reuse the `useTab` hook
-    const tabProps = useTab({ ...props, ref });
-    const isSelected = !!tabProps["aria-selected"];
 
-    // 2. Hook into the Tabs `size`, `variant`, props
-    const styles = useMultiStyleConfig("Tabs", tabProps);
-
-    return (
-      <Button
-        {...tabProps}
-        size="sm"
-        borderRadius="1rem"
-        leftIcon={props.icon}
-        bg={isSelected ? "brand.accent" : "brand.highlight3"}
-        color={isSelected ? "brand.white" : "brand.secondaryText"}
-        _hover={{
-          bg: isSelected ? "brand.hovered" : "brand.highlight3",
-          color: isSelected ? "brand.secondaryText" : "brand.secondaryText",
-        }}
-      >
-        {tabProps.children}
-      </Button>
-    );
-  });
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

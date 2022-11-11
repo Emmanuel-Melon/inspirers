@@ -9,7 +9,10 @@ import {
     Flex,
     Heading,
     Box,
-    LinkBox, LinkOverlay,
+    LinkBox, 
+    LinkOverlay,
+    Checkbox, 
+    CheckboxGroup,
     Progress,
     VStack,
     Stat,
@@ -59,19 +62,14 @@ const Objective = ({ deleteItem, objective }) => {
         <>
             <Card>
                 <Flex gap={2} alignItems="center" justifyContent="space-between">
-                    <Flex>
+                    <Flex gap={2}>
+                    <Checkbox
+                        p="2"
+                        borderRadius="0.5rem"
+                        bg="brand.highlight1"
+                    ></Checkbox>
                         <Heading size="sm" onClick={openModal}>{objective.title}</Heading>
                     </Flex>
-                    <Stack>
-                        <Text color="brand.secondaryText">{objective.progress}% completed</Text>
-                        <Progress
-                            value={objective.progress}
-                            hasStripe
-                            size="sm"
-                            colorScheme="green"
-                            borderRadius="1rem"
-                        />
-                    </Stack>
                     <Flex gap={2}>
                         <IconButton size="sm" bg="brand.white">
                             <FiUserPlus />
@@ -116,13 +114,6 @@ const Objective = ({ deleteItem, objective }) => {
                 <Stack h="50vh" w="50vh">
                     <Heading as="h2">{objective.title}</Heading>
                     <Text>Progress: {objective.progress}% </Text>
-                    <Progress
-                        value={objective.progress}
-                        hasStripe
-                        size="sm"
-                        colorScheme="green"
-                        borderRadius="1rem"
-                    />
                     <Text>Companions</Text>
                     <Flex>
                         <Button onClick={closeModal}>Cancel</Button>
@@ -149,7 +140,7 @@ const NewObjective = ({ closeEditor, onSave }) => {
         </Flex>
         <Flex gap={2}>
                 <Button size="md" onClick={() => {
-                    onSave().then(res => {
+                    onSave({ title }).then(res => {
                         closeEditor();
                     });
                 }}>Save</Button>
@@ -173,7 +164,7 @@ export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
     }
     const onSave = (data) => {
         return client.post(`/routines/${routine?.id}`, {
-            title: "Hello",
+            ...data,
             routineId: routine?.id
         })
             .then(res => {
