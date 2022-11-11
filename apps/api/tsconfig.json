@@ -1,26 +1,17 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "target": "es5",
-      "module": "commonjs",
-      "lib": [
-        "DOM"
-      ],
-      "outDir": "./dist",
-      "resolveJsonModule": true,
-      "removeComments": true,
-      "alwaysStrict": true,
-      "sourceMap": false,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "paths": {
-        "*": [
-          "types/*"
-        ]
-      }
-    },
-    "include": [
-      "src",
-      "test",
-    ]
-  }
+  "extends": "tsconfig/base.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "paths": {
+      "@prisma/client/*": [
+        "inspirers/prisma/client/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+}
