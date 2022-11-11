@@ -52,7 +52,7 @@ const layouts = [
 ];
 
 // try this layout for Routines: https://britetodo.com/?ref=roastortoast
-export default function Routines() {
+export default function Routines(props) {
   const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [view, setView] = useState("list");

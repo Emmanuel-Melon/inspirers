@@ -4,6 +4,8 @@ import { encode } from "next-auth/jwt";
 
 import { backendUrl } from "../config";
 
+console.log("backendUrl", backendUrl);
+
 function httpClient(baseURL: string) {
   const client = axios.create({ baseURL });
   client.interceptors.request.use(async (request) => {
