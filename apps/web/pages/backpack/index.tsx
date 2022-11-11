@@ -18,7 +18,7 @@ import { useFetch } from "../../hooks/useSwr";
 import { JourneyContext } from "providers/JourneyProvider";
 
 import { ListRecentlyAdded } from "../../core/Backpack/ListRecentlyAdded";
-import { ListCategories } from 'core/Backpack/ListCategories';
+import { ListFolders } from 'core/Backpack/ListFolders';
 import { QuickAccess } from 'core/Backpack/QuickAccess';
 import { LayoutController } from "ui";
 import { AddResource } from "core/Backpack/AddResource";
