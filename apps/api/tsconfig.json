@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "noImplicitAny": false,
+    "types": ["node", "jest"],
     "paths": {
       "@prisma/client/*": [
         "inspirers/prisma/client/*"
