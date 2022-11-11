@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import { JourneyOverviewCard } from "../../Journeys/components/JourneyOverviewCard";
+import { JourneyOverviewCard } from "../../core/Journeys/components/JourneyOverviewCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
-import { PersonalJourney } from "../../Journeys/components/personal";
-import { JourneyEditor } from "../../Journeys/components/editor";
+import { PersonalJourney } from "../../core/Journeys/components/personal";
+import { JourneyEditor } from "../../core/Journeys/components/editor";
 import { Card, Spinner } from "ui";
-import { ListRoutines } from "Routines/ListRoutines";
+import { ListRoutines } from "core/Routines/ListRoutines";
 
 // use roles!
 export default function Journey(props) {

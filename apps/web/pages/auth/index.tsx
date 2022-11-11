@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { AuthForm } from "../../Auth/components/LoginForm";
+import { AuthForm } from "../../core/Auth/components/LoginForm";
 import type { NextPage } from "next";
 import { Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";

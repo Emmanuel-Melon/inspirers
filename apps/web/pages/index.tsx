@@ -1,10 +1,10 @@
 import { Stack } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { Insights } from "../Journeys/components/Insights";
-import { Timeline } from "../Journeys/components/Timeline";
-import { JourneyOverviewCard } from "../Journeys/components/JourneyOverviewCard";
-import { Milestones } from "../Journeys/components/Milestones";
-import { Activities } from "../Journeys/components/Acitivites";
+import { Insights } from "../core/Journeys/components/Insights";
+import { Timeline } from "../core/Journeys/components/Timeline";
+import { JourneyOverviewCard } from "../core/Journeys/components/JourneyOverviewCard";
+import { Milestones } from "../core/Journeys/components/Milestones";
+import { Activities } from "../core/Journeys/components/Acitivites";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { useRouter } from "next/router";

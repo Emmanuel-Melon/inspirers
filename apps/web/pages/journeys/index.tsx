@@ -2,8 +2,8 @@ import { Flex, Text, Heading, Stack } from "@chakra-ui/react";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
-import { JourneyCard } from "../../Journeys/components/JourneyCard";
-import { ListJourneys } from "Journeys/ListJourneys";
+import { JourneyCard } from "../../core/Journeys/components/JourneyCard";
+import { ListJourneys } from "core/Journeys/ListJourneys";
 
 // Journey creation
 // whole page vs modal?

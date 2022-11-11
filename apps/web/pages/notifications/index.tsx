@@ -6,7 +6,7 @@ import {
 import { Button, Spinner } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { FiCheckCircle } from "react-icons/fi";
-import { ListNotifications } from "Notifications/ListNotifications";
+import { ListNotifications } from "core/Notifications/ListNotifications";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 

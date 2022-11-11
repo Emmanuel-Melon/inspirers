@@ -9,7 +9,7 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/react";
-import { ListIntegrations } from "Integrations/ListIntegrations";
+import { ListIntegrations } from "core/Integrations/ListIntegrations";
 import { FiGithub, FiCalendar, FiHardDrive, FiPackage } from "react-icons/fi";
 // import { Dropbox } from "react-icons/"
 import { EmptyState } from "ui";

@@ -13,8 +13,8 @@ import {
   StatGroup,
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
-import { ListRoutines } from "../../Routines/ListRoutines";
-import { AddRoutine } from "../../Routines/AddRoutine";
+import { ListRoutines } from "../../core/Routines/ListRoutines";
+import { AddRoutine } from "../../core/Routines/AddRoutine";
 
 
 

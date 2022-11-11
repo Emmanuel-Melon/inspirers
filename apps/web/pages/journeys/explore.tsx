@@ -1,14 +1,14 @@
 import { Flex, Text, Heading, VStack } from "@chakra-ui/react";
-import { JourneyCard } from "../../Journeys/components/JourneyCard";
+import { JourneyCard } from "../../core/Journeys/components/JourneyCard";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
-import { JourneyBluePrint } from "../../Journeys/components/JourneyBluePrint";
+import { JourneyBluePrint } from "../../core/Journeys/components/JourneyBluePrint";
 import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { InstructorCard } from "../../Journeys/components/InstructorCard";
-import { MyJourneys } from "../../Journeys/components/MyJourneys";
-import { FeaturedMentors } from "Journeys/components/FeaturedMentors";
-import { RecommendJourneys } from "Journeys/components/RecommendedJourneys";
+import { InstructorCard } from "../../core/Journeys/components/InstructorCard";
+import { MyJourneys } from "../../core/Journeys/components/MyJourneys";
+import { FeaturedMentors } from "core/Journeys/components/FeaturedMentors";
+import { RecommendJourneys } from "core/Journeys/components/RecommendedJourneys";
 
 export default function Explore(props) {
   return (

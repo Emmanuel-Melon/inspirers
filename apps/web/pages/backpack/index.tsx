@@ -17,11 +17,11 @@ import {
     FiUploadCloud
 } from "react-icons/fi";
 
-import { ListRecentlyAdded } from "../../Backpack/ListRecentlyAdded";
-import { ListCategories } from 'Backpack/ListCategories';
-import { QuickAccess } from 'Backpack/QuickAccess';
+import { ListRecentlyAdded } from "../../core/Backpack/ListRecentlyAdded";
+import { ListCategories } from 'core/Backpack/ListCategories';
+import { QuickAccess } from 'core/Backpack/QuickAccess';
 import { LayoutController } from "ui";
-import { AddResource } from "Backpack/AddResource";
+import { AddResource } from "core/Backpack/AddResource";
 import {
     FiBarChart2,
     FiFilter,

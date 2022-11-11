@@ -14,16 +14,16 @@ import {
     TagLeftIcon
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
-import { ListRoutines } from "../../Routines/ListRoutines";
+import { ListRoutines } from "../../core/Routines/ListRoutines";
 import { Button, Card, CustomCheckbox, Modal } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiSettings, FiCalendar, FiShare2, FiPlus, FiMoreHorizontal } from "react-icons/fi";
-import { RoutineStats } from "Routines/RoutineStats";
-import { RoutineObjectives } from "Routines/RoutineObjectives";
-import { RoutineResources } from "Routines/RoutineResources";
-import { RoutineTasks } from "Routines/RoutineTasks";
-import { ManageRoutine } from "Routines/ManageRoutine";
+import { RoutineStats } from "core/Routines/RoutineStats";
+import { RoutineObjectives } from "core/Routines/RoutineObjectives";
+import { RoutineResources } from "core/Routines/RoutineResources";
+import { RoutineTasks } from "core/Routines/RoutineTasks";
+import { ManageRoutine } from "core/Routines/ManageRoutine";
 import { LayoutController } from "ui";
 
 

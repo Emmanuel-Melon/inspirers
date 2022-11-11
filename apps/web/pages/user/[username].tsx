@@ -1,13 +1,13 @@
 import { GetStaticProps, GetStaticPropsContext, NextApiRequest } from 'next';
 import React, { ReactChild, useState } from "react";
 import { Flex, VStack, Stack, Heading } from "@chakra-ui/react";
-import { UserProfileCard } from "../../User/components/UserProfileCard";
-import { UserBasicInfo } from "../../User/components/UserBasicInfo";
-import { UserBioCard } from "../../User/components/UserBioCard";
-import { ProfileSectionsTab } from "../../User/components/ProfileSectionsTab";
+import { UserProfileCard } from "../../core/User/components/UserProfileCard";
+import { UserBasicInfo } from "../../core/User/components/UserBasicInfo";
+import { UserBioCard } from "../../core/User/components/UserBioCard";
+import { ProfileSectionsTab } from "../../core/User/components/ProfileSectionsTab";
 import { useRouter } from "next/router";
 import { useFetch } from "../../hooks/useSwr";
-import { UpdateUserInfoModal } from "../../User/components/UpdateUserInfoModal";
+import { UpdateUserInfoModal } from "../../core/User/components/UpdateUserInfoModal";
 import { Card, Modal, Spinner } from "ui";
 import { User } from "@prisma/client";
 import { redirectUnauthorized } from 'utils/auth';

@@ -3,7 +3,7 @@ import { useSession, signIn } from "next-auth/react";
 import { Box, Flex, Stack, useColorModeValue, Heading } from "@chakra-ui/react";
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
-import { ComingSoon, Sidebar, UnAuthorized } from "ui";
+import { Sidebar, UnAuthorized } from "ui";
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];

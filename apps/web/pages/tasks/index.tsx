@@ -4,16 +4,16 @@ import {
   Flex,
   useDisclosure,
 } from "@chakra-ui/react";
-import { TaskList } from "../../Tasks/components/TaskList";
-import { TaskViewMenu } from "../../Tasks/components/TaskViewMenu";
-import { TaskBoard } from "../../Tasks/components/TaskBoard";
+import { TaskList } from "../../core/Tasks/components/TaskList";
+import { TaskViewMenu } from "../../core/Tasks/components/TaskViewMenu";
+import { TaskBoard } from "../../core/Tasks/components/TaskBoard";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Modal } from "ui";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
-import { AddTask } from "../../Tasks/components/AddTask";
+import { AddTask } from "../../core/Tasks/components/AddTask";
 
 export default function Tasks(props) {
   const [isLoading, setIsLoading] = useState(false);

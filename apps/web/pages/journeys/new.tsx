@@ -1,4 +1,4 @@
-import { JourneyOnboardingSteps } from "../../Journeys/Onboarding/JourneyOnboardingSteps";
+import { JourneyOnboardingSteps } from "../../core/Journeys/Onboarding/JourneyOnboardingSteps";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
