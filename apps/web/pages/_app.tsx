@@ -7,11 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "../layout/layout";
 import { JourneyContext, JourneyConsumer, JourneyProvider } from "providers/JourneyProvider";
 import { fetcher } from "../hooks/useSwr";
-<<<<<<< Updated upstream
-import "@fontsource/raleway";
-=======
 // import "@fontsource/montserrat";
->>>>>>> Stashed changes
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const getLayout = Component?.getLayout || ((page) => page);
