@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FiMap } from "react-icons/fi";
 import { Card } from "ui";
 
-export const JourneyHighlights = () => {
+export const CompanionsHighlights = () => {
     return (
         <VStack p="8" width="65%" margin="0 auto">
             <VStack flex="2" gap={8} textAlign="center">

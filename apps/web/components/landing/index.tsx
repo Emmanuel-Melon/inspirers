@@ -4,12 +4,16 @@ import { LandingPageHero } from "./LandingPageHero";
 import { InspirationPane } from "./InspirationPane";
 import { JourneyHighlights } from "./JourneyHighlights";
 import { Differentiators } from "./Differentiators";
+import { CompanionsHighlights } from "./CompanionsHighlights";
+import { BackpackHighlights } from "./BackpackHighlights";
  
-export const Landing = (props: any) => {
+export const Landing = () => {
   return (
-    <VStack p="8">
+    <VStack height="100vh" overflowY="scroll">
       <LandingPageHero />
       <JourneyHighlights />
+      <CompanionsHighlights />
+      <BackpackHighlights />
       <Differentiators />
       <InspirationPane />
       <InterestForm />
