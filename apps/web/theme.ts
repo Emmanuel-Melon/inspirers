@@ -16,7 +16,7 @@ const theme: ThemeConfig = extendTheme({
   styles: {
     global: (props: Record<string, any>) => ({
       body: {
-        bg: mode("linear-gradient( 174.2deg,  #F8F8F7 7.1%, rgba(240,246,238,1) 67.4% )", "#160D25")(props),
+        bg: mode("linear-gradient( 174.2deg,  #F8F8F7 7.1%, #fbfdfb 67.4% )", "#160D25")(props),
         color: mode("#3F300C", "#EBE0F9")(props),
       },
     }),
