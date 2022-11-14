@@ -56,8 +56,9 @@ const theme: ThemeConfig = extendTheme({
   },
 
   fonts: {
-    logo: `"Raleway", ${chakraTheme?.fonts?.logo}`,
-    heading: `Sen, ${chakraTheme?.fonts?.heading}`,
+    logo: `"Montserrat", ${chakraTheme?.fonts?.logo}`,
+
+    heading: `Montserrat, ${chakraTheme?.fonts?.heading}`,
     body: `Sen, ${chakraTheme?.fonts?.body}`,
   },
   borders: {

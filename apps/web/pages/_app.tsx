@@ -7,7 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "../layout/layout";
 import { JourneyContext, JourneyConsumer, JourneyProvider } from "providers/JourneyProvider";
 import { fetcher } from "../hooks/useSwr";
-// import "@fontsource/montserrat";
+import "@fontsource/montserrat";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const getLayout = Component?.getLayout || ((page) => page);
