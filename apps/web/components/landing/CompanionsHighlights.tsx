@@ -25,7 +25,7 @@ export const CompanionsHighlights = () => {
                         content: '""',
                         width: "100%",
                         height: "15px",
-                        marginTop: "-5px"
+                        marginTop: "-10px"
                     }}
                 >Connect with peers</Heading>
                 <Heading size="lg" >Network with empowered folks who’re ready to go farther together</Heading>
