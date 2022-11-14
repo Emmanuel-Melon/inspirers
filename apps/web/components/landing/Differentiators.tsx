@@ -6,7 +6,7 @@ import { RiRobotLine, RiBrush3Line } from "react-icons/ri";
 
 export const Differentiators = () => {
     return (
-        <VStack p="8" width="65%" margin="0 auto" bg="brand.highlight1" gap={8}>
+        <VStack p="8" margin="0 auto" bg="brand.highlight1" gap={8}>
             <VStack flex="2" gap={4} textAlign="center">
                 <Box>
                     <FiMap size="2rem" />

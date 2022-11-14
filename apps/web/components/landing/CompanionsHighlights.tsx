@@ -5,7 +5,7 @@ import { Card } from "ui";
 
 export const CompanionsHighlights = () => {
     return (
-        <VStack p="8" width="65%" margin="0 auto">
+        <VStack p="8" margin="0 auto">
             <VStack flex="2" gap={8} textAlign="center">
                 <Box
                     boxShadow="0 0 0 1px rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.1)"

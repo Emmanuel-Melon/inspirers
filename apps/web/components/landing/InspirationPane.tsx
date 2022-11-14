@@ -3,7 +3,7 @@ import { Button, Card } from "ui";
 
 export const InspirationPane = () => {
     return (
-        <Flex p="8" width="65%" margin="0 auto" alignItems="center" justifyContent="center" gap="8">
+        <Flex p="8" margin="0 auto" alignItems="center" justifyContent="center" gap="8">
             <Card>
                 <Stack>
                     <Heading>Be an Inspiration</Heading>
