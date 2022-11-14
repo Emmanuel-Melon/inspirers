@@ -25,7 +25,7 @@ export const RoutinesSection = () => {
                         content: '""',
                         width: "100%",
                         height: "15px",
-                        marginTop: "-5px"
+                        marginTop: "-10px"
                     }}
                 >
                     Create Custom Routines

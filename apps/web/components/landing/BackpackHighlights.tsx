@@ -26,7 +26,7 @@ export const BackpackHighlights = () => {
                         content: '""',
                         width: "100%",
                         height: "15px",
-                        marginTop: "-5px"
+                        marginTop: "-10px"
                     }}
                 >Don’t Be Overwhelmed </Heading>
                 <Heading size="lg">No need for a bunch of redundant links and tabs. The key is to keep it simple. </Heading>

@@ -18,13 +18,14 @@ export const JourneyHighlights = () => {
                 </Box>
                 <Heading
                     size="md"
+                    width="fit-content"
                     _after={{
                         bg: "linear-gradient(91.27deg, #D1FEB5 48.92%, rgba(208, 245, 101, 0) 158.06%)",
                         display: "block",
                         content: '""',
                         width: "100%",
                         height: "15px",
-                        marginTop: "-5px"
+                        marginTop: "-10px"
                     }}
                 >Choose your path</Heading>
                 <Heading size="xl">Choose the area of your improvement, i.e., tech, communication</Heading>
