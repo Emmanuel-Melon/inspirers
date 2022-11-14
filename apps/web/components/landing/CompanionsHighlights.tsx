@@ -27,7 +27,8 @@ export const CompanionsHighlights = () => {
                         height: "15px",
                         marginTop: "-10px"
                     }}
-                >Connect with peers</Heading>
+                >
+                    Connect with peers</Heading>
                 <Heading size="lg" >Network with empowered folks who’re ready to go farther together</Heading>
                 <Text size="lg" color="brand.secondaryText">
                     We’re in this together. Join our global community of like-minded peers. Discover and learn from those who share your aspirations, then stay connected to grow together. Collaborate in real-time using Inspirers Companion Mode! Inspirers is the platform you need for collectively achieving mind-blowing dreams.

@@ -34,7 +34,7 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   loadingText,
   disabled = false,
-  size = "sm",
+  size = "lg",
   width = "100%",
   variant,
   fullWidth,

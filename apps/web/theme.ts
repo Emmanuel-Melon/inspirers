@@ -23,7 +23,7 @@ const theme: ThemeConfig = extendTheme({
   },
   colors: {
     brand: {
-      primary: "#D1FEB5",
+      primary: "rgb(199 248 96)",
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",

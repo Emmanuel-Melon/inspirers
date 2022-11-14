@@ -21,7 +21,16 @@ export const Differentiators = () => {
                     <Box>
                         <FiMap size="2rem" />
                     </Box>
-                    <Heading as="h1" size="2xl">Why We are Different</Heading>
+                    <Heading as="h1" size="2xl"
+                        _after={{
+                            bg: "linear-gradient(90.44deg, #F4C85A -7.46%, #E3A6F2 54.28%, #FBBE95 119.85%)",
+                            display: "block",
+                            content: '""',
+                            width: "100%",
+                            height: "15px",
+                            marginTop: "-15px"
+                        }}
+                    >Why We are Different</Heading>
                     <Text>
                         Go on an amazing journey with Inspirers and get inspired by the people who are doing what you aspire to do. Advice, motivation, and encouragement are at your fingertips.
                     </Text>
