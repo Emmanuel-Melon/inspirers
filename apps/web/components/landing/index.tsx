@@ -1,6 +1,6 @@
-import { VStack } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { InterestForm } from "./InterestForm";
-import { LandingPageHero } from "./LandingPageHero";
+import { HeroSection } from "./HeroSection";
 import { InspirationPane } from "./InspirationPane";
 import { JourneyHighlights } from "./JourneyHighlights";
 import { Differentiators } from "./Differentiators";
@@ -9,15 +9,15 @@ import { BackpackHighlights } from "./BackpackHighlights";
  
 export const Landing = () => {
   return (
-    <VStack height="100vh" overflowY="scroll">
-      <LandingPageHero />
+    <Container maxW="container.lg">
+      <HeroSection />
       <JourneyHighlights />
       <CompanionsHighlights />
       <BackpackHighlights />
       <Differentiators />
       <InspirationPane />
       <InterestForm />
-    </VStack>
+    </Container>
   );
 }
 

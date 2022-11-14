@@ -49,14 +49,14 @@ const theme: ThemeConfig = extendTheme({
   },
   sizes: {
     // this is global // applies to all components
-    sm: "",
-    md: "",
-    lg: "",
+    sm: "1rm",
+    md: "2rem",
+    lg: "4rem",
+    xl: "8rem"
   },
 
   fonts: {
     logo: `"Raleway", ${chakraTheme?.fonts?.logo}`,
-
     heading: `Sen, ${chakraTheme?.fonts?.heading}`,
     body: `Sen, ${chakraTheme?.fonts?.body}`,
   },
