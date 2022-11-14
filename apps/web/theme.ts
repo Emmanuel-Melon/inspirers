@@ -65,7 +65,6 @@ const theme: ThemeConfig = extendTheme({
 
   fonts: {
     logo: `"Montserrat", ${chakraTheme?.fonts?.logo}`,
-
     heading: `Montserrat, ${chakraTheme?.fonts?.heading}`,
     body: `Sen, ${chakraTheme?.fonts?.body}`,
   },
