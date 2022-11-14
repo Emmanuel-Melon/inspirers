@@ -16,7 +16,18 @@ export const CompanionsHighlights = () => {
                 >
                     <RiTeamLine size="2rem" />
                 </Box>
-                <Heading as="h3" size="md" color="brand.secondary">Connect with peers</Heading>
+                <Heading
+                    as="h3"
+                    size="md"
+                    _after={{
+                        bg: "linear-gradient(91.27deg, #D1FEB5 48.92%, rgba(208, 245, 101, 0) 158.06%)",
+                        display: "block",
+                        content: '""',
+                        width: "100%",
+                        height: "15px",
+                        marginTop: "-5px"
+                    }}
+                >Connect with peers</Heading>
                 <Heading size="lg" >Network with empowered folks who’re ready to go farther together</Heading>
                 <Text size="lg" color="brand.secondaryText">
                     We’re in this together. Join our global community of like-minded peers. Discover and learn from those who share your aspirations, then stay connected to grow together. Collaborate in real-time using Inspirers Companion Mode! Inspirers is the platform you need for collectively achieving mind-blowing dreams.

@@ -17,11 +17,22 @@ export const BackpackHighlights = () => {
                 >
                     <RiSuitcase2Line size="2rem" />
                 </Box>
-                <Heading as="h3" size="md" color="brand.secondary">Don’t Be Overwhelmed </Heading>
+                <Heading 
+                    as="h3" 
+                    size="md"
+                    _after={{
+                        bg: "linear-gradient(91.27deg, #D1FEB5 48.92%, rgba(208, 245, 101, 0) 158.06%)",
+                        display: "block",
+                        content: '""',
+                        width: "100%",
+                        height: "15px",
+                        marginTop: "-5px"
+                    }}
+                >Don’t Be Overwhelmed </Heading>
                 <Heading size="lg">No need for a bunch of redundant links and tabs. The key is to keep it simple. </Heading>
                 <Text>
-                With your goals, gather the necessary resources and organize them accordingly for easy reach and future reference.  
-The Inspirers Backpack is the ultimate resource feature that will allow you to have your books, articles, mood boards, tutorials, podcasts, videos, and more at your fingertips. You can sync your resources to your individual tasks to save time. Stay organized and put an end to information clutter.
+                    With your goals, gather the necessary resources and organize them accordingly for easy reach and future reference.
+                    The Inspirers Backpack is the ultimate resource feature that will allow you to have your books, articles, mood boards, tutorials, podcasts, videos, and more at your fingertips. You can sync your resources to your individual tasks to save time. Stay organized and put an end to information clutter.
 
                 </Text>
             </VStack>
