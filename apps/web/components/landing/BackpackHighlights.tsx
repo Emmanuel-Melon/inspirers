@@ -7,11 +7,7 @@ import { RiSuitcase2Line } from "react-icons/ri";
 export const BackpackHighlights = () => {
     return (
         <VStack p="8" margin="0 auto">
-<<<<<<< HEAD
             <VStack flex="2" gap={4} textAlign="center">
-=======
-            <VStack flex="2" gap={8} textAlign="center">
->>>>>>> 4fe53ce (fix: remove dark background:)
                 <Box
                     boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
                     p="4"

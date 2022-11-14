@@ -34,6 +34,7 @@ export const Differentiators = () => {
                     <Text>
                         Go on an amazing journey with Inspirers and get inspired by the people who are doing what you aspire to do. Advice, motivation, and encouragement are at your fingertips.
                     </Text>
+                    </Flex>
             </VStack>
             <VStack gap={8}>
                 <Flex gap={8} alignItems="center">
@@ -65,6 +66,5 @@ export const Differentiators = () => {
                 </Flex>
             </VStack>
         </VStack>
-        </Card >
     )
 }
