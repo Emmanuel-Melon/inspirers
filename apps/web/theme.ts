@@ -1,3 +1,4 @@
+// we add container here
 import {
   extendTheme,
   type ThemeConfig,
@@ -23,7 +24,8 @@ const theme: ThemeConfig = extendTheme({
   },
   colors: {
     brand: {
-      primary: "rgb(199 248 96)",
+      header: "rgba(237, 227, 247)",
+      primary: "rgb(211 255 96)",
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",
@@ -32,7 +34,7 @@ const theme: ThemeConfig = extendTheme({
       highlight1: "rgba(169, 113, 26, 0.04)",
       highlight2: "rgba(0, 157, 174, 0.035)",
       highlight3: "rgba(57, 19, 119, 0.4)",
-      grey: "rgb(245, 246, 248)",
+      grey: "rgba(245, 246, 248, 1)",
       danger: "#df4759",
       success: "#5cb85c",
       primaryText: "#151F0E", // for dark mode: #8b949e
@@ -44,6 +46,9 @@ const theme: ThemeConfig = extendTheme({
       hovered2:
         "linear-gradient(267.15deg, rgba(169, 113, 26, 0.04) -14.36%, rgba(248, 189, 250, 0.3) 25.12%, rgba(0, 157, 174, 0.035) 89.33%)",
     },
+    dark: {
+      header:"rgb(29, 10, 60)"
+    }
   },
 
   components: {
@@ -55,14 +60,6 @@ const theme: ThemeConfig = extendTheme({
     //   lg: {},
     // },
   },
-  sizes: {
-    // this is global // applies to all components
-    sm: "1rm",
-    md: "2rem",
-    lg: "4rem",
-    xl: "8rem"
-  },
-
   fonts: {
     logo: `"Montserrat", ${chakraTheme?.fonts?.logo}`,
     heading: `Montserrat, ${chakraTheme?.fonts?.heading}`,

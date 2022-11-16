@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Stack, Container } from "@chakra-ui/react";
 import { InterestForm } from "./InterestForm";
 import { HeroSection } from "./HeroSection";
 import { InspirationPane } from "./InspirationPane";
@@ -7,20 +7,27 @@ import { Differentiators } from "./Differentiators";
 import { CompanionsHighlights } from "./CompanionsHighlights";
 import { BackpackHighlights } from "./BackpackHighlights";
 import { RoutinesSection } from "./RoutinesSection";
-import Routine from "pages/routines/[id]";
- 
+import { Header } from "./Header";
+
 export const Landing = () => {
   return (
-    <Container maxW="container.lg">
-      <HeroSection />
-      <JourneyHighlights />
+    <Stack as="main">
+      <Header />
+      <Container p={["2rem", "8rem", "12rem", "16rem"]}>
+        <HeroSection />
+      </Container>
+    </Stack>
+  );
+};
+
+/**
+ *       <JourneyHighlights />
       <CompanionsHighlights />
       <BackpackHighlights />
       <RoutinesSection />
       <Differentiators />
       <InspirationPane />
       <InterestForm />
-    </Container>
-  );
-}
 
+            px={customPadding}
+ */
