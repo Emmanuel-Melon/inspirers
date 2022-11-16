@@ -1,3 +1,4 @@
+// we add container here
 import {
   extendTheme,
   type ThemeConfig,
@@ -22,7 +23,8 @@ const theme: ThemeConfig = extendTheme({
   },
   colors: {
     brand: {
-      primary: "rgb(199 248 96)",
+      header: "rgba(237, 227, 247)",
+      primary: "rgb(211 255 96)",
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",
@@ -47,14 +49,6 @@ const theme: ThemeConfig = extendTheme({
       header: "rgb(29, 10, 60)",
     },
   },
-  sizes: {
-    // this is global // applies to all components
-    sm: "1rm",
-    md: "2rem",
-    lg: "4rem",
-    xl: "8rem"
-  },
-
   fonts: {
     logo: `"Montserrat", ${chakraTheme?.fonts?.logo}`,
     heading: `Montserrat, ${chakraTheme?.fonts?.heading}`,
