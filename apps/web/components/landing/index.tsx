@@ -1,33 +1,43 @@
-import { Stack, Container } from "@chakra-ui/react";
+import { Box, Container, Stack } from "@chakra-ui/react";
 import { InterestForm } from "./InterestForm";
 import { HeroSection } from "./HeroSection";
 import { InspirationPane } from "./InspirationPane";
-import { JourneyHighlights } from "./JourneyHighlights";
-import { Differentiators } from "./Differentiators";
-import { CompanionsHighlights } from "./CompanionsHighlights";
-import { BackpackHighlights } from "./BackpackHighlights";
+import { JourneySection } from "./JourneySection";
+import { Highlights } from "./Highlights";
+import { CompanionsSection } from "./CompanionsSection";
+import { BackpackSection } from "./BackpackSection";
 import { RoutinesSection } from "./RoutinesSection";
 import { Header } from "./Header";
+import { ReflectionsSection } from "./ReflectionsSection";
+import Image from "next/image";
+import { Footer } from "./Footer";
 
 export const Landing = () => {
   return (
-    <Stack as="main">
+    <Box as="main" width="100%" justifyContent="center" alignItems="center">
       <Header />
-      <Container p={["2rem", "8rem", "12rem", "16rem"]}>
+      <Stack
+        p={["1rem", "1rem", "1rem", "1rem"]}
+        justifyContent="center"
+        alignItems="center"
+        width={["100%", "100%", "100%", "65%"]}
+        margin="0 auto"
+        gap={32}
+      >
         <HeroSection />
-      </Container>
-    </Stack>
+        <JourneySection />
+        <InspirationPane />
+        <BackpackSection />
+        <RoutinesSection />
+        <CompanionsSection />
+        <ReflectionsSection />
+
+        <Highlights />
+        
+        <InterestForm />
+        <Footer />
+      </Stack>
+    </Box>
   );
 };
 
-/**
- *       <JourneyHighlights />
-      <CompanionsHighlights />
-      <BackpackHighlights />
-      <RoutinesSection />
-      <Differentiators />
-      <InspirationPane />
-      <InterestForm />
-
-            px={customPadding}
- */

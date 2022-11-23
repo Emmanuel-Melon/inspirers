@@ -1,42 +1,78 @@
-import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Stack,
+  Text,
+  List,
+  ListItem,
+  Divider,
+} from "@chakra-ui/react";
 import { Button, Card } from "ui";
+import { gradientUnderline } from "ui";
+import { SectionWrapper } from "./SectionWrapper";
+import {
+  RiOpenArmLine,
+  RiHandHeartLine,
+  RiMagicLine,
+  RiPlantLine,
+} from "react-icons/ri";
+import Image from "next/image";
 
 export const InspirationPane = () => {
-    return (
-        <Flex p="8" margin="0 auto" alignItems="center" justifyContent="center" gap="8">
-            <Card>
-                <Stack gap={4}>
-                    <Heading
-                    width="fit-content"
-                        _after={{
-                            bg: "linear-gradient(90.44deg, #F4C85A -7.46%, #E3A6F2 54.28%, #FBBE95 119.85%)",
-                            display: "block",
-                            content: '""',
-                            width: "100%",
-                            height: "15px",
-                            marginTop: "-15px"
-                        }}
-                    >Be an Inspiration</Heading>
-                    <Text>You already established yourself in a chosen field. If you made it this far, you must be willing to share about your skills and approches by promoting yourself through helping the others... You learnt in a hard way and you wish you heard about this app before.</Text>
-
-                </Stack>
-            </Card>
-            <Card>
-                <Stack gap={4}>
-                    <Heading
-                    width="fit-content"
-                        _after={{
-                            bg: "linear-gradient(90.44deg, #ECB1F6 2.98%, #BBB1F6 55.06%, #F6D8FB 119.85%)",
-                            display: "block",
-                            content: '""',
-                            width: "100%",
-                            height: "15px",
-                            marginTop: "-15px"
-                        }}
-                    >Find Inspiration</Heading>
-                    <Text>You already sure you dont want to hestitate iany longer and start achiving your goals but you need right tools and enviroment to make it come throught. You can finally track your progress....</Text>
-                </Stack>
-            </Card>
+  return (
+    <SectionWrapper>
+      <Stack alignItems="center" justifyContent="center" gap={4}>
+        <Heading>So let's pack up and head on a Journey, shall we?</Heading>
+        <Text>
+          Whether you're trying to lose weight, get promoted at work, learn a
+          language, launch a startup, or something else-- we have everything you
+          need to achieve it.
+        </Text>
+        <Flex
+          flexDir={["column", "column", "row", "row"]}
+          alignItems="center"
+          justifyContent="center"
+          gap="8"
+        >
+          <Flex flex="1">
+          <Image
+            width="250"
+            height="250"
+            src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg"
+            alt="Banner"
+          />
+          </Flex>
+          <Stack gap={4} height="350px" overflowY="scroll" flex="2">
+            <RiOpenArmLine size="3rem" />
+            <Heading size="md">Connect and Engage</Heading>
+            <Text>
+              Find companions with similar goals to hold each other accountable
+              and celebrate wins together
+            </Text>
+            <Divider />
+            <RiMagicLine size="3rem" />
+            <Heading size="md">Reflect and improve</Heading>
+            <Text>
+              Reflect on your experience and highlight the your next area of
+              improvement
+            </Text>
+            <Divider />
+            <RiHandHeartLine size="3rem" />
+            <Heading size="md">Gather resource</Heading>
+            <Text>
+              The Backpack will allow you to have your books, articles,
+              tutorials, podcasts, videos, and more at your fingertips.
+            </Text>
+            <Divider />
+            <RiPlantLine size="3rem" />
+            <Heading size="md">Build Habits</Heading>
+            <Text>
+              Build habits that are aligned with your purpose, goals and daily
+              objectives
+            </Text>
+          </Stack>
         </Flex>
-    )
-}
+      </Stack>
+    </SectionWrapper>
+  );
+};

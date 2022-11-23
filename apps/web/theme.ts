@@ -16,7 +16,7 @@ const theme: ThemeConfig = extendTheme({
   styles: {
     global: (props: Record<string, any>) => ({
       body: {
-        bg: mode("linear-gradient( 174.2deg,  #F8F8F7 7.1%, #fbfdfb 67.4% )", "#160D25")(props),
+
         color: mode("#3F300C", "#EBE0F9")(props),
       },
     }),
@@ -28,11 +28,11 @@ const theme: ThemeConfig = extendTheme({
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",
-      accent: "#afbfbf",
+      accent: "#F4C768",
       highlight: "rgba(248, 255, 220, 0.75)",
       highlight1: "rgba(169, 113, 26, 0.04)",
       highlight2: "rgba(0, 157, 174, 0.035)",
-      highlight3: "rgba(57, 19, 119, 0.4)",
+      highlight3: "rgba(57, 19, 119, 0.05)",
       grey: "rgba(245, 246, 248, 1)",
       danger: "#df4759",
       success: "#5cb85c",
@@ -41,7 +41,7 @@ const theme: ThemeConfig = extendTheme({
       hovered:
         "linear-gradient(267.15deg, #D1FEB5 -14.36%, #F7F8C5 25.12%, #F7E4EF 89.33%)",
       gradient:
-        "linear-gradient(267.77deg, #DBF8C9 -2.57%, rgba(252, 254, 181, 0.651129) 86.26%, rgba(176, 235, 139, 0) 150.75%)",
+        "linear-gradient(267.15deg, #D3FF60 -14.36%, #F7F8C5 25.12%, #F7E4EF 89.33%)",
       hovered2:
         "linear-gradient(267.15deg, rgba(169, 113, 26, 0.04) -14.36%, rgba(248, 189, 250, 0.3) 25.12%, rgba(0, 157, 174, 0.035) 89.33%)",
     },
