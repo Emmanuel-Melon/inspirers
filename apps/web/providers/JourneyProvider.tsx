@@ -6,9 +6,9 @@ import { UPDATE_JOURNEY } from "./actions";
 export const JourneyContext = createContext<any>(null);
 export const JourneyConsumer = JourneyContext.Consumer;
 
-type JourneyProps = {
+export interface JourneyContextType {
   children: React.ReactChild | React.ReactChild[];
-};
+}
 
 const initialState = {
   journey: {
@@ -16,23 +16,16 @@ const initialState = {
     title: "",
     description: "",
     userId: "",
-
-  }
+  },
 };
 
-export const JourneyProvider = ({
-  children,
-}: JourneyProps) => {
+export const JourneyProvider = ({ children }: JourneyContextType) => {
   const [state, dispatch] = useReducer(journeyReducer, initialState);
-  const [blueprint, setBluePrint] = useState<string>("template");
-  const onBluePrintChange = (value: string) => setBluePrint(value);
-
-
 
   return (
     <JourneyContext.Provider
       value={{
-        ...state
+        ...state,
       }}
     >
       {children}

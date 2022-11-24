@@ -34,7 +34,11 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   loadingText,
   disabled = false,
+<<<<<<< Updated upstream
   size = "sm",
+=======
+  size = "md",
+>>>>>>> Stashed changes
   width = "100%",
   variant,
   fullWidth,
