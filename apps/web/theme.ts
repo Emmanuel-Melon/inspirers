@@ -10,13 +10,19 @@ const config = {
   useSystemColorMode: false,
 };
 
-
 const theme: ThemeConfig = extendTheme({
   config,
   styles: {
     global: (props: Record<string, any>) => ({
       body: {
+<<<<<<< Updated upstream
         bg: mode("linear-gradient( 174.2deg,  #F8F8F7 7.1%, rgba(240,246,238,1) 67.4% )", "#160D25")(props),
+=======
+        bg: mode(
+          "linear-gradient( 174.2deg,  #F8F8F7 7.1%, #fbfdfb 67.4% )",
+          "#160D25"
+        )(props),
+>>>>>>> Stashed changes
         color: mode("#3F300C", "#EBE0F9")(props),
       },
     }),
@@ -27,12 +33,20 @@ const theme: ThemeConfig = extendTheme({
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",
+<<<<<<< Updated upstream
       accent: "#391377",
+=======
+      accent: "#afbfbf",
+>>>>>>> Stashed changes
       highlight: "rgba(248, 255, 220, 0.75)",
       highlight1: "rgba(169, 113, 26, 0.04)",
       highlight2: "rgba(0, 157, 174, 0.035)",
       highlight3: "rgba(57, 19, 119, 0.4)",
+<<<<<<< Updated upstream
       grey: "rgb(245, 246, 248)",
+=======
+      grey: "rgba(245, 246, 248, 1)",
+>>>>>>> Stashed changes
       danger: "#df4759",
       success: "#5cb85c",
       primaryText: "#151F0E", // for dark mode: #8b949e
@@ -44,6 +58,7 @@ const theme: ThemeConfig = extendTheme({
       hovered2:
         "linear-gradient(267.15deg, rgba(169, 113, 26, 0.04) -14.36%, rgba(248, 189, 250, 0.3) 25.12%, rgba(0, 157, 174, 0.035) 89.33%)",
     },
+<<<<<<< Updated upstream
   },
 
   components: {
@@ -54,6 +69,11 @@ const theme: ThemeConfig = extendTheme({
     //   md: {},
     //   lg: {},
     // },
+=======
+    dark: {
+      header: "rgb(29, 10, 60)",
+    },
+>>>>>>> Stashed changes
   },
   sizes: {
     // this is global // applies to all components
@@ -85,75 +105,3 @@ const theme: ThemeConfig = extendTheme({
 });
 
 export default theme;
-
-// import darken , mode , whiten } from @ chakra - ul / theme - tool
-// export const ButtonStyles = {
-//  // style object for base or default style
-//  baseStyle : { } ,
-//  // styles for different sizes ( " sm " , " md " , " lg " )
-//   sizes : { } ,
-// } ;
-//   // styles for different visual variants ( " outline " , " solid " )
-//   variants : {
-//     primary : ( props ) ⇒ ( {
-//       bg : " primary " ,
-//       color : " white " ,
-//       _hover : {
-//         bg : mode ( darken ( " primary " , 20 ) , whiten ( " primary " , 20 ) ) ( pr
-//         boxShadow : " md " ,
-//       } ,
-//     } ) ,
-//     secondary : ( props ) ⇒ ( {
-//       bg : " secondary " ,
-//       color : " white " ,
-//       _hover : {
-//         bg : mode ( darken ( " secondary " , 20 ) , whiten ( " secondary " , 20 )
-//         boxShadow : " md " ,
-//       } ,
-//     } ) ,
-// default values for size and variant
-
-// import type { StyleFunctionProps } from "@chakra-ui/styled-system";
-
-// const theme = extendTheme({
-//   components: {
-//     : {
-//       // 1. We can update the base styles
-//       baseStyle:Button {
-//         fontWeight: "bold", // Normally, it is "semibold"
-//       },
-//       // 2. We can add a new button size or extend existing
-//       sizes: {
-//         xl: {
-//           h: "56px",
-//           fontSize: "lg",
-//           px: "32px",
-//         },
-//       },
-//       // 3. We can add a new visual variant
-//       variants: {
-//         "with-shadow": {
-//           bg: "red.400",
-//           boxShadow: "0 0 2px 2px #efdfde",
-//         },
-//         // 4. We can override existing variants
-//         solid: (props: StyleFunctionProps) => ({
-//           bg: props.colorMode === "dark" ? "red.300" : "red.500",
-//         }),
-//         // 5. We can add responsive variants
-//         sm: {
-//           bg: "teal.500",
-//           fontSize: "md",
-//         },
-//       },
-//       // 6. We can overwrite defaultProps
-//       defaultProps: {
-//         size: "lg", // default is md
-//         variant: "sm", // default is solid
-//         colorScheme: "green", // default is gray
-//       },
-//     },
-//   },
-// });
-
-// export default theme;
