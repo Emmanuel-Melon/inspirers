@@ -16,7 +16,10 @@ const theme: ThemeConfig = extendTheme({
   styles: {
     global: (props: Record<string, any>) => ({
       body: {
-
+        bg: mode(
+          "linear-gradient( 174.2deg,  #F8F8F7 7.1%, #fbfdfb 67.4% )",
+          "#160D25"
+        )(props),
         color: mode("#3F300C", "#EBE0F9")(props),
       },
     }),
@@ -28,11 +31,11 @@ const theme: ThemeConfig = extendTheme({
       primaryHover: "rgba(73, 51, 35, 0.8)",
       white: "#fff",
       secondary: "#A9711A",
-      accent: "#F4C768",
+      accent: "#afbfbf",
       highlight: "rgba(248, 255, 220, 0.75)",
       highlight1: "rgba(169, 113, 26, 0.04)",
       highlight2: "rgba(0, 157, 174, 0.035)",
-      highlight3: "rgba(57, 19, 119, 0.05)",
+      highlight3: "rgba(57, 19, 119, 0.4)",
       grey: "rgba(245, 246, 248, 1)",
       danger: "#df4759",
       success: "#5cb85c",
