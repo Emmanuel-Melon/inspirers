@@ -12,10 +12,6 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
     IconButton
 } from "@chakra-ui/react";
 import { BeakerIcon } from '@heroicons/react/24/solid'
@@ -28,27 +24,27 @@ import {
     FiHome,
     FiSettings,
     FiUser,
-    FiBell,
-    FiCheckCircle,
-    FiRotateCw,
-    FiTrendingUp,
-    FiMap,
-    FiMonitor,
-    FiClipboard,
-    FiShoppingBag,
-    FiPackage,
     FiLogOut,
     FiHelpCircle
 } from "react-icons/fi";
 
-import { RiApps2Line, RiHandbagLine, RiNotification3Line } from "react-icons/ri";
+import { RiApps2Line, RiHandbagLine, RiNotification3Line, RiRocket2Line } from "react-icons/ri";
 
 import { HiOutlineBell, HiOutlineHome, HiOutlineTemplate, HiOutlineClipboardCheck, HiOutlineCollection } from "react-icons/hi";
 
 const SidebarLink = ({ link }) => {
     return (
-        <LinkBox>
-            <LinkOverlay href={link.url}>
+        <LinkBox
+            p="2"
+            borderRadius="lg"
+            _hover={{
+                bg: "brand.highlight1",
+                width: "100%",
+                p: "2",
+                color: "brand.secondary",
+                boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+            }}>
+            <LinkOverlay href={link.url} color="brand.secondaryText">
                 <Flex gap={4} alignItems="center">
                     <Flex
                         color={link.active ? "brand.white" : "brand.secondaryText"}
@@ -125,19 +121,47 @@ export const Sidebar = ({ session }) => {
     const router = useRouter();
     return (
         <Stack
-            p={4}
+            p={8}
             height="100vh"
             justifyContent="space-between"
-            width="fit-content"
+            width="250px"
             alignItems="flex-start"
+            bg="brand.white"
+            borderRight="solid 0.10rem"
+            borderColor="#eee"
         >
-            <Stack gap={4} alignItems="flex-start">
-                {
-                    links.map(link => <SidebarLink key={link.id} link={link} />)
-                }
+            <Stack gap={2}>
+                <Flex gap={2} alignItems="center" p="2">
+                    <Flex
+                        color="brand.secondaryText"
+                        borderRadius="50%"
+                        alignItems="center"
+                        bg="brand.white"
+                        p="2"
+                        justifyContent="center"
+                        boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                        cursor="pointer"
+                        _hover={{
+                            bg: "brand.accent",
+                        }}
+                        style={{
+                            transform: "rotate(25deg)"
+                        }}
+                    >
+                        <RiRocket2Line size="1.5rem" />
+
+                    </Flex>
+                    <Heading size="md">Inspirers</Heading>
+                </Flex>
+                <Stack alignItems="flex-start">
+                    {
+                        links.map(link => <SidebarLink key={link.id} link={link} />)
+                    }
+                </Stack>
             </Stack>
-            <Stack gap={4}>
-                <Stack gap={4}>
+
+            <Stack gap={2}>
+                <Stack gap={2}>
                     {
                         bottomLinks.map(link => <SidebarLink key={link.id} link={link} />)
                     }
@@ -190,7 +214,7 @@ export const Sidebar = ({ session }) => {
                         </MenuList>
                     </Menu>
                     <Stack>
-                    <Text size="xs">@junubiman</Text>
+                        <Text size="xs">@junubiman</Text>
                     </Stack>
                 </Flex>
             </Stack>
