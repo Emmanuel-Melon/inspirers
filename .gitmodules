@@ -1,0 +1,6 @@
+[submodule "apps/api"]
+	path = apps/api
+	branch = main
+[submodule "apps/website"]
+	path = apps/website
+	branch = main

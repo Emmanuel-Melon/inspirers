@@ -37,11 +37,3 @@ COPY --from=installer /app .
 
 # CMD ["npm", "run", "dev"]
 CMD ["node", "-e", "(function() { setInterval(() => { console.log(\"hello\") }, 5000) })()"]
-
-# exec into the container and run the following command to see the output
-# docker exec -it <container-id> sh -c "ls -la /app/apps/api/dist"
-# inspect the packages and prisma folders to see that they are included in the image
-# prisma is a dependency of the api package
-# @inspirers/prisma cannot be found in the container. 
-# only found eslint-config-custom  tsconfig
-# try running yarn install

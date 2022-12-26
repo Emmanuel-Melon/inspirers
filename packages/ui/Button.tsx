@@ -3,12 +3,7 @@ import { Button as ButtonBase, ScaleFade } from "@chakra-ui/react";
 
 type ButtonVariant = "Outlined" | "Link" | null;
 type ButtonColor = "Primary" | "Secondary" | null;
-
-// type Button
-// <Button variant="outlined" color="secondary">Hello</Button>
-// <Button variant="outlined" color="primary">Hello</Button>
-// Use the variant prop to change the visual style of the Button. You can set the value to solid, ghost, outline, or link.
-// https://chakra-ui.com/docs/components/button#button-variants
+type ButtonType = "button" | "submit" | "reset" | undefined;
 
 type ButtonProps = {
   size?: string;
@@ -22,7 +17,8 @@ type ButtonProps = {
   width?: string;
   disabled?: boolean;
   variant?: ButtonVariant;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: ButtonType;
+  style?: React.CSSProperties;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -37,8 +33,7 @@ export const Button: FC<ButtonProps> = ({
   size = "md",
   width = "100%",
   variant,
-  fullWidth,
-  border = "solid 0.10rem #eee",
+  fullWidth = false,
   type = "button"
 }) => {
 
@@ -67,39 +62,10 @@ export const Button: FC<ButtonProps> = ({
         _hover={{
           bg: "brand.hovered"
         }}
-        type="type"
+        type={type}
       >
         {children}
       </ButtonBase>
     </ScaleFade>
   );
 };
-
-
-// import darken , mode , whiten } from @ chakra - ul / theme - tool
-// export const ButtonStyles = {
-//  // style object for base or default style
-//  baseStyle : { } ,
-//  // styles for different sizes ( " sm " , " md " , " lg " )
-//   sizes : { } ,
-// } ;
-//   // styles for different visual variants ( " outline " , " solid " )
-//   variants : {
-//     primary : ( props ) ⇒ ( {
-//       bg : " primary " ,
-//       color : " white " ,
-//       _hover : {
-//         bg : mode ( darken ( " primary " , 20 ) , whiten ( " primary " , 20 ) ) ( pr
-//         boxShadow : " md " ,
-//       } ,
-//     } ) ,
-//     secondary : ( props ) ⇒ ( {
-//       bg : " secondary " ,
-//       color : " white " ,
-//       _hover : {
-//         bg : mode ( darken ( " secondary " , 20 ) , whiten ( " secondary " , 20 )
-//         boxShadow : " md " ,
-//       } ,
-//     } ) ,
-//   // default values for size and variant
-//   defaultProps : { } ,
