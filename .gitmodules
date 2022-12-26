@@ -2,6 +2,10 @@
 	path = apps/api
 	url = https://github.com/Emmanuel-Melon/inspirers-api
 	branch = main
+[submodule "apps/admin"]
+	path = apps/admin
+	url = https://github.com/Emmanuel-Melon/inspirers-admin
+	branch = main
 [submodule "apps/website"]
 	path = apps/website
 	url = https://github.com/Emmanuel-Melon/inspirers-website
