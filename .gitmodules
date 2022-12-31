@@ -1,12 +1,8 @@
-[submodule "apps/api"]
+[submodule "apps/inspirers-api"]
 	path = apps/api
 	url = https://github.com/Emmanuel-Melon/inspirers-api
 	branch = main
-[submodule "apps/admin"]
-	path = apps/inspirers-admin
-	url = https://github.com/Emmanuel-Melon/inspirers-admin
-	branch = main
-[submodule "apps/website"]
+[submodule "apps/inspirers-website"]
 	path = apps/website
 	url = https://github.com/Emmanuel-Melon/inspirers-website
 	branch = main
