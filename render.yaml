@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: inspirers-web
+    env: node
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+    buildCommand: yarn build
+    startCommand: yarn start
+    autoDeploy: false # optional
