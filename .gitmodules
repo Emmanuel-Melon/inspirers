@@ -1,0 +1,9 @@
+[submodule "apps/inspirers-api"]
+	path = apps/inspirers-api
+	url = https://github.com/InspirersHQ/inspirers-api.git
+[submodule "apps/inspirers-admin"]
+	path = apps/inspirers-admin
+	url = https://github.com/InspirersHQ/inspirers-admin.git
+[submodule "apps/inspirers-website"]
+	path = apps/inspirers-website
+	url = https://github.com/InspirersHQ/inspirers-website.git

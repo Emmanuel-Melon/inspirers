@@ -1,5 +1,4 @@
 version: "3"
-
 services:
   web:
     container_name: web
@@ -31,9 +30,6 @@ services:
       - 3001:3001
     networks:
       - app_network
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
 networks:
   app_network:
     external: true

@@ -8,39 +8,47 @@ import { Backpack } from "@prisma/client";
 type AddResourceState = "success" | "error" | "loading" | "empty";
 
 type AddResourceViewMap = {
-    [key in AddResourceView]: any;
-}
+  [key in AddResourceView]: any;
+};
 
 type AddResourceView = "form" | "invite" | "video" | "image" | "expanded";
 
 type AddResourceProps = {
-    closeModal: () => void;
-    backpack: Backpack;
-}
+  backpack: Backpack;
+};
 
-export const AddResource: FC<AddResourceProps> = ({ backpack, closeModal }) => {
-    const [view, setView] = useState<AddResourceView>("form");
-    const toggleView = (view: AddResourceView) => {
-        setView(view);
-    }
+export const AddResource: FC<AddResourceProps> = ({ backpack }) => {
+  const [view, setView] = useState<AddResourceView>("form");
+  const toggleView = (view: AddResourceView) => {
+    setView(view);
+  };
 
-    const previousView = () => {
-        if (view === "form") {
-            closeModal();
-        } else {
-            setView("form");
-        }
-    }
-
-    // it's best to use a context provider to manage the state of the modal
-    
-    return (
-        <>
-            {view === "form" && <AddResourceForm previousView={previousView} toggleView={toggleView} closeModal={closeModal} backpack={backpack} />}
-            {view === "invite" && <InviteCompanionView previousView={previousView} toggleView={toggleView} />}
-            {view === "image" && <UploadView previousView={previousView} toggleView={toggleView} />}
-            {view === "video" && <UploadView previousView={previousView} toggleView={toggleView} />}
-            {view === "expanded" && <ExpandedResourceView previousView={previousView} toggleView={toggleView} />}
-        </>
-    )
-}
+  const previousView = () => {
+    setView("form");
+  };
+  return (
+    <>
+      {view === "form" && (
+        <AddResourceForm toggleView={toggleView} backpack={backpack} />
+      )}
+      {view === "invite" && (
+        <InviteCompanionView
+          previousView={previousView}
+          toggleView={toggleView}
+        />
+      )}
+      {view === "image" && (
+        <UploadView previousView={previousView} toggleView={toggleView} />
+      )}
+      {view === "video" && (
+        <UploadView previousView={previousView} toggleView={toggleView} />
+      )}
+      {view === "expanded" && (
+        <ExpandedResourceView
+          previousView={previousView}
+          toggleView={toggleView}
+        />
+      )}
+    </>
+  );
+};

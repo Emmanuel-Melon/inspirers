@@ -3,6 +3,7 @@ import {
   useMultiStyleConfig,
   useTab,
   Button,
+  
 } from "@chakra-ui/react";
 
 export const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
@@ -19,8 +20,8 @@ export const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
         size="sm"
         borderRadius="1rem"
         leftIcon={props.icon}
-        bg={isSelected ? "brand.accent" : "brand.highlight3"}
-        color={isSelected ? "brand.white" : "brand.grey"}
+        bg={isSelected ? "brand.highlight1" : "brand.highlight2"}
+        color={isSelected ? "brand.primaryText" : "brand.secondaryText"}
         _hover={{
           bg: isSelected ? "brand.hovered" : "brand.highlight3",
           color: isSelected ? "brand.secondaryText" : "brand.secondaryText",

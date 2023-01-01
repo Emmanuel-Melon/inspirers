@@ -4,7 +4,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/landing/HeroSection.tsx"  ],
   "exclude": [
     "node_modules"
   ],
