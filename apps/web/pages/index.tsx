@@ -1,8 +1,6 @@
-import { Landing } from "components/landing";
-
 export default function Index() {
   return (
-    <Landing />
+    <h1>Coming Soon!</h1>
   );
 }
 
