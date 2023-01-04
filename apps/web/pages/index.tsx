@@ -4,5 +4,3 @@ export default function Index() {
   );
 }
 
-Index.publicPage = true;
-
