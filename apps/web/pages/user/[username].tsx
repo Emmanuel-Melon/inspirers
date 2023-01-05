@@ -16,7 +16,6 @@ export default function UserProfile() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const { data: user, isLoading, isError } = useFetch(`/users/${router.query.username}`);
-console.log(user)
   const openModal = () => { }
   const closeModal = () => {
     setIsModalOpen(false);

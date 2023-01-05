@@ -7,7 +7,9 @@ import {
   JourneyOnboardingProvider,
 } from "../../../providers/JourneyOnboardingProvider";
 
-export const JourneyOnboardingSteps = ({ user }) => {
+export const JourneyOnboardingSteps = ({ user = {} }) => {
+
+  console.log(user);
   return (
     <JourneyOnboardingProvider>
       <JourneyOnboardingConsumer>

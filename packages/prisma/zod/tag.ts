@@ -1,6 +1,6 @@
 import * as z from "zod"
 import * as imports from "../zod-utils"
-import { CompleteResource, ResourceModel } from "./index"
+import { CompleteResource, ResourceModel, CompleteJourney, JourneyModel } from "./index"
 
 export const _TagModel = z.object({
   id: z.string(),
@@ -9,10 +9,13 @@ export const _TagModel = z.object({
   updatedAt: z.date().nullish(),
   deletedAt: z.date().nullish(),
   resourceId: z.string().nullish(),
+  color: z.string().nullish(),
+  journeyId: z.string().nullish(),
 })
 
 export interface CompleteTag extends z.infer<typeof _TagModel> {
   Resource?: CompleteResource | null
+  Journey?: CompleteJourney | null
 }
 
 /**
@@ -22,4 +25,5 @@ export interface CompleteTag extends z.infer<typeof _TagModel> {
  */
 export const TagModel: z.ZodSchema<CompleteTag> = z.lazy(() => _TagModel.extend({
   Resource: ResourceModel.nullish(),
+  Journey: JourneyModel.nullish(),
 }))

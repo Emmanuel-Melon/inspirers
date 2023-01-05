@@ -50,17 +50,59 @@ const ProfileCardActionButton = ({ icon, onClick, text }) => {
   </Button>)
 }
 
+/**
+ *           {connection?.data?.status === null && session?.user?.id !== user?.id ? <ProfileCardActionButton
+            onClick={createConnectionRequest}
+            icon={<FiUserPlus />}
+            text="Make Companion"
+          /> : null}
+
+          {connection?.data?.status === "Pending" ? <ProfileCardActionButton
+            onClick={acceptConnectionRequest}
+            icon={<FiUserPlus />}
+            text="Pending"
+          /> : null
+          }
+ */
+const FollowUserButton = (props) => {
+  if (props.isUser) {
+    return null;
+  }
+
+  let classes = "btn btn-sm action-btn";
+  if (props.user.following) {
+    classes += " btn-secondary";
+  } else {
+    classes += " btn-outline-secondary";
+  }
+
+  const handleClick = (ev) => {
+    ev.preventDefault();
+    if (props.user.following) {
+      props.unfollow(props.user.username);
+    } else {
+      props.follow(props.user.username);
+    }
+  };
+
+  return (
+    <Button className={classes} onClick={handleClick}>
+      <i className="ion-plus-round"></i>
+      &nbsp;
+      {props.user.following ? "Unfollow" : "Follow"} {props.user.username}
+    </Button>
+  );
+};
+
 export const UserProfileCard = ({ user }) => {
   const [labels, _setLabels] = useState<boolean>(false);
   const { data: session, status } = useSession();
-  // const { data, mutate } = usePost("/connections/request");
   const { mutate } = useSWRConfig();
   const [isLoading, setLoading] = useState<boolean>();
   const { data: connection } = useFetch(`/connections/${user?.id}/status`);
   console.log(user);
 
   const createConnectionRequest = () => {
-    // mutate(`http://localhost:5000/api/connections/request`)
     client.post("/connections/request", {
       requesterId: session?.user?.id,
       recepientId: user?.id
@@ -138,19 +180,7 @@ export const UserProfileCard = ({ user }) => {
               <FiMessageSquare />
             </IconButton> : null
           }
-
-          {connection?.data?.status === null && session?.user?.id !== user?.id ? <ProfileCardActionButton
-            onClick={createConnectionRequest}
-            icon={<FiUserPlus />}
-            text="Make Companion"
-          /> : null}
-
-          {connection?.data?.status === "Pending" ? <ProfileCardActionButton
-            onClick={acceptConnectionRequest}
-            icon={<FiUserPlus />}
-            text="Pending"
-          /> : null
-          }
+          
 
         </ProfileCardActions>
         <Flex>

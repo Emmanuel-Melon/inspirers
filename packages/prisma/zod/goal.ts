@@ -14,7 +14,7 @@ export const _GoalModel = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   progress: z.number().int(),
-  userId: z.number().int(),
+  userId: z.string(),
 })
 
 export interface CompleteGoal extends z.infer<typeof _GoalModel> {

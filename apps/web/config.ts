@@ -1,4 +1,4 @@
-export const backendUrl = process.env.BASE_URL || "https://inspirers-api.onrender.com/api";
+export const backendUrl = process.env.BASE_URL || "http://localhost:5000/api";
 export const secret = `${process.env.SECRET || "secret"}`;
 export const facebookClientId = process.env.FACEBOOK_ID || "";
 export const facebookClientSecret = process.env.FACEBOOK_SECRET || "";

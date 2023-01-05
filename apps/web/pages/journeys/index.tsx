@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyCard } from "../../core/Journeys/components/JourneyCard";
 import { ListJourneys } from "core/Journeys/ListJourneys";
+import { GetServerSidePropsContext } from "next";
 
 // Journey creation
 // whole page vs modal?
@@ -43,23 +44,16 @@ export default function Index(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req, res, query } = context;
+  const session = await unstable_getServerSession(req, res, authOptions);
   const { id, email, name, image, bio } = session?.user || {};
 
   return {
     props: {
       user: {
-        id: id || null,
-        email: email || null,
-        name: name || null,
-        bio: bio || null,
-        image: image || null,
-      },
+        ...session?.user,
+      }
     },
   };
 }

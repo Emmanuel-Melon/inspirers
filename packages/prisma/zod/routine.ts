@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-utils"
 import { RoutineType, RoutinePrivacy, RoutineSource, PeriodType, RoutineSchedule } from "@prisma/client"
-import { CompleteRoutineItem, RoutineItemModel, CompleteResource, ResourceModel } from "./index"
+import { CompleteRoutineItem, RoutineItemModel, CompleteResource, ResourceModel, CompleteFolder, FolderModel, CompleteJourney, JourneyModel } from "./index"
 
 export const _RoutineModel = z.object({
   id: z.string(),
@@ -28,11 +28,15 @@ export const _RoutineModel = z.object({
   periodType: z.nativeEnum(PeriodType),
   scheduleType: z.nativeEnum(RoutineSchedule),
   startingDate: z.date().nullish(),
+  linkedFolderId: z.string().nullish(),
+  position: z.number().int(),
 })
 
 export interface CompleteRoutine extends z.infer<typeof _RoutineModel> {
   items: CompleteRoutineItem[]
   resources: CompleteResource[]
+  folders: CompleteFolder[]
+  Journey?: CompleteJourney | null
 }
 
 /**
@@ -43,4 +47,6 @@ export interface CompleteRoutine extends z.infer<typeof _RoutineModel> {
 export const RoutineModel: z.ZodSchema<CompleteRoutine> = z.lazy(() => _RoutineModel.extend({
   items: RoutineItemModel.array(),
   resources: ResourceModel.array(),
+  folders: FolderModel.array(),
+  Journey: JourneyModel.nullish(),
 }))

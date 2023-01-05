@@ -82,7 +82,7 @@ export const authOptions = {
     strategy: "jwt",
   },
   jwt:{
-
+    secret: jwtSecret
   },
   pages: {
     signIn: "/auth",
@@ -99,29 +99,36 @@ export const authOptions = {
       };
     },
     async session({ session, user, token }) {
+      const encodedToken = jwt.sign({...token, ...session.user}, jwtSecret, { algorithm: 'HS256'});
       session.accessToken = token.accessToken;
       session.user.id = token.id;
-      session.jwt = token.jwt;
+      // session.jwt = token;
+      session.me = "users";
+      session.you = encodedToken;
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       // merge accounts!
       if (account) {
-        if(account.provider === 'google'){
-          const tokenData = {id : profile.id, googleToken: account.id_token || null };
-          const jwtToken = await jwt.sign(JSON.stringify(tokenData), jwtSecret);
-          token.jwt = jwtToken;
-        } else if(account.provider === 'gitub') {
-          // do gitub stuff
-          console.log("github stuff");
-        }
-        token.accessToken = account.access_token;
-        token.id = profile.id
         
-
+        token.accessToken = account.access_token
+        token.id = profile.id
+        // console.log(token);
       }
-      if (user) {
-        token.accessToken = user.token;
+
+      if(user) {
+        console.log("user!!!!!!!!!!!")
+        console.log(user);
+      }
+
+      if(token) {
+        console.log("token!!!!!!!!!!!")
+        console.log(token);
+      }
+
+      if(profile) {
+        console.log("profile!!!!!!!!!!!")
+        console.log(profile);
       }
       return token;
     },
