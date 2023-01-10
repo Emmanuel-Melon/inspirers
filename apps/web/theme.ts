@@ -17,10 +17,10 @@ const theme: ThemeConfig = extendTheme({
     global: (props: Record<string, any>) => ({
       body: {
         bg: mode(
-          "linear-gradient( 174.2deg,  #F8F8F7 7.1%, #fbfdfb 67.4% )",
-          "#160D25"
+          "rgba(245, 246, 248, 1)",
+          "rgba(245, 246, 248, 1)"
         )(props),
-        color: mode("#3F300C", "#EBE0F9")(props),
+        color: mode("#333", "#333")(props),
       },
     }),
   },

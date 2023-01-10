@@ -19,10 +19,6 @@ import {
 } from "react-icons/fi";
 import { Backpack, Folder } from "@prisma/client";
 
-// link Google Drive
-// import youtube subscriptions and playlists
-// notify users when a new video is uploaded
-
 export type FolderOverviewProps = {
     folder: Folder;
 };
@@ -34,9 +30,9 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
                     <Flex alignItems="center" justifyContent="space-between">
                         <Box
                             boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                            color="brand.accent"
+                            color="brand.white"
                             fontWeight="700"
-                            bg="brand.highlight2"
+                            bg="brand.accent"
                             p="4"
                             borderRadius="1rem"
                         >
@@ -46,7 +42,7 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
                             <FiMoreHorizontal />
                         </IconButton>
                     </Flex>
-                    <LinkOverlay href={`/backpack/${folder.title.toLowerCase()}`}>
+                    <LinkOverlay href={`/backpack/${encodeURIComponent(folder.title.toLowerCase())}`}>
                         <Stack>
                             <Heading size="sm">{folder.title}</Heading>
                             <Text color='brand.secondaryText'>0 files</Text>
@@ -55,7 +51,6 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
                 </Stack>
             </Card>
         </LinkBox>
-
     )
 }
 
@@ -85,7 +80,6 @@ export const ListFolders: FC<ListFoldersProps> = ({ backpack }) => {
         )
     }
 
-    // use under_scores for spaced out folder names
     return (
         <Stack color='brand.primaryText'>
             <Flex justifyContent="space-between" alignItems="center">

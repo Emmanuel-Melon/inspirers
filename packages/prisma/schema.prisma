@@ -391,6 +391,7 @@ model Folder {
   privacy       FoldrPrivacy? @default(Private)
   Routine       Routine?      @relation(fields: [routineId], references: [id])
   routineId     String?
+  slug String?
 }
 
 model Resource {

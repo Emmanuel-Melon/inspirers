@@ -13,7 +13,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@chakra-ui/react";
-import { Button, IconButton, Input, Modal } from "ui";
+import { Button, Card, IconButton, Input, Modal } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyContext } from "providers/JourneyProvider";
 
@@ -67,7 +67,6 @@ const layouts = [
 // domains: trigger events when a resource from a given domain is added
 // or when a certain resource type such as auto download or cache for offline viewing on phone
 export default function Folder(props) {
-  console.log(props);
   const context = useContext(JourneyContext);
   const folderId = "clcqi2pq30168xabt5r03b3yg";
   const {
@@ -80,11 +79,7 @@ export default function Folder(props) {
   return (
     <Stack gap={2}>
       <Flex justifyContent="space-between" alignItems="cebter">
-        <Breadcrumb
-          separator={<FiChevronsRight />}
-          bg="brand.highlight1"
-          borderRadius="0.5rem"
-        >
+        <Breadcrumb separator={<FiChevronsRight />} borderRadius="0.5rem">
           <BreadcrumbItem>
             <BreadcrumbLink href="" textDecoration="none">
               My Backpack
@@ -108,9 +103,13 @@ export default function Folder(props) {
         <Text>Share</Text>
       </Flex>
       <Flex gap={4}>
+        <Stack flex="2">
         <ListResources resources={resources} />
-        <Stack>
-          <Text>Up Next</Text>
+        </Stack>
+        <Stack flex="1">
+          <Card>
+            <Text>Up Next</Text>
+          </Card>
         </Stack>
       </Flex>
     </Stack>

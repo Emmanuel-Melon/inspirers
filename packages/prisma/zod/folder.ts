@@ -14,6 +14,7 @@ export const _FolderModel = z.object({
   resourceLimit: z.number().int(),
   privacy: z.nativeEnum(FoldrPrivacy).nullish(),
   routineId: z.string().nullish(),
+  slug: z.string().nullish(),
 })
 
 export interface CompleteFolder extends z.infer<typeof _FolderModel> {

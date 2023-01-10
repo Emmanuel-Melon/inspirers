@@ -21,16 +21,11 @@ import {
   ListFolders,
   ListRecentlyAdded,
   AddNewFolder,
-  ImportResources
+  ImportResources,
 } from "../../core/Backpack";
 import { LayoutController } from "ui";
 
-import {
-  FiChevronsDown,
-  FiZap,
-  FiArchive,
-  FiSearch,
-} from "react-icons/fi";
+import { FiChevronsDown, FiZap, FiArchive, FiSearch } from "react-icons/fi";
 import { HiOutlineFolder } from "react-icons/hi";
 
 export default function BackpackPage() {
@@ -88,17 +83,23 @@ export default function BackpackPage() {
     <>
       <Stack gap={2}>
         <Flex justifyContent="space-between" alignItems="flex-start">
-          <Stack gap={4}>
-            <Flex alignItems="center" gap={2}>
-              <IconButton>
-                <FiArchive />
-              </IconButton>
-              <Heading size="md">
-                {backpack?.name || "Emmanuel's Backpack"}
-              </Heading>
-              <FiChevronsDown />
+          <Stack gap={4} width="100%">
+            <Flex
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+            >
               <Flex gap={2} alignItems="center">
-                <AddResource backpack={backpack}/>
+                <IconButton>
+                  <FiArchive />
+                </IconButton>
+                <Heading size="md">
+                  {backpack?.name || "Emmanuel's Backpack"}
+                </Heading>
+                <FiChevronsDown />
+              </Flex>
+              <Flex gap={2} alignItems="center">
+                <AddResource backpack={backpack} />
                 <AddNewFolder backpack={backpack} />
                 <ImportResources />
                 <Button icon={<FiZap />} bg="brand.white">
