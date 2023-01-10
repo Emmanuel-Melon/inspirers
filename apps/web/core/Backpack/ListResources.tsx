@@ -27,7 +27,6 @@ type ResourceCardProps = {
 };
 
 const ResourceCard: FC<ResourceCardProps> = ({ resource }) => {
-  console.log(resource);
   return (
     <Card>
       <Flex alignItems="center" gap={2}>
@@ -53,12 +52,6 @@ type ListResourceProps = {
 export const ListResources: FC<ListResourceProps> = ({ resources }) => {
   return (
     <Stack gap={2}>
-      <Heading size="md">
-        Resources{" "}
-        <Box as="span" color="brand.accent">
-          4
-        </Box>
-      </Heading>
       {resources?.map((resource) => (
         <ResourceCard resource={resource} key={resource.id} />
       ))}

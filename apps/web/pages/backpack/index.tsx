@@ -22,7 +22,7 @@ import {
   ListRecentlyAdded,
   AddNewFolder,
   ImportResources,
-} from "../../core/Backpack";
+} from "core/Backpack";
 import { LayoutController } from "ui";
 
 import { FiChevronsDown, FiZap, FiArchive, FiSearch } from "react-icons/fi";

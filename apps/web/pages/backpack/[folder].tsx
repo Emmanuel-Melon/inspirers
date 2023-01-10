@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import {
+  Box,
   Stack,
   Flex,
   Heading,
@@ -21,61 +22,37 @@ import {
   FiBarChart2,
   FiFilter,
   FiList,
-  FiSettings,
-  FiChevronsDown,
-  FiPlus,
-  FiLayout,
   FiCalendar,
   FiLayers,
   FiGrid,
-  FiZap,
-  FiArchive,
-  FiDownloadCloud,
-  FiEdit,
-  FiUploadCloud,
-  FiTrash,
-  FiHeart,
-  FiMessageCircle,
-  FiFolderPlus,
   FiChevronsRight,
 } from "react-icons/fi";
 import { useRouter } from "next/router";
-import { ListResources } from "core/Backpack/ListResources";
+import { 
+  ListResources,
+  AddResource,
+  QuickAccess,
+  ListFolders,
+  ListRecentlyAdded,
+  AddNewFolder,
+  ImportResources,
+} from "core/Backpack";
 
-const layouts = [
-  {
-    id: 1,
-    title: "List",
-    icon: <FiList />,
-    active: true,
-  },
-  {
-    id: 1,
-    title: "Grid",
-    icon: <FiGrid />,
-    active: false,
-  },
-  {
-    id: 1,
-    title: "Timeline",
-    icon: <FiCalendar />,
-    active: false,
-  },
-];
 
 // add automations for:
 // domains: trigger events when a resource from a given domain is added
 // or when a certain resource type such as auto download or cache for offline viewing on phone
-export default function Folder(props) {
-  const context = useContext(JourneyContext);
-  const folderId = "clcqi2pq30168xabt5r03b3yg";
-  const {
-    data: resources,
-    isLoading: journeyLoaded,
-    isError: JourneyError,
-  } = useFetch(`/backpacks/folders/${folderId}`);
-
+export default function Folder() {
   const router = useRouter();
+
+
+  const {
+    data: folder,
+    isLoading: folderLoaded,
+    isError: folderError,
+  } = useFetch(`/backpacks/folders/${router.query.folderId}`);
+
+
   return (
     <Stack gap={2}>
       <Flex justifyContent="space-between" alignItems="cebter">
@@ -88,7 +65,7 @@ export default function Folder(props) {
 
           <BreadcrumbItem>
             <BreadcrumbLink href="">
-              {router.query.folder?.toLocaleString().toUpperCase()}
+              {folder?.title}
             </BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
@@ -97,6 +74,12 @@ export default function Folder(props) {
         </Flex>
       </Flex>
       <Flex gap={4}>
+      <Heading size="md">
+        Resources{" "}
+        <Box as="span" color="brand.accent">
+          4
+        </Box>
+      </Heading>
         <Text>Automations</Text>
         <Text>Users</Text>
         <Text>Views</Text>
@@ -104,11 +87,11 @@ export default function Folder(props) {
       </Flex>
       <Flex gap={4}>
         <Stack flex="2">
-        <ListResources resources={resources} />
+        <ListResources resources={folder?.resources} />
         </Stack>
         <Stack flex="1">
           <Card>
-            <Text>Up Next</Text>
+            <Text>{folder?.description}</Text>
           </Card>
         </Stack>
       </Flex>
