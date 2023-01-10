@@ -157,15 +157,6 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
             <Flex px="4" py="2" gap={2}>
               <Button
                 size="sm"
-                icon={<FiRotateCw />}
-                onClick={() => {}}
-                bg="brand.white"
-                color="brand.secondaryText"
-              >
-                Routine
-              </Button>
-              <Button
-                size="sm"
                 icon={<FiFolder />}
                 onClick={() => {}}
                 bg="brand.white"
@@ -197,7 +188,7 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
               py="4"
               alignItems="center"
               justifyContent="space-between"
-              bg="brand.highlight1"
+              bg="brand.highlight2"
             >
               <Flex gap={2}>
                 <IconButton onClick={() => toggleView("image")} label={""}>

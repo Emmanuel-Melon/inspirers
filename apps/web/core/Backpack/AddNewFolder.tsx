@@ -2,35 +2,18 @@ import React, { FC, useState, useEffect } from "react";
 import {
   Flex,
   Text,
-  Heading,
-  Select,
   Stack,
   Tag,
-  Divider,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
 import {
-  FiPlus,
-  FiTrash,
-  FiCheck,
-  FiTag,
   FiUserPlus,
-  FiLink2,
   FiClock,
   FiX,
-  FiLink,
-  FiImage,
-  FiVideo,
   FiMoreHorizontal,
-  FiEye,
   FiMaximize2,
-  FiArrowRight,
   FiChevronsRight,
-  FiFolder,
   FiRotateCw,
   FiUsers,
 } from "react-icons/fi";
@@ -53,12 +36,14 @@ export type AddNewFolderProps = {
 
 export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
   const [title, setTitle] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const errorToast = (message: string) => toast.error(message);
+  const successToast = (message: string) => toast.success(message);
 
   const addResource = (e: SubmitEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    
     client
       .post(`/backpacks/${backpack?.id}/folders`, {
         title,
@@ -66,8 +51,17 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
       })
       .then((response) => {
         setIsLoading(false);
+        setTitle("");
+        closeModal();
       })
-      .then(() => closeModal());
+      .catch(err => {
+        setIsLoading(false);
+        console.log(err);
+        setTitle("");
+        // alert("sorry")
+
+        errorToast(err.message);
+      })
   };
 
   const preventExit = () => {
@@ -76,7 +70,7 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
 
   useEffect(() => {
     const keyDownHandler = (event) => {
-      console.log("User pressed: ", event.key);
+     // console.log("User pressed: ", event.key);
 
       if (event.key === "Escape") {
         event.preventDefault();
@@ -200,6 +194,7 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
           </Stack>
         </form>
       </Modal>
+      <Toaster position="bottom-center" />
     </>
   );
 };
