@@ -25,9 +25,9 @@ export const IconButton: FC<IconButtonProps> = ({
             p="2"
             boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
             color={color}
-            _hover={{
-                bg: "brand.hovered",
-            }}
+            // _hover={{
+            //     bg: "brand.hovered",
+            // }}
             size={size}
         >
             {children}

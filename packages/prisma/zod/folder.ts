@@ -1,6 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-utils"
-import { CompleteResource, ResourceModel } from "./index"
+import { FoldrPrivacy } from "@prisma/client"
+import { CompleteResource, ResourceModel, CompleteBackpack, BackpackModel, CompleteRoutine, RoutineModel } from "./index"
 
 export const _FolderModel = z.object({
   id: z.string(),
@@ -8,10 +9,17 @@ export const _FolderModel = z.object({
   createdAt: z.date().nullish(),
   updatedAt: z.date().nullish(),
   deletedAt: z.date().nullish(),
+  backpackId: z.string().nullish(),
+  description: z.string().nullish(),
+  resourceLimit: z.number().int(),
+  privacy: z.nativeEnum(FoldrPrivacy).nullish(),
+  routineId: z.string().nullish(),
 })
 
 export interface CompleteFolder extends z.infer<typeof _FolderModel> {
   Resources: CompleteResource[]
+  Backpack?: CompleteBackpack | null
+  Routine?: CompleteRoutine | null
 }
 
 /**
@@ -21,4 +29,6 @@ export interface CompleteFolder extends z.infer<typeof _FolderModel> {
  */
 export const FolderModel: z.ZodSchema<CompleteFolder> = z.lazy(() => _FolderModel.extend({
   Resources: ResourceModel.array(),
+  Backpack: BackpackModel.nullish(),
+  Routine: RoutineModel.nullish(),
 }))

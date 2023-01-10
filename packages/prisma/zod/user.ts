@@ -21,6 +21,8 @@ export const _UserModel = z.object({
   occupation: z.string().nullish(),
   timeZone: z.string(),
   weekStart: z.string(),
+  dayStart: z.string().nullish(),
+  dayEnd: z.string().nullish(),
   completedOnboarding: z.boolean(),
   timeFormat: z.number().int().nullish(),
 })
