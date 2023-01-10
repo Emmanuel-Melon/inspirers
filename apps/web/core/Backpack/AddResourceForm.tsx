@@ -61,6 +61,7 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
         title,
         resourceUrl: url,
         type: ResourceType.Video,
+        folderId: "clcqi2pq30168xabt5r03b3yg"
       })
       .then((response) => {
         setIsLoading(false);

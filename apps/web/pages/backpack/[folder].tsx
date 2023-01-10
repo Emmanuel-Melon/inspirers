@@ -37,10 +37,10 @@ import {
   FiHeart,
   FiMessageCircle,
   FiFolderPlus,
-  FiChevronsRight
+  FiChevronsRight,
 } from "react-icons/fi";
 import { useRouter } from "next/router";
-
+import { ListResources } from "core/Backpack/ListResources";
 
 const layouts = [
   {
@@ -60,34 +60,58 @@ const layouts = [
     title: "Timeline",
     icon: <FiCalendar />,
     active: false,
-  }
+  },
 ];
 
 // add automations for:
 // domains: trigger events when a resource from a given domain is added
 // or when a certain resource type such as auto download or cache for offline viewing on phone
-export default function Folder() {
+export default function Folder(props) {
+  console.log(props);
   const context = useContext(JourneyContext);
-  const { data: journeys, isLoading: journeyLoaded, isError: JourneyError } = useFetch(`/journeys/${context.journey.id}`);
-  const backpack = journeys?.backpacks.filter(backpack => backpack.journeyId === context.journey.id)[0];
-  const { data: resources, isLoading, isError } = useFetch(`/backpacks/${backpack?.id}`);
+  const folderId = "clcqi2pq30168xabt5r03b3yg";
+  const {
+    data: resources,
+    isLoading: journeyLoaded,
+    isError: JourneyError,
+  } = useFetch(`/backpacks/folders/${folderId}`);
 
   const router = useRouter();
   return (
     <Stack gap={2}>
-      <Breadcrumb separator={<FiChevronsRight />} bg="brand.highlight1" p="2" borderRadius="0.5rem">
-        <BreadcrumbItem>
-          <BreadcrumbLink href='' textDecoration="none">My Backpack</BreadcrumbLink>
-        </BreadcrumbItem>
+      <Flex justifyContent="space-between" alignItems="cebter">
+        <Breadcrumb
+          separator={<FiChevronsRight />}
+          bg="brand.highlight1"
+          borderRadius="0.5rem"
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink href="" textDecoration="none">
+              My Backpack
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-        <BreadcrumbItem>
-          <BreadcrumbLink href=''>Thoughts</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
-      <Flex gap={2}>
-        <Button>Automations</Button>
-        <Button>Import</Button>
-        <Button>Add Resources</Button>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="">
+              {router.query.folder?.toLocaleString().toUpperCase()}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <Flex gap={2}>
+          <Button>Automations</Button>
+        </Flex>
+      </Flex>
+      <Flex gap={4}>
+        <Text>Automations</Text>
+        <Text>Users</Text>
+        <Text>Views</Text>
+        <Text>Share</Text>
+      </Flex>
+      <Flex gap={4}>
+        <ListResources resources={resources} />
+        <Stack>
+          <Text>Up Next</Text>
+        </Stack>
       </Flex>
     </Stack>
   );
