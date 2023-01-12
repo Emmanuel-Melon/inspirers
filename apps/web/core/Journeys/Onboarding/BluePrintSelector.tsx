@@ -8,11 +8,9 @@ import {
   useRadioGroup,
   Box
 } from "@chakra-ui/react";
-import { Card, RadioCard } from "ui";
+import { RadioCard } from "ui";
 import { useState } from "react";
 import { FiCopy, FiMap } from "react-icons/fi";
-
-
 
 type SelectorCardProps = {
   description?: string;
@@ -21,7 +19,7 @@ type SelectorCardProps = {
 
 const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
   return (
-    <Stack>
+    <Stack bg="brand.white" p="4" borderRadius="1rem">
       <Box
         bg="brand.highlight1"
         p="4"
@@ -54,7 +52,7 @@ const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
 };
 
 export type BluePrintSelectorProps = {
-  onBluePrintChange: (value: string) => void; // rename to onBluePrintChange? 
+  onBluePrintChange: (value: string) => void;
   currentStep: number;
 };
 
@@ -108,7 +106,7 @@ export const BluePrintSelector: FC<BluePrintSelectorProps> = ({
                   borderColor="brand.white"
                   checked={{
                     border: "solid 0.15rem",
-                    borderColor: "brand.primary",
+                    borderColor: "brand.accent",
                   }}
                   hover={{
                     border: "solid 0.15rem",

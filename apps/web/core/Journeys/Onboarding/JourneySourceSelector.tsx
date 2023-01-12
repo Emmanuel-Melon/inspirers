@@ -1,15 +1,27 @@
 import React, { useContext } from "react";
-import { Divider, Flex, Text, Heading, Stack } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text, Heading, Stack } from "@chakra-ui/react";
 import Image from "next/image";
 import { BluePrintSelector } from "./BluePrintSelector";
 import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { Button, Card } from "ui";
-import { FiInfo, FiX, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
+import { useForm } from "react-hook-form";
 
-export const FirstStep = () => {
+export const JourneySourceSelector = () => {
   const context = useContext(JourneyOnboardingContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      blueprint: "Blank",
+    },
+    reValidateMode: "onChange",
+  });
   return (
-    <Flex width="100%" gap={8} color="brand.primaryText">
+    <form>
+      <Flex width="100%" gap={8} color="brand.primaryText">
       <Stack width="100%" gap={4} alignItems="flex-start">
         <Heading color="brand.primaryText">
           {context.currentStep.title}
@@ -33,14 +45,12 @@ export const FirstStep = () => {
         </Flex>
       </Stack>
     </Flex>
+      </form>
   );
 };
 
-// use as inspiration for designing the guide: https://dribbble.com/shots/5765098-Nabis-OnBoarding-Flow
-// center everything like this? https://dribbble.com/shots/15825034-Onboarding
-// this would work for the user onboarding
-// maybe routines and backpacks too
-export const FirstStepGuide = ({ guide, blueprint }) => {
+
+export const JourneySourceSelectorGuide = ({ guide, blueprint }) => {
   const context = useContext(JourneyOnboardingContext);
   return (
     <Stack>

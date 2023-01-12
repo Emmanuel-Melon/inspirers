@@ -71,7 +71,7 @@ export async function getServerSideProps(context) {
     context.res,
     authOptions
   );
-  const { createdAt, ...user } = session?.user;
+  
 
   if (!session) {
     return {
@@ -84,7 +84,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      user
+      user: {
+
+      }
     },
   };
 }

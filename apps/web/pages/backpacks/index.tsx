@@ -27,6 +27,11 @@ type CreateNewBackProps = {
   userId: string;
 };
 
+type FormValues = {
+  name: string;
+  description?: string;
+}
+
 const CreateNewBack: FC<CreateNewBackProps> = ({
   journeyId,
   label = "New",
@@ -37,6 +42,9 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
 
   const onSave = () => {
     setIsLoading(true);
@@ -86,7 +94,7 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
             <Button onClick={onCancel} bg="brand.white">
               Cancel
             </Button>
-            <Button onClick={onSave} isLoading={isLoading}>
+            <Button onClick={onSubmit} isLoading={isLoading}>
               Save
             </Button>
           </Flex>

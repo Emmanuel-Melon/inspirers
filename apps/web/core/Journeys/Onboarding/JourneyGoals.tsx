@@ -45,7 +45,7 @@ import { RecommendedAccounts } from "./RecommendedAccounts";
 import { useFetch } from "hooks/useSwr";
 
 
-export const ThirdStepGuide = ({ guide }) => {
+export const JourneyGoalsGuide = ({ guide }) => {
   const context = useContext(JourneyOnboardingContext);
   return (
     <Flex height="100%">
@@ -199,7 +199,7 @@ const currentGoals = [
   }
 ]
 
-export const ThirdStep = ({ onChange }) => {
+export const JourneyGoals = () => {
   const context = useContext(JourneyOnboardingContext);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);

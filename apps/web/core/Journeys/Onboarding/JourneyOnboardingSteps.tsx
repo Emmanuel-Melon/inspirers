@@ -1,13 +1,13 @@
-import { FirstStep, FirstStepGuide } from "./JourneyType";
-import { SecondStep, SecondStepGuide } from "./JourneyInfo";
-import { ThirdStep, ThirdStepGuide } from "./JourneyGoals";
+import { JourneySourceSelector, JourneySourceSelectorGuide } from "./JourneySourceSelector";
+import { JourneyInfo, JourneyInfoGuide } from "./JourneyInfo";
+import { JourneyGoals, JourneyGoalsGuide } from "./JourneyGoals";
 import { Flex, Stack } from "@chakra-ui/react";
 import {
   JourneyOnboardingConsumer,
   JourneyOnboardingProvider,
-} from "../../../providers/JourneyOnboardingProvider";
+} from "providers/JourneyOnboardingProvider";
 
-export const JourneyOnboardingSteps = ({ user = {} }) => {
+export const JourneyOnboardingSteps = () => {
 
 
   return (
@@ -16,19 +16,19 @@ export const JourneyOnboardingSteps = ({ user = {} }) => {
         {(value) => (
           <Flex width="100%" gap={4}>
             <Stack flex="2">
-              {value.currentStep.id === 1 ? <FirstStep user={user} /> : null}
-              {value.currentStep.id === 2 ? <SecondStep user={user} /> : null}
-              {value.currentStep.id === 3 ? <ThirdStep user={user} /> : null}
+              {value.currentStep.id === 1 ? <JourneySourceSelector /> : null}
+              {value.currentStep.id === 2 ? <JourneyInfo /> : null}
+              {value.currentStep.id === 3 ? <JourneyGoals /> : null}
             </Stack>
             <Flex gap={4} flex="1">
               {value.currentStep.id === 1 ? (
-                <FirstStepGuide user={user} guide={value.currentStep} />
+                <JourneySourceSelectorGuide guide={value.currentStep} />
               ) : null}
               {value.currentStep.id === 2 ? (
-                <SecondStepGuide user={user} guide={value.currentStep} />
+                <JourneyInfoGuide guide={value.currentStep} />
               ) : null}
               {value.currentStep.id === 3 ? (
-                <ThirdStepGuide user={user} guide={value.currentStep} />
+                <JourneyGoalsGuide guide={value.currentStep} />
               ) : null}
             </Flex>
           </Flex>
@@ -37,3 +37,32 @@ export const JourneyOnboardingSteps = ({ user = {} }) => {
     </JourneyOnboardingProvider>
   );
 };
+
+/**
+ *   const handleNext = () => {
+    if (context.journey.title === "") {
+      setLoading(true);
+      client
+        .post("/journeys", {
+          blueprint: context.blueprint,
+          title: journey.title,
+          userId: "user.id",
+          journeyType: journey.journeyType,
+          active: true,
+        })
+        .then((res) => {
+          setLoading(false);
+          successToast("Created journey");
+          context.updateJourney(res.data.data);
+          context.moveForward(context.currentStep.id + 1, res.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(true);
+          errorToast("something went wrong, try again later");
+        });
+    } else {
+      context.moveForward(context.currentStep.id + 1, {});
+    }
+  };
+ */
