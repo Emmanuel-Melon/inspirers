@@ -10,3 +10,4 @@ export * from "./SearchBackpack";
 export * from "./LinkFolder";
 export * from "./InviteCompanionView";
 export * from "./ImportResources";
+export * from "./ListResources";

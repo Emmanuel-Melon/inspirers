@@ -100,7 +100,7 @@ model Journey {
   bluePrintId  String?
   journeyType  String?
   fieldId      String?
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
   active       Boolean      @default(false)
   completed    Boolean      @default(false)
   completedAt  DateTime?
@@ -115,6 +115,8 @@ model Journey {
   tasks        Task[]
   tags         Tag[]
   applications App[]
+
+  @@index([userId])
 }
 
 model JourneyBluePrint {
@@ -383,7 +385,7 @@ model Folder {
   createdAt     DateTime?     @default(now())
   updatedAt     DateTime?     @default(now())
   deletedAt     DateTime?     @default(now())
-  Resources     Resource[]
+  resources     Resource[]
   backpackId    String?
   Backpack      Backpack?     @relation(fields: [backpackId], references: [id])
   description   String?
@@ -391,6 +393,7 @@ model Folder {
   privacy       FoldrPrivacy? @default(Private)
   Routine       Routine?      @relation(fields: [routineId], references: [id])
   routineId     String?
+  slug String?
 }
 
 model Resource {
@@ -432,7 +435,9 @@ model Backpack {
   folders     Folder[]
   maxFolders  Int          @default(10)
   Automation  Automation[]
-  Journey     Journey      @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  Journey     Journey?      @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  slug String?
+  @@index([journeyId])
 }
 
 enum AutomationTrigger {

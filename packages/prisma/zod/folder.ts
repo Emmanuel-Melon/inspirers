@@ -14,10 +14,11 @@ export const _FolderModel = z.object({
   resourceLimit: z.number().int(),
   privacy: z.nativeEnum(FoldrPrivacy).nullish(),
   routineId: z.string().nullish(),
+  slug: z.string().nullish(),
 })
 
 export interface CompleteFolder extends z.infer<typeof _FolderModel> {
-  Resources: CompleteResource[]
+  resources: CompleteResource[]
   Backpack?: CompleteBackpack | null
   Routine?: CompleteRoutine | null
 }
@@ -28,7 +29,7 @@ export interface CompleteFolder extends z.infer<typeof _FolderModel> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const FolderModel: z.ZodSchema<CompleteFolder> = z.lazy(() => _FolderModel.extend({
-  Resources: ResourceModel.array(),
+  resources: ResourceModel.array(),
   Backpack: BackpackModel.nullish(),
   Routine: RoutineModel.nullish(),
 }))

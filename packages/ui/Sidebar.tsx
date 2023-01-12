@@ -17,7 +17,7 @@ import {
 import { BeakerIcon } from '@heroicons/react/24/solid'
 import { Avatar, Card, Navbar, Spinner } from "ui";
 import Head from "next/head";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 
 import {
@@ -34,7 +34,8 @@ import { HiOutlineBell, HiOutlineHome, HiOutlineTemplate, HiOutlineClipboardChec
 
 const SidebarLink = ({ link }) => {
     return (
-        <LinkBox
+        <NextLink href={link.url} passHref>
+            <LinkBox
             p="2"
             borderRadius="lg"
             _hover={{
@@ -44,7 +45,7 @@ const SidebarLink = ({ link }) => {
                 color: "brand.secondary",
                 boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
             }}>
-            <LinkOverlay href={link.url} color="brand.secondaryText">
+            <LinkOverlay color="brand.secondaryText">
                 <Flex gap={4} alignItems="center">
                     <Flex
                         color={link.active ? "brand.white" : "brand.secondaryText"}
@@ -66,6 +67,7 @@ const SidebarLink = ({ link }) => {
                 </Flex>
             </LinkOverlay>
         </LinkBox>
+        </NextLink>
     )
 }
 
@@ -98,7 +100,7 @@ export const Sidebar = ({ session }) => {
         {
             id: 8,
             name: "Backpack",
-            url: "/backpack",
+            url: "/backpacks",
             icon: <RiHandbagLine size="1rem" />
         },
         {

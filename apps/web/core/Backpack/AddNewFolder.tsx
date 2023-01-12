@@ -2,35 +2,18 @@ import React, { FC, useState, useEffect } from "react";
 import {
   Flex,
   Text,
-  Heading,
-  Select,
   Stack,
   Tag,
-  Divider,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
 import {
-  FiPlus,
-  FiTrash,
-  FiCheck,
-  FiTag,
   FiUserPlus,
-  FiLink2,
   FiClock,
   FiX,
-  FiLink,
-  FiImage,
-  FiVideo,
   FiMoreHorizontal,
-  FiEye,
   FiMaximize2,
-  FiArrowRight,
   FiChevronsRight,
-  FiFolder,
   FiRotateCw,
   FiUsers,
 } from "react-icons/fi";
@@ -39,6 +22,7 @@ import { Button, Modal, IconButton, Input } from "ui";
 import { RiFolderUserLine } from "react-icons/ri";
 import { client } from "utils/client";
 import { Folder, ResourceType, Backpack } from "@prisma/client";
+import { useRouter } from "next/router";
 
 // clear form fields after submit
 // add loading state
@@ -48,26 +32,39 @@ import { Folder, ResourceType, Backpack } from "@prisma/client";
 // add a preview of the link
 // submit form on enter
 export type AddNewFolderProps = {
-  backpack: Backpack;
+  backpack?: Backpack;
 };
 
-export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
+export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack = {}}) => {
   const [title, setTitle] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const errorToast = (message: string) => toast.error(message);
+  const successToast = (message: string) => toast.success(message);
+  const router = useRouter();
+
+  console.log(router.query.backpack);
 
   const addResource = (e: SubmitEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    
+    
     client
-      .post(`/backpacks/${backpack?.id}/folders`, {
+      .post(`/backpacks/${router.query.backpack}/folders`, {
         title,
-        backpackId: backpack?.id,
+        backpackId: router.query.backpack,
       })
       .then((response) => {
+        successToast("Folder created successfully.")
         setIsLoading(false);
+        setTitle("");
+        closeModal();
       })
-      .then(() => closeModal());
+      .catch(err => {
+        setIsLoading(false);
+        setTitle("");
+        errorToast(err.message);
+      })
   };
 
   const preventExit = () => {
@@ -76,7 +73,7 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
 
   useEffect(() => {
     const keyDownHandler = (event) => {
-      console.log("User pressed: ", event.key);
+     // console.log("User pressed: ", event.key);
 
       if (event.key === "Escape") {
         event.preventDefault();
@@ -93,6 +90,10 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
       document.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
+
+  useEffect(() => {
+
+  }, [isLoading]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   function openModal() {
@@ -200,6 +201,7 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack }) => {
           </Stack>
         </form>
       </Modal>
+      <Toaster position="bottom-center" />
     </>
   );
 };

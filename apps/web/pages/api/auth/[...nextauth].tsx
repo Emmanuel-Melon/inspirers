@@ -117,18 +117,15 @@ export const authOptions = {
       }
 
       if(user) {
-        console.log("user!!!!!!!!!!!")
-        console.log(user);
+//
       }
 
       if(token) {
-        console.log("token!!!!!!!!!!!")
-        console.log(token);
+//
       }
 
       if(profile) {
-        console.log("profile!!!!!!!!!!!")
-        console.log(profile);
+       //
       }
       return token;
     },

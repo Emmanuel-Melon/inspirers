@@ -53,7 +53,7 @@ const layouts = [
 
 // try this layout for Routines: https://britetodo.com/?ref=roastortoast
 export default function Routines(props) {
-  const { data: routines, isLoading, isError } = useFetch(`/routines/${props.user?.id}/list`);
+  const { data: routines, isLoading, isError } = useFetch(`/routines/cla6zxzxy098694btiqwmaixd/list`);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [view, setView] = useState("list");
 
@@ -135,17 +135,4 @@ export default function Routines(props) {
       </Modal>
     </>
   );
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { req, res, query } = context;
-  const session = await unstable_getServerSession(req, res, authOptions);
-
-  return {
-    props: {
-      user: {
-        ...session?.user,
-      }
-    },
-  };
 }
