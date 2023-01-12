@@ -17,6 +17,7 @@ import { client } from "utils/client";
 import NextLink from "next/link";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { FiArchive, FiSearch, FiPlus, FiShare, FiLock } from "react-icons/fi";
 
