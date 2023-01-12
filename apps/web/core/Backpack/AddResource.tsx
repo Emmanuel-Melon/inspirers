@@ -14,10 +14,10 @@ type AddResourceViewMap = {
 type AddResourceView = "form" | "invite" | "video" | "image" | "expanded";
 
 type AddResourceProps = {
-  backpack: Backpack;
+  backpack?: Backpack;
 };
 
-export const AddResource: FC<AddResourceProps> = ({ backpack }) => {
+export const AddResource: FC<AddResourceProps> = ({ backpack = {} }) => {
   const [view, setView] = useState<AddResourceView>("form");
   const toggleView = (view: AddResourceView) => {
     setView(view);

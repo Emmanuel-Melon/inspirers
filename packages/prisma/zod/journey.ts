@@ -19,7 +19,7 @@ export const _JourneyModel = z.object({
 })
 
 export interface CompleteJourney extends z.infer<typeof _JourneyModel> {
-  user: CompleteUser
+  user?: CompleteUser | null
   backpacks: CompleteBackpack[]
   routines: CompleteRoutine[]
   reflections: CompleteReflection[]
@@ -36,7 +36,7 @@ export interface CompleteJourney extends z.infer<typeof _JourneyModel> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const JourneyModel: z.ZodSchema<CompleteJourney> = z.lazy(() => _JourneyModel.extend({
-  user: UserModel,
+  user: UserModel.nullish(),
   backpacks: BackpackModel.array(),
   routines: RoutineModel.array(),
   reflections: ReflectionModel.array(),

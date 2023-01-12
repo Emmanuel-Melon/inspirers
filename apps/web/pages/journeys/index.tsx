@@ -19,7 +19,7 @@ import { GetServerSidePropsContext } from "next";
 // use this for recommendations' feedback: https://dribbble.com/shots/15900878-Video-Branding-Editor
 
 export default function Index(props) {
-  const { data: journeys, isLoading, isError } = useFetch(`/journeys/${props.user?.id}/list`);
+  const { data: journeys, isLoading, isError } = useFetch(`/journeys/cla6zxzxy098694btiqwmaixd/list`);
   return (
     <>
       <Stack

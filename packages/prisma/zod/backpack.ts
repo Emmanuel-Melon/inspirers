@@ -12,13 +12,14 @@ export const _BackpackModel = z.object({
   updatedAt: z.date().nullish(),
   deletedAt: z.date().nullish(),
   maxFolders: z.number().int(),
+  slug: z.string().nullish(),
 })
 
 export interface CompleteBackpack extends z.infer<typeof _BackpackModel> {
   resources: CompleteResource[]
   folders: CompleteFolder[]
   Automation: CompleteAutomation[]
-  Journey: CompleteJourney
+  Journey?: CompleteJourney | null
 }
 
 /**
@@ -30,5 +31,5 @@ export const BackpackModel: z.ZodSchema<CompleteBackpack> = z.lazy(() => _Backpa
   resources: ResourceModel.array(),
   folders: FolderModel.array(),
   Automation: AutomationModel.array(),
-  Journey: JourneyModel,
+  Journey: JourneyModel.nullish(),
 }))

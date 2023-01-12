@@ -12,10 +12,10 @@ export interface JourneyContextType {
 
 const initialState = {
   journey: {
-    id: "cla15t1mr0005ksbt3cx1dyqn",
+    id: "clcqvy7g90011dabtsv8rnzh4",
     title: "",
     description: "",
-    userId: "",
+    userId: "cla6zxzxy098694btiqwmaixd",
   },
 };
 

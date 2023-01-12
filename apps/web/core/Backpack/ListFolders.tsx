@@ -10,66 +10,69 @@ import {
   LinkOverlay,
 } from "@chakra-ui/react";
 import { Card, IconButton, EmptyState } from "ui";
-import { useFetch } from "hooks/useSwr";
 import { RiFolder5Line } from "react-icons/ri";
 import { FiMoreHorizontal, FiFolder, FiFolderPlus } from "react-icons/fi";
-import { Backpack, Folder } from "@prisma/client";
-import NextLink from 'next/link'
+import { Folder } from "@prisma/client";
+import NextLink from "next/link";
 
 export type FolderOverviewProps = {
   folder: Folder;
 };
 export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
   return (
-    <NextLink href={{
-        pathname: `/backpack/${encodeURIComponent(folder.title.toLowerCase())}`,
+    <NextLink
+      href={{
+        pathname: `/backpacks/${encodeURIComponent(folder.title.toLowerCase())}`,
         query: {
-            name: folder.title,
-            folderId: folder.id
-        }
-    }} passHref>
-        <LinkBox width="30%">
-      <Card>
-        <Stack gap={4}>
-          <Flex alignItems="center" justifyContent="space-between">
-            <Box
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-              color="brand.white"
-              fontWeight="700"
-              bg="brand.accent"
-              p="4"
-              borderRadius="1rem"
-            >
-              <FiFolder />
-            </Box>
-            <IconButton>
-              <FiMoreHorizontal />
-            </IconButton>
-          </Flex>
-          <LinkOverlay>
-            <Stack>
-              <Heading size="sm">{folder.title}</Heading>
-              <Text color="brand.secondaryText">0 files</Text>
-            </Stack>
-          </LinkOverlay>
-        </Stack>
-      </Card>
-    </LinkBox>
+          name: folder.title,
+          folderId: folder.id,
+        },
+      }}
+      passHref
+    >
+      <LinkBox>
+        <Card>
+          <Stack gap={4}>
+            <Flex alignItems="center" justifyContent="space-between">
+              <Box
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                color="brand.white"
+                fontWeight="700"
+                bg="brand.accent"
+                p="4"
+                borderRadius="1rem"
+              >
+                <FiFolder />
+              </Box>
+              <IconButton>
+                <FiMoreHorizontal />
+              </IconButton>
+            </Flex>
+            <LinkOverlay>
+              <Stack>
+                <Heading size="sm">{folder.title}</Heading>
+                <Text color="brand.secondaryText">0 files</Text>
+              </Stack>
+            </LinkOverlay>
+          </Stack>
+        </Card>
+      </LinkBox>
     </NextLink>
   );
 };
 
 export type ListFoldersProps = {
-  backpack: Backpack;
+  folders: Folder[];
+  isError?: boolean;
+  isLoading?: boolean;
 };
-export const ListFolders: FC<ListFoldersProps> = ({ backpack }) => {
-  const {
-    data: folders,
-    isLoading,
-    isError,
-  } = useFetch(`/backpacks/${backpack?.id}/folders`);
-  const [parent] = useAutoAnimate();
 
+export const ListFolders: FC<ListFoldersProps> = ({
+  isLoading,
+  isError,
+  folders,
+}) => {
+  const [parent] = useAutoAnimate();
   if (isError) {
     return <Text>Failed to Load Folders</Text>;
   }
@@ -89,7 +92,7 @@ export const ListFolders: FC<ListFoldersProps> = ({ backpack }) => {
   }
 
   return (
-    <Stack color="brand.primaryText">
+    <Stack color="brand.primaryText" width="100%">
       <Flex justifyContent="space-between" alignItems="center">
         <Heading size="sm">Folders</Heading>
         <Flex gap={2}>

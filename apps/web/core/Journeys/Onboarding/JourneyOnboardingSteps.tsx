@@ -9,7 +9,7 @@ import {
 
 export const JourneyOnboardingSteps = ({ user = {} }) => {
 
-  console.log(user);
+
   return (
     <JourneyOnboardingProvider>
       <JourneyOnboardingConsumer>

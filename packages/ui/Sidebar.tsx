@@ -100,7 +100,7 @@ export const Sidebar = ({ session }) => {
         {
             id: 8,
             name: "Backpack",
-            url: "/backpack",
+            url: "/backpacks",
             icon: <RiHandbagLine size="1rem" />
         },
         {

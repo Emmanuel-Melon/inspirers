@@ -25,7 +25,7 @@ export const Button: FC<ButtonProps> = ({
   children,
   onClick,
   icon,
-  bg = "brand.primary",
+  bg = "brand.accent",
   color = "brand.primaryText",
   isLoading = false,
   loadingText,
