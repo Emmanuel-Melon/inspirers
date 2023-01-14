@@ -142,7 +142,7 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
                   placeholder="Resource name (optional)"
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
-                  autofocus={true}
+                  autoFocus={true}
                 />
               </FormControl>
               <FormControl>

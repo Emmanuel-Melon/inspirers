@@ -1,5 +1,5 @@
 import React, { FC, useContext, useCallback, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import {
   Box,
   Flex,
@@ -11,6 +11,11 @@ import {
   HStack,
   useCheckboxGroup,
   Stack,
+  Grid,
+  GridItem,
+  FormErrorMessage,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 import { Input } from "ui/Input";
 import { Button, IconButton } from "ui";
@@ -50,18 +55,22 @@ const JourneyTypeSelector: FC<JourneyTypeSelectorProps> = ({
   const type: JourneyType = "academic";
   return (
     <>
-      <Text color="brand.secondaryText">Type of journey</Text>
+      <FormControl>
+      <FormLabel color="brand.secondaryText">Type of journey</FormLabel>
       <HStack {...group}>
         {options.map((value) => {
           const radio = getRadioProps({ value });
           return (
             <RadioCard
+              p="0.5rem"
+              
               key={value}
               {...radio}
               bg="brand.white"
               checked={{
-                bg: "brand.primaryText",
+                bg: "brand.accent",
                 color: "brand.white",
+                borderRadius: "0.5rem",
               }}
               hover={{
                 borderColor: "brand.highlight2",
@@ -73,6 +82,7 @@ const JourneyTypeSelector: FC<JourneyTypeSelectorProps> = ({
           );
         })}
       </HStack>
+      </FormControl>
 
       {type === "academic" ? <AcademicJourneyForm /> : null}
       {type === "business" ? <BusinessJourneyForm /> : null}
@@ -88,24 +98,28 @@ type JourneyFormProps = {
 const CareerJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
   return (
     <>
-      <Text color="brand.primaryText">Field</Text>
-      <Input
-        placeholder="E.g Engineering, Medicine etc."
-        type="text"
-        onChange={() => {}}
-        value={journey.interest}
-        name="interest"
-      />
-      <Text color="brand.primaryText">Experience level</Text>
-      <Select
-        placeholder="e.g undergrad or postgrade"
-        borderRadius="1rem"
-        name="background"
-      >
-        <option value={journey.background}>No Experience</option>
-        <option value={journey.background}>Early Career</option>
-        <option value={journey.background}>Mid Level/ Senior</option>
-      </Select>
+      <FormControl>
+        <FormLabel color="brand.primaryText">Field</FormLabel>
+        <Input
+          placeholder="E.g Engineering, Medicine etc."
+          type="text"
+          onChange={() => {}}
+          value={journey.interest}
+          name="interest"
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel color="brand.primaryText">Experience level</FormLabel>
+        <Select
+          placeholder="e.g undergrad or postgrade"
+          borderRadius="1rem"
+          name="background"
+        >
+          <option value={journey.background}>No Experience</option>
+          <option value={journey.background}>Early Career</option>
+          <option value={journey.background}>Mid Level/ Senior</option>
+        </Select>
+      </FormControl>
     </>
   );
 };
@@ -113,14 +127,16 @@ const CareerJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
 const BusinessJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
   return (
     <>
-      <Text color="brand.primaryText">Business type</Text>
-      <Input
-        placeholder="E.g Tech, Education"
-        type="text"
-        onChange={() => {}}
-        value={journey.field}
-        name="field"
-      />
+      <FormControl>
+        <FormLabel color="brand.primaryText">Business type</FormLabel>
+        <Input
+          placeholder="E.g Tech, Education"
+          type="text"
+          onChange={() => {}}
+          value={journey.field}
+          name="field"
+        />
+      </FormControl>
     </>
   );
 };
@@ -130,7 +146,7 @@ type AcademicJourneyInput = {
   title: string;
 };
 
-const AcademicJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
+const AcademicJourneyForm = ({ journey }: JourneyFormProps) => {
   const {
     register,
     handleSubmit,
@@ -142,34 +158,38 @@ const AcademicJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
 
   console.log(watch("title"));
   return (
-    <form>
-      <Text color="brand.secondaryText">Your field</Text>
-      <Input
-        placeholder="E.g Engineering, Medicine etc."
-        type="text"
-        {...register("title")}
-      />
-      <Text color="brand.secondaryText">Academic level</Text>
-      <Select
-        placeholder="e.g undergraduate or postgrade"
-        borderRadius="1rem"
-        name="background"
-        variant="outline"
-        bg="brand.highlight2"
-        borderColor="brand.highlight2"
-      >
-        <option>High School</option>
-        <option>Undergraduate</option>
-        <option>Postgraduate</option>
-        <option>Other</option>
-      </Select>
-    </form>
+    <Stack gap={1}>
+      <FormControl>
+        <FormLabel color="brand.secondaryText">Your field</FormLabel>
+        <Input
+          placeholder="E.g Engineering, Medicine etc."
+          type="text"
+          {...register("title")}
+        />
+      </FormControl>
+      <FormControl>
+        <FormLabel color="brand.secondaryText">Academic level</FormLabel>
+        <Select
+          placeholder="e.g undergraduate or postgrade"
+          borderRadius="1rem"
+          name="background"
+          variant="outline"
+          bg="brand.highlight2"
+          borderColor="brand.highlight2"
+        >
+          <option>High School</option>
+          <option>Undergraduate</option>
+          <option>Postgraduate</option>
+          <option>Other</option>
+        </Select>
+      </FormControl>
+    </Stack>
   );
 };
 
 type JourneyInfoInputs = {
   title: string;
-}
+};
 
 const JourneyInfoForm = () => {
   const context = useContext(JourneyOnboardingContext);
@@ -178,13 +198,20 @@ const JourneyInfoForm = () => {
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
 
-  const { register, handleSubmit, watch } = useForm<JourneyInfoInputs>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm<JourneyInfoInputs>();
   const onSubmit: SubmitHandler<JourneyInfoInputs> = (data) =>
     console.log(data);
 
   const options = ["academic", "business", "career", "personal"];
 
   console.log(watch("title"));
+  console.log(errors);
 
   const updateJourneyType = (value) => {
     /**
@@ -201,25 +228,31 @@ const JourneyInfoForm = () => {
     return <ListBluePrints />;
   }
   return (
-    <form>
-      <Flex
-        direction="column"
-        gap={4}
-        borderRadius="1rem"
-        color="brand.primaryText"
-      >
-        <Text color="brand.secondaryText">
-          Name your journey{" "}
-          <Box as="span" color="brand.danger">
-            *
-          </Box>
-        </Text>
-        <Input
-          placeholder="e.g Getting into Harvard"
-          type="text"
-          autofocus={true}
-          {...register("title", { required: true, maxLength: 20 })}
-        />
+    <Grid gap={4} borderRadius="1rem" color="brand.primaryText" width="100%">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl>
+          <FormLabel color="brand.secondaryText" htmlFor="title">
+            Name your journey{" "}
+            <Box as="span" color="brand.danger">
+              *
+            </Box>
+          </FormLabel>
+
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <Input
+                placeholder="e.g Getting into Harvard"
+                type="text"
+                autoFocus={true}
+                id="title"
+                {...field}
+              />
+            )}
+          />
+          {errors.title && <p>Hello</p>}
+        </FormControl>
         <JourneyTypeSelector
           defaultValue={""}
           options={options}
@@ -240,6 +273,7 @@ const JourneyInfoForm = () => {
             </Button>
           ) : null}
           <Button
+            as="input"
             type="submit"
             icon={<FiArrowRight />}
             isLoading={isLoading}
@@ -247,16 +281,16 @@ const JourneyInfoForm = () => {
             Continue
           </Button>
         </Flex>
-      </Flex>
-    </form>
+      </form>
+    </Grid>
   );
 };
 
 export const JourneyInfo = () => {
   const context = useContext(JourneyOnboardingContext);
   return (
-    <VStack width="100%" alignItems="flex-start">
-      <Flex alignItems="center" gap={4}>
+    <Stack width="100%" alignItems="flex-start">
+      <Flex alignItems="center" gap={4} width="100%">
         <IconButton
           size="sm"
           onClick={context.moveBackwards}
@@ -271,7 +305,7 @@ export const JourneyInfo = () => {
       <Text>{context.currentStep.description}</Text>
       <JourneyInfoForm />
       <Toaster position="bottom-center" />
-    </VStack>
+    </Stack>
   );
 };
 

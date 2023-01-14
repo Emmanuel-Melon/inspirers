@@ -99,7 +99,7 @@ export const ManageRoutine = ({ closeModal }) => {
                             type="text"
                             value={title}
                             name="title"
-                            autofocus={true}
+                            autoFocus={true}
                         />
                     </FormControl>
                     <FormControl>

@@ -1,26 +1,24 @@
 import { JourneySourceSelector, JourneySourceSelectorGuide } from "./JourneySourceSelector";
 import { JourneyInfo, JourneyInfoGuide } from "./JourneyInfo";
 import { JourneyGoals, JourneyGoalsGuide } from "./JourneyGoals";
-import { Flex, Stack } from "@chakra-ui/react";
+import { Stack, Grid, GridItem } from "@chakra-ui/react";
 import {
   JourneyOnboardingConsumer,
   JourneyOnboardingProvider,
 } from "providers/JourneyOnboardingProvider";
 
 export const JourneyOnboardingSteps = () => {
-
-
   return (
     <JourneyOnboardingProvider>
       <JourneyOnboardingConsumer>
         {(value) => (
-          <Flex width="100%" gap={4}>
-            <Stack flex="2">
+          <Grid width="100%" gap={4} templateColumns='repeat(3, 1fr)'>
+            <GridItem colSpan={2}>
               {value.currentStep.id === 1 ? <JourneySourceSelector /> : null}
               {value.currentStep.id === 2 ? <JourneyInfo /> : null}
               {value.currentStep.id === 3 ? <JourneyGoals /> : null}
-            </Stack>
-            <Flex gap={4} flex="1">
+            </GridItem>
+            <GridItem gap={4} >
               {value.currentStep.id === 1 ? (
                 <JourneySourceSelectorGuide guide={value.currentStep} />
               ) : null}
@@ -30,8 +28,8 @@ export const JourneyOnboardingSteps = () => {
               {value.currentStep.id === 3 ? (
                 <JourneyGoalsGuide guide={value.currentStep} />
               ) : null}
-            </Flex>
-          </Flex>
+            </GridItem>
+          </Grid>
         )}
       </JourneyOnboardingConsumer>
     </JourneyOnboardingProvider>
