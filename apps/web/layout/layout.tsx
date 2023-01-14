@@ -4,6 +4,7 @@ import { Box, Flex, Stack, useColorModeValue, Grid, GridItem, Heading } from "@c
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import { Sidebar, UnAuthorized } from "ui";
+import { HiOutlineBell, HiOutlineHome, HiOutlineTemplate, HiOutlineClipboardCheck, HiOutlineCollection } from "react-icons/hi";
 
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -12,6 +13,46 @@ type LayoutProps = {
 // preserve layout when navigating
 // pre-fetch
 // nesting layout
+
+const links = [
+  {
+      id: 1,
+      name: "Home",
+      url: "/",
+      icon: <HiOutlineHome size="1rem" />
+  },
+  {
+      id: 4,
+      name: "Routines",
+      url: "/routines",
+      icon: <HiOutlineTemplate size="1rem" />
+  },
+  {
+      id: 5,
+      name: "Tasks",
+      url: "/tasks",
+      icon: <HiOutlineClipboardCheck size="1rem" />
+  },
+  {
+      id: 6,
+      name: "Notifications",
+      url: "/notifications",
+      icon: <RiNotification3Line size="1rem" />
+  },
+  {
+      id: 8,
+      name: "Backpack",
+      url: "/backpacks",
+      icon: <RiHandbagLine size="1rem" />
+  },
+  {
+      id: 9,
+      name: "Apps",
+      url: "/apps",
+      icon: <RiApps2Line size="1rem" />
+  }
+];
+
 export default function Layout({ children }: LayoutProps) {
   const { data: session, status } = useSession();
   const bgColor = useColorModeValue("black", "white");
@@ -24,6 +65,8 @@ export default function Layout({ children }: LayoutProps) {
       </Flex>
     );
   }
+
+
 
   if (session) {
     return (
@@ -39,7 +82,7 @@ export default function Layout({ children }: LayoutProps) {
         <body>
           <Grid as="main" templateColumns='repeat(6, 1fr)'>
             <GridItem rowSpan={2} colSpan={1}>
-              <Sidebar session={session} />
+              <Sidebar links={links} />
             </GridItem>
             <GridItem rowSpan={2} colSpan={5}>
               <Box as="section" p="4">
