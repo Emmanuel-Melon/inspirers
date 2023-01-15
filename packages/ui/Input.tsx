@@ -1,5 +1,9 @@
 import { FunctionComponent } from "react";
-import { Input as InputBase, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import {
+  Input as InputBase,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
 
 type InputProps = {
   placeholder?: string;
@@ -11,35 +15,34 @@ type InputProps = {
   label?: string;
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  autofocus?: boolean;
+  autoFocus?: boolean;
 };
 
-export const Input: FunctionComponent<InputProps> = (props) => {
+export const Input = (props: InputProps) => {
   return (
-    <InputGroup>
-      <InputBase
-        autoComplete="off"
-        placeholder={props.placeholder}
-        cursor="pointer"
-        value={props.value}
-        name={props.name}
-        type={props.type}
-        bg="brand.white"
-        id={props.type}
-        variant="filled"
-        onChange={props.onChange}
-        focusBorderColor="brand.white"
-        color="brand.secondaryText"
-        autoFocus={props.autofocus}
-        _hover={{
-          background: "brand.white",
-        }}
-        _focus={{
-          outline: "none",
-          background: "brand.white",
-        }}
-        _placeholder={{ opacity: 1, color: "brand.secondaryText" }}
-      />
-    </InputGroup>
+    <InputBase
+      autoComplete="off"
+      placeholder={props.placeholder}
+      cursor="pointer"
+      value={props.value}
+      name={props.name}
+      type={props.type}
+      bg="brand.white"
+      id={props.type}
+      variant="filled"
+      onChange={props.onChange}
+      focusBorderColor="brand.white"
+      color="brand.secondaryText"
+      autoFocus={props.autoFocus}
+      _hover={{
+        background: "brand.white",
+      }}
+      _focus={{
+        outline: "none",
+        background: "brand.white",
+      }}
+      _placeholder={{ opacity: 1, color: "brand.secondaryText" }}
+      {...props}
+    />
   );
 };

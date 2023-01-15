@@ -24,7 +24,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { IconType } from "react-icons";
 
-import { RiRocket2Line, RiMenu2Line } from "react-icons/ri";
+import { RiRocket2Line, RiMenu2Line, RiArrowLeftLine } from "react-icons/ri";
 
 type SidebarLinkProps = {
   name: string;
@@ -74,47 +74,27 @@ const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
 
 type SidebarProps = {
   links: Array<SidebarLinkProps>;
+  collapsible?: boolean;
 };
 
-export const Sidebar: FC<SidebarProps> = ({ links }) => {
+export const Sidebar: FC<SidebarProps> = ({ collapsible, links }) => {
   return (
     <Stack
-      p={8}
-      height="100vh"
-      justifyContent="space-between"
-      width="250px"
+      p={4}
+      minH="100vh"
       alignItems="flex-start"
-      bg="brand.white"
-      borderRight="solid 0.10rem"
-      borderColor="#eee"
+      position="sticky"
+      boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
     >
-      <Stack gap={2}>
-        <Flex gap={2} alignItems="center" p="2">
-          <Flex
-            color="brand.secondaryText"
-            borderRadius="50%"
-            alignItems="center"
-            bg="brand.white"
-            p="2"
-            justifyContent="center"
-            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-            cursor="pointer"
-            _hover={{
-              bg: "brand.accent",
-            }}
-            style={{
-              transform: "rotate(25deg)",
-            }}
-          >
-            <RiRocket2Line size="1.5rem" />
-          </Flex>
-          <Heading size="md">Inspirers</Heading>
+      <Stack alignItems="flex-start">
+        <Flex gap={2} alignItems="center" justifyContent="flex-end">
+          <IconButton aria-label={"collapse sidebar"}>
+            <RiArrowLeftLine />
+          </IconButton>
         </Flex>
-        <Stack alignItems="flex-start">
-          {links.map((link) => (
-            <SidebarLink key={link.name} {...link} />
-          ))}
-        </Stack>
+        {links.map((link) => (
+          <SidebarLink key={link.name} {...link} />
+        ))}
       </Stack>
     </Stack>
   );

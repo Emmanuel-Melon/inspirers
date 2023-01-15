@@ -134,7 +134,7 @@ const NewObjective = ({ closeEditor, onSave }) => {
                 placeholder="New objective"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-                autofocus
+                autoFocus
             />
 
         </Flex>

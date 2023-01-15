@@ -93,7 +93,7 @@ export const AddRoutine = ({ cancel }) => {
                             type="text"
                             value={name}
                             name="name"
-                            autofocus={true}
+                            autoFocus={true}
                         />
                     </FormControl>
                 </Stack>

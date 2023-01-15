@@ -10,8 +10,8 @@ import { ListNotifications } from "../../core/Notifications/ListNotifications";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-export default function Notifications() {
-  const { data: notifications, isLoading, isError } = useFetch(`/notifications/${props.user?.id}`);
+export default function Notifications({ user = {} }) {
+  const { data: notifications, isLoading, isError } = useFetch(`/notifications/${user?.id}`);
   const markAllAsRead = () => {}
   return (
     <Stack gap={4} align="center" color="brand.primaryText" width="100%" borderRadius="1rem">
@@ -42,27 +42,3 @@ export default function Notifications() {
   );
 }
 
-
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-  const { createdAt, ...user } = session?.user;
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      user
-    },
-  };
-}

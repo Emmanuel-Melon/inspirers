@@ -9,6 +9,7 @@
   "scripts": {
     "build": "turbo run build --scope=docs",
     "dev": "turbo run dev --parallel",
+    "dev-app": "turbo run dev --scope=\"inspirers/api\" --scope=\"inspirers/web\" ",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start": "turbo run start",
@@ -26,9 +27,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.11",
     "husky": "^8.0.1",
-    "react-icons": "^4.4.0",
     "web": "^0.0.2"
   },
   "packageManager": "yarn@1.22.19"

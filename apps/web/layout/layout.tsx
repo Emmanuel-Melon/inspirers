@@ -1,11 +1,27 @@
 import React, { ReactChild } from "react";
 import { useSession, signIn } from "next-auth/react";
-import { Box, Flex, Stack, useColorModeValue, Grid, GridItem, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  useColorModeValue,
+  Grid,
+  GridItem,
+  Heading,
+} from "@chakra-ui/react";
 import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import { Sidebar, UnAuthorized } from "ui";
-import { HiOutlineBell, HiOutlineHome, HiOutlineTemplate, HiOutlineClipboardCheck, HiOutlineCollection } from "react-icons/hi";
+import {
+  HiOutlineBell,
+  HiOutlineHome,
+  HiOutlineTemplate,
+  HiOutlineClipboardCheck,
+  HiOutlineCollection,
+} from "react-icons/hi";
 
+
+import { RiHandbagLine, RiApps2Line } from "react-icons/ri";
 type LayoutProps = {
   children: ReactChild | ReactChild[];
 };
@@ -16,41 +32,41 @@ type LayoutProps = {
 
 const links = [
   {
-      id: 1,
-      name: "Home",
-      url: "/",
-      icon: <HiOutlineHome size="1rem" />
+    id: 1,
+    name: "Home",
+    url: "/",
+    icon: <HiOutlineHome size="1rem" />,
   },
   {
-      id: 4,
-      name: "Routines",
-      url: "/routines",
-      icon: <HiOutlineTemplate size="1rem" />
+    id: 4,
+    name: "Routines",
+    url: "/routines",
+    icon: <HiOutlineTemplate size="1rem" />,
   },
   {
-      id: 5,
-      name: "Tasks",
-      url: "/tasks",
-      icon: <HiOutlineClipboardCheck size="1rem" />
+    id: 5,
+    name: "Tasks",
+    url: "/tasks",
+    icon: <HiOutlineClipboardCheck size="1rem" />,
   },
   {
-      id: 6,
-      name: "Notifications",
-      url: "/notifications",
-      icon: <RiNotification3Line size="1rem" />
+    id: 6,
+    name: "Notifications",
+    url: "/notifications",
+    icon: <HiOutlineClipboardCheck size="1rem" />,
   },
   {
-      id: 8,
-      name: "Backpack",
-      url: "/backpacks",
-      icon: <RiHandbagLine size="1rem" />
+    id: 8,
+    name: "Backpack",
+    url: "/backpacks",
+    icon: <RiHandbagLine size="1rem" />,
   },
   {
-      id: 9,
-      name: "Apps",
-      url: "/apps",
-      icon: <RiApps2Line size="1rem" />
-  }
+    id: 9,
+    name: "Apps",
+    url: "/apps",
+    icon: <RiApps2Line size="1rem" />,
+  },
 ];
 
 export default function Layout({ children }: LayoutProps) {
@@ -79,21 +95,17 @@ export default function Layout({ children }: LayoutProps) {
           />
           <link rel="icon" href="favicon.png" />
         </Head>
-        <body>
-          <Grid as="main" templateColumns='repeat(6, 1fr)'>
+        <Grid as="main" templateColumns="repeat(6, 1fr)">
             <GridItem rowSpan={2} colSpan={1}>
               <Sidebar links={links} />
             </GridItem>
-            <GridItem rowSpan={2} colSpan={5}>
-              <Box as="section" p="4">
-                {children}
-              </Box>
+            <GridItem rowSpan={2} colSpan={5} p="4">
+              {children}
             </GridItem>
           </Grid>
-        </body>
       </>
     );
   }
 
-  return <UnAuthorized onClick={signIn}/>;
+  return <UnAuthorized onClick={signIn} />;
 }

@@ -1,14 +1,8 @@
-import { useContext, useState } from "react";
 import {
   Stack,
   Text,
   Flex,
   Heading,
-  Box,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
 } from "@chakra-ui/react";
 import { Button } from "ui";
 import { useRouter } from "next/router";
@@ -16,11 +10,13 @@ import { useRouter } from "next/router";
 export default function Index() {
   const router = useRouter();
   function getStarted() {
-    router.push("/journeys/new");
+    router.push("/journeys/new/getting_started");
   }
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center" gap={8}>
+      <Flex justifyContent="space-between" alignItems="center" gap={8}
+        direction={{ base: "row", md: "column" }}
+      >
         <Stack flex="2">
           <Heading size="md">Journeys</Heading>
           <Text>

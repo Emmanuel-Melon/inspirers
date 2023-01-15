@@ -144,7 +144,7 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack = {}}) => {
                   placeholder="Folder Name name (optional)"
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
-                  autofocus={true}
+                  autoFocus={true}
                 />
               </FormControl>
             </Stack>

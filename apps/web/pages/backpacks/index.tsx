@@ -17,6 +17,7 @@ import { client } from "utils/client";
 import NextLink from "next/link";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { FiArchive, FiSearch, FiPlus, FiShare, FiLock } from "react-icons/fi";
 
@@ -25,6 +26,11 @@ type CreateNewBackProps = {
   label?: string;
   userId: string;
 };
+
+type FormValues = {
+  name: string;
+  description?: string;
+}
 
 const CreateNewBack: FC<CreateNewBackProps> = ({
   journeyId,
@@ -36,6 +42,9 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
 
   const onSave = () => {
     setIsLoading(true);
@@ -85,7 +94,7 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
             <Button onClick={onCancel} bg="brand.white">
               Cancel
             </Button>
-            <Button onClick={onSave} isLoading={isLoading}>
+            <Button onClick={onSubmit} isLoading={isLoading}>
               Save
             </Button>
           </Flex>
