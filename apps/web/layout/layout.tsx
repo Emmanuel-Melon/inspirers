@@ -20,6 +20,7 @@ import {
   HiOutlineCollection,
 } from "react-icons/hi";
 
+
 import { RiHandbagLine, RiApps2Line } from "react-icons/ri";
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -80,6 +81,8 @@ export default function Layout({ children }: LayoutProps) {
       </Flex>
     );
   }
+
+
 
   if (session) {
     return (
