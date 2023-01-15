@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import useSWR, { SWRConfig } from 'swr';
+import { SWRConfig } from 'swr';
 import { ChakraProvider, theme as chakraTheme } from "@chakra-ui/react";
 import theme from "../theme";
 import "../styles/global.css";
@@ -7,10 +7,10 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "../layout/layout";
 import { JourneyContext, JourneyConsumer, JourneyProvider } from "providers/JourneyProvider";
 import { fetcher } from "../hooks/useSwr";
-import "@fontsource/montserrat";
+// import "@fontsource/montserrat";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const getLayout = Component?.getLayout || ((page) => page);
+  const getLayout = Component?.getLayout || ((page: any) => page);
 
   return getLayout(
     <SessionProvider
