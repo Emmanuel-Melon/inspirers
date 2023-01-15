@@ -33,6 +33,7 @@ type SidebarLinkProps = {
   active?: boolean;
 };
 
+// collapse sidebar
 const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
   return (
     <NextLink href={url} passHref>
