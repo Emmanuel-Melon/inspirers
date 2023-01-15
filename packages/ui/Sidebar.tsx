@@ -24,7 +24,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { IconType } from "react-icons";
 
-import { RiRocket2Line, RiMenu2Line } from "react-icons/ri";
+import { RiRocket2Line, RiMenu2Line, RiArrowLeftLine } from "react-icons/ri";
 
 type SidebarLinkProps = {
   name: string;
@@ -74,9 +74,10 @@ const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
 
 type SidebarProps = {
   links: Array<SidebarLinkProps>;
+  collapsible?: boolean;
 };
 
-export const Sidebar: FC<SidebarProps> = ({ links }) => {
+export const Sidebar: FC<SidebarProps> = ({ collapsible, links }) => {
   return (
     <Stack
       p={8}
@@ -109,6 +110,7 @@ export const Sidebar: FC<SidebarProps> = ({ links }) => {
             <RiRocket2Line size="1.5rem" />
           </Flex>
           <Heading size="md">Inspirers</Heading>
+          <RiArrowLeftLine />
         </Flex>
         <Stack alignItems="flex-start">
           {links.map((link) => (
