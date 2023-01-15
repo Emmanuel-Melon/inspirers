@@ -96,10 +96,8 @@ export default function Layout({ children }: LayoutProps) {
             <GridItem rowSpan={2} colSpan={1}>
               <Sidebar links={links} />
             </GridItem>
-            <GridItem rowSpan={2} colSpan={5}>
-              <Box as="section" p="4">
-                {children}
-              </Box>
+            <GridItem rowSpan={2} colSpan={5} p="4">
+              {children}
             </GridItem>
           </Grid>
       </>

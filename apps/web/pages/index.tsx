@@ -14,7 +14,9 @@ export default function Index() {
   }
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center" gap={8}>
+      <Flex justifyContent="space-between" alignItems="center" gap={8}
+        direction={{ base: "row", md: "column" }}
+      >
         <Stack flex="2">
           <Heading size="md">Journeys</Heading>
           <Text>
