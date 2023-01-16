@@ -30,7 +30,7 @@ type CreateNewBackProps = {
 type FormValues = {
   name: string;
   description?: string;
-}
+};
 
 const CreateNewBack: FC<CreateNewBackProps> = ({
   journeyId,
@@ -42,9 +42,14 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
 
   const onSave = () => {
     setIsLoading(true);
@@ -55,7 +60,7 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
         journeyId,
       })
       .then((response) => {
-        successToast("Folder created successfully.")
+        successToast("Folder created successfully.");
         setIsLoading(false);
         setClicked((currentState) => !currentState);
         setName("");
@@ -100,7 +105,7 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
           </Flex>
         </Stack>
       )}
-       <Toaster position="bottom-center" />
+      <Toaster position="bottom-center" />
     </>
   );
 };
@@ -111,12 +116,10 @@ type ListBackpacksProps = {
   isError?: boolean;
 };
 
-const BackpacksList: FC<ListBackpacksProps> = ({
-  backpacks,
-  isError,
-  isLoading,
-}) => {
-  const [parent]: any = useAutoAnimate();
+const BackpacksList = () => {
+  const context = useContext(JourneyContext);
+  const { data: backpacks, isLoading, isError } = useFetch(`/backpacks`);
+  const [animationParentRef] = useAutoAnimate<HTMLDivElement>();
   if (isError) {
     return <Text>Failed to Load Backpacks</Text>;
   }
@@ -124,9 +127,17 @@ const BackpacksList: FC<ListBackpacksProps> = ({
   if (isLoading) {
     return <Text>Loading Backpacks</Text>;
   }
+
+  const createNewBack = () => {};
   return (
     <Flex gap={4}>
-      <Stack gap={2} ref={parent} width="100%">
+      <Flex
+        gap={2}
+        ref={animationParentRef}
+        width="100%"
+        direction={["column", "column", "row", "row"]}
+        as="div"
+      >
         {backpacks?.map((backpack) => (
           <NextLink
             href={{
@@ -168,7 +179,7 @@ const BackpacksList: FC<ListBackpacksProps> = ({
             </LinkBox>
           </NextLink>
         ))}
-      </Stack>
+      </Flex>
     </Flex>
   );
 };
@@ -240,13 +251,6 @@ const EmptyBackpacks = () => {
 };
 
 export default function BackpackPage() {
-  const context = useContext(JourneyContext);
-  const {
-    data: backpacks,
-    isLoading: backpacksLoaded,
-    isError: backpacksError,
-  } = useFetch(`/backpacks`);
-
   return (
     <>
       <Stack gap={2}>
@@ -275,17 +279,7 @@ export default function BackpackPage() {
           </Stack>
         </Flex>
         <Flex gap={8}>
-          <Stack gap={4} flex="2">
-            {backpacks && backpacks?.length === 0 ? (
-              <EmptyBackpacks />
-            ) : (
-              <BackpacksList
-                backpacks={backpacks}
-                isLoading={backpacksLoaded}
-                isError={backpacksError}
-              />
-            )}
-          </Stack>
+          <BackpacksList />
         </Flex>
       </Stack>
     </>

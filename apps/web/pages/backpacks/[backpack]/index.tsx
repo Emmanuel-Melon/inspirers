@@ -31,8 +31,8 @@ export default function Backpack() {
   } = useFetch(`/backpacks/${router.query.backpack}/folders`);
 
   return (
-    <Stack>
-      <Flex justifyContent="space-between">
+    <Stack gap={2}>
+      <Flex justifyContent="space-between" direction={["row", "column", "column", "column"]}>
         <Flex gap={2} alignItems="center">
           <IconButton onClick={() => router.back()}>
             <FiChevronLeft />
@@ -48,7 +48,7 @@ export default function Backpack() {
           </Button>
         </Flex>
       </Flex>
-      <Flex gap={4}>
+      <Flex gap={4} direction={["row", "column", "column", "column"]}>
         <Stack flex="2">
           <ListFolders
             folders={folders}
