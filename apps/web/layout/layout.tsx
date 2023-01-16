@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React, { ReactChild, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import {
   Box,
@@ -19,7 +19,6 @@ import {
   HiOutlineClipboardCheck,
   HiOutlineCollection,
 } from "react-icons/hi";
-
 
 import { RiHandbagLine, RiApps2Line } from "react-icons/ri";
 type LayoutProps = {
@@ -71,8 +70,10 @@ const links = [
 
 export default function Layout({ children }: LayoutProps) {
   const { data: session, status } = useSession();
-  const bgColor = useColorModeValue("black", "white");
-  const textColor = useColorModeValue("white", "black");
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const collapseSidebar = () => {
+    setCollapsed((currentState) => !currentState);
+  };
 
   if (status === "loading") {
     return (
@@ -81,8 +82,6 @@ export default function Layout({ children }: LayoutProps) {
       </Flex>
     );
   }
-
-
 
   if (session) {
     return (
@@ -95,14 +94,14 @@ export default function Layout({ children }: LayoutProps) {
           />
           <link rel="icon" href="favicon.png" />
         </Head>
-        <Grid as="main" templateColumns="repeat(6, 1fr)">
-            <GridItem rowSpan={2} colSpan={1}>
-              <Sidebar links={links} />
-            </GridItem>
-            <GridItem rowSpan={2} colSpan={5} p="4">
-              {children}
-            </GridItem>
-          </Grid>
+        <Flex as="main" minH="100vh" height="calc(100vh - 100px)">
+          <Sidebar
+            links={links}
+            collapseSidebar={collapseSidebar}
+            collapsed={collapsed}
+          />
+          <Box p="4">{children}</Box>
+        </Flex>
       </>
     );
   }

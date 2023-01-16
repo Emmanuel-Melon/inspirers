@@ -30,7 +30,7 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
       }}
       passHref
     >
-      <LinkBox>
+      <LinkBox width="31%">
         <Card>
           <Stack gap={4}>
             <Flex alignItems="center" justifyContent="space-between">

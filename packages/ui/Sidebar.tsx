@@ -8,25 +8,22 @@ import {
   Stack,
   LinkBox,
   LinkOverlay,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton,
+  useDisclosure,
   Drawer,
   DrawerContent,
-  useDisclosure,
+  FlexProps,
+  BoxProps,
 } from "@chakra-ui/react";
 import { BeakerIcon } from "@heroicons/react/24/solid";
-import { Avatar, Card, Navbar, Spinner } from "ui";
+import { Avatar, Card, IconButton, Navbar, Spinner } from "ui";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { IconType } from "react-icons";
 
-import { RiRocket2Line, RiMenu2Line, RiArrowLeftLine } from "react-icons/ri";
+import { RiRocket2Line, RiMenu2Line, RiMenu3Line } from "react-icons/ri";
 
-type SidebarLinkProps = {
+type SidebarItemProps = {
   name: string;
   icon?: IconType;
   url?: string;
@@ -34,7 +31,13 @@ type SidebarLinkProps = {
 };
 
 // collapse sidebar
-const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
+const SidebarItem: FC<SidebarItemProps> = ({
+  active,
+  collapsed,
+  icon,
+  name,
+  url,
+}) => {
   return (
     <NextLink href={url} passHref>
       <LinkBox
@@ -65,7 +68,7 @@ const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
             >
               {icon}
             </Flex>
-            {name}
+            {collapsed ? name : null}
           </Flex>
         </LinkOverlay>
       </LinkBox>
@@ -74,34 +77,59 @@ const SidebarLink: FC<SidebarLinkProps> = ({ active, icon, name, url }) => {
 };
 
 type SidebarProps = {
-  links: Array<SidebarLinkProps>;
-  collapsible?: boolean;
+  links: Array<SidebarItemProps>;
+  collapsed?: boolean;
+  collapseSidebar?: any;
 };
 
-export const Sidebar: FC<SidebarProps> = ({ collapsible, links }) => {
+export const Sidebar: FC<SidebarProps> = ({
+  collapsed,
+  collapseSidebar,
+  links,
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Stack
-      p={4}
-      minH="100vh"
-      alignItems="flex-start"
+    <Box
+      p={2}
+      
+      alignItems={collapsed ? "center" : "flex-start"}
       position="sticky"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+      width={collapsed ? "200px" : "fit-content"}
+      
     >
+      <Drawer
+        autoFocus={false}
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        size="full"
+      >
+        <DrawerContent>
+          <p>menu</p>
+        </DrawerContent>
+      </Drawer>
       <Stack alignItems="flex-start">
-        <Flex gap={2} alignItems="center" justifyContent="flex-end">
-          <IconButton aria-label={"collapse sidebar"}>
-            <RiArrowLeftLine />
+        <Flex gap={2} alignItems="center" justifyContent="center" p="2">
+          <IconButton aria-label={"collapse sidebar"} onClick={collapseSidebar}>
+            <RiMenu3Line />
           </IconButton>
         </Flex>
         {links.map((link) => (
-          <SidebarLink key={link.name} {...link} />
+          <SidebarItem key={link.name} {...link} collapsed={collapsed} />
         ))}
       </Stack>
-    </Stack>
+    </Box>
   );
 };
 
-interface MobileProps {
+const SidebarContent = () => {
+  return <p>Content Here</p>;
+};
+
+interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
@@ -116,10 +144,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       {...rest}
     >
       <IconButton
-        variant="outline"
         onClick={onOpen}
         aria-label="open menu"
-        icon={<RiMenu2Line />}
+        icon={<RiMenu3Line />}
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
