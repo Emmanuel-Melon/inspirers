@@ -42,7 +42,7 @@ export default function Backpack() {
         backpackId: router.query.backpack
       })
       .then((response) => {
-        console.log(response);
+        successToast("Resource created");
       })
       .catch((err) => {
         console.log(err);

@@ -195,7 +195,6 @@ const BackpacksList = () => {
   );
 };
 
-const EmptyBackpacks = () => {
   // automatically paste url
   // pin folder to quick access
   // add folder capacity
@@ -208,58 +207,6 @@ const EmptyBackpacks = () => {
 
   // assign labels to what something is for.
   //
-
-  return (
-    <>
-      <Card>
-        <Stack gap={2}>
-          <Heading size="md">You don&apos;t have a Backpack ready.</Heading>
-          <Text>
-            This version of inspirers will allow you to create up to 3
-            Backpacks.
-          </Text>
-          <Flex gap={4}>
-            <CreateNewBack
-              label="Create Backpack"
-              journeyId="clcqvy7g90011dabtsv8rnzh4"
-              userId="cla6zxzxy098694btiqwmaixd"
-            />
-            <Button bg="brand.white">Learn More</Button>
-          </Flex>
-        </Stack>
-      </Card>
-      <Flex gap={2} justifyContent="space-between">
-        <Card bg="brand.highlight2">
-          <Stack>
-            <Heading size="sm">Organize</Heading>
-            <Text color="brand.secondaryText">
-              This version of inspirers will allow you to create up to 3
-              Backpacks.
-            </Text>
-          </Stack>
-        </Card>
-        <Card bg="brand.highlight2">
-          <Stack>
-            <Heading size="sm">Import Data</Heading>
-            <Text color="brand.secondaryText">
-              This version of inspirers will allow you to create up to 3
-              Backpacks.
-            </Text>
-          </Stack>
-        </Card>
-        <Card bg="brand.highlight2">
-          <Stack>
-            <Heading size="sm">Automate</Heading>
-            <Text color="brand.secondaryText">
-              This version of inspirers will allow you to create up to 3
-              Backpacks.
-            </Text>
-          </Stack>
-        </Card>
-      </Flex>
-    </>
-  );
-};
 
 export default function BackpackPage() {
   return (
