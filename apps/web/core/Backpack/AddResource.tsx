@@ -17,7 +17,7 @@ type AddResourceProps = {
   backpack?: Backpack;
 };
 
-export const AddResource: FC<AddResourceProps> = ({ backpack = {} }) => {
+export const AddResource: FC<AddResourceProps> = ({ addResource, backpack = {} }) => {
   const [view, setView] = useState<AddResourceView>("form");
   const toggleView = (view: AddResourceView) => {
     setView(view);
@@ -29,7 +29,7 @@ export const AddResource: FC<AddResourceProps> = ({ backpack = {} }) => {
   return (
     <>
       {view === "form" && (
-        <AddResourceForm toggleView={toggleView} backpack={backpack} />
+        <AddResourceForm toggleView={toggleView} addResource={addResource} />
       )}
       {view === "invite" && (
         <InviteCompanionView

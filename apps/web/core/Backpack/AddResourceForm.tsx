@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
   Flex,
   Text,
@@ -11,10 +12,21 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
 } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useFetch } from "hooks/useSwr";
+import { useRouter } from "next/router";
 
-import { Button, IconButton, Input, Modal } from "ui";
+import { AsyncDropdown, Button, IconButton, Input, Modal } from "ui";
 import {
   FiPlus,
   FiTrash,
@@ -35,7 +47,7 @@ import {
   FiFolder,
   FiRotateCw,
   FiUsers,
-  FiUploadCloud
+  FiUploadCloud,
 } from "react-icons/fi";
 import { client } from "utils/client";
 import { ResourceType } from "@prisma/client";
@@ -48,25 +60,60 @@ import { ResourceType } from "@prisma/client";
 // add a preview of the link
 // submit form on enter
 
-export const AddResourceForm = ({ toggleView, backpack }) => {
-  const [title, setTitle] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const LinkFolderButton = ({ control }) => {
+  const generateUrl = () => {
+    return "/backpacks/clcsb7g9w4289lfbtan3qgu6z/folders";
+  };
+  return (
+    <Popover isLazy placement="right-start">
+      <PopoverTrigger>
+        <Button icon={<FiFolder />} bg="white">
+          Folder
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverArrow />
+        <PopoverCloseButton />
+        <PopoverHeader>Choose folder</PopoverHeader>
+        <PopoverBody>
+          <Controller
+            name="folderId"
+            control={control}
+            render={({ field }) => (
+              <AsyncDropdown
+                optionsUrl={generateUrl()}
+                {...field}
+                placeholder="Choose a folder"
+              />
+            )}
+          />
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  );
+};
 
-  const addResource = (e: SubmitEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    client
-      .post(`/backpacks/${backpack?.id}`, {
-        title,
-        resourceUrl: url,
-        type: ResourceType.Video,
-        folderId: "clcqi2pq30168xabt5r03b3yg"
-      })
-      .then((response) => {
-        setIsLoading(false);
-      })
-      .then(() => closeModal());
+export const AddResourceForm = ({ addResource, toggleView, backpack }) => {
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [folderId, setFolderId] = useState<string>("clcsbfkxu4481lfbt56bcnbfo");
+  const router = useRouter();
+
+
+  const { control, register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      title: "",
+      resourceUrl: "",
+      folderId,
+      type: ResourceType.Video,
+    },
+  });
+
+  const onSubmit = async (data) => {
+    addResource({
+      ...data,
+      folderId: data.folderId.value
+    });
   };
 
   const preventExit = () => {
@@ -101,13 +148,14 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
       document.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
+
   return (
     <>
       <Button icon={<FiUploadCloud />} onClick={openModal} bg="brand.white">
         Add Resource
       </Button>
       <Modal show={isModalOpen} close={closeModal}>
-        <form onSubmit={addResource}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Stack color="brand.primaryText">
             <Flex
               px="4"
@@ -127,7 +175,7 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
                 <Text size="sm">New resource</Text>
               </Flex>
               <Flex gap={2} alignItems="center">
-                <IconButton label={""} onClick={() => {}}>
+                <IconButton label={""} colorScheme="teal" onClick={() => {}}>
                   <FiMaximize2 />
                 </IconButton>
                 <IconButton label={""} onClick={closeModal}>
@@ -137,51 +185,26 @@ export const AddResourceForm = ({ toggleView, backpack }) => {
             </Flex>
             <Stack px="4" py="2">
               <FormControl>
-                <Input
-                  type="text"
-                  placeholder="Resource name (optional)"
-                  onChange={(e) => setTitle(e.target.value)}
-                  value={title}
-                  autoFocus={true}
+                <Controller
+                  name="title"
+                  control={control}
+                  render={({ field }) => (
+                    <Input {...field} placeholder="Enter name" />
+                  )}
                 />
               </FormControl>
               <FormControl>
-                <Input
-                  type="text"
-                  placeholder="Enter a URL"
-                  onChange={(e) => setUrl(e.target.value)}
-                  value={url}
+                <Controller
+                  name="resourceUrl"
+                  control={control}
+                  render={({ field }) => (
+                    <Input {...field} placeholder="Resource Url" />
+                  )}
                 />
               </FormControl>
             </Stack>
             <Flex px="4" py="2" gap={2}>
-              <Button
-                size="sm"
-                icon={<FiFolder />}
-                onClick={() => {}}
-                bg="brand.white"
-                color="brand.secondaryText"
-              >
-                Folder
-              </Button>
-              <Button
-                size="sm"
-                icon={<FiClock />}
-                onClick={() => {}}
-                bg="brand.white"
-                color="brand.secondaryText"
-              >
-                Due Date
-              </Button>
-              <Button
-                size="sm"
-                icon={<FiUsers />}
-                onClick={() => {}}
-                bg="brand.white"
-                color="brand.secondaryText"
-              >
-                Companions
-              </Button>
+              <LinkFolderButton control={control} />
             </Flex>
             <Flex
               px="4"

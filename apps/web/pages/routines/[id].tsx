@@ -66,7 +66,7 @@ export default function Routine() {
                         <Button size="md" bg="brand.white" icon={<FiShare2 />}>Share</Button>
                         <Button size="md" icon={<FiSettings />} onClick={openModal}>Manage Routine</Button>
                     </Flex>
-                    <LinkFolderModal routine={routine} />
+                   
                 </Flex>
                 <Flex gap={8}>
                     <Stack gap={4} width="100%" flex="2">

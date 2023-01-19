@@ -1,25 +1,39 @@
-import { useState, useEffect } from "react";
-import { Select, Box, Spinner } from "@chakra-ui/react";
+import { FC, useState, useEffect } from "react";
+import { Box, Spinner } from "@chakra-ui/react";
+import {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} from "chakra-react-select";
+import { useFetch } from "hooks/useSwr";
 
-const AsyncDropdown = ({ optionsUrl }) => {
-  const [options, setOptions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+type AsyncDropdownProps = {
+  placeholder?: string;
+  optionsUrl?: string;
+}
+
+export const AsyncDropdown: FC<AsyncDropdownProps> = ({ 
+  optionsUrl, 
+  placeholder,
+  ...props
+}) => {
+
+
+  const { data, isLoading, isError } = useFetch(optionsUrl);
+  const transformOptions = optionsArr => {
+    return optionsArr.map(option => {
+      return { value: option.id, label: option.title || option.name }
+    })
+  }
 
   return (
-    <Box>
-      {isLoading ? (
-        <Spinner size="md" color="gray.500" />
-      ) : (
-        <Select placeholder="Select an option">
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </Select>
-      )}
-    </Box>
+    <Select
+      tagVariant="solid"
+      placeholder={placeholder}
+      options={data && transformOptions(data)}
+      size="sm"
+      {...props}
+    />
   );
 };
-
-export default AsyncDropdown;

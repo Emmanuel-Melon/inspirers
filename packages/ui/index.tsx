@@ -16,3 +16,4 @@ export * from "./IconButton";
 export * from "./ComingSoon";
 export * from "./Tab";
 export * from "./utils";
+export * from "./AsyncDropdown";

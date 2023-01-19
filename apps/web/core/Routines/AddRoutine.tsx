@@ -97,71 +97,7 @@ export const AddRoutine = ({ cancel }) => {
                         />
                     </FormControl>
                 </Stack>
-                <Flex px="4" py="2" gap={2}>
-                    <Menu>
-                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
-                            Journey
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Download</MenuItem>
-                            <MenuItem>Create a Copy</MenuItem>
-                            <MenuItem>Mark as Draft</MenuItem>
-                            <MenuItem>Delete</MenuItem>
-                            <MenuItem>Attend a Workshop</MenuItem>
-                        </MenuList>
-                    </Menu>
-                    <Menu>
-                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
-                            Journey
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Download</MenuItem>
-                            <MenuItem>Create a Copy</MenuItem>
-                            <MenuItem>Mark as Draft</MenuItem>
-                            <MenuItem>Delete</MenuItem>
-                            <MenuItem>Attend a Workshop</MenuItem>
-                        </MenuList>
-                    </Menu>
-                    <Menu>
-                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
-                            Journey
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Download</MenuItem>
-                            <MenuItem>Create a Copy</MenuItem>
-                            <MenuItem>Mark as Draft</MenuItem>
-                            <MenuItem>Delete</MenuItem>
-                            <MenuItem>Attend a Workshop</MenuItem>
-                        </MenuList>
-                    </Menu>
-                    <Menu>
-                        <MenuButton as={Button} rightIcon={<FiRotateCw />}>
-                            Journey
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Download</MenuItem>
-                            <MenuItem>Create a Copy</MenuItem>
-                            <MenuItem>Mark as Draft</MenuItem>
-                            <MenuItem>Delete</MenuItem>
-                            <MenuItem>Attend a Workshop</MenuItem>
-                        </MenuList>
-                    </Menu>
-                </Flex>
-                <Flex px="4" py="4" alignItems="center" justifyContent="space-between" bg="brand.highlight2">
-                    <Flex gap={2}>
-                        <IconButton onClick={() => toggleView("image")} label={""}>
-                            <FiImage />
-                        </IconButton>
-                        <IconButton onClick={() => toggleView("video")} label={""}>
-                            <FiVideo />
-                        </IconButton>
-                        <IconButton onClick={() => toggleView("invite")} label={""}>
-                            <FiUserPlus />
-                        </IconButton>
-                        <IconButton onClick={() => toggleView("expanded")} label={""}>
-                            <FiMoreHorizontal />
-                        </IconButton>
-                    </Flex>
+                <Flex px="4" py="4" alignItems="center" justifyContent="flex-end" bg="brand.highlight2">
                     <Flex gap={2}>
                         <Button size="sm" bg="brand.white" onClick={cancel}>Draft</Button>
                         <Button size="sm" type="submit" isLoading={isLoading}>Continue</Button>
