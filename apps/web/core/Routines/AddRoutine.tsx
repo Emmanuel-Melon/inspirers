@@ -12,19 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Routine } from "@prisma/client";
 import {
-    FiPlus,
-    FiTrash,
-    FiCheck,
-    FiTag,
-    FiUserPlus,
-    FiLink2,
-    FiClock,
     FiX,
-    FiLink,
-    FiImage,
-    FiVideo,
-    FiMoreHorizontal,
-    FiEye,
     FiMaximize2,
     FiArrowRight,
     FiChevronsRight,
@@ -37,19 +25,30 @@ import { Input } from "ui";
 import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Controller, useForm } from "react-hook-form";
 
 export const AddRoutine = ({ cancel }) => {
     const [name, setName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { data: session, status } = useSession();
 
+    const { control, register, handleSubmit, setValue } = useForm({
+        defaultValues: {
+          title: "",
+        },
+      });
+
     const router = useRouter();
     const handleClick = (e) => {
         e.preventDefault();
         setIsLoading(true);
+       
+    }
+
+    const onSubmit = async (data) => {
+
         client.post(`/routines`, {
-            title: name,
-            userId: session?.user?.id
+            ...data
         }).then(res => {
             console.log(res);
             setIsLoading(false);
@@ -60,9 +59,9 @@ export const AddRoutine = ({ cancel }) => {
                 console.log(err);
                 setIsLoading(false);
             })
-    }
+      };
     return (
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Stack color="brand.primaryText">
                 <Flex px="4" py="2" justifyContent="space-between" alignItems="center">
                     <Flex gap={1} alignItems="center" color="brand.secondaryText">
