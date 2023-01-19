@@ -21,50 +21,68 @@ import {
 import { Button, Card, IconButton, Input, Modal } from "ui";
 import { FiChevronLeft, FiZap, FiArchive, FiSearch } from "react-icons/fi";
 import { useFetch } from "hooks/useSwr";
+import { client } from "utils/client";
+import { Resource } from "@prisma/client";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Backpack() {
   const router = useRouter();
+  const errorToast = (message: string) => toast.error(message);
+  const successToast = (message: string) => toast.success(message);
   const {
     data: folders,
     isLoading,
     isError,
   } = useFetch(`/backpacks/${router.query.backpack}/folders`);
 
+  const addResource = (data: Resource) => {
+    return client
+      .post(`/backpacks/resources`, {
+        ...data,
+        backpackId: router.query.backpack
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+        errorToast(err.message);
+      });
+  };
+
   return (
-    <Stack gap={2}>
-      <Flex justifyContent="space-between" direction={["row", "column", "column", "column"]}>
-        <Flex gap={2} alignItems="center">
-          <IconButton onClick={() => router.back()}>
-            <FiChevronLeft />
-          </IconButton>
-          <Heading size="md">{router.query.backpackName}</Heading>
-        </Flex>
-        <Flex gap={2} alignItems="center">
-          <AddResource />
-          <AddNewFolder />
-          <ImportResources />
-          <Button icon={<FiZap />} bg="brand.white">
-            Automations
-          </Button>
-        </Flex>
-      </Flex>
-      <Flex gap={4} direction={["row", "column", "column", "column"]}>
-        <Stack flex="2">
-          <ListFolders
-            folders={folders}
-            isLoading={isLoading}
-            isError={isError}
-          />
-          <Flex>
-            <Card>
-              <Heading size="sm">Organize</Heading>
-            </Card>
+    <>
+      <Flex gap={2} direction={["row", "column", "column", "column"]}>
+        <Flex
+          justifyContent="space-between"
+          direction={["row", "row", "row", "row"]}
+        >
+          <Flex gap={2} alignItems="center">
+            <IconButton onClick={() => router.back()}>
+              <FiChevronLeft />
+            </IconButton>
+            <Heading size="md">{router.query.backpackName}</Heading>
           </Flex>
-        </Stack>
-        <Stack flex="1">
-          <Heading size="sm">Folder Activity</Heading>
-        </Stack>
+          <Flex gap={2} alignItems="center">
+            <AddResource addResource={addResource} />
+            <AddNewFolder />
+            <ImportResources />
+            <Button icon={<FiZap />} bg="brand.white">
+              Automations
+            </Button>
+          </Flex>
+        </Flex>
+        <Flex gap={4} direction={["row", "column", "column", "column"]}>
+          <Stack flex="2">
+            <ListFolders
+              folders={folders}
+              isLoading={isLoading}
+              isError={isError}
+            />
+          </Stack>
+        </Flex>
       </Flex>
-    </Stack>
+      <Toaster position="bottom-center" />
+    </>
   );
 }

@@ -19,10 +19,11 @@ export type FolderOverviewProps = {
   folder: Folder;
 };
 export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
+  console.log(folder);
   return (
     <NextLink
       href={{
-        pathname: `/backpacks/${encodeURIComponent(folder.title.toLowerCase())}`,
+        pathname: `/backpacks/${folder.backpackId}/${folder.id}`,
         query: {
           name: folder.title,
           folderId: folder.id,
@@ -30,7 +31,7 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
       }}
       passHref
     >
-      <LinkBox width="31%">
+      <LinkBox flex="1" minW="30%" maxW="30%">
         <Card>
           <Stack gap={4}>
             <Flex alignItems="center" justifyContent="space-between">

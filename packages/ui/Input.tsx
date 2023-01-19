@@ -14,7 +14,7 @@ type InputProps = {
   icon?: any;
   label?: string;
   value?: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
   autoFocus?: boolean;
 };
 
@@ -24,13 +24,7 @@ export const Input = (props: InputProps) => {
       autoComplete="off"
       placeholder={props.placeholder}
       cursor="pointer"
-      value={props.value}
-      name={props.name}
-      type={props.type}
-      bg="brand.white"
-      id={props.type}
       variant="filled"
-      onChange={props.onChange}
       focusBorderColor="brand.white"
       color="brand.secondaryText"
       autoFocus={props.autoFocus}

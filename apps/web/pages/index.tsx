@@ -4,7 +4,7 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import { Button } from "ui";
+import { AsyncDropdown, Button } from "ui";
 import { useRouter } from "next/router";
 
 export default function Index() {
@@ -26,6 +26,7 @@ export default function Index() {
         <Flex>
           <Button onClick={getStarted}>New Journey</Button>
         </Flex>
+        <AsyncDropdown />
       </Flex>
     </>
   );

@@ -73,6 +73,15 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
       });
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+
   const onCancel = () => {
     setClicked(false);
     // cancel any http requests
@@ -81,10 +90,11 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
     <>
       {!clicked ? (
         <Flex>
-          <Button onClick={() => setClicked(true)}>{label}</Button>
+          <Button onClick={() => setIsModalOpen(true)}>{label}</Button>
         </Flex>
       ) : (
-        <Stack>
+        <Modal show={isModalOpen} close={closeModal}>
+          <Stack>
           <Input
             placeholder="Backpack Name"
             value={name}
@@ -104,6 +114,8 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
             </Button>
           </Flex>
         </Stack>
+        </Modal>
+        
       )}
       <Toaster position="bottom-center" />
     </>
@@ -130,56 +142,55 @@ const BackpacksList = () => {
 
   const createNewBack = () => {};
   return (
-    <Flex gap={4}>
-      <Flex
-        gap={2}
-        ref={animationParentRef}
-        width="100%"
-        direction={["column", "column", "row", "row"]}
-        as="div"
-      >
-        {backpacks?.map((backpack) => (
-          <NextLink
-            href={{
-              pathname: `/backpacks/${backpack.id}`,
-              query: {
-                backpackName: backpack.name,
-              },
-            }}
-            passHref
-          >
-            <LinkBox>
-              <Card key={backpack.id}>
-                <Stack gap={2}>
-                  <Flex
-                    gap={4}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Stack>
-                      <LinkOverlay>
-                        <Heading size="sm">{backpack.name}</Heading>
-                      </LinkOverlay>
-                    </Stack>
-                    <Flex gap={2}>
-                      <IconButton>
-                        <FiShare />
-                      </IconButton>
-                    </Flex>
+    <Flex
+      gap={2}
+      ref={animationParentRef}
+      width="100%"
+      direction={["column", "column", "row", "row"]}
+      as="div"
+      justifyContent="space-between"
+    >
+      {backpacks?.map((backpack) => (
+        <NextLink
+          href={{
+            pathname: `/backpacks/${backpack.id}`,
+            query: {
+              backpackName: backpack.name,
+            },
+          }}
+          passHref
+        >
+          <LinkBox flex="1">
+            <Card key={backpack.id}>
+              <Stack gap={2}>
+                <Flex
+                  gap={4}
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Stack>
+                    <LinkOverlay>
+                      <Heading size="sm">{backpack.name}</Heading>
+                    </LinkOverlay>
+                  </Stack>
+                  <Flex gap={2}>
+                    <IconButton>
+                      <FiShare />
+                    </IconButton>
                   </Flex>
+                </Flex>
+                <Stack gap={2}>
+                  <Text>1/ {backpack.maxFolders} Folders</Text>
                   <Flex gap={2} alignItems="center">
-                    <Text>1/ {backpack.maxFolders} Folders</Text>
-                    <Flex gap={2} alignItems="center">
-                      <FiLock />
-                      <Text>Private</Text>
-                    </Flex>
+                    <FiLock />
+                    <Text>Private</Text>
                   </Flex>
                 </Stack>
-              </Card>
-            </LinkBox>
-          </NextLink>
-        ))}
-      </Flex>
+              </Stack>
+            </Card>
+          </LinkBox>
+        </NextLink>
+      ))}
     </Flex>
   );
 };
@@ -267,10 +278,7 @@ export default function BackpackPage() {
                 </IconButton>
                 <Heading size="md">Emmanuel&apos;s Backpacks</Heading>
               </Flex>
-              <CreateNewBack
-                journeyId={context.journey.id}
-                userId={context.journey.userId}
-              />
+              <CreateNewBack />
             </Flex>
             <Text>
               Empower your growth journey with thousands of free resources from
