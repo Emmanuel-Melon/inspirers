@@ -18,6 +18,7 @@ export const _RoutineModel = z.object({
   duration: z.string().nullish(),
   description: z.string().nullish(),
   reminders: z.boolean(),
+  reminder: z.string().nullish(),
   privacy: z.nativeEnum(RoutinePrivacy).nullish(),
   source: z.nativeEnum(RoutineSource).nullish(),
   periodStartDate: z.date().nullish(),
@@ -28,6 +29,7 @@ export const _RoutineModel = z.object({
   periodType: z.nativeEnum(PeriodType),
   scheduleType: z.nativeEnum(RoutineSchedule),
   startingDate: z.date().nullish(),
+  endDate: z.date().nullish(),
   linkedFolderId: z.string().nullish(),
   position: z.number().int(),
 })

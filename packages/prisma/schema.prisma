@@ -720,14 +720,15 @@ model Routine {
   createdAt         DateTime?       @default(now())
   updatedAt         DateTime?       @default(now())
   deletedAt         DateTime?       @default(now())
-  startsAt          DateTime?
-  finishesAt        DateTime?
+  startsAt          DateTime? @db.Time
+  finishesAt        DateTime? @db.Time
   resourceId        String?
   journeyId         String?
   type              RoutineType?
   duration          String?
   description       String?
   reminders         Boolean         @default(true)
+  reminder          String?
   privacy           RoutinePrivacy?
   source            RoutineSource?
   periodStartDate   DateTime?
@@ -740,6 +741,7 @@ model Routine {
   items             RoutineItem[]
   resources         Resource[]
   startingDate      DateTime?
+  endDate           DateTime?
   linkedFolderId    String?
   position          Int             @default(0)
   folders           Folder[]

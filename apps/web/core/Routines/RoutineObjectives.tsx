@@ -158,6 +158,7 @@ type RoutineObjectivesProps = {
 
 
 export const RoutineObjectives = ({ routine }: RoutineObjectivesProps) => {
+    console.log(routine);
     const [edit, setEdit] = useState(false);
     const closeEditor = () => {
         setEdit(false);

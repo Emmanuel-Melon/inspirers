@@ -26,6 +26,7 @@ import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
+import { parse, format, formatDistance, formatRelative, subDays } from "date-fns";
 
 export const AddRoutine = ({ addNewRoutine }) => {
   const [name, setName] = useState<string>("");
@@ -40,13 +41,22 @@ export const AddRoutine = ({ addNewRoutine }) => {
   const { control, register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: "",
+      startingDate: null,
+      startsAt: null,
+      finishesAt: null,
+      reminder: ""
     },
   });
 
   const onSubmit = async (data) => {
 
     console.log(data)
-    await addNewRoutine(data);
+    await addNewRoutine({
+      ...data,
+      startsAt: parse(data.startsAt, "HH:mm", new Date()),
+      finishesAt: parse(data.finishesAt, "HH:mm", new Date()),
+      startingDate: new Date(data.startingDate)
+    });
     closeModal();
   };
   return (
@@ -91,6 +101,60 @@ export const AddRoutine = ({ addNewRoutine }) => {
                       placeholder="Routine name"
                       type="text"
                       autoFocus={true}
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+                <Controller
+                  name="startingDate"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="Start Date"
+                      type="date"
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              <Flex>
+              <FormControl>
+                <Controller
+                  name="startsAt"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="Start Date"
+                      type="time"
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+                <Controller
+                  name="finishesAt"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="Start Date"
+                      type="time"
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              </Flex>
+              <FormControl>
+                <Controller
+                  name="reminder"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="Reminder"
+                      type="text"
                       {...field}
                     />
                   )}

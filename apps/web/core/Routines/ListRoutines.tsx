@@ -30,7 +30,7 @@ export const ListRoutines = ({ isLoading, isError, routines }: ListRoutinesProps
     return (
         <Stack gap={2} width="100%">
             {
-                routines?.map(routine => <RoutineItem routine={routine} key={routine.id} />)
+                routines && routines?.map(routine => <RoutineItem routine={routine} key={routine.id} />)
             }
         </Stack>
     )
