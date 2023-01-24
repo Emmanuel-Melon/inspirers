@@ -21,10 +21,13 @@ import {
     IconButton,
 
 } from "@chakra-ui/react";
-import { Button, Card, CustomCheckbox } from "ui";
+import { AsyncDropdown, Button, Card, CustomCheckbox } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { FiFlag, FiPlayCircle, FiClock, FiPlus, FiArrowRight, FiMoreHorizontal, FiLink } from "react-icons/fi";
+import { LinkFolderButton } from "core/Backpack/AddResourceForm";
+
+import { Controller, useForm } from "react-hook-form";
 
 const RoutineResource = () => {
     return (
@@ -65,6 +68,12 @@ const RoutineResource = () => {
 }
 
 export const RoutineResources = ({ routine }) => {
+
+    const { control, register, handleSubmit, setValue } = useForm({
+        defaultValues: {
+          linkedFolderId: "",
+        },
+      });
     const resources = [];
     return (
         <Stack alignItems="flex-start" >
@@ -81,7 +90,17 @@ export const RoutineResources = ({ routine }) => {
                 resources.length === 0 ? <Card>
                     <Flex gap={4} alignItems="center" justifyContent="space-between">
                     <Text color="brand.secondaryText">No Resources Linked</Text>
-                    <Button size="sm" icon={<FiLink />} bg="brand.highlight1">Link Resources</Button>
+                    <Controller
+            name="linkedFolderId"
+            control={control}
+            render={({ field }) => (
+              <AsyncDropdown
+                optionsUrl=""
+                {...field}
+                placeholder="Choose a folder"
+              />
+            )}
+          />
                     </Flex>
                 </Card> : resources.map(resource => <RoutineResource key={resource.id} resource={resource} />)
             }

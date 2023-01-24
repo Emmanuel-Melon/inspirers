@@ -11,7 +11,7 @@ import {
     Box,
     IconButton,
     Tag,
-    TagLeftIcon
+    TagLeftIcon,
 } from "@chakra-ui/react";
 import { useFetch } from "../../hooks/useSwr";
 import { ListRoutines } from "../../core/Routines/ListRoutines";
@@ -31,11 +31,6 @@ import { LinkFolderModal } from "../../core/Backpack/LinkFolder";
 export default function Routine() {
     const router = useRouter();
     const { data: routine, isLoading, isError } = useFetch(`${router.asPath}`);
-
-    const { data: tasks, isLoading: loadingTasks, isError: tasksError } = useFetch(`/tasks/cl85vw6x902664pbt1jyyl2fo/list`);
-
-    const { data: folders, isLoading: loadingFolders, isError: foldersError } = useFetch(`/backpacks/cl9odbs5g0255vwbtk7wo8osu/folders`);
-
     const [isModalOpen, setIsOpen] = useState<boolean>(false);
 
     const openModal = () => {

@@ -100,7 +100,7 @@ model Journey {
   bluePrintId  String?
   journeyType  String?
   fieldId      String?
-  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
   active       Boolean      @default(false)
   completed    Boolean      @default(false)
   completedAt  DateTime?
@@ -393,7 +393,7 @@ model Folder {
   privacy       FoldrPrivacy? @default(Private)
   Routine       Routine?      @relation(fields: [routineId], references: [id])
   routineId     String?
-  slug String?
+  slug          String?
 }
 
 model Resource {
@@ -435,8 +435,9 @@ model Backpack {
   folders     Folder[]
   maxFolders  Int          @default(10)
   Automation  Automation[]
-  Journey     Journey?      @relation(fields: [journeyId], references: [id], onDelete: Cascade)
-  slug String?
+  Journey     Journey?     @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  slug        String?
+
   @@index([journeyId])
 }
 
@@ -743,6 +744,26 @@ model Routine {
   position          Int             @default(0)
   folders           Folder[]
   Journey           Journey?        @relation(fields: [journeyId], references: [id])
+}
+
+model EventType {
+  id           String     @id @default(cuid())
+  startTime    DateTime
+  endTime      DateTime
+  title        String
+  description  String
+  recurrenceId String
+  recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
+
+  @@index([recurrenceId])
+}
+
+model Recurrence {
+  id        String      @id @default(cuid())
+  frequency String
+  startDate DateTime
+  endDate   DateTime?
+  EventType EventType[]
 }
 
 model Schedule {

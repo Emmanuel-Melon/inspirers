@@ -60,7 +60,7 @@ import { ResourceType } from "@prisma/client";
 // add a preview of the link
 // submit form on enter
 
-const LinkFolderButton = ({ control }) => {
+export const LinkFolderButton = ({ control }) => {
   const generateUrl = () => {
     return "/backpacks/clcsb7g9w4289lfbtan3qgu6z/folders";
   };
