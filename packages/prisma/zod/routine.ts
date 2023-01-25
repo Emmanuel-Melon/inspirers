@@ -3,6 +3,12 @@ import * as imports from "../zod-utils"
 import { RoutineType, RoutinePrivacy, RoutineSource, PeriodType, RoutineSchedule } from "@prisma/client"
 import { CompleteRoutineItem, RoutineItemModel, CompleteResource, ResourceModel, CompleteFolder, FolderModel, CompleteJourney, JourneyModel } from "./index"
 
+// Helper schema for JSON fields
+type Literal = boolean | number | string
+type Json = Literal | { [key: string]: Json } | Json[]
+const literalSchema = z.union([z.string(), z.number(), z.boolean()])
+const jsonSchema: z.ZodSchema<Json> = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]))
+
 export const _RoutineModel = z.object({
   id: z.string(),
   userId: z.string(),
@@ -32,6 +38,7 @@ export const _RoutineModel = z.object({
   endDate: z.date().nullish(),
   linkedFolderId: z.string().nullish(),
   position: z.number().int(),
+  recurrence: jsonSchema,
 })
 
 export interface CompleteRoutine extends z.infer<typeof _RoutineModel> {

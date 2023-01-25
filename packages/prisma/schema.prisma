@@ -746,27 +746,10 @@ model Routine {
   position          Int             @default(0)
   folders           Folder[]
   Journey           Journey?        @relation(fields: [journeyId], references: [id])
+  recurrence   Json
+
 }
 
-model EventType {
-  id           String     @id @default(cuid())
-  startTime    DateTime
-  endTime      DateTime
-  title        String
-  description  String
-  recurrenceId String
-  recurrence   Recurrence @relation(fields: [recurrenceId], references: [id])
-
-  @@index([recurrenceId])
-}
-
-model Recurrence {
-  id        String      @id @default(cuid())
-  frequency String
-  startDate DateTime
-  endDate   DateTime?
-  EventType EventType[]
-}
 
 model Schedule {
   id       String  @id @default(cuid())

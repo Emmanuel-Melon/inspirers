@@ -66,35 +66,11 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
                 <Flex justifyContent="space-between" >
                     <Flex gap={4} alignItems="center">
 
-                        <Box
-                            bg="brand.highlight1"
-                            p="4"
-                            borderRadius="50%"
-                            color="brand.secondary"
-                        >
-                            {routine.type === RoutineType.Productivity ? <FiBriefcase size="1rem" /> : null}
-                            {routine.type === RoutineType.Wellness ? <FiHeart size="1rem" /> : null}
-
-                        </Box>
                         <Stack>
                             <LinkOverlay href={`routines/${routine.id}`}>
                                 <Heading size="sm">{routine.title}</Heading>
                             </LinkOverlay>
                             <Text>{routine.description}</Text>
-                            <Flex gap={4}>
-                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
-                                    <TagLeftIcon as={FiBarChart2} />
-                                    <TagLabel>Beginner</TagLabel>
-                                </Tag>
-                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
-                                    <TagLeftIcon as={FiClock} />
-                                    <TagLabel>2 Hours</TagLabel>
-                                </Tag>
-                                <Tag width="fit-content" bg="brand.highlight3" color="brand.accent">
-                                    <TagLeftIcon as={FiUsers} />
-                                    <TagLabel>2 Companions</TagLabel>
-                                </Tag>
-                            </Flex>
                         </Stack>
                     </Flex>
                     <Stack alignItems="flex-end">
