@@ -28,6 +28,7 @@ export const Input = (props: InputProps) => {
       focusBorderColor="brand.white"
       color="brand.secondaryText"
       autoFocus={props.autoFocus}
+      bg="brand.highlight2"
       _hover={{
         background: "brand.white",
       }}

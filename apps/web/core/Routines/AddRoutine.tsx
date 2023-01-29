@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Stack,
   Text,
@@ -9,6 +9,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  FormLabel
 } from "@chakra-ui/react";
 import { Routine } from "@prisma/client";
 import {
@@ -26,39 +27,67 @@ import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
-import { parse, format, formatDistance, formatRelative, subDays } from "date-fns";
+import {
+  addHours,
+  parse,
+  format,
+  formatDistance,
+  formatRelative,
+  subDays,
+} from "date-fns";
 
 export const AddRoutine = ({ addNewRoutine }) => {
   const [name, setName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState<boolean>(false);
   const { data: session, status } = useSession();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false)
+  };
 
-  const { control, register, handleSubmit, setValue } = useForm({
+  const { control, register, handleSubmit, setValue, reset } = useForm({
     defaultValues: {
       title: "",
       startingDate: null,
       startsAt: null,
-      finishesAt: null,
-      reminder: ""
+      duration: 0,
+      reminder: "",
     },
   });
 
   const onSubmit = async (data) => {
 
-    console.log(data)
-    await addNewRoutine({
-      ...data,
-      startsAt: parse(data.startsAt, "HH:mm", new Date()),
-      finishesAt: parse(data.finishesAt, "HH:mm", new Date()),
-      startingDate: new Date(data.startingDate)
-    });
-    closeModal();
+    const startsAt = parse(data.startsAt, "HH:mm", new Date());
+    try {
+      await addNewRoutine({
+        ...data,
+        startsAt,
+        finishesAt: addHours(startsAt, data.duration),
+        startingDate: new Date(data.startingDate),
+      });
+  
+      // reset form!
+      setIsSubmitSuccessful(true);
+      closeModal();
+    } catch (err) {
+      console.log("oh man!");
+    }
   };
+
+  useEffect(() => {
+    reset({
+      title: "",
+      startingDate: null,
+      startsAt: null,
+      duration: 0,
+      reminder: "",
+    })
+  }, [isSubmitSuccessful])
+  
   return (
     <>
       <Button onClick={openModal}>New Routine</Button>
@@ -93,6 +122,7 @@ export const AddRoutine = ({ addNewRoutine }) => {
             </Flex>
             <Stack px="4" py="2">
               <FormControl>
+              <FormLabel>Duration</FormLabel>
                 <Controller
                   name="title"
                   control={control}
@@ -106,57 +136,45 @@ export const AddRoutine = ({ addNewRoutine }) => {
                   )}
                 />
               </FormControl>
-              <FormControl>
-                <Controller
-                  name="startingDate"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      placeholder="Start Date"
-                      type="date"
-                      {...field}
-                    />
-                  )}
-                />
-              </FormControl>
-              <Flex>
-              <FormControl>
-                <Controller
-                  name="startsAt"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      placeholder="Start Date"
-                      type="time"
-                      {...field}
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl>
-                <Controller
-                  name="finishesAt"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      placeholder="Start Date"
-                      type="time"
-                      {...field}
-                    />
-                  )}
-                />
-              </FormControl>
+              <Flex gap={4}>
+                <FormControl>
+                <FormLabel>Starts on</FormLabel>
+                  <Controller
+                    name="startingDate"
+                    control={control}
+                    render={({ field }) => (
+                      <Input placeholder="Start Date" type="date" {...field} />
+                    )}
+                  />
+                </FormControl>
+                <FormControl>
+                <FormLabel>Starts at</FormLabel>
+                  <Controller
+                    name="startsAt"
+                    control={control}
+                    render={({ field }) => (
+                      <Input placeholder="Start Date" type="time" {...field} />
+                    )}
+                  />
+                </FormControl>
               </Flex>
               <FormControl>
+                <FormLabel>Duration</FormLabel>
+                <Controller
+                  name="duration"
+                  control={control}
+                  render={({ field }) => (
+                    <Input placeholder="Duration" type="number" {...field} />
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+              <FormLabel>Set a reminder</FormLabel>
                 <Controller
                   name="reminder"
                   control={control}
                   render={({ field }) => (
-                    <Input
-                      placeholder="Reminder"
-                      type="text"
-                      {...field}
-                    />
+                    <Input placeholder="Reminder" type="text" {...field} />
                   )}
                 />
               </FormControl>
