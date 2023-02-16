@@ -15,6 +15,8 @@ export const RadioCard = (props: any) => {
         _checked={props.checked}
         cursor="pointer"
         _focus={props.focus}
+        borderRadius="1rem"
+
       >
         {props.children}
       </Box>

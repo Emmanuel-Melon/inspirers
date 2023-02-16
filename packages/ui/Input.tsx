@@ -18,19 +18,28 @@ type InputProps = {
   autoFocus?: boolean;
 };
 
-export const Input = (props: InputProps) => {
+export const Input = ({
+  placeholder,
+  autoFocus,
+  size = "md",
+  width,
+  ...props
+}: InputProps) => {
   return (
     <InputBase
       autoComplete="off"
-      placeholder={props.placeholder}
+      placeholder={placeholder}
       cursor="pointer"
       variant="filled"
-      focusBorderColor="brand.white"
+      focusBorderColor="brand.accent"
       color="brand.secondaryText"
-      autoFocus={props.autoFocus}
+      autoFocus={autoFocus}
+      bg="brand.grey"
+      size={size}
       _hover={{
         background: "brand.white",
       }}
+      width={width}
       _focus={{
         outline: "none",
         background: "brand.white",

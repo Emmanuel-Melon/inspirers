@@ -98,34 +98,36 @@ export const authOptions = {
         email,
       };
     },
-    async session({ session, user, token }) {
-      const encodedToken = jwt.sign({...token, ...session.user}, jwtSecret, { algorithm: 'HS256'});
-      session.accessToken = token.accessToken;
-      session.user.id = token.id;
-      // session.jwt = token;
-      session.me = "users";
-      session.you = encodedToken;
+    async session(data) {
+
+      const { session, token } = data;
+  
+      // custom jwt
+      const encodedToken = jwt.sign({ ...token?.user }, jwtSecret, { algorithm: 'HS256'});
+      // session.accessToken = token.accessToken;
+      // session.user.id = token.id;
+      // session.jwt = encodedToken;
+      // pick certain fields
+      session.user = token?.user;
+      session.id_token = token.id_token
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      // merge accounts!
+    async jwt(data) {
+      const { token, user, account, profile, isNewUser } = data;
       if (account) {
         
         token.accessToken = account.access_token
         token.id = profile.id
-        // console.log(token);
+        token.id_token = account.id_token
       }
 
       if(user) {
-//
+        token.user = user
       }
 
-      if(token) {
-//
-      }
 
       if(profile) {
-       //
+        token.profile = profile
       }
       return token;
     },
