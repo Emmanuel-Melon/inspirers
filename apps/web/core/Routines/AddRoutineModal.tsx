@@ -37,8 +37,7 @@ import {
   FiEdit3,
   FiColumns,
 } from "react-icons/fi";
-import { Button, IconButton, Modal } from "ui";
-import { Card, Input } from "ui";
+import { Button, IconButton, Modal, Input } from "ui";
 import { client } from "utils/client";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -46,6 +45,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Controller, useForm } from "react-hook-form";
 import { addHours, parse } from "date-fns";
 import { reducer } from "./reducers";
+import toast, { Toaster } from "react-hot-toast";
 
 const DatePicker = ({ field }: any) => {
   return (
@@ -148,19 +148,24 @@ function RadioCard(props: any) {
 const initialState = {};
 
 type AddRoutineModalProps = {
-  addNewRoutine: any;
+  CTA?: string;
+  journeyId?: string;
 };
 
 export const AddRoutineModal: FC<AddRoutineModalProps> = ({
-  addNewRoutine,
+  CTA = "New Routine",
+  journeyId = "cldvqpxv50001btfnwanocwtk"
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCustom, setIsCustom] = useState<boolean>(true);
+  const { data: session } = useSession();
   // const [state, dispatch] = useReducer(reducer, initialState);
 
   const options = ["on", "after"];
+  const errorToast = (message: string) => toast.error(message);
+  const successToast = (message: string) => toast.success(message);
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "framework",
@@ -174,6 +179,24 @@ export const AddRoutineModal: FC<AddRoutineModalProps> = ({
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const addNewRoutine = (data) => {
+    client
+      .post(`/routines`, {
+        ...data,
+        userId: session?.user?.id,
+        journeyId // props or context?
+      })
+      .then((res) => {
+        console.log(res);
+        successToast("Routine created");
+        closeModal();
+      })
+      .catch((err) => {
+        console.log(err);
+        errorToast(err.message);
+      });
   };
 
   const defaultFormValues = () => {
@@ -227,7 +250,7 @@ export const AddRoutineModal: FC<AddRoutineModalProps> = ({
 
       // reset form!
       setIsSubmitSuccessful(true);
-      closeModal();
+
     } catch (err) {
       console.log("oh man!");
     }
@@ -248,8 +271,8 @@ export const AddRoutineModal: FC<AddRoutineModalProps> = ({
 
   return (
     <>
-      <Button onClick={openModal} icon={<FiPlus />}>
-        New Routine
+      <Button onClick={openModal} icon={<FiPlus />} width="fit-content">
+        {CTA}
       </Button>
       <Modal show={isModalOpen} close={closeModal}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -263,7 +286,7 @@ export const AddRoutineModal: FC<AddRoutineModalProps> = ({
               <Flex gap={1} alignItems="center" color="brand.secondaryText">
                 <Text>Journey</Text>
                 <FiChevronsRight />
-                <Text size="xs">New Routine</Text>
+                <Text size="xs">{CTA}</Text>
               </Flex>
               <Flex gap={2} alignItems="center">
                 <IconButton label={""} onClick={() => {}}>
@@ -404,6 +427,7 @@ export const AddRoutineModal: FC<AddRoutineModalProps> = ({
           </Stack>
         </form>
       </Modal>
+      <Toaster position="bottom-center" />
     </>
   );
 };

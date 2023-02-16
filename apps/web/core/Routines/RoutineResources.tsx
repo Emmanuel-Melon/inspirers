@@ -1,109 +1,72 @@
 import {
-    Avatar,
-    Image,
-    Img,
-    Stack,
-    Text,
-    Link,
-    Flex,
-    Heading,
-    Box,
-    LinkBox, LinkOverlay,
-    Progress,
-    VStack,
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
-    Tag,
-    IconButton,
-
+  Box,
+  Stack,
+  Text,
+  Link,
+  Flex,
+  Heading,
+  Tag,
+  IconButton,
 } from "@chakra-ui/react";
 import { AsyncDropdown, Button, Card, CustomCheckbox } from "ui";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { FiFlag, FiPlayCircle, FiClock, FiPlus, FiArrowRight, FiMoreHorizontal, FiLink } from "react-icons/fi";
+import { FiArrowRight, FiMoreHorizontal, FiFolder } from "react-icons/fi";
 import { LinkFolderButton } from "core/Backpack/AddResourceForm";
+import { useFetch } from "hooks/useSwr";
 
 import { Controller, useForm } from "react-hook-form";
 
-const RoutineResource = () => {
-    return (
-        <Card>
-        <Flex gap={2} justifyContent="space-between">
-            <Stack>
-                <Heading size="xs">Anderew Mead - Node.js Course</Heading>
-                <Flex gap={2}>
-                    <Tag
-                        size="sm"
-                        width="fit-content"
-                        bg="brand.highlight2"
-                    >
-                        Inspirers
-                    </Tag>
-                    <Tag
-                        size="sm"
-                        width="fit-content"
-                        bg="brand.highlight3"
-                    >
-                        Inspirers
-                    </Tag>
-                    <Tag
-                        size="sm"
-                        width="fit-content"
-                        bg="brand.highlight1"
-                    >
-                        Inspirers
-                    </Tag>
-                </Flex>
-            </Stack>
-            <IconButton size="sm" bg="brand.primary">
-                <FiArrowRight />
-            </IconButton>
+const RoutineResource = ({ resource }) => {
+  return (
+    <Card>
+      <Flex gap={2} justifyContent="space-between" alignItems="center">
+        <Flex alignItems="center" gap={2}>
+          <Box color="brand.accent">
+            <FiFolder />
+          </Box>
+          <Stack>
+            <Heading size="sm">{resource.title}</Heading>
+          </Stack>
         </Flex>
+        <Button>Link Folder</Button>
+      </Flex>
     </Card>
-    )
-}
+  );
+};
 
 export const RoutineResources = ({ routine }) => {
-
-    const { control, register, handleSubmit, setValue } = useForm({
-        defaultValues: {
-          linkedFolderId: "",
-        },
-      });
-    const resources = [];
-    return (
-        <Stack alignItems="flex-start" >
-            <Flex justifyContent="space-between" width="100%">
-            <Stack>
-                    <Heading size="sm" color="brand.secondary">Backpack</Heading>
-                    <Text color="brand.secondaryText">Pack resources</Text>
-                </Stack>
-                <IconButton size="sm" bg="brand.highlight2" aria-label={""}>
-                    <FiMoreHorizontal />
-                </IconButton>
-            </Flex>
-            {
-                resources.length === 0 ? <Card>
-                    <Flex gap={4} alignItems="center" justifyContent="space-between">
-                    <Text color="brand.secondaryText">No Resources Linked</Text>
-                    <Controller
-            name="linkedFolderId"
-            control={control}
-            render={({ field }) => (
-              <AsyncDropdown
-                optionsUrl=""
-                {...field}
-                placeholder="Choose a folder"
-              />
-            )}
-          />
-                    </Flex>
-                </Card> : resources.map(resource => <RoutineResource key={resource.id} resource={resource} />)
-            }
-        </Stack>
-    )
-}
+  const { control, register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      linkedFolderId: "",
+    },
+  });
+  
+  const {
+    data: resources,
+    isLoading,
+    isError,
+  } = useFetch(`backpacks/cldxkhcr90001btj6bhh9cdqr/folders`);
+  
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
+  if (isError) {
+    return <p>Error</p>;
+  }
+  return (
+    <Stack alignItems="flex-start">
+      {resources?.length === 0 ? (
+        <Card>
+          <Flex gap={4} alignItems="center" justifyContent="space-between">
+            <Text color="brand.secondaryText">No folders</Text>
+          </Flex>
+        </Card>
+      ) : (
+        resources?.map((resource) => (
+          <RoutineResource key={resource.id} resource={resource} />
+        ))
+      )}
+    </Stack>
+  );
+};

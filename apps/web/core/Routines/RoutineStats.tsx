@@ -14,7 +14,6 @@ import { BeakerIcon } from '@heroicons/react/24/solid';
 export const RoutineStats = ({ routine }) => {
     return (
         <Stack gap={2}>
-            <Heading size="sm" color="brand.secondary">Overview</Heading>
             <Flex gap={4}>
                 <Card>
                     <Flex gap={2} alignItems="center">
