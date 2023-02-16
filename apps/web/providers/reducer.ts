@@ -7,7 +7,7 @@ export function stepsReducer(state: JourneyType, action: ActionType) {
         (step) => step.id === action.payload.targetStepId
       );
 
-      if (action.payload.targetStepId === 4) {
+      if (action.payload.targetStepId === 6) {
         console.log("finished");
       } else {
         return {

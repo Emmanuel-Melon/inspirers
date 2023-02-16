@@ -10,7 +10,7 @@ import {
     Box,
   } from "@chakra-ui/react";
   
-  export default function JourneyGoals() {
+  export default function BackpackStep() {
     return <Heading>Place for discoveries.</Heading>;
   }
   

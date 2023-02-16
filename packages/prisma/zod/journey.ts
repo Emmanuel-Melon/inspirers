@@ -1,6 +1,6 @@
 import * as z from "zod"
 import * as imports from "../zod-utils"
-import { CompleteUser, UserModel, CompleteBackpack, BackpackModel, CompleteRoutine, RoutineModel, CompleteReflection, ReflectionModel, CompleteInterest, InterestModel, CompleteGoal, GoalModel, CompleteTask, TaskModel, CompleteTag, TagModel, CompleteApp, AppModel } from "./index"
+import { CompleteBackpack, BackpackModel, CompleteRoutine, RoutineModel, CompleteReflection, ReflectionModel, CompleteInterest, InterestModel, CompleteGoal, GoalModel, CompleteTask, TaskModel, CompleteTag, TagModel, CompleteApp, AppModel, CompleteUser, UserModel } from "./index"
 
 export const _JourneyModel = z.object({
   id: z.string(),
@@ -19,7 +19,6 @@ export const _JourneyModel = z.object({
 })
 
 export interface CompleteJourney extends z.infer<typeof _JourneyModel> {
-  user?: CompleteUser | null
   backpacks: CompleteBackpack[]
   routines: CompleteRoutine[]
   reflections: CompleteReflection[]
@@ -28,6 +27,7 @@ export interface CompleteJourney extends z.infer<typeof _JourneyModel> {
   tasks: CompleteTask[]
   tags: CompleteTag[]
   applications: CompleteApp[]
+  User: CompleteUser
 }
 
 /**
@@ -36,7 +36,6 @@ export interface CompleteJourney extends z.infer<typeof _JourneyModel> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const JourneyModel: z.ZodSchema<CompleteJourney> = z.lazy(() => _JourneyModel.extend({
-  user: UserModel.nullish(),
   backpacks: BackpackModel.array(),
   routines: RoutineModel.array(),
   reflections: ReflectionModel.array(),
@@ -45,4 +44,5 @@ export const JourneyModel: z.ZodSchema<CompleteJourney> = z.lazy(() => _JourneyM
   tasks: TaskModel.array(),
   tags: TagModel.array(),
   applications: AppModel.array(),
+  User: UserModel,
 }))

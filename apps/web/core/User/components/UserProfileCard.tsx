@@ -1,9 +1,7 @@
 import React, { ReactChild, useState } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import {
-
   Flex,
-
   Text,
   Heading,
   VStack,
@@ -11,7 +9,7 @@ import {
   Stack,
   Tag,
   TagLabel,
-  TagLeftIcon
+  TagLeftIcon,
 } from "@chakra-ui/react";
 import { Avatar, Button, IconButton, Modal, Card } from "ui";
 import {
@@ -21,7 +19,11 @@ import {
   FiFolder,
   FiCreditCard,
   FiTwitter,
-  FiLinkedin, FiEdit3, FiUserPlus, FiMoreHorizontal, FiMessageSquare
+  FiLinkedin,
+  FiEdit3,
+  FiUserPlus,
+  FiMoreHorizontal,
+  FiMessageSquare,
 } from "react-icons/fi";
 import { useFetch, usePost } from "hooks/useSwr";
 import { client } from "utils/client";
@@ -29,26 +31,24 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-const CompanionView = () => { }
-const UserView = () => { }
+const CompanionView = () => {};
+const UserView = () => {};
 
 const ProfileCardActions = ({ children }) => {
   return (
     <Flex gap={4} justifyContent="flex-end" alignItems="center">
       {children}
     </Flex>
-  )
-}
+  );
+};
 
 const ProfileCardActionButton = ({ icon, onClick, text }) => {
-  return (<Button
-    onClick={onClick}
-    icon={icon}
-    size="sm"
-  >
-    {text}
-  </Button>)
-}
+  return (
+    <Button onClick={onClick} icon={icon} size="sm">
+      {text}
+    </Button>
+  );
+};
 
 /**
  *           {connection?.data?.status === null && session?.user?.id !== user?.id ? <ProfileCardActionButton
@@ -103,26 +103,28 @@ export const UserProfileCard = ({ user }) => {
   console.log(user);
 
   const createConnectionRequest = () => {
-    client.post("/connections/request", {
-      requesterId: session?.user?.id,
-      recepientId: user?.id
-    }).then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    })
-  }
+    client
+      .post("/connections/request", {
+        requesterId: session?.user?.id,
+        recepientId: user?.id,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const cancelConnectionRequest = () => {
-
-  }
+  const cancelConnectionRequest = () => {};
 
   const acceptConnectionRequest = () => {
     client.post("/connections/accept", {
       requesterId: user?.id,
-    })
-  }
+    });
+  };
 
+  console.log(user);
 
   return (
     <>
@@ -135,30 +137,26 @@ export const UserProfileCard = ({ user }) => {
         width="100%"
       >
         <Flex gap={4} alignItems="flex-start">
-        <Avatar
-            size="lg"
-            src={
-              user?.image ||
-              "https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg"
-            }
-          />
+          <Avatar name={user?.name} src={user?.image} size="lg" />
           <Stack alignItems="flex-start">
             <Heading color="brand.primaryText" size="sm">
               {user?.name}
             </Heading>
-            <Text color="brand.secondary" size="sm">@{user?.username}</Text>
+            <Text color="brand.secondary" size="sm">
+              @{user?.username}
+            </Text>
           </Stack>
         </Flex>
         <ProfileCardActions>
-          {
-            session?.user?.id === user?.id ?
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                icon={<FiEdit3 />}
-                size="sm"
-              >
-                Edit Profile
-              </Button> : null}
+          {session?.user?.id === user?.id ? (
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              icon={<FiEdit3 />}
+              size="sm"
+            >
+              Edit Profile
+            </Button>
+          ) : null}
           <IconButton
             borderRadius="50%"
             bg="brand.highlight1"
@@ -167,28 +165,26 @@ export const UserProfileCard = ({ user }) => {
           >
             <FiMoreHorizontal />
           </IconButton>
-          {
-            false ? <IconButton
+          {false ? (
+            <IconButton
               borderRadius="50%"
               bg="brand.highlight1"
               aria-label={""}
               boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
               _hover={{
-                bg: "brand.hovered"
+                bg: "brand.hovered",
               }}
             >
               <FiMessageSquare />
-            </IconButton> : null
-          }
-          
-
+            </IconButton>
+          ) : null}
         </ProfileCardActions>
         <Flex>
           <Text my="8">{user?.bio}</Text>
         </Flex>
       </Stack>
     </>
-  )
+  );
 };
 
 /**

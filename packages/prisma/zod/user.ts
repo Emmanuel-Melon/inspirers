@@ -1,7 +1,7 @@
 import * as z from "zod"
 import * as imports from "../zod-utils"
 import { IdentityProvider } from "@prisma/client"
-import { CompleteAccount, AccountModel, CompleteSession, SessionModel, CompleteJourney, JourneyModel, CompleteNotificationRecepient, NotificationRecepientModel, CompleteSchedule, ScheduleModel, CompleteApiKey, ApiKeyModel, CompleteWebhook, WebhookModel, CompleteCredential, CredentialModel, CompleteMembership, MembershipModel } from "./index"
+import { CompleteAccount, AccountModel, CompleteSession, SessionModel, CompleteJourney, JourneyModel, CompleteNotificationRecepient, NotificationRecepientModel, CompleteSchedule, ScheduleModel, CompleteApiKey, ApiKeyModel, CompleteWebhook, WebhookModel, CompleteCredential, CredentialModel, CompleteMembership, MembershipModel, CompleteRoutine, RoutineModel } from "./index"
 
 export const _UserModel = z.object({
   id: z.string(),
@@ -24,19 +24,22 @@ export const _UserModel = z.object({
   dayStart: z.string().nullish(),
   dayEnd: z.string().nullish(),
   completedOnboarding: z.boolean(),
+  createdFirstJourney: z.boolean(),
   timeFormat: z.number().int().nullish(),
+  journeyId: z.string().nullish(),
 })
 
 export interface CompleteUser extends z.infer<typeof _UserModel> {
   Account: CompleteAccount[]
   Session: CompleteSession[]
-  Journey: CompleteJourney[]
+  Journey?: CompleteJourney | null
   NotificationRecepient: CompleteNotificationRecepient[]
   Schedule: CompleteSchedule[]
   ApiKey: CompleteApiKey[]
   Webhook: CompleteWebhook[]
   Credential: CompleteCredential[]
   Memberships: CompleteMembership[]
+  Routine: CompleteRoutine[]
 }
 
 /**
@@ -47,11 +50,12 @@ export interface CompleteUser extends z.infer<typeof _UserModel> {
 export const UserModel: z.ZodSchema<CompleteUser> = z.lazy(() => _UserModel.extend({
   Account: AccountModel.array(),
   Session: SessionModel.array(),
-  Journey: JourneyModel.array(),
+  Journey: JourneyModel.nullish(),
   NotificationRecepient: NotificationRecepientModel.array(),
   Schedule: ScheduleModel.array(),
   ApiKey: ApiKeyModel.array(),
   Webhook: WebhookModel.array(),
   Credential: CredentialModel.array(),
   Memberships: MembershipModel.array(),
+  Routine: RoutineModel.array(),
 }))

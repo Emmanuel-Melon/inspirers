@@ -1,6 +1,8 @@
 import { JourneySourceSelector, JourneySourceSelectorGuide } from "./JourneySourceSelector";
 import { JourneyInfo, JourneyInfoGuide } from "./JourneyInfo";
-import { JourneyGoals, JourneyGoalsGuide } from "./JourneyGoals";
+import { BackpackStep, BackpackStepGuide } from "./BackpackStep";
+import { RoutinesStep } from "./RoutinesStep";
+import { CompanionsStep } from "./CompanionsStep";
 import { Stack, Grid, GridItem } from "@chakra-ui/react";
 import {
   JourneyOnboardingConsumer,
@@ -12,22 +14,13 @@ export const JourneyOnboardingSteps = () => {
     <JourneyOnboardingProvider>
       <JourneyOnboardingConsumer>
         {(value) => (
-          <Grid width="100%" gap={4} templateColumns='repeat(3, 1fr)'>
+          <Grid width="100%" gap={4}>
             <GridItem colSpan={2}>
               {value.currentStep.id === 1 ? <JourneySourceSelector /> : null}
               {value.currentStep.id === 2 ? <JourneyInfo /> : null}
-              {value.currentStep.id === 3 ? <JourneyGoals /> : null}
-            </GridItem>
-            <GridItem gap={4} >
-              {value.currentStep.id === 1 ? (
-                <JourneySourceSelectorGuide guide={value.currentStep} />
-              ) : null}
-              {value.currentStep.id === 2 ? (
-                <JourneyInfoGuide guide={value.currentStep} />
-              ) : null}
-              {value.currentStep.id === 3 ? (
-                <JourneyGoalsGuide guide={value.currentStep} />
-              ) : null}
+              {value.currentStep.id === 3 ? <BackpackStep /> : null}
+              {value.currentStep.id === 4 ? <RoutinesStep /> : null}
+              {value.currentStep.id === 5 ? <CompanionsStep /> : null}
             </GridItem>
           </Grid>
         )}

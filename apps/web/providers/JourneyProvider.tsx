@@ -8,6 +8,7 @@ export const JourneyConsumer = JourneyContext.Consumer;
 
 export interface JourneyContextType {
   children: React.ReactChild | React.ReactChild[];
+  value?: any;
 }
 
 const initialState = {
@@ -19,13 +20,13 @@ const initialState = {
   },
 };
 
-export const JourneyProvider = ({ children }: JourneyContextType) => {
+export const JourneyProvider = ({ children, value }: JourneyContextType) => {
   const [state, dispatch] = useReducer(journeyReducer, initialState);
 
   return (
     <JourneyContext.Provider
       value={{
-        ...state,
+        ...value
       }}
     >
       {children}

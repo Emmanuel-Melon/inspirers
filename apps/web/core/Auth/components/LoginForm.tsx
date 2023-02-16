@@ -11,14 +11,13 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { Button, Card, Input } from "ui";
-import { User } from "types/User";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { FiUser } from "react-icons/fi";
 import { FiFacebook, FiGithub, FiMail } from "react-icons/fi";
+import { IdentityProvider, Routine, RoutineItem, User } from "@prisma/client";
 
-
-export const getProviderStyles = (provider: string) => {
+export const getProviderStyles = (provider: IdentityProvider) => {
   if (provider === "GitHub") {
     return {
       bg: "#000",
@@ -29,12 +28,6 @@ export const getProviderStyles = (provider: string) => {
     return {
       bg: "#fff",
       color: "#333",
-    };
-  }
-  if (provider === "Facebook") {
-    return {
-      bg: "#4267B2",
-      color: "#fff",
     };
   }
 };
@@ -53,7 +46,7 @@ export const GetProviderIcon = (providerName: string) => {
 
 type AuthFormProps = {
   mode: "login" | "signup";
-  providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>;
+  providers: IdentityProvider[];
 };
 
 export const AuthForm = ({ mode, providers }: AuthFormProps) => {
@@ -78,14 +71,15 @@ export const AuthForm = ({ mode, providers }: AuthFormProps) => {
     e.preventDefault();
     if (mode === "login") {
       setIsLoading(true);
-      signIn("credentials", { email: authState.login, password: authState.password })
+      signIn("credentials", {
+        email: authState.login,
+        password: authState.password,
+      })
         .then((res) => {
           setIsLoading(false);
           router.push("/");
         })
-        .catch((err) => {
-
-        });
+        .catch((err) => {});
     } else {
       signIn("credentials", {
         email: authState.login,
@@ -150,35 +144,34 @@ export const AuthForm = ({ mode, providers }: AuthFormProps) => {
             </Heading>
             <Flex gap={4} direction="column">
               {providers &&
-                Object.values(providers).map((provider, index) => {
-                  const style = getProviderStyles(provider?.name);
-                  return (
-                    <>
-                      {provider?.name !== "Credentials" && (<Button
-                        bg={style?.bg || "brand.white"}
-                        color={style?.color || "brand.white"}
-                        icon={GetProviderIcon(provider?.name)}
-                        key={`${index}-${provider?.name}`}
-                        border={
-                          provider?.name === "Google"
-                            ? "solid 0.10rem #000"
-                            : "none"
-                        }
-                        onClick={() =>
-                          signIn(provider?.id)
-                            .then((res) => {
-                              console.log(res);
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                            })
-                        }
-                      >
-                        {provider?.name}
-                      </Button>)}
-                    </>
-                  );
-                })}
+                Object.values(providers).map(
+                  (provider: User["identityProvider"], index: int) => {
+                    const style = getProviderStyles(provider?.name);
+                    return (
+                      <>
+                        {provider?.name !== "Credentials" && (
+                          <Button
+                            bg={style?.bg || "brand.white"}
+                            color={style?.color || "brand.white"}
+                            icon={GetProviderIcon(provider?.name)}
+                            key={`${index}-${provider?.name}`}
+                            onClick={() =>
+                              signIn(provider?.id)
+                                .then((res) => {
+                                  console.log(res);
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                })
+                            }
+                          >
+                            {provider?.name}
+                          </Button>
+                        )}
+                      </>
+                    );
+                  }
+                )}
             </Flex>
             <Text>
               Have an account?{" "}

@@ -26,10 +26,10 @@ export default function UserProfile() {
         isLoading ? <Spinner />: (
           <Flex width="100%" gap={8} height="100%">
             <VStack alignItems="flex-start" width="35%">
-              <UserProfileCard user={user?.data} />
-              <UserBioCard user={user?.data} />
+              <UserProfileCard user={user} />
+              <UserBioCard user={user} />
             </VStack>
-            <ProfileSectionsTab user={user?.data} />
+            <ProfileSectionsTab user={user} />
           </Flex>
         )
       }

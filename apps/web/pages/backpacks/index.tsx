@@ -9,7 +9,7 @@ import {
   LinkOverlay,
   Textarea,
 } from "@chakra-ui/react";
-import { Button, Card, IconButton, Input, Modal } from "ui";
+import { Button, Card, EmptyState, IconButton, Input, Modal } from "ui";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyContext } from "providers/JourneyProvider";
 import { Backpack } from "@prisma/client";
@@ -95,27 +95,26 @@ const CreateNewBack: FC<CreateNewBackProps> = ({
       ) : (
         <Modal show={isModalOpen} close={closeModal}>
           <Stack>
-          <Input
-            placeholder="Backpack Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Textarea
-            placeholder="Description"
-            bg="brand.white"
-            color="brand.secondaryText"
-          />
-          <Flex justifyContent="flex-end" gap={2}>
-            <Button onClick={onCancel} bg="brand.white">
-              Cancel
-            </Button>
-            <Button onClick={onSubmit} isLoading={isLoading}>
-              Save
-            </Button>
-          </Flex>
-        </Stack>
+            <Input
+              placeholder="Backpack Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Textarea
+              placeholder="Description"
+              bg="brand.white"
+              color="brand.secondaryText"
+            />
+            <Flex justifyContent="flex-end" gap={2}>
+              <Button onClick={onCancel} bg="brand.white">
+                Cancel
+              </Button>
+              <Button onClick={onSubmit} isLoading={isLoading}>
+                Save
+              </Button>
+            </Flex>
+          </Stack>
         </Modal>
-        
       )}
       <Toaster position="bottom-center" />
     </>
@@ -138,6 +137,18 @@ const BackpacksList = () => {
 
   if (isLoading) {
     return <Text>Loading Backpacks</Text>;
+  }
+
+  if (backpacks?.length === 0) {
+    return (
+      <EmptyState
+        heading="Don't Forget Your Supplies!"
+        description="Gather all the resources you need to achieve your goals and keep them organized in one place."
+        icon={<FiArchive />}
+      >
+        <Button icon={<FiSearch />}>Start Packing</Button>
+      </EmptyState>
+    );
   }
 
   const createNewBack = () => {};
@@ -195,18 +206,18 @@ const BackpacksList = () => {
   );
 };
 
-  // automatically paste url
-  // pin folder to quick access
-  // add folder capacity
-  // as a mentor, I would like to set the folder capacity for a mentee.
-  // mentee can upload what they like but the capacity cannot be exceeded
-  // can't add content before current content is consumed/expired
+// automatically paste url
+// pin folder to quick access
+// add folder capacity
+// as a mentor, I would like to set the folder capacity for a mentee.
+// mentee can upload what they like but the capacity cannot be exceeded
+// can't add content before current content is consumed/expired
 
-  // routines are a way of blocking your calendar and automating
-  // automate your calendars with Routines!!!!
+// routines are a way of blocking your calendar and automating
+// automate your calendars with Routines!!!!
 
-  // assign labels to what something is for.
-  //
+// assign labels to what something is for.
+//
 
 export default function BackpackPage() {
   return (
@@ -223,14 +234,9 @@ export default function BackpackPage() {
                 <IconButton>
                   <FiArchive />
                 </IconButton>
-                <Heading size="md">Emmanuel&apos;s Backpacks</Heading>
+                <Heading size="md">Emmanuel&apos;s Backpack</Heading>
               </Flex>
-              <CreateNewBack />
             </Flex>
-            <Text>
-              Empower your growth journey with thousands of free resources from
-              people just like you.
-            </Text>
           </Stack>
         </Flex>
         <Flex gap={8}>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import { JourneyOverviewCard } from "../../core/Journeys/components/JourneyOverviewCard";
+import { JourneyGreeting } from "../../core/Journeys/components/JourneyGreeting";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ export default function Journey(props) {
   if (journey?.userId === props.user?.id) {
     return (
       <Stack gap={4} width="100%">
-        <JourneyOverviewCard user={props.user} journey={journey} />
+        <JourneyGreeting user={props.user} journey={journey} />
         <Flex gap={8}>
           <Flex gap={4} flex="2" overflowX="scroll">
           <Stack gap={4}>
@@ -59,7 +59,7 @@ export default function Journey(props) {
 
   return (
     <Flex width="100%" gap={8} direction="column" height="100%">
-      <JourneyOverviewCard user={props.user} journey={journey} />
+      <JourneyGreeting user={props.user} journey={journey} />
       {!isLoading ? <JourneyEditor journey={journey} /> : <Spinner />}
     </Flex>
   );

@@ -17,3 +17,8 @@ export const usePost = (url: string, request: any) => {
   return (url: string) =>
   client.post(url, request).then((res: { data: any }) => res.data);
 };
+
+export const useDelete = (url) => {
+  return (url: string) =>
+  client.delete(url).then((res: { data: any }) => res.data);
+};

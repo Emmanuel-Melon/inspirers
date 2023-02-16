@@ -18,7 +18,7 @@ const initialState = {
   },
   currentStep: {
     id: 1,
-    title: "New Journey",
+    title: "Ready, Set, Pick!",
     active: true,
     skippable: false,
     journeyId: "",
@@ -33,25 +33,39 @@ const initialState = {
   steps: [
     {
       id: 1,
-      title: "New Beginning",
+      title: "Ready, Set, Pick!",
       active: true,
       skippable: false,
       completed: false,
     },
     {
       id: 2,
-      title: "About your journey",
+      title: "Crafting Your Journey",
       active: false,
       skippable: false,
       completed: false,
     },
     {
       id: 3,
-      title: "Getting ready",
+      title: "Don't Forget Your Supplies!",
       active: false,
       skippable: false,
       completed: false,
     },
+    {
+      id: 4,
+      title: "Create Routines!",
+      active: false,
+      skippable: false,
+      completed: false,
+    },
+    {
+      id: 5,
+      title: "Find Companions",
+      active: false,
+      skippable: false,
+      completed: false,
+    }
   ],
 };
 
@@ -87,6 +101,8 @@ export const JourneyOnboardingProvider = ({
       },
     });
   };
+
+  console.log(state);
 
   return (
     <JourneyOnboardingContext.Provider
