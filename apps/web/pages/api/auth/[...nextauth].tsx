@@ -103,10 +103,10 @@ export const authOptions = {
       const { session, token } = data;
   
       // custom jwt
-      const encodedToken = jwt.sign({...token, ...session.user }, jwtSecret, { algorithm: 'HS256'});
+      const encodedToken = jwt.sign({ ...token?.user }, jwtSecret, { algorithm: 'HS256'});
       // session.accessToken = token.accessToken;
       // session.user.id = token.id;
-      // session.jwt = token;
+      // session.jwt = encodedToken;
       // pick certain fields
       session.user = token?.user;
       session.id_token = token.id_token
