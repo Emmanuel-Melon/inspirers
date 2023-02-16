@@ -16,7 +16,7 @@ import {
   FormErrorMessage,
   FormLabel,
   FormControl,
-  Textarea
+  Textarea,
 } from "@chakra-ui/react";
 import { Input } from "ui/Input";
 import { Button, IconButton } from "ui";
@@ -37,7 +37,7 @@ import {
   FiStar,
   FiPlus,
   FiArrowLeft,
-  FiSliders
+  FiSliders,
 } from "react-icons/fi";
 import { Card, RadioCard } from "ui";
 import toast, { Toaster } from "react-hot-toast";
@@ -49,9 +49,9 @@ import {
 } from "react-icons/ri";
 import { useSession, signIn, signOut } from "next-auth/react";
 
-
-type JourneyInfoInputs = {
+type JourneyInfoInput = {
   title: string;
+  description?: string;
 };
 
 const currentGoals = [
@@ -99,12 +99,11 @@ const JourneyInfoForm = () => {
   const [isError, setError] = useState<boolean>(false);
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
-  const { data: session } = useSession();
 
   const defaultFormValues = () => {
     return {
       title: "",
-      description: ""
+      description: "",
     };
   };
 
@@ -113,7 +112,6 @@ const JourneyInfoForm = () => {
     // resolver: zodResolver(schema),
   });
 
-  console.log(context);
 
   const {
     register,
@@ -123,32 +121,25 @@ const JourneyInfoForm = () => {
     formState: { errors },
   } = createJourneyForm;
 
-  const onSubmit: SubmitHandler<JourneyInfoInputs> = (data) => {
-
+  const onSubmit: SubmitHandler<JourneyInfoInput> = (data) => {
     client
-    .post(`journeys`, {
-      ...data,
-      userId: session?.user?.id
-    })
-    .then(() => {
-      // setGoalInfo({ ...goal, title: "" });
-      context.moveForward(3);
-    });
+      .post(`journeys`, {
+        ...data,
+      })
+      .then(({ data: { journey } }) => {
+        // setGoalInfo({ ...goal, title: "" });
+        console.log(journey);
+        context.updateJourney(journey);
+        // don't move unless you got approval from the previous step!
+        context.moveForward(context.currentStep.id + 1);
+      })
+      .catch((err) => {
+        // alert("err");
+        console.log(err);
+      });
   };
 
   const [isFocused, setFocused] = useState(false);
-
-
-  const updateJourneyType = (value) => {
-    /**
-     * setJourneyInfo((currentState) => {
-      return {
-        ...currentState,
-        journeyType: value,
-      };
-    });
-     */
-  };
 
   if (context.blueprint === "template") {
     return <ListBluePrints />;
@@ -175,7 +166,7 @@ const JourneyInfoForm = () => {
     <Grid gap={4} borderRadius="1rem" color="brand.primaryText" width="100%">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap={4}>
-        <Heading size="sm">Basic Info</Heading>
+          <Heading size="sm">Basic Info</Heading>
           <FormControl>
             <FormLabel color="brand.secondaryText" htmlFor="title">
               Name your journey{" "}
@@ -201,10 +192,9 @@ const JourneyInfoForm = () => {
           </FormControl>
           <FormControl>
             <Flex gap={2} alignItems="center">
-    
-            <FormLabel color="brand.secondaryText" htmlFor="title">
-               Description
-            </FormLabel>
+              <FormLabel color="brand.secondaryText" htmlFor="title">
+                Description
+              </FormLabel>
             </Flex>
 
             <Controller
@@ -215,7 +205,7 @@ const JourneyInfoForm = () => {
                   placeholder="Describe your journey"
                   bg="brand.grey"
                   id="description"
-                  _placeholder={{ color: 'brand.secondaryText' }}
+                  _placeholder={{ color: "brand.secondaryText" }}
                   {...field}
                 />
               )}
@@ -223,36 +213,36 @@ const JourneyInfoForm = () => {
             {errors.title && <p>Hello</p>}
           </FormControl>
 
-          {
-            false ? <Stack borderRadius="1rem">
-            <Heading size="sm">My Goals</Heading>
+          {false ? (
+            <Stack borderRadius="1rem">
+              <Heading size="sm">My Goals</Heading>
               <Text color="brand.secondaryText">
                 Start by defining your long-term goal and breaking it down into
                 smaller, achievable steps.
               </Text>
               <FormControl>
-              <FormLabel color="brand.secondaryText" htmlFor="title">
-                Add a goal{" "}
-                <Box as="span" color="brand.danger">
-                  *
-                </Box>
-              </FormLabel>
-  
-              <Controller
-                name="title"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    placeholder="e.g Reaching a 100 users"
-                    type="text"
-                    autoFocus={true}
-                    id="title"
-                    {...field}
-                  />
-                )}
-              />
-              {errors.title && <p>Hello</p>}
-            </FormControl>
+                <FormLabel color="brand.secondaryText" htmlFor="title">
+                  Add a goal{" "}
+                  <Box as="span" color="brand.danger">
+                    *
+                  </Box>
+                </FormLabel>
+
+                <Controller
+                  name="title"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="e.g Reaching a 100 users"
+                      type="text"
+                      autoFocus={true}
+                      id="title"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.title && <p>Hello</p>}
+              </FormControl>
               {isFocused ? (
                 <Stack gap={4}>
                   <Flex alignItems="center" gap={4}>
@@ -265,8 +255,8 @@ const JourneyInfoForm = () => {
                       <FiStar size="1rem" />
                     </Box>
                     <Text color="brand.secondaryText">
-                      Check out these inspiring SMART goals from our community of
-                      change makers.
+                      Check out these inspiring SMART goals from our community
+                      of change makers.
                     </Text>
                   </Flex>
                   <Flex gap={2} flexWrap="wrap">
@@ -276,8 +266,8 @@ const JourneyInfoForm = () => {
                   </Flex>
                 </Stack>
               ) : null}
-            </Stack> : null
-          }
+            </Stack>
+          ) : null}
 
           <Flex gap={4} justifyContent="flex-end">
             {false ? (

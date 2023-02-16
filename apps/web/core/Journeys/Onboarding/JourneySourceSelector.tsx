@@ -19,10 +19,12 @@ import { FiCopy, FiEdit3 } from "react-icons/fi";
 
 type SelectorCardProps = {
   description?: string;
+  label?: string;
   value?: string;
 };
 
-const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
+const SelectorCard: FC<SelectorCardProps> = ({ description, label, value }) => {
+  console.log(value);
   return (
     <Stack bg="brand.white" p="4" borderRadius="1rem">
       <Box
@@ -32,12 +34,12 @@ const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
         color="brand.white"
         width="fit-content"
       >
-        {value === "Create from Scratch" ? <FiEdit3 /> : <FiCopy />}
+        {value === "blank" ? <FiEdit3 /> : <FiCopy />}
       </Box>
       <Stack>
         <Text>
-          {value}{" "}
-          {value === "Template" ? (
+          {label}{" "}
+          {value === "template" ? (
             <Box
               as="span"
               bg="brand.highlight1"
@@ -59,19 +61,22 @@ const SelectorCard: FC<SelectorCardProps> = ({ description, value }) => {
 };
 
 export type BluePrintSelectorProps = {
-  onBluePrintChange: (value: string) => void;
-  currentStep: number;
+  onBluePrintChange?: (value: string) => void;
+  currentStep?: number;
 };
 
-export const BluePrintSelector: FC<BluePrintSelectorProps> = ({
-  onBluePrintChange,
-  currentStep,
-}) => {
-  const [bluePrint, setBluePrint] = useState<string>("blank");
+export const BluePrintSelector: FC<BluePrintSelectorProps> = () => {
+  const context = useContext(JourneyOnboardingContext);
+  const {
+    onBluePrintChange,
+    currentStep,
+    blueprint
+  } = context;
+
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "blueprint",
-    defaultValue: bluePrint,
+    defaultValue: blueprint,
     onChange: (nextValue) => {
       onBluePrintChange(nextValue);
     },
@@ -82,13 +87,15 @@ export const BluePrintSelector: FC<BluePrintSelectorProps> = ({
   const options = [
     {
       id: 1,
-      value: "Create from Scratch",
+      value: "blank",
       description: "Perfect for the seasoned pros who know exactly what they want.",
+      label: "Create from Scratch"
     },
     {
       id: 2,
-      value: "Template",
+      value: "template",
       description: "Discover pre-made journeys designed by experts in various fields",
+      label: "Template"
     },
   ];
 
@@ -138,12 +145,16 @@ export const JourneySourceSelector = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      blueprint: "Blank",
+      blueprint: "blank",
     },
     reValidateMode: "onChange",
   });
 
-  const onSubmit = data => context.moveForward(data);
+  const onSubmit = data => {
+    // 
+    // validate choice before you move forward!
+    context.moveForward(context.currentStep.id + 1)
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex width="100%" gap={8} color="brand.primaryText">
@@ -152,13 +163,10 @@ export const JourneySourceSelector = () => {
             {context.currentStep.title}
           </Heading>
           <Flex direction="column" borderRadius="1rem">
-            <BluePrintSelector
-              currentStep={context.currentStep}
-              onBluePrintChange={context.onBluePrintChange}
-            />
+            <BluePrintSelector />
             <Flex gap={4} justifyContent="flex-end">
               <Button
-                onClick={() => context.moveForward(context.currentStep.id + 1)}
+                type="submit"
                 icon={<FiArrowRight />}
               >
                 Continue
