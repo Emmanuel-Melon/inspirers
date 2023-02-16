@@ -1,51 +1,52 @@
 import { Box, Heading, Text, Flex, Stack } from "@chakra-ui/react";
-import { Button, Card } from "ui";
-import { FiPlus } from "react-icons/fi";
+import { Button, IconButton, Card } from "ui";
+import { FiInfo } from "react-icons/fi";
 
 export type EmptyStateAction = {
-    title: string;
-    handler: () => void;
-}
+  title: string;
+  handler: () => void;
+};
 export interface EmptyStateProps {
-    heading: string;
-    description: string;
-    icon: any;
-    action?: EmptyStateAction;
+  heading: string;
+  description: string;
+  icon: any;
+  action?: EmptyStateAction;
+  children: any;
 }
 
-export const EmptyState = ({ icon, heading, description, action }: EmptyStateProps) => {
-    return (
-        <Card bg="brand.white">
-            <Flex>
-                <Flex
-                    gap={4}
-                    alignItems="center"
-                >
-                    <Box
-                        bg="brand.white"
-                        width="fit-content"
-                        p="4"
-                        borderRadius="1rem"
-                        color="brand.secondaryText"
-                        boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                    >
-                        {icon}
-                    </Box>
-                    <Stack>
-                        <Heading size="md" as="h3" color="brand.primaryText">{heading}</Heading>
-                        <Text color="brand.secondaryText">{description}</Text>
-                    </Stack>
-                </Flex>
-                {
-                    action && <Button
-                        size="sm"
-                        icon={<FiPlus />}
-                        onClick={action.handler}
-                    >
-                        {action.title}
-                    </Button>
-                }
-            </Flex>
-        </Card>
-    )
-}
+export const EmptyState = ({
+  icon,
+  heading,
+  description,
+  action,
+  children,
+}: EmptyStateProps) => {
+  return (
+    <Card bg="brand.white">
+      <Stack>
+      <Box
+          bg="brand.accent"
+          width="fit-content"
+          p="2"
+          borderRadius="1rem"
+          color="brand.white"
+          boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+        >
+          {icon}
+        </Box>
+        <Stack flex="2">
+          <Flex justifyContent="space-between">
+            <Heading size="md" as="h3" color="brand.primaryText">
+              {heading}
+            </Heading>
+            <IconButton color="brand.accent">
+              <FiInfo />
+            </IconButton>
+          </Flex>
+          <Text color="brand.secondaryText">{description}</Text>
+          {children}
+        </Stack>
+      </Stack>
+    </Card>
+  );
+};

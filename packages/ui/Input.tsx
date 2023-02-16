@@ -21,7 +21,7 @@ type InputProps = {
 export const Input = ({
   placeholder,
   autoFocus,
-  size = "sm",
+  size = "md",
   width,
   ...props
 }: InputProps) => {
@@ -34,7 +34,7 @@ export const Input = ({
       focusBorderColor="brand.accent"
       color="brand.secondaryText"
       autoFocus={autoFocus}
-      bg="brand.highlight2"
+      bg="brand.grey"
       size={size}
       _hover={{
         background: "brand.white",

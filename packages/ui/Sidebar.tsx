@@ -21,7 +21,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { IconType } from "react-icons";
 
-import { RiRocket2Line, RiMenu2Line, RiMenu3Line } from "react-icons/ri";
+import { RiLogoutCircleLine, RiMenu2Line, RiMenu3Line } from "react-icons/ri";
 
 type SidebarItemProps = {
   name: string;
@@ -41,12 +41,13 @@ const SidebarItem: FC<SidebarItemProps> = ({
   return (
     <NextLink href={url} passHref>
       <LinkBox
-        p="2"
+        p="1"
         borderRadius="lg"
+        cursor="pointer"
         _hover={{
-          bg: "brand.highlight1",
+          bg: "brand.primary",
           width: "100%",
-          p: "2",
+          p: "1",
           color: "brand.secondary",
           boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
         }}
@@ -91,12 +92,12 @@ export const Sidebar: FC<SidebarProps> = ({
   return (
     <Box
       p={2}
-      
+      bg="white"
       alignItems={collapsed ? "center" : "flex-start"}
       position="sticky"
       boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
       width={collapsed ? "200px" : "fit-content"}
-      
+      height="100vh"
     >
       <Drawer
         autoFocus={false}
@@ -120,6 +121,9 @@ export const Sidebar: FC<SidebarProps> = ({
         {links.map((link) => (
           <SidebarItem key={link.name} {...link} collapsed={collapsed} />
         ))}
+                  <IconButton onClick={signOut}>
+            <RiLogoutCircleLine />
+          </IconButton>
       </Stack>
     </Box>
   );
