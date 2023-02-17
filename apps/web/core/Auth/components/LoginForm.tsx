@@ -155,6 +155,7 @@ export const AuthForm = ({ mode, providers }: AuthFormProps) => {
                             color={style?.color || "brand.white"}
                             icon={GetProviderIcon(provider?.name)}
                             key={`${index}-${provider?.name}`}
+                            width="100%"
                             onClick={() =>
                               signIn(provider?.id)
                                 .then((res) => {
