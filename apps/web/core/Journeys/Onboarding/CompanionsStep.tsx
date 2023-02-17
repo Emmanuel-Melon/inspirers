@@ -129,10 +129,19 @@ export const CompanionsStep = () => {
 
   const handleNext = () => {
     // context.updateJourney({ createdFirstJourney: true });
-    context.moveForward(context.currentStep.id + 1);
-    if(context.currentStep.id === 6) {
-      context.updateJourney({ createdFirstJourney: true });
-    }
+
+    context.updateJourney({ createdFirstJourney: true });
+    client
+    .put(`users/${context.journey.userId}`, {
+      createdFirstJourney: true
+    })
+    .then(() => {
+      // setGoalInfo({ ...goal, title: "" });
+      // context.moveForward(3);
+      router.reload();
+      // check whatt does prefetch do!
+      // supply a query string to indicate source == onboarding to prepae app for first time!
+    });
   };
 
   console.log(context);

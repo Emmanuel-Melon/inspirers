@@ -47,7 +47,6 @@ import {
   RiStore3Line,
   RiBriefcase2Line,
 } from "react-icons/ri";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 type JourneyInfoInput = {
   title: string;

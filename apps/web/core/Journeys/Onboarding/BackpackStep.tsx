@@ -311,8 +311,8 @@ export const BackpackStep = () => {
             {errors.title && <p>Hello</p>}
           </FormControl>
         </Stack>
-        <Stack gap={2}>
-          <Card>
+        <Flex gap={2}>
+        <Card>
             <Stack>
               <Box color="brand.accent">
                 <HiOutlineTemplate />
@@ -348,7 +348,7 @@ export const BackpackStep = () => {
               <Button>View Integrations</Button>
             </Stack>
           </Card>
-        </Stack>
+        </Flex>
         <Flex gap={4} justifyContent="flex-end">
         <Button
           bg="brand.white"
