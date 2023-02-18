@@ -18,8 +18,7 @@ import {
   FormControl,
   Textarea,
 } from "@chakra-ui/react";
-import { Input } from "ui/Input";
-import { Button, IconButton } from "ui";
+import { Button, IconButton, Input } from "ui";
 import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { client } from "../../../utils/client";
 import { ListBluePrints } from "../components/ListBluePrints";
@@ -283,7 +282,6 @@ const JourneyInfoForm = () => {
               </Button>
             ) : null}
             <Button
-              as="input"
               type="submit"
               icon={<FiArrowRight />}
               isLoading={isLoading}
