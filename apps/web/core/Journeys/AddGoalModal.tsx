@@ -16,7 +16,7 @@ export const AddGoalModal = ({ CTA = "Start Setting Goals" }) => {
   return (
     <>
       <Flex gap={2}>
-        <Button onClick={openModal} icon={<FiTarget />}>
+        <Button onClick={openModal} icon={<FiTarget />} bg="brand.white" color="brand.accent">
           {CTA}
         </Button>
       </Flex>

@@ -29,9 +29,15 @@ const GoalCard = ({ goal }) => {
   const btnRef = useRef();
   return (
     <>
-      <Card>
-        <Flex gap={2} alignItems="center">
-          <Box color="brand.accent" bg="brand.white" p="2">
+<Flex gap={2} alignItems="center">
+          <Box
+            bg="brand.white"
+            width="fit-content"
+            p="2"
+            borderRadius="1rem"
+            color="brand.primaryText"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+          >
             <FiTarget />
           </Box>
           <Flex
@@ -57,7 +63,6 @@ const GoalCard = ({ goal }) => {
             </IconButton>
           </Flex>
         </Flex>
-      </Card>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -72,8 +77,8 @@ const GoalCard = ({ goal }) => {
 
           <DrawerBody bg="brand.highlight1">
             <Stack>
-            <Heading size="sm">Goal Progress</Heading>
-            <Progress
+              <Heading size="sm">Goal Progress</Heading>
+              <Progress
                 value={89}
                 hasStripe
                 size="md"
@@ -126,17 +131,32 @@ export const GoalsOverview = () => {
   }
 
   return (
-    <Stack width="100%">
+    <Card>
+      <Stack gap={2}>
       <Flex gap={2} alignItems="center" justifyContent="space-between">
-        <Heading size="md">Goals (3)</Heading>
-        <AddGoalModal journey={context} CTA="Add another goal" />
+        <Stack>
+          <Box
+            bg="brand.accent"
+            width="fit-content"
+            p="2"
+            borderRadius="1rem"
+            color="brand.white"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+          >
+            <FiTarget />
+          </Box>
+          <Heading size="md">Goals (3)</Heading>
+        </Stack>
+        
       </Flex>
-      <Flex gap={2}>
+      <Stack gap={2}>
         {goals?.map((goal) => (
           <GoalCard key={goal.id} goal={goal} />
         ))}
-      </Flex>
-    </Stack>
+      </Stack>
+      <AddGoalModal journey={context} CTA="Add another goal" />
+      </Stack>
+    </Card>
   );
 };
 
