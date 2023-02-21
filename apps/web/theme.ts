@@ -12,7 +12,6 @@ const config = {
 };
 
 const theme: ThemeConfig = extendTheme({
-  config,
   styles: {
     global: (props: Record<string, any>) => ({
       body: {
@@ -32,7 +31,7 @@ const theme: ThemeConfig = extendTheme({
       white: "#fff",
       secondary: "#6C56F1",
       accent: "#6C56F1",
-      highlight: "rgba(248, 255, 220, 0.75)",
+      highlight: "rgba(248, 255, 220, 0.45)",
       highlight1: "rgba(169, 113, 26, 0.04)",
       highlight2: "rgba(0, 157, 174, 0.035)",
       highlight3: "rgba(57, 19, 119, 0.035)",

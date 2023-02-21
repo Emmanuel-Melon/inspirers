@@ -28,6 +28,7 @@ import {
 import { useFetch, usePost } from "hooks/useSwr";
 import { client } from "utils/client";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -36,7 +37,7 @@ const UserView = () => {};
 
 const ProfileCardActions = ({ children }) => {
   return (
-    <Flex gap={4} justifyContent="flex-end" alignItems="center">
+    <Flex gap={4} alignItems="center">
       {children}
     </Flex>
   );
@@ -64,12 +65,17 @@ const ProfileCardActionButton = ({ icon, onClick, text }) => {
           /> : null
           }
  */
-const FollowUserButton = (props) => {
-  if (props.isUser) {
+const FollowUserButton = ({ createConnectionRequest, isUser, user, connection }) => {
+  if (isUser) {
     return null;
   }
 
-  let classes = "btn btn-sm action-btn";
+  console.log(connection)
+
+  
+
+  /**
+   *   let classes = "btn btn-sm action-btn";
   if (props.user.following) {
     classes += " btn-secondary";
   } else {
@@ -85,11 +91,22 @@ const FollowUserButton = (props) => {
     }
   };
 
+   */
   return (
-    <Button className={classes} onClick={handleClick}>
-      <i className="ion-plus-round"></i>
-      &nbsp;
-      {props.user.following ? "Unfollow" : "Follow"} {props.user.username}
+    <Button onClick={createConnectionRequest}>
+      {connection?.status ? "Unfollow" : "Follow"}
+    </Button>
+  );
+};
+
+const MessageUserButton = ({ isUser, user }) => {
+  if (isUser) {
+    return null;
+  }
+
+  return (
+    <Button>
+      {true ? "Message" : "Message"} {user?.username}
     </Button>
   );
 };
@@ -100,7 +117,8 @@ export const UserProfileCard = ({ user }) => {
   const { mutate } = useSWRConfig();
   const [isLoading, setLoading] = useState<boolean>();
   const { data: connection } = useFetch(`/connections/${user?.id}/status`);
-  console.log(user);
+  const router = useRouter();
+  console.log(router);
 
   const createConnectionRequest = () => {
     client
@@ -128,26 +146,17 @@ export const UserProfileCard = ({ user }) => {
 
   return (
     <>
-      <Stack
-        bg="brand.white"
-        borderRadius="1rem"
-        p="4"
-        direction="column"
-        color="brand.primaryText"
-        width="100%"
-      >
-        <Flex gap={4} alignItems="flex-start">
-          <Avatar name={user?.name} src={user?.image} size="lg" />
-          <Stack alignItems="flex-start">
-            <Heading color="brand.primaryText" size="sm">
+<Stack gap={2}>
+          <Avatar name={user?.name} src={user?.image} size="xl" />
+          <Stack>
+            <Heading color="brand.primaryText" size="md">
               {user?.name}
             </Heading>
-            <Text color="brand.secondary" size="sm">
+            <Text color="brand.accent">
               @{user?.username}
             </Text>
           </Stack>
-        </Flex>
-        <ProfileCardActions>
+          <ProfileCardActions>
           {session?.user?.id === user?.id ? (
             <Button
               onClick={() => setIsModalOpen(true)}
@@ -157,32 +166,11 @@ export const UserProfileCard = ({ user }) => {
               Edit Profile
             </Button>
           ) : null}
-          <IconButton
-            borderRadius="50%"
-            bg="brand.highlight1"
-            aria-label={""}
-            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-          >
-            <FiMoreHorizontal />
-          </IconButton>
-          {false ? (
-            <IconButton
-              borderRadius="50%"
-              bg="brand.highlight1"
-              aria-label={""}
-              boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-              _hover={{
-                bg: "brand.hovered",
-              }}
-            >
-              <FiMessageSquare />
-            </IconButton>
-          ) : null}
+
+          <FollowUserButton createConnectionRequest={createConnectionRequest} connection={connection} isUser={session?.user?.id === router.query.username} />
+          <MessageUserButton  connection={connection} isUser={session?.user?.id === router.query.username} />
         </ProfileCardActions>
-        <Flex>
-          <Text my="8">{user?.bio}</Text>
-        </Flex>
-      </Stack>
+        </Stack>
     </>
   );
 };

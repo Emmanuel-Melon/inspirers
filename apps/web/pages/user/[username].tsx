@@ -25,11 +25,15 @@ export default function UserProfile() {
       {
         isLoading ? <Spinner />: (
           <Flex width="100%" gap={8} height="100%">
-            <VStack alignItems="flex-start" width="35%">
+            <Stack flex="1">
+            <Card>
               <UserProfileCard user={user} />
-              <UserBioCard user={user} />
-            </VStack>
+            </Card>
+            </Stack>
+            <Stack flex="2">
             <ProfileSectionsTab user={user} />
+            </Stack>
+            
           </Flex>
         )
       }

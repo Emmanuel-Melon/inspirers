@@ -6,9 +6,12 @@ export function stepsReducer(state: JourneyType, action: ActionType) {
       const nextStep = state.steps.find(
         (step) => step.id === action.payload.targetStepId
       );
-
       if (action.payload.targetStepId === 6) {
         console.log("finished");
+        return {
+          ...state,
+          completedOnboarding: true
+        }
       } else {
         return {
           ...state,

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import {
     Avatar,
     Img,
@@ -27,6 +27,7 @@ import {
     TagLeftIcon
 } from "@chakra-ui/react";
 import Image from "next/image";
+import { JourneyConsumer, JourneyContext } from "providers/JourneyProvider";
 
 import { Input, IconButton, Button, Card } from "ui";
 import {
@@ -50,20 +51,14 @@ import {
 } from "react-icons/fi";
 
 export const CurrentJourney = () => {
+    const context = useContext(JourneyContext);
+    console.log(context);
     return (
         <Flex gap={4} width="100%">
-            <Stack flex={1}>
-                <Image
-                    src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1657997898/inspirers/images/burgundy-53.svg"
-                    width="150px"
-                    height="200px"
-                    alt="Hello, World"
-                />
-            </Stack>
             <Stack flex={2} gap={2}>
                 <Flex justifyContent="space-between" alignItems="center">
                     <Stack>
-                        <Heading size="md">Launching Inspirers</Heading>
+                        <Heading size="md">{context?.title}</Heading>
                         <Text>
                             When you do it with other people, you learn, you laugh, and you make unforgettable memories to last a lifetime.
                         </Text>
@@ -71,44 +66,6 @@ export const CurrentJourney = () => {
                     <IconButton aria-label={""} size="sm" onClick={() => {}}>
                         <FiMoreHorizontal />
                     </IconButton>
-                </Flex>
-                <Flex gap={4} flexWrap="wrap">
-                    <Tag
-                        bg="brand.highlight"
-                        borderRadius='full'
-                        size="lg"
-                        _hover={{
-                            bg: "brand.hovered"
-                        }}
-                        cursor="pointer"
-                    >
-                        <TagLeftIcon boxSize='12px' as={FiCreditCard} />
-                        <TagLabel>Finance</TagLabel>
-                    </Tag>
-                    <Tag
-                        bg="brand.highlight1"
-                        borderRadius='full'
-                        size="lg"
-                        _hover={{
-                            bg: "brand.hovered"
-                        }}
-                        cursor="pointer"
-                    >
-                        <TagLeftIcon boxSize='12px' as={FiCode} />
-                        <TagLabel>EdTech</TagLabel>
-                    </Tag>
-                    <Tag
-                        bg="brand.highlight2"
-                        borderRadius='full'
-                        size="lg"
-                        _hover={{
-                            bg: "brand.hovered"
-                        }}
-                        cursor="pointer"
-                    >
-                        <TagLeftIcon boxSize='12px' as={FiBriefcase} />
-                        <TagLabel>Startups</TagLabel>
-                    </Tag>
                 </Flex>
                 <Card>
                     <Flex justifyContent="space-between">

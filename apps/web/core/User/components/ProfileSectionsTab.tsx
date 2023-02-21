@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useContext, useCallback, useState } from "react";
 import {
   Avatar,
   Flex,
@@ -24,6 +24,7 @@ import { ResourceList } from "core/User/ResourcesList";
 import { UserCompanions } from "core/User/Companions";
 import { UserActivity } from "core/User/Activity";
 import { CurrentJourney } from "core/User/CurrentJourney";
+import { JourneyConsumer, JourneyContext } from "providers/JourneyProvider";
 
 import {
   FiActivity,
@@ -33,33 +34,38 @@ import {
   FiCompass,
 } from "react-icons/fi";
 
+const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
+  // 1. Reuse the `useTab` hook
+  const tabProps = useTab({ ...props, ref });
+  const isSelected = !!tabProps["aria-selected"];
+
+  // 2. Hook into the Tabs `size`, `variant`, props
+  const styles = useMultiStyleConfig("Tabs", tabProps);
+
+  return (
+    <Button
+      {...tabProps}
+      size="sm"
+      alignItems="center"
+      borderRadius="0.5rem"
+      leftIcon={props.icon}
+      bg={isSelected ? "brand.primary" : "transparent"}
+      color={isSelected ? "brand.primaryText" : "brand.primaryText"}
+      _hover={{
+        bg: isSelected ? "brand.hovered" : "brand.highlight3",
+        color: isSelected ? "brand.primaryText" : "brand.primaryText",
+      }}
+    >
+      {tabProps.children}
+    </Button>
+  );
+});
+
 export const ProfileSectionsTab = () => {
-  const CustomTab = React.forwardRef(function InnerComponent(props, ref) {
-    // 1. Reuse the `useTab` hook
-    const tabProps = useTab({ ...props, ref });
-    const isSelected = !!tabProps["aria-selected"];
 
-    // 2. Hook into the Tabs `size`, `variant`, props
-    const styles = useMultiStyleConfig("Tabs", tabProps);
 
-    return (
-      <Button
-        {...tabProps}
-        size="sm"
-        alignItems="center"
-        borderRadius="1rem"
-        leftIcon={props.icon}
-        bg={isSelected ? "brand.accent" : "transparent"}
-        color={isSelected ? "brand.white" : "brand.primaryText"}
-        _hover={{
-          bg: isSelected ? "brand.hovered" : "brand.highlight3",
-          color: isSelected ? "brand.primaryText" : "brand.primaryText",
-        }}
-      >
-        {tabProps.children}
-      </Button>
-    );
-  });
+  const context = useContext(JourneyContext);
+  console.log(context);
 
   const getStarted = () => {};
   return (
@@ -80,7 +86,6 @@ export const ProfileSectionsTab = () => {
           <CustomTab icon={<FiCompass />}>Journey</CustomTab>
           <CustomTab icon={<FiActivity />}>Activity</CustomTab>
           <CustomTab icon={<FiUsers />}>Companions</CustomTab>
-          <CustomTab icon={<FiClipboard />}>Tasks</CustomTab>
           <CustomTab icon={<FiShoppingBag />}>Backpacks</CustomTab>
         </TabList>
 
@@ -109,14 +114,6 @@ export const ProfileSectionsTab = () => {
               panelTitle="Companions"
               url={EmptyStateImages.MenteesEmptyStateImage}
               input={<UserCompanions />}
-            />
-          </TabPanel>
-          <TabPanel p="none">
-            <WhatToDisplay
-              status="on"
-              panelTitle="Tasks"
-              url={EmptyStateImages.TasksEmptyStateImage}
-              input={<TaskList tasks={[]} />}
             />
           </TabPanel>
           <TabPanel p="none">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Stat,
@@ -15,6 +15,8 @@ import {
   TabPanel,
   Progress,
   Box,
+  useTab,
+  useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { JourneyGreeting } from "core/Journeys/components/JourneyGreeting";
@@ -41,17 +43,22 @@ import {
 } from "providers/JourneyProvider";
 import { JourneyOnboardingSteps } from "core/Journeys/Onboarding/JourneyOnboardingSteps";
 import { RiHandbagLine, RiUserStarLine } from "react-icons/ri";
+import { User } from "@prisma/client";
 
-const JourneyOverview = () => {
+
+
+const JourneyOverview = ({ journey }) => {
   return (
-    <EmptyState
-      heading="Unleash Your Potential!"
-      description="Do not let your day fly by without making the most of it! Create your
-        first routine now."
-      icon={<HiOutlineMap />}
+    <Stack height="100%">
+          <Card
     >
-      <Button>Start Your Journey</Button>
-    </EmptyState>
+      <Stack>
+      <Heading>{journey?.title}</Heading>
+      <Text>{journey?.description}</Text>
+      <Text>{journey?.description}</Text>
+      </Stack>
+    </Card>
+    </Stack>
   );
 };
 
@@ -221,6 +228,21 @@ const JourneyCreationProgress = () => {
   );
 };
 
+// if there is a journey but progress hasn't been completed, continue where they left off
+
+export const ONBOARDING_NEXT_REDIRECT = {
+  redirect: {
+    permanent: false,
+    destination: "/getting-started",
+  },
+} as const;
+
+export const shouldShowOnboarding = (
+  user: Pick<User, "createdAt" | "completedOnboarding">
+) => {
+  return !user.completedOnboarding;
+};
+
 export default function Index() {
   const { data: session } = useSession();
   const {
@@ -229,13 +251,12 @@ export default function Index() {
     isError,
   } = useFetch(`/journeys/${session?.user?.id}/current`);
 
-  console.log(session?.user?.createdFirstJourney);
-
   if (isLoading) {
     return <p>Loading journey</p>;
   }
 
   if (isError) {
+    console.log(isError)
     return <p>Failed to load journey</p>;
   }
 
@@ -251,17 +272,31 @@ export default function Index() {
           <Stack>
             <JourneyGreeting />
           </Stack>
-          {journey ? (
-            <Tabs isLazy>
-              <TabList>
-                <Tab>Day 0</Tab>
+          {journey?.userId === session?.user?.id ? (
+            <Tabs defaultIndex={0} isLazy variant="unstyled">
+              <TabList
+                gap={4}
+                bg="brand.highlight3"
+                p="4"
+                borderRadius="1rem"
+                boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+                marginBottom={4}
+              >
+                <Tab >Day 0</Tab>
                 <Tab>Journey Overview</Tab>
               </TabList>
               <TabPanels>
-                <TabPanel>
+                <TabPanel p="none">
                   <Stack gap={2}>
-                    {journey ? <GoalsOverview /> : null}
-                    <Flex gap={8}>
+                    <Flex gap={2}>
+                    <Stack flex="2">
+                      {journey ? <JourneyOverview journey={journey} /> : null}
+                      </Stack>
+                      <Stack flex="1">
+                      {journey ? <GoalsOverview /> : null}
+                      </Stack>
+                    </Flex>
+                    <Flex gap={2}>
                       <Stack flex="2">
                         <RoutinesOverview />
                         <Activities />
@@ -280,7 +315,7 @@ export default function Index() {
                     </Flex>
                   </Stack>
                 </TabPanel>
-                <TabPanel>
+                <TabPanel p="none">
                   <JourneyTimeline />
                 </TabPanel>
               </TabPanels>

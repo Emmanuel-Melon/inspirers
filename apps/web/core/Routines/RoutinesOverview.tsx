@@ -12,11 +12,9 @@ import {
 import { Button, Card, IconButton } from "ui";
 import { useRouter } from "next/router";
 import { ActiveRoutine } from "core/Routines/ActiveRoutine";
-import NextLink from "next/link";
-import { JourneyGreeting } from "core/Journeys/components/JourneyGreeting";
-import { UpcomingRoutines } from "core/Routines/ListRoutines";
-import { GoalsOverview } from "core/Journeys/JourneyOverview";
 import { FiHeadphones, FiBook, FiPlay, FiPause } from "react-icons/fi";
+import { useFetch } from "hooks/useSwr";
+import { JourneyConsumer, JourneyContext } from "providers/JourneyProvider";
 
 export const TimeTracker = () => {
   return (
@@ -59,10 +57,20 @@ export const TimeTracker = () => {
 
 // maybe a widget that pops
 export const RoutinesOverview = () => {
+  const context = useContext(JourneyContext);
+  
+  const {
+    data: routines,
+    isLoading,
+    isError,
+  } = useFetch(`/routines/${context?.userId}/list`);
+
+  console.log(routines);
+  
   return (
     <Flex gap={4}>
       <Stack flex="1">
-        <ActiveRoutine />
+        <ActiveRoutine routines={routines} />
         <Stack flex="1">
           {false ? (
             <Flex gap={2}>

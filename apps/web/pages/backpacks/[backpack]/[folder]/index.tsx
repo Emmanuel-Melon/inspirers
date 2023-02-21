@@ -24,12 +24,6 @@ import { FiChevronsRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 import {
   ListResources,
-  AddResource,
-  QuickAccess,
-  ListFolders,
-  ListRecentlyAdded,
-  AddNewFolder,
-  ImportResources,
 } from "core/Backpack";
 
 // add automations for:
@@ -44,7 +38,6 @@ export default function Folder() {
     isError: folderError,
   } = useFetch(`/backpacks/folders/${router.query.folderId}`);
 
-  console.log(router);
 
   return (
     <Stack gap={2}>
