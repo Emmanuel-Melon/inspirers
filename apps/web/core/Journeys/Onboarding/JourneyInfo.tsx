@@ -16,13 +16,28 @@ import {
   FormErrorMessage,
   FormLabel,
   FormControl,
+  Textarea,
 } from "@chakra-ui/react";
-import { Input } from "ui/Input";
-import { Button, IconButton } from "ui";
+import { Button, IconButton, Input } from "ui";
 import { JourneyOnboardingContext } from "../../../providers/JourneyOnboardingProvider";
 import { client } from "../../../utils/client";
 import { ListBluePrints } from "../components/ListBluePrints";
-import { FiX, FiArrowRight, FiBookOpen, FiArrowLeft } from "react-icons/fi";
+import {
+  FiX,
+  FiArrowRight,
+  FiTarget,
+  FiTrendingUp,
+  FiThumbsUp,
+  FiCheckCircle,
+  FiClock,
+  FiFlag,
+  FiBookOpen,
+  FiMoreHorizontal,
+  FiStar,
+  FiPlus,
+  FiArrowLeft,
+  FiSliders,
+} from "react-icons/fi";
 import { Card, RadioCard } from "ui";
 import toast, { Toaster } from "react-hot-toast";
 import { CustomCheckbox } from "ui";
@@ -32,163 +47,48 @@ import {
   RiBriefcase2Line,
 } from "react-icons/ri";
 
-type JourneyTypeSelectorProps = {
-  defaultValue: any;
-  options: any;
-  updateJourneyType: any;
-};
-
-type JourneyType = "academic" | "business" | "career" | "personal";
-
-const JourneyTypeSelector: FC<JourneyTypeSelectorProps> = ({
-  defaultValue,
-  options,
-  updateJourneyType,
-}) => {
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "journey",
-    defaultValue,
-    onChange: (nextValue) => updateJourneyType(nextValue),
-  });
-
-  const group = getRootProps();
-  const type: JourneyType = "academic";
-  return (
-    <>
-      <FormControl>
-      <FormLabel color="brand.secondaryText">Type of journey</FormLabel>
-      <HStack {...group}>
-        {options.map((value) => {
-          const radio = getRadioProps({ value });
-          return (
-            <RadioCard
-              p="0.5rem"
-              
-              key={value}
-              {...radio}
-              bg="brand.white"
-              checked={{
-                bg: "brand.accent",
-                color: "brand.white",
-                borderRadius: "0.5rem",
-              }}
-              hover={{
-                borderColor: "brand.highlight2",
-              }}
-              name="journeyType"
-            >
-              {value}
-            </RadioCard>
-          );
-        })}
-      </HStack>
-      </FormControl>
-
-      {type === "academic" ? <AcademicJourneyForm /> : null}
-      {type === "business" ? <BusinessJourneyForm /> : null}
-      {type === "career" ? <CareerJourneyForm /> : null}
-    </>
-  );
-};
-
-type JourneyFormProps = {
-  journey?: any;
-};
-
-const CareerJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
-  return (
-    <>
-      <FormControl>
-        <FormLabel color="brand.primaryText">Field</FormLabel>
-        <Input
-          placeholder="E.g Engineering, Medicine etc."
-          type="text"
-          onChange={() => {}}
-          value={journey.interest}
-          name="interest"
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel color="brand.primaryText">Experience level</FormLabel>
-        <Select
-          placeholder="e.g undergrad or postgrade"
-          borderRadius="1rem"
-          name="background"
-        >
-          <option value={journey.background}>No Experience</option>
-          <option value={journey.background}>Early Career</option>
-          <option value={journey.background}>Mid Level/ Senior</option>
-        </Select>
-      </FormControl>
-    </>
-  );
-};
-
-const BusinessJourneyForm: FC<JourneyFormProps> = ({ journey }) => {
-  return (
-    <>
-      <FormControl>
-        <FormLabel color="brand.primaryText">Business type</FormLabel>
-        <Input
-          placeholder="E.g Tech, Education"
-          type="text"
-          onChange={() => {}}
-          value={journey.field}
-          name="field"
-        />
-      </FormControl>
-    </>
-  );
-};
-
-type AcademicJourneyInput = {
-  background?: string;
+type JourneyInfoInput = {
   title: string;
+  description?: string;
 };
 
-const AcademicJourneyForm = ({ journey }: JourneyFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<AcademicJourneyInput>();
-  const onSubmit: SubmitHandler<AcademicJourneyInput> = (data) =>
-    console.log(data);
+const currentGoals = [
+  {
+    id: 1,
+    title: "Build 5 front end applications",
+    eta: "1 month",
+    userId: "cl8bry9660006rlbt2n2ki24f",
+  },
+  {
+    id: 4,
+    title: "Learn how to play 15 guitar solos",
+    eta: "1 month",
+    userId: "cl8bry9660006rlbt2n2ki24f",
+  },
+];
 
-  console.log(watch("title"));
+const SmartGoalSuggestion = ({ saveGoal, goal }) => {
   return (
-    <Stack gap={1}>
-      <FormControl>
-        <FormLabel color="brand.secondaryText">Your field</FormLabel>
-        <Input
-          placeholder="E.g Engineering, Medicine etc."
-          type="text"
-          {...register("title")}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel color="brand.secondaryText">Academic level</FormLabel>
-        <Select
-          placeholder="e.g undergraduate or postgrade"
-          borderRadius="1rem"
-          name="background"
-          variant="outline"
-          bg="brand.highlight2"
-          borderColor="brand.highlight2"
-        >
-          <option>High School</option>
-          <option>Undergraduate</option>
-          <option>Postgraduate</option>
-          <option>Other</option>
-        </Select>
-      </FormControl>
-    </Stack>
+    <Flex
+      gap={2}
+      bg="brand.white"
+      py="2"
+      px="4"
+      borderRadius="1.5rem"
+      alignItems="center"
+      boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+      _hover={{
+        bg: "brand.highlight2",
+      }}
+      cursor="pointer"
+      onClick={() => saveGoal({ title: goal.title, userId: goal.userId })}
+    >
+      <Box bg="brand.highlight3" p="2" color="brand.accent" borderRadius="50%">
+        <FiFlag />
+      </Box>
+      <Text>{goal.title}</Text>
+    </Flex>
   );
-};
-
-type JourneyInfoInputs = {
-  title: string;
 };
 
 const JourneyInfoForm = () => {
@@ -198,89 +98,198 @@ const JourneyInfoForm = () => {
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
 
+  const defaultFormValues = () => {
+    return {
+      title: "",
+      description: "",
+    };
+  };
+
+  const createJourneyForm = useForm({
+    defaultValues: defaultFormValues(),
+    // resolver: zodResolver(schema),
+  });
+
+
   const {
     register,
     handleSubmit,
     watch,
     control,
     formState: { errors },
-  } = useForm<JourneyInfoInputs>();
-  const onSubmit: SubmitHandler<JourneyInfoInputs> = (data) =>
-    console.log(data);
+  } = createJourneyForm;
 
-  const options = ["academic", "business", "career", "personal"];
-
-  console.log(watch("title"));
-  console.log(errors);
-
-  const updateJourneyType = (value) => {
-    /**
-     * setJourneyInfo((currentState) => {
-      return {
-        ...currentState,
-        journeyType: value,
-      };
-    });
-     */
+  const onSubmit: SubmitHandler<JourneyInfoInput> = (data) => {
+    client
+      .post(`journeys`, {
+        ...data,
+      })
+      .then(({ data: { journey } }) => {
+        // setGoalInfo({ ...goal, title: "" });
+        console.log(journey);
+        context.updateJourney(journey);
+        // don't move unless you got approval from the previous step!
+        context.moveForward(context.currentStep.id + 1);
+      })
+      .catch((err) => {
+        // alert("err");
+        console.log(err);
+      });
   };
+
+  const [isFocused, setFocused] = useState(false);
 
   if (context.blueprint === "template") {
     return <ListBluePrints />;
   }
+
+  const saveGoal = (goal) => {
+    client
+      .post(`journeys/${context.journey.id}/goals`, {
+        ...goal,
+      })
+      .then(() => {
+        // setGoalInfo({ ...goal, title: "" });
+      });
+  };
+
+  // disable next button if no goals are added
+  // disable auto suggestions if max goal count is reached
+  // maintain fixed height for the goal container
+  // separate the suggestions from the added goals
+  // maybve a divider between the two
+  // or a container witgha  different bg color
+
   return (
     <Grid gap={4} borderRadius="1rem" color="brand.primaryText" width="100%">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl>
-          <FormLabel color="brand.secondaryText" htmlFor="title">
-            Name your journey{" "}
-            <Box as="span" color="brand.danger">
-              *
-            </Box>
-          </FormLabel>
+        <Stack gap={4}>
+          <Heading size="sm">Basic Info</Heading>
+          <FormControl>
+            <FormLabel color="brand.secondaryText" htmlFor="title">
+              Name your journey{" "}
+              <Box as="span" color="brand.danger">
+                *
+              </Box>
+            </FormLabel>
 
-          <Controller
-            name="title"
-            control={control}
-            render={({ field }) => (
-              <Input
-                placeholder="e.g Getting into Harvard"
-                type="text"
-                autoFocus={true}
-                id="title"
-                {...field}
-              />
-            )}
-          />
-          {errors.title && <p>Hello</p>}
-        </FormControl>
-        <JourneyTypeSelector
-          defaultValue={""}
-          options={options}
-          updateJourneyType={updateJourneyType}
-        />
-        <Flex gap={4} justifyContent="flex-end">
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  placeholder="e.g Getting into Harvard"
+                  type="text"
+                  autoFocus={true}
+                  id="title"
+                  {...field}
+                />
+              )}
+            />
+            {errors.title && <p>Hello</p>}
+          </FormControl>
+          <FormControl>
+            <Flex gap={2} alignItems="center">
+              <FormLabel color="brand.secondaryText" htmlFor="title">
+                Description
+              </FormLabel>
+            </Flex>
+
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <Textarea
+                  placeholder="Describe your journey"
+                  bg="brand.grey"
+                  id="description"
+                  _placeholder={{ color: "brand.secondaryText" }}
+                  {...field}
+                />
+              )}
+            />
+            {errors.title && <p>Hello</p>}
+          </FormControl>
+
           {false ? (
-            <Button
-              onClick={context.moveBackwards}
-              bg="brand.white"
-              color="brand.primaryText"
-              icon={<FiX />}
-              disabled={
-                context.currentStep.id === 1 || context.currentStep.id === 5
-              }
-            >
-              Back
-            </Button>
+            <Stack borderRadius="1rem">
+              <Heading size="sm">My Goals</Heading>
+              <Text color="brand.secondaryText">
+                Start by defining your long-term goal and breaking it down into
+                smaller, achievable steps.
+              </Text>
+              <FormControl>
+                <FormLabel color="brand.secondaryText" htmlFor="title">
+                  Add a goal{" "}
+                  <Box as="span" color="brand.danger">
+                    *
+                  </Box>
+                </FormLabel>
+
+                <Controller
+                  name="title"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="e.g Reaching a 100 users"
+                      type="text"
+                      autoFocus={true}
+                      id="title"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.title && <p>Hello</p>}
+              </FormControl>
+              {isFocused ? (
+                <Stack gap={4}>
+                  <Flex alignItems="center" gap={4}>
+                    <Box
+                      bg="brand.highlight1"
+                      p="2"
+                      color="brand.secondary"
+                      borderRadius="50%"
+                    >
+                      <FiStar size="1rem" />
+                    </Box>
+                    <Text color="brand.secondaryText">
+                      Check out these inspiring SMART goals from our community
+                      of change makers.
+                    </Text>
+                  </Flex>
+                  <Flex gap={2} flexWrap="wrap">
+                    {currentGoals.map((goal) => (
+                      <SmartGoalSuggestion goal={goal} saveGoal={saveGoal} />
+                    ))}
+                  </Flex>
+                </Stack>
+              ) : null}
+            </Stack>
           ) : null}
-          <Button
-            as="input"
-            type="submit"
-            icon={<FiArrowRight />}
-            isLoading={isLoading}
-          >
-            Continue
-          </Button>
-        </Flex>
+
+          <Flex gap={4} justifyContent="flex-end">
+            {false ? (
+              <Button
+                onClick={context.moveBackwards}
+                bg="brand.white"
+                color="brand.primaryText"
+                icon={<FiX />}
+                disabled={
+                  context.currentStep.id === 1 || context.currentStep.id === 5
+                }
+              >
+                Back
+              </Button>
+            ) : null}
+            <Button
+              type="submit"
+              icon={<FiArrowRight />}
+              isLoading={isLoading}
+            >
+              Continue
+            </Button>
+          </Flex>
+        </Stack>
       </form>
     </Grid>
   );
@@ -398,3 +407,31 @@ export const JourneyInfoGuide = ({ guide }) => {
     </Stack>
   );
 };
+
+/**
+ *       <Stack ref={parent}>
+        <Text>As soon as I do the following, my journey will be finished.</Text>
+        {
+          goals && goals.length === 0 ? (
+            <Stack>
+              <Flex alignItems="center" gap={4}>
+                <Box
+                  bg="brand.highlight1"
+                  p="2"
+                  color="brand.secondary"
+                  borderRadius="50%"
+                >
+                  <FiStar size="1rem" />
+                </Box>
+                <Text>Autogenerate goals using our awesome AI tool!</Text>
+              </Flex>
+            </Stack>
+          ) : null
+        }
+        {goals && goals?.map((goal) => {
+          return (
+            <JourneyGoal goal={goal} key={goal.id} />
+          )
+        })}
+      </Stack>
+ */

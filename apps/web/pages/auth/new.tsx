@@ -11,14 +11,15 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  Textarea,
 } from "@chakra-ui/react";
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Input } from "ui/Input";
-import { Button } from "ui";
+import { Button, Card } from "ui";
 import toast, { Toaster } from "react-hot-toast";
 import { client } from "../../utils/client";
 import Router, { useRouter } from "next/router";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 /**
  * 
@@ -30,103 +31,139 @@ export default function NewUserPage() {
 }
 
  */
-export default function NewUser(props) {
+
+type UserInfoInput = {
+  name: string;
+  username?: string;
+  bio?: string;
+};
+
+export default function NewUser() {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const errorToast = (message: string) => toast.error(message);
   const successToast = (message: string) => toast.success(message);
   const router = useRouter();
+  const { data: session } = useSession();
 
-  const [info, setUserInfo] = useState({
-    username: "",
-    name: ""
+  const defaultFormValues = () => {
+    return {
+      username: session?.user.name,
+      name: "",
+      bio: "",
+    };
+  };
+
+  const userForm = useForm({
+    defaultValues: defaultFormValues(),
+    // resolver: zodResolver(schema),
   });
 
-  const updateUserInfo = () => {
-    setLoading(true);
-    return client
-      .put(`/users/${props.user.id}`, {
-        name: info.name,
-        username: info.username
-      })
-      .then((res) => {
-        setLoading(false);
-        successToast("Created info");
-      })
-      .then(() => router.push(`/user/${props.user.id}`))
-      .catch((err) => {
-        setLoading(false);
-        setError(true);
-        errorToast("something went wrong, try again later");
-      });
-  }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    formState: { errors },
+  } = userForm;
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserInfo((currentState) => {
-      return {
-        ...currentState,
-        [name]: value,
-      };
-    });
-  }, []);
+
+  const onSubmit: SubmitHandler<UserInfoInput> = (data) => {
+    client
+      .put(`/users/${session?.user?.id}`, {
+        ...data,
+      })
+      .then(({ data: { user } }) => {
+        // setGoalInfo({ ...goal, title: "" });
+
+        console.log(user);
+        router.push("/")
+      })
+      .catch((err) => {
+        // alert("err");
+        console.log(err);
+      });
+  };
+
+
   return (
     <>
-      <Stack gap={8} width="50%">
-      <VStack flex="1" alignItems="flex-start">
-          <Flex gap={2} alignItems="center">
-            <Avatar src={props.user.image} />
-            <Heading size="md">Welcome, {props.user.name}</Heading>
-          </Flex>
-        </VStack>
+      <Card>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack gap={8} width="50%">
+            <VStack flex="1" alignItems="flex-start">
+              <Flex gap={2} alignItems="center">
+                <Heading size="md">Hi there, {session?.user.name}</Heading>
+              </Flex>
+            </VStack>
 
-        <Stack alignItems="flex-start" bg="brand.white" flex="2" p="4" borderRadius="1rem">
-          <FormControl>
-            <FormLabel>What should we call you?</FormLabel>
-            <Input
-              onChange={onChange}
-              placeholder="John Doe"
-              type="text"
-              value={info.name}
-              name="name"
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Username</FormLabel>
-            <Input
-              onChange={onChange}
-              placeholder="Must be unique"
-              type="text"
-              value={info.username}
-              name="username"
-            />
-          </FormControl>
-          <Button onClick={updateUserInfo} isLoading={isLoading}>Done</Button>
-        </Stack>
-      </Stack>
+            <Stack alignItems="flex-start" flex="2">
+              <FormControl>
+                <FormLabel color="brand.secondaryText">
+                  What should we call you?
+                </FormLabel>
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder={session?.user.name}
+                      type="text"
+                      autoFocus={true}
+                      id="name"
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel color="brand.secondaryText">Username</FormLabel>
+                <Controller
+                  name="username"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      placeholder={session?.user.username}
+                      type="text"
+                      autoFocus={true}
+                      id="username"
+                      {...field}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+                <Flex gap={2} alignItems="center">
+                  <FormLabel color="brand.secondaryText" htmlFor="title">
+                    Bio
+                  </FormLabel>
+                </Flex>
+
+                <Controller
+                  name="bio"
+                  control={control}
+                  render={({ field }) => (
+                    <Textarea
+                      placeholder="Tell us about yourself"
+                      bg="brand.grey"
+                      id="bio"
+                      _placeholder={{ color: "brand.secondaryText" }}
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.title && <p>Hello</p>}
+              </FormControl>
+              <Flex justifyContent="flex-end">
+                <Button type="submit" isLoading={isLoading}>
+                  Done
+                </Button>
+              </Flex>
+            </Stack>
+          </Stack>
+        </form>
+      </Card>
       <Toaster position="bottom-center" />
     </>
-
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-  const { id, email, name, bio, image } = session?.user;
-
-  return {
-    props: {
-      user: {
-        id: id || null,
-        email: email || null,
-        name: name || null,
-        bio: bio || null,
-        image: image || null,
-      },
-    },
-  };
 }

@@ -1,4 +1,3 @@
-import next from "next";
 import React, { createContext, useReducer, useState } from "react";
 import { stepsReducer } from "./reducer";
 import { MOVE_BACKWARDS, MOVE_FORWARD, UPDATE_JOURNEY } from "./actions";
@@ -18,7 +17,7 @@ const initialState = {
   },
   currentStep: {
     id: 1,
-    title: "New Journey",
+    title: "Ready, Set, Pick!",
     active: true,
     skippable: false,
     journeyId: "",
@@ -30,24 +29,39 @@ const initialState = {
     },
     completed: false,
   },
+  completedOnboarding: false,
   steps: [
     {
       id: 1,
-      title: "New Beginning",
+      title: "Ready, Set, Pick!",
       active: true,
       skippable: false,
       completed: false,
     },
     {
       id: 2,
-      title: "About your journey",
+      title: "Crafting Your Journey",
       active: false,
       skippable: false,
       completed: false,
     },
     {
       id: 3,
-      title: "Getting ready",
+      title: "Don't Forget Your Supplies!",
+      active: false,
+      skippable: false,
+      completed: false,
+    },
+    {
+      id: 4,
+      title: "Create Routines!",
+      active: false,
+      skippable: false,
+      completed: false,
+    },
+    {
+      id: 5,
+      title: "Find Companions",
       active: false,
       skippable: false,
       completed: false,
@@ -55,14 +69,16 @@ const initialState = {
   ],
 };
 
+// should only be concerned with the steps
+// the rest is handled by the main provider!
 export const JourneyOnboardingProvider = ({
   children,
 }: JourneyOnboardingProps) => {
   const [state, dispatch] = useReducer(stepsReducer, initialState);
-  const [blueprint, setBluePrint] = useState<string>("template");
+  const [blueprint, setBluePrint] = useState<string>("blank");
   const onBluePrintChange = (value: string) => setBluePrint(value);
 
-  const moveForward = (targetStepId) => {
+  const moveForward = (targetStepId: number) => {
     dispatch({
       type: MOVE_FORWARD,
       payload: {
@@ -70,7 +86,8 @@ export const JourneyOnboardingProvider = ({
       },
     });
   };
-  const moveBackwards = (targetStepId) => {
+
+  const moveBackwards = (targetStepId: number) => {
     dispatch({
       type: MOVE_BACKWARDS,
       payload: {
@@ -79,10 +96,11 @@ export const JourneyOnboardingProvider = ({
     });
   };
 
-  const updateJourney = async (data, options) => {
+  const updateJourney = async (data: any) => {
     dispatch({
       type: UPDATE_JOURNEY,
       payload: {
+        ...state.journey,
         ...data,
       },
     });

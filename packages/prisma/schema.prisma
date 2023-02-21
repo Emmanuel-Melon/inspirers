@@ -96,11 +96,10 @@ model Journey {
   id           String       @id @default(cuid())
   title        String?
   description  String?
-  userId       String
+  userId       String @unique
   bluePrintId  String?
   journeyType  String?
   fieldId      String?
-  user         User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
   active       Boolean      @default(false)
   completed    Boolean      @default(false)
   completedAt  DateTime?
@@ -115,6 +114,7 @@ model Journey {
   tasks        Task[]
   tags         Tag[]
   applications App[]
+  User         User         @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -216,7 +216,7 @@ model User {
   Session               Session[]
   identityProvider      IdentityProvider        @default(GITHUB)
   identityProviderId    String?
-  Journey               Journey[]
+  Journey               Journey?
   journeyLimit          Int                     @default(1)
   location              String?
   occupation            String?
@@ -226,6 +226,7 @@ model User {
   dayStart              String?                 @default("08:00")
   dayEnd                String?                 @default("17:00")
   completedOnboarding   Boolean                 @default(false)
+  createdFirstJourney   Boolean                 @default(false)
   timeFormat            Int?                    @default(12)
   Schedule              Schedule[]
   ApiKey                ApiKey[]
@@ -233,6 +234,10 @@ model User {
   Credential            Credential[]
   // Role                  UserRole                @default(Learner)
   Memberships           Membership[]
+  Routine               Routine[]
+  journeyId             String?
+
+  @@index([journeyId])
 }
 
 model WaitlistMember {
@@ -713,43 +718,62 @@ model RoutineItem {
   Routine   Routine @relation(fields: [routineId], references: [id])
 }
 
+model RoutineAutomation {
+  id     String @id @default(cuid())
+  userId String
+  title  String
+}
+
+// zod prisma uses comments to annotate
 model Routine {
-  id                String          @id @default(cuid())
+  id                String             @id @default(cuid())
   userId            String
   title             String
-  createdAt         DateTime?       @default(now())
-  updatedAt         DateTime?       @default(now())
-  deletedAt         DateTime?       @default(now())
-  startsAt          DateTime? @db.Time
-  finishesAt        DateTime? @db.Time
+  createdAt         DateTime?          @default(now())
+  updatedAt         DateTime?          @default(now())
+  deletedAt         DateTime?          @default(now())
+  startsAt          DateTime?          @db.Time
+  finishesAt        DateTime?          @db.Time
   resourceId        String?
   journeyId         String?
   type              RoutineType?
   duration          String?
   description       String?
-  reminders         Boolean         @default(true)
+  reminders         Boolean            @default(true)
   reminder          String?
   privacy           RoutinePrivacy?
   source            RoutineSource?
   periodStartDate   DateTime?
   periodEndDate     DateTime?
   periodDays        Int?
-  beforeEventBuffer Int             @default(0)
-  afterEventBuffer  Int             @default(0)
-  periodType        PeriodType      @default(UNLIMITED)
-  scheduleType      RoutineSchedule @default(Standard)
+  beforeEventBuffer Int                @default(0)
+  afterEventBuffer  Int                @default(0)
+  periodType        PeriodType         @default(UNLIMITED)
+  scheduleType      RoutineSchedule    @default(Standard)
   items             RoutineItem[]
   resources         Resource[]
+  references        RoutineReference[]
   startingDate      DateTime?
   endDate           DateTime?
   linkedFolderId    String?
-  position          Int             @default(0)
+  position          Int                @default(0)
   folders           Folder[]
-  Journey           Journey?        @relation(fields: [journeyId], references: [id])
-  recurrence   Json
+  Journey           Journey?           @relation(fields: [journeyId], references: [id])
+  recurrence        Json
+  user              User?              @relation(fields: [userId], references: [id])
 
+  @@index([userId])
+  @@index([journeyId])
 }
 
+model RoutineReference {
+  id        String  @id @default(cuid())
+  routineId String
+  Routine   Routine @relation(fields: [routineId], references: [id])
+  active    Boolean @default(false)
+
+  @@index([routineId])
+}
 
 model Schedule {
   id       String  @id @default(cuid())

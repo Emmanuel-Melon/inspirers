@@ -13,14 +13,11 @@ import { Navbar, Spinner } from "ui";
 import Head from "next/head";
 import { Sidebar, UnAuthorized } from "ui";
 import {
-  HiOutlineBell,
   HiOutlineHome,
   HiOutlineTemplate,
-  HiOutlineClipboardCheck,
-  HiOutlineCollection,
 } from "react-icons/hi";
 
-import { RiHandbagLine, RiApps2Line } from "react-icons/ri";
+import { RiHandbagLine, RiApps2Line, RiBellLine } from "react-icons/ri";
 type LayoutProps = {
   children: ReactChild | ReactChild[];
 };
@@ -41,19 +38,7 @@ const links = [
     name: "Routines",
     url: "/routines",
     icon: <HiOutlineTemplate size="1rem" />,
-  },
-  {
-    id: 5,
-    name: "Tasks",
-    url: "/tasks",
-    icon: <HiOutlineClipboardCheck size="1rem" />,
-  },
-  {
-    id: 6,
-    name: "Notifications",
-    url: "/notifications",
-    icon: <HiOutlineClipboardCheck size="1rem" />,
-  },
+  },,
   {
     id: 8,
     name: "Backpack",
@@ -100,7 +85,7 @@ export default function Layout({ children }: LayoutProps) {
             collapseSidebar={collapseSidebar}
             collapsed={collapsed}
           />
-          <Box p="4">{children}</Box>
+          <Box p="4" as="section" flexGrow="1" overflowY="scroll">{children}</Box>
         </Flex>
       </>
     );

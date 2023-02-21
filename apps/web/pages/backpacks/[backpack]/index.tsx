@@ -45,7 +45,6 @@ export default function Backpack() {
         successToast("Resource created");
       })
       .catch((err) => {
-        console.log(err);
         errorToast(err.message);
       });
   };

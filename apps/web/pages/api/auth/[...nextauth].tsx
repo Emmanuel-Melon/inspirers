@@ -63,10 +63,6 @@ export const authOptions = {
         return null;
       }
     }),
-    FacebookProvider({
-      clientId: facebookClientId,
-      clientSecret: facebookClientSecret,
-    }),
     GithubProvider({
       clientId: githubClientId,
       clientSecret: githubClientSecret,

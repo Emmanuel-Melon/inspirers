@@ -73,7 +73,7 @@ const QueuedResources = () => {
   );
 };
 
-export const ActiveRoutine = () => {
+export const ActiveRoutine = ({ routines }) => {
   const today = format(new Date(), "yyyy-MM-dd");
   const startsAt = format(new Date(), "HH:mm");
 
@@ -87,19 +87,27 @@ export const ActiveRoutine = () => {
 
   if (routine === null || routine === undefined) {
     return (
-      <EmptyState
-        heading="Unleash Your Potential!"
-        description="Do not let your day fly by without making the most of it! Create your
-      first routine now."
-        icon={<HiOutlineTemplate />}
-      >
-        <Flex gap={2}>
-          <Button bg="brand.white" color="brand.accent">
-            Explore
-          </Button>
-          <AddRoutineModal CTA="Create Your Routine" />
-        </Flex>
-      </EmptyState>
+      <Card>
+        <Stack>
+          <Card bg="brand.highlight3">
+            <Text>You don't have any routines scheduled for now.</Text>
+            <Text>your next Routine will start at: 3:30 PM</Text>
+          </Card>
+          <Flex>
+            {routines?.map((routine) => (
+              <Card>
+                <Text>{routine?.title}</Text>
+              </Card>
+            ))}
+          </Flex>
+          <Flex gap={2}>
+            <Button bg="brand.white" color="brand.accent">
+              Explore
+            </Button>
+            <AddRoutineModal CTA="Create Your Routine" />
+          </Flex>
+        </Stack>
+      </Card>
     );
   }
 

@@ -3,7 +3,6 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useFetch } from "../../hooks/useSwr";
 import { JourneyCard } from "../../core/Journeys/components/JourneyCard";
-import { ListJourneys } from "core/Journeys/ListJourneys";
 import { GetServerSidePropsContext } from "next";
 
 // Journey creation
@@ -36,7 +35,7 @@ export default function Index(props) {
           </Stack>
         </Flex>
         <Stack>
-        <ListJourneys journeys={journeys} isLoading={isLoading} isError={isError} />
+
 
         </Stack>
       </Stack>

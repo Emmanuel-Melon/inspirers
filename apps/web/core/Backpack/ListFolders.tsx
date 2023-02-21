@@ -8,10 +8,14 @@ import {
   Box,
   LinkBox,
   LinkOverlay,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
+  Progress
 } from "@chakra-ui/react";
 import { Card, IconButton, EmptyState } from "ui";
 import { RiFolder5Line } from "react-icons/ri";
-import { FiMoreHorizontal, FiFolder, FiFolderPlus } from "react-icons/fi";
+import { FiMoreHorizontal, FiFolder, FiFolderPlus, FiUsers, FiBookOpen, FiHeart } from "react-icons/fi";
 import { Folder } from "@prisma/client";
 import NextLink from "next/link";
 
@@ -19,7 +23,7 @@ export type FolderOverviewProps = {
   folder: Folder;
 };
 export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
-  console.log(folder);
+  // using this might be fucked up in list components, it ties the link to the
   return (
     <NextLink
       href={{
@@ -31,30 +35,50 @@ export const FolderOverview: FC<FolderOverviewProps> = ({ folder }) => {
       }}
       passHref
     >
-      <LinkBox flex="1" minW="30%" maxW="30%">
+      <LinkBox flex="1" minW="45%" maxW="50%">
         <Card>
-          <Stack gap={4}>
+          <Stack gap={2}>
             <Flex alignItems="center" justifyContent="space-between">
               <Box
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
-                color="brand.white"
+                color="brand.secondaryText"
                 fontWeight="700"
-                bg="brand.accent"
-                p="4"
+                bg="brand.white"
+                p="2"
                 borderRadius="1rem"
               >
                 <FiFolder />
               </Box>
-              <IconButton>
-                <FiMoreHorizontal />
-              </IconButton>
             </Flex>
+            <Heading size="sm">{folder?.title}</Heading>
             <LinkOverlay>
-              <Stack>
-                <Heading size="sm">{folder.title}</Heading>
-                <Text color="brand.secondaryText">0 files</Text>
-              </Stack>
+            <Flex alignItems="center" gap={2} borderRadius="1rem">
+                  <Tag gap={2} alignItems="center" color="brand.secondaryText">
+                    <TagLeftIcon as={FiHeart} />
+                    <TagLabel>3</TagLabel>
+                  </Tag>
+                  <Tag gap={2} alignItems="center" color="brand.secondaryText">
+                    <TagLeftIcon as={FiBookOpen} />
+                    <TagLabel>2</TagLabel>
+                  </Tag>
+                  <Tag gap={2} alignItems="center" color="brand.secondaryText">
+                    <TagLeftIcon as={FiUsers} />
+                    <TagLabel>7</TagLabel>
+                  </Tag>
+                </Flex>
             </LinkOverlay>
+            <Progress
+            value={2}
+            hasStripe
+            size="md"
+            colorScheme="purple"
+            borderRadius="1rem"
+            bg="brand.highlight3"
+            boxShadow="rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+          />
+          <Flex>
+            <Text color="brand.secondaryText">Completed Resources 24</Text>
+          </Flex>
           </Stack>
         </Card>
       </LinkBox>
@@ -67,6 +91,8 @@ export type ListFoldersProps = {
   isError?: boolean;
   isLoading?: boolean;
 };
+
+// should fetch its own data and probaby receive a key as prop
 
 export const ListFolders: FC<ListFoldersProps> = ({
   isLoading,
@@ -94,17 +120,7 @@ export const ListFolders: FC<ListFoldersProps> = ({
 
   return (
     <Stack color="brand.primaryText" width="100%">
-      <Flex justifyContent="space-between" alignItems="center">
-        <Heading size="sm">Folders</Heading>
-        <Flex gap={2}>
-          <IconButton>
-            <FiFolderPlus />
-          </IconButton>
-          <IconButton>
-            <FiMoreHorizontal />
-          </IconButton>
-        </Flex>
-      </Flex>
+
       <Flex gap={4} flexWrap="wrap" ref={parent}>
         {folders?.map((folder: Folder) => (
           <FolderOverview key={folder.id} folder={folder} />

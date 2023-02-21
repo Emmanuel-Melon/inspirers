@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useEffect, useReducer, useState, useContext } from "react";
+import { JourneyConsumer, JourneyContext } from "providers/JourneyProvider";
 import {
   Flex,
   Text,
@@ -50,9 +51,9 @@ export const AddNewFolder: FC<AddNewFolderProps> = ({ backpack = {}}) => {
     
     
     client
-      .post(`/backpacks/${router.query.backpack}/folders`, {
+      .post(`/backpacks/cle9628w50003btb048xmjl8o/folders`, {
         title,
-        backpackId: router.query.backpack,
+        backpackId: "cle9628w50003btb048xmjl8o",
       })
       .then((response) => {
         successToast("Folder created successfully.")
